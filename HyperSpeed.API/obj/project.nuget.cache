@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "wGQFLjqgBvU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.API\\HyperSpeed.API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\davi.rretrao\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.2\\microsoft.aspnetcore.openapi.10.0.2.nupkg.sha512",
+    "C:\\Users\\davi.rretrao\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

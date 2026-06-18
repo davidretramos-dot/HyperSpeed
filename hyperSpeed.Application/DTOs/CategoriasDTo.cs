@@ -4,7 +4,20 @@ using System.Text;
 
 namespace hyperSpeed.Application.DTOs
 {
-    internal class CategoriasDTo
+    public class CategoriasDTo
     {
+        public int Id { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public int ContagemJogos { get; set; }
     }
+
+    public class CriacaoCategoriaDTo
+    {
+        public string Nome { get; set; } = string.Empty;
+    }
+
+    public class AtualizacaoCategoriaDTo
+    {
+        public string Nome { get; set; } = string.Empty;
+    }    
 }

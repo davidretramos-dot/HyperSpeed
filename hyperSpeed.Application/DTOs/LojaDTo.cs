@@ -6,5 +6,6 @@ namespace hyperSpeed.Application.DTOs
 {
     internal class LojaDTo
     {
+
     }
 }

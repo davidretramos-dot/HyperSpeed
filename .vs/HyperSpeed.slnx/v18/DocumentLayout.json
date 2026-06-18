@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.infrastruture\\repositories\\lojarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|solutionrelative:hyperspeed.infrastruture\\repositories\\lojarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.application\\dtos\\categoriasdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|solutionrelative:hyperspeed.application\\dtos\\categoriasdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.infrastruture\\repositories\\categoriasrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|solutionrelative:hyperspeed.infrastruture\\repositories\\categoriasrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.application\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|solutionrelative:hyperspeed.application\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.infrastruture\\identity\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|solutionrelative:hyperspeed.infrastruture\\identity\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.infrastruture\\repositories\\lojarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|solutionrelative:hyperspeed.infrastruture\\repositories\\lojarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.application\\dtos\\lojadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|solutionrelative:hyperspeed.application\\dtos\\lojadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.infrastruture\\repositories\\categoriasrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|solutionrelative:hyperspeed.infrastruture\\repositories\\categoriasrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61DC5867-0868-44FB-9925-74F7D362528C}|HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.infrastruture\\context\\hyperspeeddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,18 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.application\\interfaces\\icategoriasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|solutionrelative:hyperspeed.application\\interfaces\\icategoriasservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.application\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|solutionrelative:hyperspeed.application\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.application\\dtos\\lojadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|solutionrelative:hyperspeed.application\\dtos\\lojadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed.application\\dtos\\categoriasdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6905979-BE4D-337F-F948-1A0F4BE23EE0}|hyperSpeed.Application\\hyperSpeed.Application.csproj|solutionrelative:hyperspeed.application\\dtos\\categoriasdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{549A8437-C160-91DD-B932-53652B83AAAB}|HyperSpeed\\HyperSpeed.Domain.csproj|c:\\users\\davi.rretrao\\source\\repos\\hyperspeed\\hyperspeed\\interfaces\\ilojarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -106,32 +106,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LojaRepository.cs",
-              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
-              "RelativeDocumentMoniker": "HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
-              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
-              "RelativeToolTip": "HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T19:53:46.151Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CategoriasRepository.cs",
-              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
-              "RelativeDocumentMoniker": "HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
-              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
-              "RelativeToolTip": "HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "LojaDTo.cs",
+              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\LojaDTo.cs",
+              "RelativeDocumentMoniker": "hyperSpeed.Application\\DTOs\\LojaDTo.cs",
+              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\LojaDTo.cs",
+              "RelativeToolTip": "hyperSpeed.Application\\DTOs\\LojaDTo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T19:53:33.483Z",
+              "WhenOpened": "2026-06-17T19:45:38.364Z",
               "EditorCaption": ""
             },
             {
@@ -149,7 +152,59 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthDTo.cs",
+              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\AuthDTo.cs",
+              "RelativeDocumentMoniker": "hyperSpeed.Application\\DTOs\\AuthDTo.cs",
+              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\AuthDTo.cs",
+              "RelativeToolTip": "hyperSpeed.Application\\DTOs\\AuthDTo.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAowBgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T19:45:59.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategoriasDTo.cs",
+              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
+              "RelativeDocumentMoniker": "hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
+              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
+              "RelativeToolTip": "hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAswBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T19:45:24.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "LojaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
+              "RelativeDocumentMoniker": "HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
+              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
+              "RelativeToolTip": "HyperSpeed.Infrastruture\\Repositories\\LojaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T19:53:46.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CategoriasRepository.cs",
+              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
+              "RelativeDocumentMoniker": "HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
+              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
+              "RelativeToolTip": "HyperSpeed.Infrastruture\\Repositories\\CategoriasRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T19:53:33.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "HyperSpeedDbContext.cs",
               "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Context\\HyperSpeedDbContext.cs",
               "RelativeDocumentMoniker": "HyperSpeed.Infrastruture\\Context\\HyperSpeedDbContext.cs",
@@ -162,7 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "LojaConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Configurations\\LojaConfiguration.cs",
               "RelativeDocumentMoniker": "HyperSpeed.Infrastruture\\Configurations\\LojaConfiguration.cs",
@@ -175,7 +230,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "CategoriasConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\Configurations\\CategoriasConfiguration.cs",
               "RelativeDocumentMoniker": "HyperSpeed.Infrastruture\\Configurations\\CategoriasConfiguration.cs",
@@ -188,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "LojaService.cs",
               "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\Services\\LojaService.cs",
               "RelativeDocumentMoniker": "hyperSpeed.Application\\Services\\LojaService.cs",
@@ -201,7 +256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "CategoriasService.cs",
               "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\Services\\CategoriasService.cs",
               "RelativeDocumentMoniker": "hyperSpeed.Application\\Services\\CategoriasService.cs",
@@ -214,7 +269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "ILojaSerivce.cs",
               "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\Interfaces\\ILojaSerivce.cs",
               "RelativeDocumentMoniker": "hyperSpeed.Application\\Interfaces\\ILojaSerivce.cs",
@@ -227,7 +282,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "ICategoriasService.cs",
               "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\Interfaces\\ICategoriasService.cs",
               "RelativeDocumentMoniker": "hyperSpeed.Application\\Interfaces\\ICategoriasService.cs",
@@ -236,45 +291,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-17T19:46:23.034Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AuthDTo.cs",
-              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\AuthDTo.cs",
-              "RelativeDocumentMoniker": "hyperSpeed.Application\\DTOs\\AuthDTo.cs",
-              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\AuthDTo.cs",
-              "RelativeToolTip": "hyperSpeed.Application\\DTOs\\AuthDTo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T19:45:59.694Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "LojaDTo.cs",
-              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\LojaDTo.cs",
-              "RelativeDocumentMoniker": "hyperSpeed.Application\\DTOs\\LojaDTo.cs",
-              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\LojaDTo.cs",
-              "RelativeToolTip": "hyperSpeed.Application\\DTOs\\LojaDTo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T19:45:38.364Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "CategoriasDTo.cs",
-              "DocumentMoniker": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
-              "RelativeDocumentMoniker": "hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
-              "ToolTip": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
-              "RelativeToolTip": "hyperSpeed.Application\\DTOs\\CategoriasDTo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-17T19:45:24.612Z",
               "EditorCaption": ""
             },
             {
@@ -395,10 +411,6 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 22,
               "Title": "_ViewImports.cshtml",
@@ -421,7 +433,20 @@
               "RelativeToolTip": "HyperSpeed.UI\\Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-16T20:13:19.818Z"
+              "WhenOpened": "2026-06-16T20:13:19.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }

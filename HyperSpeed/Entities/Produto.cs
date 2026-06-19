@@ -4,13 +4,16 @@ using System.Text;
 
 namespace HyperSpeed.Domain.Entities
 {
-    public class Categorias
+    public class Produto
     {
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
+        public decimal Preco {  get; set; } 
+        public int Estoque { get; set; }
 
+        public int IdCategoria { get; set; }
 
-
+        public virtual Categorias Categoria { get; set; }
     }
 }

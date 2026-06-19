@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("hyperSpeed.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4bb5b58d8c9c9b3bf4128dfb8158ada48da07049")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e89a7dcaa2d49eb65a1f3ea98d2a73b485d2246c")]
 [assembly: System.Reflection.AssemblyProductAttribute("hyperSpeed.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("hyperSpeed.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

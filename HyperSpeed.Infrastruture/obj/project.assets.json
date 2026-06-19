@@ -4137,23 +4137,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\davi.rretrao\\.nuget\\packages\\": {},
+    "C:\\Users\\joao.rrsantos2\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj",
+      "projectUniqueName": "C:\\Users\\joao.rrsantos2\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj",
       "projectName": "HyperSpeed.Infrastruture",
-      "projectPath": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj",
-      "packagesPath": "C:\\Users\\davi.rretrao\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\obj\\",
+      "projectPath": "C:\\Users\\joao.rrsantos2\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\HyperSpeed.Infrastruture.csproj",
+      "packagesPath": "C:\\Users\\joao.rrsantos2\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\joao.rrsantos2\\source\\repos\\HyperSpeed\\HyperSpeed.Infrastruture\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\davi.rretrao\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\joao.rrsantos2\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4169,11 +4169,11 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\hyperSpeed.Application.csproj": {
-              "projectPath": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\hyperSpeed.Application.csproj"
+            "C:\\Users\\joao.rrsantos2\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\hyperSpeed.Application.csproj": {
+              "projectPath": "C:\\Users\\joao.rrsantos2\\source\\repos\\HyperSpeed\\hyperSpeed.Application\\hyperSpeed.Application.csproj"
             },
-            "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed\\HyperSpeed.Domain.csproj": {
-              "projectPath": "C:\\Users\\davi.rretrao\\source\\repos\\HyperSpeed\\HyperSpeed\\HyperSpeed.Domain.csproj"
+            "C:\\Users\\joao.rrsantos2\\source\\repos\\HyperSpeed\\HyperSpeed\\HyperSpeed.Domain.csproj": {
+              "projectPath": "C:\\Users\\joao.rrsantos2\\source\\repos\\HyperSpeed\\HyperSpeed\\HyperSpeed.Domain.csproj"
             }
           }
         }

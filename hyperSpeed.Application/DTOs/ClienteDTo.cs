@@ -4,8 +4,7 @@ using System.Text;
 
 namespace hyperSpeed.Application.DTOs
 {
-    internal class LojaDTo
+    internal class ClienteDTo
     {
-
     }
 }

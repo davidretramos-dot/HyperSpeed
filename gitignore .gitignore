@@ -1,0 +1,110 @@
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln.ide
+*.sln.iml
+
+# Build results
+[Bb]in/
+[Oo]bj/
+out/
+artifacts/
+publish/
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Dotnet publish / build artifacts
+*.dll
+*.exe
+*.pdb
+*.app
+*.apk
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Database files
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# User secrets and environment files
+secrets.json
+*.secrets.json
+.env
+.env.* 
+.env.local
+
+# ASP.NET / IIS
+IISExpress/
+applicationhost.config
+
+# Rider / ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Visual Studio Code workspace storage
+.history/
+
+# macOS / Linux
+.DS_Store
+.Spotlight-V100
+.Trashes
+desktop.ini
+Thumbs.db
+
+# Node / front-end
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# Package managers / lock files (if you want to ignore generated lockfiles, otherwise remove)
+# package-lock.json
+# yarn.lock
+
+# Coverage / profiler
+coverage/
+*.coverage
+*.prof
+
+# VS Code extensions hosts
+.vscode-test/
+
+# Ignore publish folder produced by dotnet publish
+*/bin/Release/
+*/bin/Debug/
+*/bin/*.Publish
+
+# Ignore Rider caches and settings
+.idea/
+*.iml
+
+# Keep IDE config tracked but ignore local/private overrides:
+# appsettings.Development.json files often contain secrets; ignore local-only appsettings if you use them
+appsettings.*.Local.json
+appsettings.Secrets.json

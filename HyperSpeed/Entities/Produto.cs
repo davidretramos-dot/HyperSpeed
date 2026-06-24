@@ -14,6 +14,7 @@ namespace HyperSpeed.Domain.Entities
 
         public int IdCategoria { get; set; }
 
-        public virtual Categorias Categoria { get; set; }
+        
+        public ICollection<Categorias> Categorias { get; set; } = new List<Categorias>();
     }
 }

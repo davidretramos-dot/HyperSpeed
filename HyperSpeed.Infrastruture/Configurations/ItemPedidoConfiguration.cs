@@ -24,7 +24,7 @@ namespace HyperSpeed.Infrastruture.Configurations
                 .HasColumnType("decimal(18,2)")
                 .IsRequired();
 
-            builder.HasOne(i => i.Pedido)
+            builder.HasOne(i => i.Pedidos)
                 .WithMany(p => p.ItemPedidos)
                 .HasForeignKey(i => i.IdPedido)
                 .OnDelete(DeleteBehavior.Cascade);

@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\hyperSpeed.Application\hyperSpeed.Application.csproj" />
-    <ProjectReference Include="..\HyperSpeed.Infrastruture\HyperSpeed.Infrastruture.csproj" />
+    <ProjectReference Include="..\HyperSpeed.Infrastruture\HyperSpeed.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

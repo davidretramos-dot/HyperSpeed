@@ -1,7 +1,7 @@
 <Solution>
   <Project Path="HyperSpeed.API/HyperSpeed.API.csproj" />
   <Project Path="hyperSpeed.Application/hyperSpeed.Application.csproj" />
-  <Project Path="HyperSpeed.Infrastruture/HyperSpeed.Infrastruture.csproj" />
+  <Project Path="HyperSpeed.Infrastruture/HyperSpeed.Infrastructure.csproj" />
   <Project Path="HyperSpeed.UI/HyperSpeed.UI.csproj" />
   <Project Path="HyperSpeed/HyperSpeed.Domain.csproj" />
 </Solution>

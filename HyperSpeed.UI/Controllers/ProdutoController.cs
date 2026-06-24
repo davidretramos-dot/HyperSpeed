@@ -2,7 +2,7 @@
 
 namespace HyperSpeed.UI.Controllers
 {
-    public class LojaController : Controller
+    public class ProdutoController : Controller
     {
       
     }

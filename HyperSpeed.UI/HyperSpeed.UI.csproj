@@ -7,9 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Account\" />
-    <Folder Include="Views\Loja\" />
+    <Compile Remove="Views\Loja\**" />
+    <Content Remove="Views\Loja\**" />
+    <EmbeddedResource Remove="Views\Loja\**" />
+    <None Remove="Views\Loja\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,12 @@
   <ItemGroup>
     <ProjectReference Include="..\hyperSpeed.Application\hyperSpeed.Application.csproj" />
     <ProjectReference Include="..\HyperSpeed.Infrastruture\HyperSpeed.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Produto\" />
   </ItemGroup>
 
 </Project>

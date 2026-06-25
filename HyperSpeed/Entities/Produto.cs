@@ -11,7 +11,7 @@ namespace HyperSpeed.Domain.Entities
         public string Descricao { get; set; } = string.Empty;
         public decimal Preco {  get; set; } 
         public int Estoque { get; set; }
-
+        public string Imagem { get; set; } = string.Empty;
         public int IdCategoria { get; set; }
 
         

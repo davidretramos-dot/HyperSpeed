@@ -11,6 +11,7 @@ namespace HyperSpeed.Domain.Entities
         public string Descricao { get; set; } = string.Empty;
 
 
-
     }
+
+
 }

@@ -7,6 +7,6 @@ namespace HyperSpeed.UI.Controllers
 {
     public class ContaController : Controller
     {
-       private readonly UserManager<IdentityUser> _
+       //private readonly UserManager<IdentityUser> _
     }
 }

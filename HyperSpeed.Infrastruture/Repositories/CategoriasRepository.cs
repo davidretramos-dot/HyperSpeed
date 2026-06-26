@@ -8,7 +8,7 @@ using System.Text;
 
 namespace HyperSpeed.Infrastruture.Repositories
 {
-    internal class CategoriasRepository : ICategoriaRepository
+   public class CategoriasRepository : ICategoriaRepository
     {
         private readonly HyperSpeedDbContext _context;
 
@@ -20,7 +20,7 @@ namespace HyperSpeed.Infrastruture.Repositories
         public async Task<IEnumerable<Categorias>> GetAllCategoriasAsync()
         {
             return await _context.Categorias
-                .Include(c => c.Produtos) // Inclui os produtos relacionados
+                // Inclui os produtos relacionados
                 .OrderBy(c => c.Nome) // Ordena por nome da categoria
                 .ToListAsync();
         }
@@ -28,7 +28,7 @@ namespace HyperSpeed.Infrastruture.Repositories
         public async Task<Categorias?> GetCategoriaByIdAsync(int id)
         {
             return await _context.Categorias
-                .Include(c => c.Produtos) // Inclui os produtos relacionados
+                 // Inclui os produtos relacionados
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
@@ -56,5 +56,14 @@ namespace HyperSpeed.Infrastruture.Repositories
         {
             return await _context.Categorias.CountAsync();
         } 
+      public async Task<IEnumerable<Categorias>> GetAllAsync()
+        {
+            return await GetAllCategoriasAsync();
+        }
+
+        public async Task<Categorias?> GetByIdAsync(int id)
+        {
+            return await GetCategoriaByIdAsync(id);
+        }
     }
 }

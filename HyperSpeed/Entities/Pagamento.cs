@@ -20,6 +20,6 @@ namespace HyperSpeed.Domain.Entities
 
         public int IdPedido { get; set; }
 
-        public ICollection<Pedido> Idpedido{ get; set; } = new List<Pedido>();
+        public Pedido Pedido { get; set; } = null!;
     }
 }

@@ -19,7 +19,7 @@ namespace HyperSpeed.Infrastructure.Repositories
         public async Task<IEnumerable<Produto>> GetAllAsync()
         {
             return await _context.Produtos
-                .Include(p => p.Categoria) // Inclui a categoria relacionada
+                .Include(p => p.Categorias) // Inclui a categoria relacionada
                 .OrderBy(p => p.Nome) // Ordena por nome do produto
                 .ToListAsync();
         }
@@ -27,7 +27,7 @@ namespace HyperSpeed.Infrastructure.Repositories
         public async Task<Produto?> GetByIdAsync(int id)
         {
             return await _context.Produtos
-                .Include(p => p.Categoria) // Inclui a categoria relacionada
+                .Include(p => p.Categorias) // Inclui a categoria relacionada
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
@@ -35,15 +35,14 @@ namespace HyperSpeed.Infrastructure.Repositories
         public async Task<IEnumerable<Produto>> GetFeaturedAsync()
         {
             return await _context.Produtos
-                .Include(p => p.Categoria)
-                .Where(p => p.IsFeatured)
+                .Include(p => p.Categorias) .OrderBy(p => p.Nome)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Produto>>GetByCategoryAsync(int IdCategoria)
         {
             return await _context.Produtos
-                .Include(p => p.Categoria)
+                .Include(p => p.Categorias)
                 .Where(p => p.IdCategoria == IdCategoria)
                 .ToListAsync();
         }

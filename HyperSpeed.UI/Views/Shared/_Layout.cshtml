@@ -1,50 +1,86 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HyperSpeed.UI</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HyperSpeed.UI.styles.css" asp-append-version="true" />
+
+    <title>Hyper Speed</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HyperSpeed.UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+        <div class="top-bar">
+
+            <div class="logo">
+                <img src="~/images/logo.png" alt="Hyper Speed">
                 </div>
+
+                <div class="search">
+                    <input type="text" placeholder="Pesquisa">
+                </div>
+
+                <div class="account">
+                    CONTA ★ FAVORITOS
+                </div>
+
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+            <nav>
+
+                <a href="#">☰</a>
+                <a href="#">CARRINHO</a>
+                <a href="#">MONTE SEU PC</a>
+                <a href="#">DEPARTAMENTOS</a>
+                <a href="#">PERIFÉRICOS</a>
+                <a href="#">PROMOÇÕES</a>
+
+            </nav>
+
+        </header>
+
+        <main>
             @RenderBody()
         </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - HyperSpeed.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+        <footer>
+
+            <div class="footer-container">
+
+                <div class="footer-box">
+                    <h2>AJUDA</h2>
+
+                    <a href="#">Fale conosco</a>
+                    <a href="#">Políticas e Privacidade</a>
+                    <a href="#">Termos de Aceite</a>
+                </div>
+
+                <div class="footer-box">
+                    <h2>DÚVIDAS</h2>
+
+                    <a href="#">Entrega</a>
+                    <a href="#">Garantia</a>
+                    <a href="#">Como pagar</a>
+                </div>
+
+                <div class="footer-box">
+                    <h2>PAGAMENTO</h2>
+
+                    <p>PIX</p>
+                    <p>VISA</p>
+                    <p>MASTERCARD</p>
+                    <p>BOLETO</p>
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                © Desenvolvido por Lightning Tech - TI31
+            </div>
+
+        </footer>
+
+    </body>
 </html>

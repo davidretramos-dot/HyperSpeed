@@ -1,107 +1,126 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
-<section class="banner">
+<link rel="stylesheet" href="/css/style.css">
+<header>
 
-    <img src="~/images/banner.jpg" alt="Mega Promoção">
+    <div class="top-bar">
 
-    </section>
+        <div class="logo">
+            <img src="~/images/logo.png" alt="Logo">
+            </div>
 
-    <section class="slogan">
+            <div class="search">
+                <input type="text" placeholder="Pesquisa">
+            </div>
 
-        <p>Tudo do bom e mais barato</p>
+            <div class="account">
+                CONTA ★ FAVORITOS
+            </div>
 
-        <h1>Confira!</h1>
+        </div>
 
-    </section>
+    </header>
 
-    <section class="categoria">
+    <nav class="navbar">
 
-        <h2>MONTE SEU PC</h2>
+        <div class="menu-categorias">
 
-        <div class="produtos">
+            <button class="hamburger">
+                ☰
+            </button>
 
-            <div class="produto-card">
-                <img src="~/images/produtos/cpu-amd.png">
-                    <span>R$</span>
-                </div>
+            <div class="categorias-dropdown">
+
+                <a href="#">Processadores</a>
+                <a href="#">Placas de Vídeo</a>
+                <a href="#">Memórias RAM</a>
+                <a href="#">SSD</a>
+                <a href="#">Gabinetes</a>
+                <a href="#">Monitores</a>
+
+            </div>
+
+        </div>
+
+        <a href="#">Carrinho</a>
+        <a href="#">Monte seu PC</a>
+        <a href="#">Departamentos</a>
+        <a href="#">Periféricos</a>
+        <a href="#">Promoções</a>
+
+    </nav>
+
+    <section class="banner">
+
+        <img src="~/images/banner.jpg" alt="Banner">
+
+        </section>
+
+        <section class="slogan">
+
+            <p>Tudo do bom e mais barato</p>
+
+            <h1>CONFIRA!</h1>
+
+        </section>
+
+        <section class="categoria">
+
+            <h2>MONTE SEU PC</h2>
+
+            <div class="produtos">
 
                 <div class="produto-card">
-                    <img src="~/images/produtos/gpu.png">
-                        <span>R$</span>
+                    <img src="~/images/produtos/cpu-amd.png">
+                        <span>R$ 1.999</span>
                     </div>
 
                     <div class="produto-card">
-                        <img src="~/images/produtos/ssd.png">
-                            <span>R$</span>
+                        <img src="~/images/produtos/gpu.png">
+                            <span>R$ 3.999</span>
                         </div>
 
                         <div class="produto-card">
-                            <img src="~/images/produtos/cpu-intel.png">
-                                <span>R$</span>
+                            <img src="~/images/produtos/ssd.png">
+                                <span>R$ 499</span>
                             </div>
 
-                        </div>
-
-                    </section>
-
-                    <section class="categoria">
-
-                        <h2>PERIFÉRICOS / OUTROS</h2>
-
-                        <div class="produtos">
-
                             <div class="produto-card">
-                                <img src="~/images/produtos/teclado.png">
-                                    <span>R$</span>
+                                <img src="~/images/produtos/cpu-intel.png">
+                                    <span>R$ 1.799</span>
                                 </div>
 
+                            </div>
+
+                        </section>
+
+                        <section class="categoria">
+
+                            <h2>PERIFÉRICOS / OUTROS</h2>
+
+                            <div class="produtos">
+
                                 <div class="produto-card">
-                                    <img src="~/images/produtos/placamae.png">
-                                        <span>R$</span>
+                                    <img src="~/images/produtos/teclado.png">
+                                        <span>R$ 399</span>
                                     </div>
 
                                     <div class="produto-card">
                                         <img src="~/images/produtos/headset.png">
-                                            <span>R$</span>
+                                            <span>R$ 299</span>
                                         </div>
 
                                         <div class="produto-card">
-                                            <img src="~/images/produtos/controle.png">
-                                                <span>R$</span>
+                                            <img src="~/images/produtos/mouse.png">
+                                                <span>R$ 199</span>
                                             </div>
 
                                             <div class="produto-card">
-                                                <img src="~/images/produtos/rgb.png">
-                                                    <span>R$</span>
+                                                <img src="~/images/produtos/monitor.png">
+                                                    <span>R$ 1.299</span>
                                                 </div>
 
-                                                <div class="produto-card">
-                                                    <img src="~/images/produtos/fone.png">
-                                                        <span>R$</span>
-                                                    </div>
+                                            </div>
 
-                                                    <div class="produto-card">
-                                                        <img src="~/images/produtos/monitor.png">
-                                                            <span>R$</span>
-                                                        </div>
-
-                                                        <div class="produto-card">
-                                                            <img src="~/images/produtos/gabinete.png">
-                                                                <span>R$</span>
-                                                            </div>
-
-                                                            <div class="produto-card">
-                                                                <img src="~/images/produtos/mouse.png">
-                                                                    <span>R$</span>
-                                                                </div>
-
-                                                                <div class="produto-card">
-                                                                    <img src="~/images/produtos/notebook.png">
-                                                                        <span>R$</span>
-                                                                    </div>
-
-                                                                </div>
-
-                    </section>
-
+                                        </section>

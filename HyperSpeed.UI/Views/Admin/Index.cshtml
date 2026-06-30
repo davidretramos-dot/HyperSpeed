@@ -1,0 +1,155 @@
+﻿@model DashBoardViewModel
+@{
+    @{
+    ViewData["Title"] = "Painel Administrativo";
+}
+
+<div class="admin">
+
+    <aside class="admin-sidebar">
+
+        <h2>ADMIN</h2>
+
+        <a asp-controller="Admin" asp-action="Index">
+            Dashboard
+        </a>
+
+        <a asp-controller="Produto" asp-action="Index">
+            Produtos
+        </a>
+
+        <a asp-controller="Categoria" asp-action="Index">
+            Categorias
+        </a>
+
+        <a asp-controller="Pedido" asp-action="Index">
+            Pedidos
+        </a>
+
+        <a asp-controller="Usuario" asp-action="Index">
+            Usuários
+        </a>
+
+        <a asp-controller="Home" asp-action="Index">
+            Voltar ao Site
+        </a>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <h1>Painel Administrativo</h1>
+
+        <div class="admin-cards">
+
+            <div class="admin-card">
+                <h3>Produtos</h3>
+                <span>152</span>
+            </div>
+
+            <div class="admin-card">
+                <h3>Categorias</h3>
+                <span>12</span>
+            </div>
+
+            <div class="admin-card">
+                <h3>Pedidos</h3>
+                <span>48</span>
+            </div>
+
+            <div class="admin-card">
+                <h3>Usuários</h3>
+                <span>320</span>
+            </div>
+
+        </div>
+
+        <div class="admin-actions">
+
+            <a asp-controller="Produto"
+               asp-action="Create"
+               class="admin-btn">
+
+                Novo Produto
+
+            </a>
+
+            <a asp-controller="Categoria"
+               asp-action="Create"
+               class="admin-btn">
+
+                Nova Categoria
+
+            </a>
+
+            <a asp-controller="Pedido"
+               asp-action="Index"
+               class="admin-btn">
+
+                Ver Pedidos
+
+            </a>
+
+        </div>
+
+        <h2>Pedidos Recentes</h2>
+
+        <table class="admin-table">
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>#001</td>
+
+                    <td>João</td>
+
+                    <td>R$ 2.399,00</td>
+
+                    <td>Pago</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>#002</td>
+
+                    <td>Maria</td>
+
+                    <td>R$ 899,00</td>
+
+                    <td>Enviado</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>#003</td>
+
+                    <td>Carlos</td>
+
+                    <td>R$ 4.599,00</td>
+
+                    <td>Preparando</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </main>
+
+</div>
+}

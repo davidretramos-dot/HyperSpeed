@@ -1,0 +1,135 @@
+﻿@model IEnumerable<ProdutoDTo>
+@{
+    ViewData["Title"] = "Gerenciar Produtos";
+}
+
+<div class="admin">
+
+    <aside class="admin-sidebar">
+
+        <h2>ADMIN</h2>
+
+        <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+        <a asp-controller="ProdutoAdmin" asp-action="Index">Produtos</a>
+        <a asp-controller="Categoria" asp-action="Index">Categorias</a>
+        <a asp-controller="Pedido" asp-action="Index">Pedidos</a>
+        <a asp-controller="Usuario" asp-action="Index">Usuários</a>
+        <a asp-controller="Home" asp-action="Index">Voltar ao Site</a>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+
+            <h1>Produtos</h1>
+
+            <a asp-action="Create" class="admin-btn">
+                + Novo Produto
+            </a>
+
+        </div>
+
+        <div class="admin-search">
+
+            <input type="text"
+                   placeholder="Pesquisar produto...">
+
+        </div>
+
+        <table class="admin-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Imagem</th>
+                    <th>Produto</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>
+                        <img src="~/images/produtos/cpu-amd.png"
+                             class="produto-admin-img">
+                        </td>
+
+                        <td>Ryzen 7 7700X</td>
+
+                        <td>Processador</td>
+
+                        <td>R$ 1.999,90</td>
+
+                        <td>15</td>
+
+                        <td>
+
+                            <a asp-action="Edit"
+                                   class="btn-editar">
+
+                                Editar
+
+                            </a>
+
+                            <a asp-action="Delete"
+                                   class="btn-excluir">
+
+                                Excluir
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>
+                            <img src="~/images/produtos/gpu.png"
+                                 class="produto-admin-img">
+                            </td>
+
+                            <td>RTX 4070</td>
+
+                            <td>Placa de Vídeo</td>
+
+                            <td>R$ 4.299,90</td>
+
+                            <td>8</td>
+
+                            <td>
+
+                                <a asp-action="Edit"
+                                       class="btn-editar">
+
+                                    Editar
+
+                                </a>
+
+                                <a asp-action="Delete"
+                                       class="btn-excluir">
+
+                                    Excluir
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </main>
+
+        </div>

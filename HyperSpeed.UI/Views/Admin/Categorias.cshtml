@@ -1,0 +1,275 @@
+﻿@model IEnumerable<CategoriasDTo>
+@{
+    ViewData["Title"] = "Gerenciar Categorias";
+}
+
+<div class="admin">
+
+    <aside class="admin-sidebar">
+
+        <h2>ADMIN</h2>
+
+        <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+
+        <a asp-controller="ProdutoAdmin" asp-action="Index">Produtos</a>
+
+        <a asp-controller="Categoria" asp-action="Index">Categorias</a>
+
+        <a asp-controller="Pedido" asp-action="Index">Pedidos</a>
+
+        <a asp-controller="Usuario" asp-action="Index">Usuários</a>
+
+        <a asp-controller="Home" asp-action="Index">Voltar ao Site</a>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+
+            <h1>Categorias</h1>
+
+            <a asp-action="Create" class="admin-btn">
+
+                + Nova Categoria
+
+            </a>
+
+        </div>
+
+        <div class="admin-search">
+
+            <input type="text"
+                   placeholder="Pesquisar categoria...">
+
+        </div>
+
+        <table class="admin-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Categoria</th>
+
+                    <th>Categoria Pai</th>
+
+                    <th>Quantidade de Produtos</th>
+
+                    <th>Ações</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>1</td>
+
+                    <td>Hardware</td>
+
+                    <td>—</td>
+
+                    <td>54</td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                               class="btn-editar">
+
+                            Editar
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               class="btn-excluir">
+
+                            Excluir
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>2</td>
+
+                    <td>Processadores</td>
+
+                    <td>Hardware</td>
+
+                    <td>16</td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                               class="btn-editar">
+
+                            Editar
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               class="btn-excluir">
+
+                            Excluir
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>3</td>
+
+                    <td>SSD</td>
+
+                    <td>Hardware</td>
+
+                    <td>21</td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                               class="btn-editar">
+
+                            Editar
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               class="btn-excluir">
+
+                            Excluir
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>4</td>
+
+                    <td>Periféricos</td>
+
+                    <td>—</td>
+
+                    <td>37</td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                               class="btn-editar">
+
+                            Editar
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               class="btn-excluir">
+
+                            Excluir
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>5</td>
+
+                    <td>Teclados</td>
+
+                    <td>Periféricos</td>
+
+                    <td>12</td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                               class="btn-editar">
+
+                            Editar
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               class="btn-excluir">
+
+                            Excluir
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+        <tbody>
+
+            @foreach (var categoria in Model)
+            {
+
+                <tr>
+
+                    <td>@categoria.Id</td>
+
+                    <td>@categoria.Nome</td>
+
+                    <td>
+
+                        @(categoria.CategoriaPai == null
+                            ? "-"
+                            : categoria.CategoriaPai.Nome)
+
+                    </td>
+
+                    <td>
+
+                        @categoria.Produtos.Count
+
+                    </td>
+
+                    <td>
+
+                        <a asp-action="Edit"
+                               asp-route-id="@categoria.Id"
+                               class="btn-editar">
+
+                            Editar
+
+                        </a>
+
+                        <a asp-action="Delete"
+                               asp-route-id="@categoria.Id"
+                               class="btn-excluir">
+
+                            Excluir
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </main>
+
+</div>

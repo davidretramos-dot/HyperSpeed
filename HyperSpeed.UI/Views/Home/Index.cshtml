@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+<<<<<<< Updated upstream
 <link rel="stylesheet" href="/css/style.css">
 <header>
 
@@ -38,22 +39,110 @@
                 <a href="#">SSD</a>
                 <a href="#">Gabinetes</a>
                 <a href="#">Monitores</a>
+=======
+
+<header>
+
+    <div class="top-bar">
+
+        <div class="logo">
+            <a asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo.png" alt="Logo">
+                </a>
+            </div>
+
+            <div class="search">
+                <form asp-controller="Produto" asp-action="Pesquisar" method="get">
+
+                    <input type="text"
+                           name="pesquisa"
+                           placeholder="Pesquisar produtos..." />
+
+                </form>
+            </div>
+
+            <div class="account">
+
+                <a asp-controller="Usuario" asp-action="Login">
+                    Conta
+                </a>
+
+                |
+
+                <a asp-controller="Favorito" asp-action="Index">
+                    Favoritos
+                </a>
+>>>>>>> Stashed changes
 
             </div>
 
         </div>
 
+<<<<<<< Updated upstream
         <a href="#">Carrinho</a>
         <a href="#">Monte seu PC</a>
         <a href="#">Departamentos</a>
         <a href="#">Periféricos</a>
         <a href="#">Promoções</a>
+=======
+    </header>
+
+    <nav class="navbar">
+
+        <div class="menu-categorias">
+
+            <button class="hamburger" type="button">
+                ☰
+            </button>
+
+            <div class="categorias-dropdown">
+
+                <a asp-controller="Categoria" asp-action="Processadores">Processadores</a>
+
+                <a asp-controller="Categoria" asp-action="PlacasVideo">Placas de Vídeo</a>
+
+                <a asp-controller="Categoria" asp-action="Memorias">Memórias RAM</a>
+
+                <a asp-controller="Categoria" asp-action="SSD">SSD</a>
+
+                <a asp-controller="Categoria" asp-action="Gabinetes">Gabinetes</a>
+
+                <a asp-controller="Categoria" asp-action="Monitores">Monitores</a>
+
+            </div>
+
+        </div>
+
+        <a asp-controller="Carrinho" asp-action="Index">
+            Carrinho
+        </a>
+
+        <a asp-controller="Montagem" asp-action="Index">
+            Monte seu PC
+        </a>
+
+        <a asp-controller="Categoria" asp-action="Index">
+            Departamentos
+        </a>
+
+        <a asp-controller="Produto" asp-action="Perifericos">
+            Periféricos
+        </a>
+
+        <a asp-controller="Produto" asp-action="Promocoes">
+            Promoções
+        </a>
+>>>>>>> Stashed changes
 
     </nav>
 
     <section class="banner">
 
+<<<<<<< Updated upstream
         <img src="~/images/banner.jpg" alt="Banner">
+=======
+        <img src="~/images/banner.jpg" alt="Banner Principal">
+>>>>>>> Stashed changes
 
         </section>
 
@@ -72,22 +161,38 @@
             <div class="produtos">
 
                 <div class="produto-card">
+<<<<<<< Updated upstream
                     <img src="~/images/produtos/cpu-amd.png">
+=======
+                    <img src="~/images/produtos/cpu-amd.png" alt="Ryzen AMD">
+>>>>>>> Stashed changes
                         <span>R$ 1.999</span>
                     </div>
 
                     <div class="produto-card">
+<<<<<<< Updated upstream
                         <img src="~/images/produtos/gpu.png">
+=======
+                        <img src="~/images/produtos/gpu.png" alt="RTX">
+>>>>>>> Stashed changes
                             <span>R$ 3.999</span>
                         </div>
 
                         <div class="produto-card">
+<<<<<<< Updated upstream
                             <img src="~/images/produtos/ssd.png">
+=======
+                            <img src="~/images/produtos/ssd.png" alt="SSD">
+>>>>>>> Stashed changes
                                 <span>R$ 499</span>
                             </div>
 
                             <div class="produto-card">
+<<<<<<< Updated upstream
                                 <img src="~/images/produtos/cpu-intel.png">
+=======
+                                <img src="~/images/produtos/cpu-intel.png" alt="Intel">
+>>>>>>> Stashed changes
                                     <span>R$ 1.799</span>
                                 </div>
 
@@ -102,22 +207,38 @@
                             <div class="produtos">
 
                                 <div class="produto-card">
+<<<<<<< Updated upstream
                                     <img src="~/images/produtos/teclado.png">
+=======
+                                    <img src="~/images/produtos/teclado.png" alt="Teclado">
+>>>>>>> Stashed changes
                                         <span>R$ 399</span>
                                     </div>
 
                                     <div class="produto-card">
+<<<<<<< Updated upstream
                                         <img src="~/images/produtos/headset.png">
+=======
+                                        <img src="~/images/produtos/headset.png" alt="Headset">
+>>>>>>> Stashed changes
                                             <span>R$ 299</span>
                                         </div>
 
                                         <div class="produto-card">
+<<<<<<< Updated upstream
                                             <img src="~/images/produtos/mouse.png">
+=======
+                                            <img src="~/images/produtos/mouse.png" alt="Mouse">
+>>>>>>> Stashed changes
                                                 <span>R$ 199</span>
                                             </div>
 
                                             <div class="produto-card">
+<<<<<<< Updated upstream
                                                 <img src="~/images/produtos/monitor.png">
+=======
+                                                <img src="~/images/produtos/monitor.png" alt="Monitor">
+>>>>>>> Stashed changes
                                                     <span>R$ 1.299</span>
                                                 </div>
 

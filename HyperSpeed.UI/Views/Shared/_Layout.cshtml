@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿<!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -82,3 +83,12 @@
 
     </body>
 </html>
+=======
+﻿@foreach (var produto in Model)
+{
+    <div class="produto-card">
+        <img src="@produto.Imagem" alt="@produto.Nome" />
+        <span>@produto.Preco.ToString("C")</span>
+    </div>
+}
+>>>>>>> Stashed changes

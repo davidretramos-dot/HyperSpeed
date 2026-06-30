@@ -25,7 +25,7 @@ namespace HyperSpeed.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<CategoriasDTo>> Create([FromBody] CriacaoCategoriaDTo dto)
         {
             var category = await _categoriasService.CreateAsync(dto);

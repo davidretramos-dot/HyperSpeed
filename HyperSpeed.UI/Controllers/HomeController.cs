@@ -6,10 +6,10 @@ namespace HyperSpeed.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILojaSerivce _produtoService;
+        private readonly IProdutoService _produtoService;
         private readonly ICategoriasService _categoriasService;
 
-        public HomeController(ILojaSerivce produtoService, ICategoriasService categoriasService)
+        public HomeController(IProdutoService produtoService, ICategoriasService categoriasService)
         {
             _produtoService = produtoService;
             _categoriasService = categoriasService;

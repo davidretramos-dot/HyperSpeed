@@ -15,7 +15,17 @@ namespace HyperSpeed.Infrastruture.Identity
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(); ;
 
-            await context.Database.MigrateAsync();
+            try
+            {
+               
+                await context.Database.MigrateAsync();
+            }
+            catch (Exception)
+            {
+                // Se houver problemas com migrations (ex.: projeto sem migrations aplicadas ao DB atual)
+                // usa EnsureCreated como fallback para criar o esquema automaticamente em ambiente de desenvolvimento.
+                await context.Database.EnsureCreatedAsync();
+            }
 
             if (!context.Categorias.Any())
             {

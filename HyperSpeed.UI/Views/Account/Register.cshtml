@@ -1,100 +1,96 @@
-<<<<<<< Updated upstream
-﻿@{
-    ViewData["Title"] = "Criar Conta";
-=======
-﻿@* Register — Design Stitch *@
-@model RegistoDto
+@model SeuProjeto.ViewModels.RegistroViewModel
 
 @{
-    ViewData["Title"] = "Registrar";
-    Layout = null;
->>>>>>> Stashed changes
+    ViewData["Title"] = "Criar Conta";
 }
+
 <div class="login-page">
 
     <div class="login-card">
 
-<<<<<<< Updated upstream
         <h1>Criar Conta</h1>
 
-        <form asp-action="Registrar" method="post">
+        <form asp-controller="Conta" asp-action="Registro" method="post">
 
-            <label>Nome Completo</label>
-            <input type="text" name="Nome" placeholder="Digite seu nome" required />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <label>E-mail</label>
-            <input type="email" name="Email" placeholder="Digite seu e-mail" required />
+            <div class="form-group">
 
-            <label>CPF</label>
-            <input type="text" name="Cpf" placeholder="000.000.000-00" required />
+                <label asp-for="Nome"></label>
 
-            <label>Telefone</label>
-            <input type="text" name="Telefone" placeholder="(00) 00000-0000" required />
-=======
-            @* Exibe erros de validação *@
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="alert alert-danger py-2" role="alert">
-                    <small>
-                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                        {
-                            <span>@error.ErrorMessage</span>
-                            <br />
-                        }
-                    </small>
-                </div>
-            }
+                <input asp-for="Nome" class="form-control" />
 
-            <form asp-controller="Account" asp-action="Register" method="post">
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Email</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                        <input asp-for="Email" type="email" class="form-control"
-                               placeholder="seu@email.com" required />
-                    </div>
-                </div>
+                <span asp-validation-for="Nome" class="text-danger"></span>
 
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Senha</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                        <input asp-for="Senha" type="password" class="form-control"
-                               placeholder="••••••••" required />
-                    </div>
-                    <small class="text-muted">Mínimo 6 caracteres com maiúscula, minúscula, número e especial.</small>
-                </div>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Confirmar Senha</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                        <input asp-for="ConfirmarSenha" type="password" class="form-control"
-                               placeholder="••••••••" required />
-                    </div>
-                </div>
->>>>>>> Stashed changes
+            <div class="form-group">
 
-            <label>Senha</label>
-            <input type="password" name="Senha" placeholder="Digite sua senha" required />
+                <label asp-for="Email"></label>
 
-            <label>Confirmar Senha</label>
-            <input type="password" name="ConfirmarSenha" placeholder="Confirme sua senha" required />
+                <input asp-for="Email" class="form-control" />
 
-            <button type="submit">
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="Cpf"></label>
+
+                <input asp-for="Cpf" class="form-control" />
+
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="Telefone"></label>
+
+                <input asp-for="Telefone" class="form-control" />
+
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="Senha"></label>
+
+                <input asp-for="Senha" class="form-control" />
+
+                <span asp-validation-for="Senha" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="ConfirmarSenha"></label>
+
+                <input asp-for="ConfirmarSenha" class="form-control" />
+
+                <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+
+            </div>
+
+            <button type="submit" class="admin-btn">
+
                 Criar Conta
+
             </button>
 
         </form>
 
         <div class="login-links">
 
-            <a asp-controller="Login" asp-action="Index">
-                Já possui uma conta?
-            </a>
+            <p>Já possui uma conta?</p>
 
-            <a asp-controller="Home" asp-action="Index">
-                Voltar à loja
+            <a asp-controller="Conta"
+               asp-action="Login">
+
+                Entrar
+
             </a>
 
         </div>
@@ -102,3 +98,8 @@
     </div>
 
 </div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

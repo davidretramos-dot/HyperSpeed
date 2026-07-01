@@ -1,9 +1,7 @@
-<<<<<<< Updated upstream
-﻿@{
+@model HyperSpeed.UI.Models.LoginViewModel
+@{
     ViewData["Title"] = "Login";
 }
-=======
-﻿@model HyperSpeed.UI.Models.LoginViewModel
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -24,44 +22,38 @@
                 <img src="~/images/logo.png" alt="SenacGames Logo" class="brand-logo mb-3" style="height: 60px;" />
                 <p>Acesse sua conta para continuar</p>
             </div>
->>>>>>> Stashed changes
 
+            <div class="login-page">
+                <div class="login-container">
+                    <div class="login-card">
+                        <h1>Bem-vindo!</h1>
+                        <p>Faça login para continuar.</p>
 
-<div class="login-page">
+                        <form asp-action="Login" method="post">
+                            <div class="input-group">
+                                <label>Email</label>
+                                <input type="email" name="Email" placeholder="Digite seu email" required>
+                            </div>
 
+                            <div class="input-group">
+                                <label>Senha</label>
+                                <input type="password" name="Senha" placeholder="Digite sua senha" required>
+                            </div>
 
-    <div class="login-container">
+                            <button type="submit" class="btn-login">
+                                Entrar
+                            </button>
+                        </form>
 
-        <div class="login-card">
-
-            <h1>Bem-vindo!</h1>
-            <p>Faça login para continuar.</p>
-
-            <form asp-action="Login" method="post">
-
-                <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" name="Email" placeholder="Digite seu email" required>
+                        <div class="login-links">
+                            <a asp-action="Cadastrar">Criar conta</a>
+                            <a asp-action="EsqueciSenha">Esqueci minha senha</a>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="input-group">
-                    <label>Senha</label>
-                    <input type="password" name="Senha" placeholder="Digite sua senha" required>
-                </div>
-
-                <button type="submit" class="btn-login">
-                    Entrar
-                </button>
-
-            </form>
-
-            <div class="login-links">
-                <a asp-action="Cadastrar">Criar conta</a>
-                <a asp-action="EsqueciSenha">Esqueci minha senha</a>
             </div>
 
-        </div>
-
-    </div>
-
-</div>
+        </div> <!-- .auth-card -->
+    </div> <!-- .auth-page -->
+</body>
+</html>

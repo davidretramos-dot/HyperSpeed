@@ -1,0 +1,52 @@
+﻿<header>
+
+    <div class="top-bar">
+
+        <div class="logo">
+
+            <a asp-controller="Home"
+               asp-action="Index">
+
+                <img src="~/images/logo.png" />
+
+            </a>
+
+        </div>
+
+        <div class="search">
+
+            <form asp-controller="Produto"
+                  asp-action="Pesquisa"
+                  method="get">
+
+                <input type="text"
+                       name="pesquisa"
+                       placeholder="Pesquisar produtos..." />
+
+            </form>
+
+        </div>
+
+        <div class="account">
+
+            <a asp-controller="Usuario"
+               asp-action="Login">
+
+                Conta
+
+            </a>
+
+            |
+
+            <a asp-controller="Favorito"
+               asp-action="Index">
+
+                Favoritos
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>

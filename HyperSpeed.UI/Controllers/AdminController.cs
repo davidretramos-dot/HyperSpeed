@@ -1,67 +1,94 @@
-﻿using hyperSpeed.Application.DTOs;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using hyperSpeed.Application.DTOs;
 using hyperSpeed.Application.ViewModels;
 using HyperSpeed.Domain.Entities;
 using HyperSpeed.Domain.interfaces;
+using hyperSpeed.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-<<<<<<< Updated upstream
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-=======
-using hyperSpeed.Application.Interfaces;
->>>>>>> Stashed changes
 
 namespace HyperSpeed.UI.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class AdminController : Controller
     {
-<<<<<<< Updated upstream
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IProdutoService _produtoService;
+        private readonly ICategoriasService _categoriaService;
 
         public AdminController(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IProdutoService produtoService,
+            ICategoriasService categoriasService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-=======
-        private readonly ILojaSerivce _produtoService;
-        private readonly ICategoriasService _categoriaService;
-
-        public AdminController(ILojaSerivce produtoService, ICategoriasService categoriasService)
-        {
             _produtoService = produtoService;
             _categoriaService = categoriasService;
->>>>>>> Stashed changes
+        }
+
+        // GET: /Admin
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            ViewData["ActiveMenu"] = "Dashboard";
+            ViewData["Title"] = "Painel Administrativo";
+
+            var totalProdutos = await _produtoService.CountAsync();
+            var totalCategorias = await _categoriaService.CountAsync(); // fallback if different name
+            // fallback safe call in case method name or service differs
+            if (totalCategorias == 0)
+            {
+                totalCategorias = await _categoriaService.CountAsync();
+            }
+
+            var allProdutos = await _produtoService.GetAllAsync();
+            var recent = allProdutos
+                .OrderByDescending(p => p.CriacaoAt)
+                .Take(5)
+                .ToList();
+
+            var vm = new DashboardViewModel
+            {
+                TotalProdutos = totalProdutos,
+                TotalCategorias = totalCategorias,
+                RecentProdutos = recent
+            };
+
+            return View(vm);
         }
 
         /// <summary>
         /// Registra um novo usuário.
-        /// POST /api/admin/register
+        /// POST /Admin/Register
         /// </summary>
         [HttpPost("register")]
         public async Task<ActionResult> Register([FromBody] RegistoDto dto)
         {
-            // validação de senha
             if (dto.Senha != dto.ConfirmarSenha)
                 return BadRequest(new { message = "As senhas não coincidem." });
 
             var user = new IdentityUser
             {
-<<<<<<< Updated upstream
                 UserName = dto.Email,
                 Email = dto.Email
-=======
-                TotalProdutos = await _produtoService.CountAsync(),
-                TotalCategorias = await _categoriaService.CountAsync(),
-                RecentProdutos = (await _produtoService.GetAllAsync()).Take(5)
             };
-            return View(viewModel);
+
+            var result = await _userManager.CreateAsync(user, dto.Senha);
+
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(new { message = "Erro ao registrar usuário.", errors });
+            }
+
+            return Ok(new { message = "Usuário registrado com sucesso." });
         }
 
         public async Task<IActionResult> Produtos()
@@ -70,45 +97,55 @@ namespace HyperSpeed.UI.Controllers
             ViewData["Title"] = "Gerenciar Produtos";
             ViewData["Subtitle"] = "Cadastre, edite e exclua produtos do catálogo";
 
-            var produto = await _produtoService.GetAllAsync();
-            return View(produto);
+            var produtos = await _produtoService.GetAllAsync();
+            return View(produtos);
         }
 
+        // GET: Admin/CreateProd
         [HttpGet]
         public async Task<IActionResult> CreateProd()
         {
             ViewData["ActiveMenu"] = "Produtos";
-            ViewData["Title"] = "Cadastrar Novo Game";
+            ViewData["Title"] = "Inserir Novo Produto";
 
             var categorias = await _categoriaService.GetAllAsync();
             var viewModel = new ProdutoFormViewModel
             {
-                Categorias = categorias,
-                ReleaseYear = DateTime.Now.Year
->>>>>>> Stashed changes
+                Categorias = categorias
             };
 
-            // Cria o usuário usando o UserManager
-            var result = await _userManager.CreateAsync(user, dto.Senha);
+            // usa convenção: Views/Admin/CreateProd.cshtml
+            return View(viewModel);
+        }
 
-            if (!result.Succeeded)
+        // POST: Admin/CreateProd
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProd(ProdutoFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
             {
-<<<<<<< Updated upstream
-                var errors = result.Errors.Select(erros => erros.Description);
-                return BadRequest(new { message = "Erro ao registrar usuário.", errors });
-=======
-                Title = viewModel.Title,
+                viewModel.Categorias = await _categoriaService.GetAllAsync();
+                return View(viewModel);
+            }
+
+            var dto = new CriacaoProdutoDTo
+            {
+                NomeProduto = viewModel.NomeProduto,
                 Descricao = viewModel.Descricao,
-                ReleaseYear = viewModel.ReleaseYear,
-                CoverImageUrl = viewModel.CoverImageUrl,
-                IdCategorias = viewModel.IdCategorias,
+                Preco = viewModel.Preco,
+                Estoque = viewModel.Estoque,
+                ImagemUrl = viewModel.ImagemUrl,
+                IdCategoria = viewModel.IdCategoria,
+                Destaque = viewModel.Destaque
             };
 
             await _produtoService.CreateAsync(dto);
-            TempData["Sucess"] = "Produto cadastrado com sucesso";
+            TempData["Success"] = "Produto cadastrado com sucesso";
             return RedirectToAction(nameof(Produtos));
         }
 
+        // GET: Admin/EditProd/5
         [HttpGet]
         public async Task<IActionResult> EditProd(int id)
         {
@@ -121,35 +158,46 @@ namespace HyperSpeed.UI.Controllers
             var categorias = await _categoriaService.GetAllAsync();
             var viewModel = new ProdutoFormViewModel
             {
-                id = produto.Id,
-                Title = produto.Title,
+                Id = produto.Id,
+                NomeProduto = produto.NomeProduto,
                 Descricao = produto.Descricao,
-                ReleaseYear = produto.ReleaseYear,
-                CoverImageUrl = produto.CoverImageUrl,
-                IdCategorias = produto.IdCategorias
+                Preco = produto.Preco,
+                Estoque = produto.Estoque,
+                ImagemUrl = produto.ImagemUrl,
+                IdCategoria = produto.IdCategoria,
+                Destaque = produto.Destaque,
                 Categorias = categorias
             };
 
+            // usa convenção: Views/Admin/EditProd.cshtml
             return View(viewModel);
         }
+
+        // POST: Admin/EditProd/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult> EditProd(int id, ProdutoFormView viewModel)
+        public async Task<IActionResult> EditProd(int id, ProdutoFormViewModel viewModel)
         {
-            var dto = new UpdateProdutoDto
+            if (!ModelState.IsValid)
             {
-                Title = viewModel.Title,
+                viewModel.Categorias = await _categoriaService.GetAllAsync();
+                return View(viewModel);
+            }
+
+            var dto = new AutualizacaoProdutoDTo
+            {
+                NomeProduto = viewModel.NomeProduto,
                 Descricao = viewModel.Descricao,
-                ReleaseYear = viewModel.ReleaseYear,
-                CoverImageUrl = viewModel.CoverImageUrl,
-                IdCategorias = viewModel.IdCategorias
+                Preco = viewModel.Preco,
+                Estoque = viewModel.Estoque,
+                ImagemUrl = viewModel.ImagemUrl,
+                IdCategoria = viewModel.IdCategoria,
+                Destaque = viewModel.Destaque
             };
 
             var result = await _produtoService.UpdateAsync(id, dto);
+            if (result == null) return NotFound();
 
-            if (result == null)
-                return NotFound();
             TempData["Success"] = "Produto atualizado com sucesso!";
             return RedirectToAction(nameof(Produtos));
         }
@@ -162,6 +210,8 @@ namespace HyperSpeed.UI.Controllers
 
             var produto = await _produtoService.GetByIdAsync(id);
             if (produto == null) return NotFound();
+
+            // usa convenção: Views/Admin/DeleteProd.cshtml
             return View(produto);
         }
 
@@ -170,7 +220,7 @@ namespace HyperSpeed.UI.Controllers
         public async Task<IActionResult> DeleteProdConfirmed(int id)
         {
             await _produtoService.DeleteAsync(id);
-            TempData["Sucess"] = "Game excluido com sucesso!";
+            TempData["Success"] = "Produto excluído com sucesso!";
             return RedirectToAction(nameof(Produtos));
         }
 
@@ -178,7 +228,7 @@ namespace HyperSpeed.UI.Controllers
         {
             ViewData["ActiveMenu"] = "Categorias";
             ViewData["Title"] = "Gerenciar Categorias";
-            ViewData["Subtitle"] = "Cadastre, edite e exclua categorias de games";
+            ViewData["Subtitle"] = "Cadastre, edite e exclua categorias dos Produtos";
 
             var categorias = await _categoriaService.GetAllAsync();
             return View(categorias);
@@ -194,7 +244,7 @@ namespace HyperSpeed.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCategoria(CreateCategoriasDto dto)
+        public async Task<IActionResult> CreateCategoria(CriacaoCategoriaDTo dto)
         {
             await _categoriaService.CreateAsync(dto);
             TempData["Success"] = "Categoria cadastrada com sucesso!";
@@ -214,7 +264,7 @@ namespace HyperSpeed.UI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCategoria(int id, UpdateCategoriasDto dto)
+        public async Task<IActionResult> EditCategoria(int id, AtualizacaoCategoriaDTo dto)
         {
             var result = await _categoriaService.UpdateAsync(id, dto);
             if (result == null) return NotFound();
@@ -242,24 +292,24 @@ namespace HyperSpeed.UI.Controllers
             var deleted = await _categoriaService.DeleteAsync(id);
             if (!deleted)
             {
-                TempData["Error"] = "Não foi possivel excluir a categoria. Verifique se há produtos associados. ";
+                TempData["Error"] = "Não foi possível excluir a categoria. Verifique se há produtos associados.";
                 return RedirectToAction(nameof(Categorias));
->>>>>>> Stashed changes
             }
-            return Ok(new { message = "Usuário registrado com sucesso." });
+
+            TempData["Success"] = "Categoria excluída com sucesso!";
+            return RedirectToAction(nameof(Categorias));
         }
 
         ///<summary>
         /// Faz login do usuário.
-        /// POST /api/admin/login
+        /// POST /Admin/Login
         /// </summary>
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
             var result = await _signInManager.PasswordSignInAsync(
                 dto.Email, dto.Senha, isPersistent: false, lockoutOnFailure: false);
-            // isPersistent: se o cookie de autenticação deve ser persistente
-            // lockoutOnFailure: se deve bloquear a conta após falhas consecutivas de login
+
             if (!result.Succeeded)
             {
                 return Unauthorized(new { message = "Email ou senha inválidos." });
@@ -278,7 +328,7 @@ namespace HyperSpeed.UI.Controllers
 
         /// <summary>
         /// Faz logout do usuário
-        /// POST /api/admin/logout
+        /// POST /Admin/Logout
         /// </summary>
         [HttpPost("logout")]
         [Authorize]
@@ -290,7 +340,7 @@ namespace HyperSpeed.UI.Controllers
 
         /// <summary>
         /// Retorna os dados do usuário autenticado
-        /// GET /api/admin/me
+        /// GET /Admin/Me
         /// </summary>
         [HttpGet("me")]
         [Authorize]
@@ -311,33 +361,25 @@ namespace HyperSpeed.UI.Controllers
             });
         }
 
-        // --- classes auxiliares existentes no arquivo (mantive conforme estavam) ---
-
-        public class ProdutoFormView
+        // --- classes auxiliares ---
+        public class ProdutoFormViewModel
         {
-
+            public int? Id { get; set; }
+            public string NomeProduto { get; set; } = string.Empty;
+            public string Descricao { get; set; } = string.Empty;
+            public int Preco { get; set; }
+            public int Estoque { get; set; }
+            public string ImagemUrl { get; set; } = string.Empty;
+            public int IdCategoria { get; set; }
+            public bool Destaque { get; set; }
+            public IEnumerable<CategoriasDTo> Categorias { get; set; } = Enumerable.Empty<CategoriasDTo>();
         }
 
-        internal class UpdateProdDto : AutualizacaoProdutoDTo
-        {
-            public object Title { get; set; }
-            public object Descricao { get; set; }
-            public object ReleaseYear { get; set; }
-            public object CoverImageUrl { get; set; }
-            public object IdCategorias { get; set; }
-        }
-
-        internal class ProdutoFormViewModel
-        {
-            public IEnumerable<CategoriasDTo> Categorias { get; set; }
-            public int ReleaseYear { get; set; }
-        }
-
-        internal class DashboardViewModel
+        public class DashboardViewModel
         {
             public int TotalProdutos { get; set; }
             public int TotalCategorias { get; set; }
-            public IEnumerable<ProdutoDTo> RecentProdutos { get; set; }
+            public IEnumerable<ProdutoDTo> RecentProdutos { get; set; } = Enumerable.Empty<ProdutoDTo>();
         }
     }
 }

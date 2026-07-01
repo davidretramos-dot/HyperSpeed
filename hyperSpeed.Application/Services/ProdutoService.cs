@@ -20,11 +20,6 @@ namespace hyperSpeed.Application.Services
         {
             _ProdutoRepository = produtoRepository;
         }
-
-        public ProdutoService()
-        {
-        }
-
         public async Task<ProdutoDTo?> GetAllAsync(int id)
         {
             var Produto = await _ProdutoRepository.GetByIdAsync(id);

@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
 
 builder.Services.AddDbContext<HyperSpeedDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -71,7 +72,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-var app = builder.Build();
+var apps = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -90,5 +91,8 @@ app.MapControllers();
 
 await SeedData.SeedAsync(app.Services);
 
+app.UseStaticFiles();
+
+app.MapRazorPages();
 app.Run();
 

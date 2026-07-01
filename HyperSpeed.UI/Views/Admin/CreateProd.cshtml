@@ -1,27 +1,27 @@
-﻿@using static HyperSpeed.UI.Controllers.AdminController
+@using static HyperSpeed.UI.Controllers.AdminController
 @model ProdutoFormViewModel
 @{
     Layout = "_AdminLayout";
-    ViewData["Title"] = "Editar Produto";
+    ViewData["Title"] = "Cadastrar Novo Game";
 }
 
 <div class="row justify-content-center">
     <div class="col-lg-8">
         <div class="form-senac">
-            <form asp-action="EditProd" asp-route-id="@Model.Id" method="post">
+            <form asp-action="CreateProd" method="post">
                 @Html.AntiForgeryToken()
                 <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
                 <div class="row g-3">
                     <div class="col-12">
                         <label asp-for="NomeProduto" class="form-label">Título do Game</label>
-                        <input asp-for="NomeProduto" class="form-control" required />
+                        <input asp-for="NomeProduto" class="form-control" placeholder="Ex: God of War Ragnarök" required />
                         <span asp-validation-for="NomeProduto" class="text-danger"></span>
                     </div>
 
                     <div class="col-12">
                         <label asp-for="Descricao" class="form-label">Descrição</label>
-                        <textarea asp-for="Descricao" class="form-control" rows="4" required></textarea>
+                        <textarea asp-for="Descricao" class="form-control" rows="4" placeholder="Descreva o game..." required></textarea>
                         <span asp-validation-for="Descricao" class="text-danger"></span>
                     </div>
 
@@ -40,7 +40,7 @@
                     <div class="col-md-4">
                         <label asp-for="IdCategoria" class="form-label">Categoria</label>
                         <select asp-for="IdCategoria" class="form-select" required>
-                            <option value="">Selecione</option>
+                            <option value="">Selecione uma categoria</option>
                             @foreach (var category in Model.Categorias)
                             {
                                 <option value="@category.Id">@category.Nome</option>
@@ -50,8 +50,8 @@
                     </div>
 
                     <div class="col-12">
-                        <label asp-for="ImagemUrl" class="form-label">URL da Imagem</label>
-                        <input asp-for="ImagemUrl" class="form-control" />
+                        <label asp-for="ImagemUrl" class="form-label">URL da Imagem de Capa</label>
+                        <input asp-for="ImagemUrl" class="form-control" placeholder="https://exemplo.com/imagem.png" />
                         <span asp-validation-for="ImagemUrl" class="text-danger"></span>
                     </div>
 
@@ -59,7 +59,7 @@
                         <div class="form-check">
                             <input asp-for="Destaque" class="form-check-input" type="checkbox" />
                             <label asp-for="Destaque" class="form-check-label">
-                                <i class="bi bi-star-fill text-warning"></i> Destaque
+                                <i class="bi bi-star-fill text-warning"></i> Marcar como destaque
                             </label>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                         <i class="bi bi-arrow-left"></i> Cancelar
                     </a>
                     <button type="submit" class="btn btn-primary-senac">
-                        <i class="bi bi-check-lg"></i> Salvar Alterações
+                        <i class="bi bi-check-lg"></i> Cadastrar Game
                     </button>
                 </div>
             </form>

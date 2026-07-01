@@ -21,5 +21,6 @@ namespace HyperSpeed.Domain.interfaces
         Task DeleteAsync(int id);
 
         Task<int> CountAsync();
+        Task<IEnumerable<Produto>> GetByCategoryAsync(int IdCategoria);
     }
 }

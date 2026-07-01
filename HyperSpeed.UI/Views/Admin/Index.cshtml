@@ -1,155 +1,77 @@
-﻿@model DashBoardViewModel
+﻿@model HyperSpeed.UI.Controllers.AdminController.DashboardViewModel
+
 @{
-    @{
+    Layout = "_AdminLayout";
     ViewData["Title"] = "Painel Administrativo";
 }
 
 <div class="admin">
-
     <aside class="admin-sidebar">
-
         <h2>ADMIN</h2>
-
-        <a asp-controller="Admin" asp-action="Index">
-            Dashboard
-        </a>
-
-        <a asp-controller="Produto" asp-action="Index">
-            Produtos
-        </a>
-
-        <a asp-controller="Categoria" asp-action="Index">
-            Categorias
-        </a>
-
-        <a asp-controller="Pedido" asp-action="Index">
-            Pedidos
-        </a>
-
-        <a asp-controller="Usuario" asp-action="Index">
-            Usuários
-        </a>
-
-        <a asp-controller="Home" asp-action="Index">
-            Voltar ao Site
-        </a>
-
+        <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+        <a asp-controller="Admin" asp-action="Produtos">Produtos</a>
+        <a asp-controller="Admin" asp-action="Categorias">Categorias</a>
+        <a asp-controller="Pedido" asp-action="Index">Pedidos</a>
+        <a asp-controller="Home" asp-action="Index">Voltar ao Site</a>
     </aside>
 
     <main class="admin-content">
-
-        <h1>Painel Administrativo</h1>
+        <h1>@ViewData["Title"]</h1>
 
         <div class="admin-cards">
-
             <div class="admin-card">
                 <h3>Produtos</h3>
-                <span>152</span>
+                <span>@(Model?.TotalProdutos ?? 0)</span>
             </div>
 
             <div class="admin-card">
                 <h3>Categorias</h3>
-                <span>12</span>
+                <span>@(Model?.TotalCategorias ?? 0)</span>
             </div>
 
             <div class="admin-card">
                 <h3>Pedidos</h3>
-                <span>48</span>
+                <span>—</span>
             </div>
-
-            <div class="admin-card">
-                <h3>Usuários</h3>
-                <span>320</span>
-            </div>
-
         </div>
 
         <div class="admin-actions">
-
-            <a asp-controller="Produto"
-               asp-action="Create"
-               class="admin-btn">
-
-                Novo Produto
-
+            <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-speedometer2"></i> Ir para Dashboard
             </a>
-
-            <a asp-controller="Categoria"
-               asp-action="Create"
-               class="admin-btn">
-
-                Nova Categoria
-
-            </a>
-
-            <a asp-controller="Pedido"
-               asp-action="Index"
-               class="admin-btn">
-
-                Ver Pedidos
-
-            </a>
-
+            <a asp-controller="Admin" asp-action="CreateProd" class="btn btn-primary ms-2">Novo Produto</a>
+            <a asp-controller="Admin" asp-action="CreateCategoria" class="btn btn-outline-primary ms-2">Nova Categoria</a>
         </div>
 
-        <h2>Pedidos Recentes</h2>
+        <h2 class="mt-4">Produtos Recentes</h2>
 
-        <table class="admin-table">
-
-            <thead>
-
-                <tr>
-                    <th>ID</th>
-                    <th>Cliente</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <tr>
-
-                    <td>#001</td>
-
-                    <td>João</td>
-
-                    <td>R$ 2.399,00</td>
-
-                    <td>Pago</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>#002</td>
-
-                    <td>Maria</td>
-
-                    <td>R$ 899,00</td>
-
-                    <td>Enviado</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>#003</td>
-
-                    <td>Carlos</td>
-
-                    <td>R$ 4.599,00</td>
-
-                    <td>Preparando</td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
+        @if (Model?.RecentProdutos != null && Model.RecentProdutos.Any())
+        {
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Categoria</th>
+                        <th>Criado Em</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in Model.RecentProdutos)
+                    {
+                        <tr>
+                            <td>@p.Id</td>
+                            <td>@p.NomeProduto</td>
+                            <td>@p.NomeCategoria</td>
+                            <td>@p.CriacaoAt.ToString("yyyy-MM-dd")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="text-muted-senac">Nenhum produto recente encontrado.</p>
+        }
     </main>
-
 </div>
-}

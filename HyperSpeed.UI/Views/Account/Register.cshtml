@@ -1,104 +1,46 @@
-<<<<<<< Updated upstream
-﻿@{
-    ViewData["Title"] = "Criar Conta";
-=======
-﻿@* Register — Design Stitch *@
 @model RegistoDto
 
 @{
-    ViewData["Title"] = "Registrar";
-    Layout = null;
->>>>>>> Stashed changes
+    ViewData["Title"] = "Criar Conta";
 }
+
 <div class="login-page">
-
     <div class="login-card">
-
-<<<<<<< Updated upstream
         <h1>Criar Conta</h1>
 
-        <form asp-action="Registrar" method="post">
+        <form asp-controller="Conta" asp-action="Register" method="post" novalidate>
+            @Html.AntiForgeryToken()
 
-            <label>Nome Completo</label>
-            <input type="text" name="Nome" placeholder="Digite seu nome" required />
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <label>E-mail</label>
-            <input type="email" name="Email" placeholder="Digite seu e-mail" required />
+            <div class="mb-3">
+                <label class="form-label">E-mail</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="seu@email.com" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
 
-            <label>CPF</label>
-            <input type="text" name="Cpf" placeholder="000.000.000-00" required />
+            <div class="mb-3">
+                <label class="form-label">Senha</label>
+                <input asp-for="Senha" type="password" class="form-control" placeholder="••••••••" required />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+                <small class="text-muted">Mínimo 6 caracteres (conforme regras do Identity configuradas).</small>
+            </div>
 
-            <label>Telefone</label>
-            <input type="text" name="Telefone" placeholder="(00) 00000-0000" required />
-=======
-            @* Exibe erros de validação *@
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="alert alert-danger py-2" role="alert">
-                    <small>
-                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                        {
-                            <span>@error.ErrorMessage</span>
-                            <br />
-                        }
-                    </small>
-                </div>
-            }
+            <div class="mb-3">
+                <label class="form-label">Confirmar Senha</label>
+                <input asp-for="ConfirmarSenha" type="password" class="form-control" placeholder="••••••••" required />
+                <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+            </div>
 
-            <form asp-controller="Account" asp-action="Register" method="post">
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Email</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                        <input asp-for="Email" type="email" class="form-control"
-                               placeholder="seu@email.com" required />
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Senha</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                        <input asp-for="Senha" type="password" class="form-control"
-                               placeholder="••••••••" required />
-                    </div>
-                    <small class="text-muted">Mínimo 6 caracteres com maiúscula, minúscula, número e especial.</small>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold">Confirmar Senha</label>
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                        <input asp-for="ConfirmarSenha" type="password" class="form-control"
-                               placeholder="••••••••" required />
-                    </div>
-                </div>
->>>>>>> Stashed changes
-
-            <label>Senha</label>
-            <input type="password" name="Senha" placeholder="Digite sua senha" required />
-
-            <label>Confirmar Senha</label>
-            <input type="password" name="ConfirmarSenha" placeholder="Confirme sua senha" required />
-
-            <button type="submit">
+            <button type="submit" class="btn btn-primary">
                 Criar Conta
             </button>
-
         </form>
 
-        <div class="login-links">
-
-            <a asp-controller="Login" asp-action="Index">
-                Já possui uma conta?
-            </a>
-
-            <a asp-controller="Home" asp-action="Index">
-                Voltar à loja
-            </a>
-
+        <div class="login-links mt-3">
+            <a asp-controller="Conta" asp-action="Login">Já possui uma conta?</a>
+            <span> | </span>
+            <a asp-controller="Home" asp-action="Index">Voltar à loja</a>
         </div>
-
     </div>
-
 </div>

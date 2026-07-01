@@ -1,9 +1,9 @@
-<<<<<<< Updated upstream
-﻿@{
+@model HyperSpeed.UI.Models.LoginViewModel
+
+@{
     ViewData["Title"] = "Login";
 }
-=======
-﻿@model HyperSpeed.UI.Models.LoginViewModel
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -20,48 +20,44 @@
     <div class="auth-page">
         <div class="auth-card animate-in">
             <div class="auth-logo">
-                @*TROCAR LOGO AQUI MAIS TARDE*@
-                <img src="~/images/logo.png" alt="SenacGames Logo" class="brand-logo mb-3" style="height: 60px;" />
                 <p>Acesse sua conta para continuar</p>
             </div>
->>>>>>> Stashed changes
 
+            <div class="login-page">
+                <div class="login-container">
+                    <div class="login-card">
+                        <h1>Bem-vindo!</h1>
+                        <p>Faça login para continuar.</p>
 
-<div class="login-page">
+                        <form asp-controller="Conta" asp-action="Login" method="post">
+                            @Html.AntiForgeryToken()
 
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" type="email" placeholder="Digite seu email" required />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
 
-    <div class="login-container">
+                            <div class="mb-3">
+                                <label class="form-label">Senha</label>
+                                <input asp-for="Password" class="form-control" type="password" placeholder="Digite sua senha" required />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
 
-        <div class="login-card">
+                            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
 
-            <h1>Bem-vindo!</h1>
-            <p>Faça login para continuar.</p>
+                            <button type="submit" class="btn btn-primary btn-login">Entrar</button>
+                        </form>
 
-            <form asp-action="Login" method="post">
-
-                <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" name="Email" placeholder="Digite seu email" required>
+                        <div class="login-links mt-3">
+                            <a asp-controller="Conta" asp-action="Register">Criar conta</a>
+                            <span> | </span>
+                            <a asp-controller="Conta" asp-action="EsqueciSenha">Esqueci minha senha</a>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="input-group">
-                    <label>Senha</label>
-                    <input type="password" name="Senha" placeholder="Digite sua senha" required>
-                </div>
-
-                <button type="submit" class="btn-login">
-                    Entrar
-                </button>
-
-            </form>
-
-            <div class="login-links">
-                <a asp-action="Cadastrar">Criar conta</a>
-                <a asp-action="EsqueciSenha">Esqueci minha senha</a>
             </div>
-
         </div>
-
     </div>
-
-</div>
+</body>
+</html>

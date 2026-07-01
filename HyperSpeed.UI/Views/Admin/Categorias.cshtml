@@ -1,5 +1,4 @@
-﻿@model IEnumerable<CategoriasDTo>
-@{
+﻿@{
     ViewData["Title"] = "Gerenciar Categorias";
 }
 
@@ -79,14 +78,14 @@
                     <td>
 
                         <a asp-action="Edit"
-                               class="btn-editar">
+                           class="btn-editar">
 
                             Editar
 
                         </a>
 
                         <a asp-action="Delete"
-                               class="btn-excluir">
+                           class="btn-excluir">
 
                             Excluir
 
@@ -109,14 +108,14 @@
                     <td>
 
                         <a asp-action="Edit"
-                               class="btn-editar">
+                           class="btn-editar">
 
                             Editar
 
                         </a>
 
                         <a asp-action="Delete"
-                               class="btn-excluir">
+                           class="btn-excluir">
 
                             Excluir
 
@@ -139,14 +138,14 @@
                     <td>
 
                         <a asp-action="Edit"
-                               class="btn-editar">
+                           class="btn-editar">
 
                             Editar
 
                         </a>
 
                         <a asp-action="Delete"
-                               class="btn-excluir">
+                           class="btn-excluir">
 
                             Excluir
 
@@ -169,14 +168,14 @@
                     <td>
 
                         <a asp-action="Edit"
-                               class="btn-editar">
+                           class="btn-editar">
 
                             Editar
 
                         </a>
 
                         <a asp-action="Delete"
-                               class="btn-excluir">
+                           class="btn-excluir">
 
                             Excluir
 
@@ -199,14 +198,14 @@
                     <td>
 
                         <a asp-action="Edit"
-                               class="btn-editar">
+                           class="btn-editar">
 
                             Editar
 
                         </a>
 
                         <a asp-action="Delete"
-                               class="btn-excluir">
+                           class="btn-excluir">
 
                             Excluir
 
@@ -219,56 +218,6 @@
             </tbody>
 
         </table>
-        <tbody>
-
-            @foreach (var categoria in Model)
-            {
-
-                <tr>
-
-                    <td>@categoria.Id</td>
-
-                    <td>@categoria.Nome</td>
-
-                    <td>
-
-                        @(categoria.CategoriaPai == null
-                            ? "-"
-                            : categoria.CategoriaPai.Nome)
-
-                    </td>
-
-                    <td>
-
-                        @categoria.Produtos.Count
-
-                    </td>
-
-                    <td>
-
-                        <a asp-action="Edit"
-                               asp-route-id="@categoria.Id"
-                               class="btn-editar">
-
-                            Editar
-
-                        </a>
-
-                        <a asp-action="Delete"
-                               asp-route-id="@categoria.Id"
-                               class="btn-excluir">
-
-                            Excluir
-
-                        </a>
-
-                    </td>
-
-                </tr>
-
-            }
-
-        </tbody>
 
     </main>
 

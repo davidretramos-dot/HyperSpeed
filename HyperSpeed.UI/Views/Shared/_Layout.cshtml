@@ -1,94 +1,36 @@
-<<<<<<< Updated upstream
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Hyper Speed</title>
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
+
+    <title>@ViewData["Title"] - ByteTech</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
+
 <body>
 
-    <header>
+    <partial name="_Header" />
 
-        <div class="top-bar">
+    <partial name="_Navbar" />
 
-            <div class="logo">
-                <img src="~/images/logo.png" alt="Hyper Speed">
-                </div>
+    <main>
 
-                <div class="search">
-                    <input type="text" placeholder="Pesquisa">
-                </div>
+        @RenderBody()
 
-                <div class="account">
-                    CONTA ★ FAVORITOS
-                </div>
+    </main>
 
-            </div>
+    <partial name="_Footer" />
 
-            <nav>
+    <script src="~/js/menu.js"></script>
+    <script src="~/js/carousel.js"></script>
 
-                <a href="#">☰</a>
-                <a href="#">CARRINHO</a>
-                <a href="#">MONTE SEU PC</a>
-                <a href="#">DEPARTAMENTOS</a>
-                <a href="#">PERIFÉRICOS</a>
-                <a href="#">PROMOÇÕES</a>
+</body>
 
-            </nav>
-
-        </header>
-
-        <main>
-            @RenderBody()
-        </main>
-
-        <footer>
-
-            <div class="footer-container">
-
-                <div class="footer-box">
-                    <h2>AJUDA</h2>
-
-                    <a href="#">Fale conosco</a>
-                    <a href="#">Políticas e Privacidade</a>
-                    <a href="#">Termos de Aceite</a>
-                </div>
-
-                <div class="footer-box">
-                    <h2>DÚVIDAS</h2>
-
-                    <a href="#">Entrega</a>
-                    <a href="#">Garantia</a>
-                    <a href="#">Como pagar</a>
-                </div>
-
-                <div class="footer-box">
-                    <h2>PAGAMENTO</h2>
-
-                    <p>PIX</p>
-                    <p>VISA</p>
-                    <p>MASTERCARD</p>
-                    <p>BOLETO</p>
-                </div>
-
-            </div>
-
-            <div class="copyright">
-                © Desenvolvido Por Caramelo Tech - TI31
-            </div>
-
-        </footer>
-
-    </body>
 </html>
-=======
-﻿@foreach (var produto in Model)
-{
-    <div class="produto-card">
-        <img src="@produto.Imagem" alt="@produto.Nome" />
-        <span>@produto.Preco.ToString("C")</span>
-    </div>
-}
->>>>>>> Stashed changes

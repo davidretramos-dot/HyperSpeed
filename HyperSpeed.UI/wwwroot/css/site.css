@@ -1,175 +1,61 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
+/*==============================
+        PRODUTOS ADMIN
+===============================*/
 
-body {
-    background: #fff;
-}
-
-/* HEADER */
-
-.top-bar {
+.admin-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    padding: 10px;
-    background: #222;
+    margin-bottom: 30px;
 }
 
-.logo img {
-    width: 120px;
+.admin-search {
+    margin-bottom: 25px;
 }
 
-.search {
-    flex: 1;
-}
-
-    .search input {
+    .admin-search input {
         width: 100%;
-        padding: 15px;
+        max-width: 450px;
+        padding: 14px;
         border: none;
-        border-radius: 10px;
+        border-radius: 8px;
         font-size: 16px;
     }
 
-.account {
-    background: black;
-    color: #d10046;
-    padding: 15px;
-    border-radius: 10px;
-    font-weight: bold;
-}
-
-/* MENU */
-
-nav {
-    background: #8b002e;
-    display: flex;
-    justify-content: center;
-}
-
-    nav a {
-        color: white;
-        text-decoration: none;
-        padding: 15px 25px;
-        font-weight: bold;
-    }
-
-/* BANNER */
-
-.banner {
-    background: black;
-    text-align: center;
-}
-
-    .banner img {
-        width: 100%;
-        max-width: 1400px;
-    }
-
-/* SLOGAN */
-
-.slogan {
-    background: #222;
-    text-align: center;
-    padding: 50px;
-}
-
-    .slogan p {
-        color: #d10046;
-        font-size: 28px;
-    }
-
-    .slogan h1 {
-        color: #d10046;
-        margin-top: 20px;
-        font-size: 60px;
-    }
-
-/* PRODUTOS */
-
-.categoria {
-    background: #222;
-    padding: 50px;
-    margin-top: 40px;
-}
-
-    .categoria h2 {
-        color: #d10046;
-        margin-bottom: 30px;
-        border-bottom: 2px solid black;
-    }
-
-.produtos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.produto-card {
-    width: 180px;
-    background: black;
-    border-radius: 12px;
-    padding: 10px;
-}
-
-    .produto-card img {
-        width: 100%;
-        height: 140px;
-        object-fit: contain;
-        background: white;
-        border-radius: 10px;
-    }
-
-    .produto-card span {
-        display: block;
-        color: white;
-        font-size: 30px;
-        font-weight: bold;
-        margin-top: 10px;
-    }
-
-/* FOOTER */
-
-footer {
-    background: #222;
-    color: white;
-    margin-top: 40px;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 50px;
-}
-
-.footer-box {
-    background: black;
-    width: 250px;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-    .footer-box h2 {
-        margin-bottom: 15px;
-    }
-
-    .footer-box a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        margin-bottom: 10px;
-    }
-
-.copyright {
+.produto-admin-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
     background: white;
-    color: black;
-    text-align: center;
-    padding: 15px;
-    font-weight: bold;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.btn-editar {
+    background: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+    .btn-editar:hover {
+        background: #0063cc;
+    }
+
+.btn-excluir {
+    background: #c62828;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+    .btn-excluir:hover {
+        background: #9b1d1d;
+    }
+
+.admin-table td {
+    vertical-align: middle;
 }

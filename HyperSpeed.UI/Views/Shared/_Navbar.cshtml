@@ -1,0 +1,57 @@
+﻿<nav class="navbar">
+
+    <div class="menu-categorias">
+
+        <button class="hamburger">
+
+            ☰
+
+        </button>
+
+        <div class="categorias-dropdown">
+
+            <a asp-controller="Categoria" asp-action="Processadores">
+                Processadores
+            </a>
+
+            <a asp-controller="Categoria" asp-action="PlacasVideo">
+                Placas de Vídeo
+            </a>
+
+            <a asp-controller="Categoria" asp-action="Memorias">
+                Memórias RAM
+            </a>
+
+            <a asp-controller="Categoria" asp-action="SSD">
+                SSD
+            </a>
+
+            <a asp-controller="Categoria" asp-action="Gabinetes">
+                Gabinetes
+            </a>
+
+            <a asp-controller="Categoria" asp-action="Monitores">
+                Monitores
+            </a>
+
+        </div>
+
+    </div>
+
+    <a asp-controller="Carrinho" asp-action="Index">
+        Carrinho
+    </a>
+
+    <a asp-controller="Montagem" asp-action="Index">
+        Monte seu PC
+    </a>
+
+    <a asp-controller="Produto" asp-action="Index">
+        Produtos
+    </a>
+
+    <a asp-controller="Produto" asp-action="Promocoes">
+        Promoções
+    </a>
+
+</nav>

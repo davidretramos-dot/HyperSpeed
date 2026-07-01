@@ -1,114 +1,90 @@
-using hyperSpeed.Application.DTOs;
 using HyperSpeed.UI.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using SeuProjeto.ViewModels;
 
-namespace HyperSpeed.UI.Controllers
+namespace SeuProjeto.Controllers
 {
     public class ContaController : Controller
     {
-<<<<<<< Updated upstream
-       //private readonly UserManager<IdentityUser> _
-=======
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public ContaController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        // ==========================
+        // LOGIN
+        // ==========================
 
         [HttpGet]
-        public IActionResult Login(string? returnUrl = null)
+        public IActionResult Login()
         {
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
+        public IActionResult Login(LoginViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
-            var result = await _singInManager.PasswordSignInAsync(dto.Email, dto.Password, isPersistent: false, lockoutOnFailure: false);
+            if (!ModelState.IsValid)
+                return View(model);
 
-            if (result.Succeeded) 
-            {
-                if(!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                        return Redirect(returnUrl);
+            // Aqui será feita a validação do usuário no banco
 
-                return RedirectToAction("Index", "Home");
-            }
-            ModelState.AddModelError(string.Empty, "Email ou senha inválidos.");
-            return View(dto);
-        }
+            // Exemplo:
+            // var usuario = _context.Usuarios
+            //     .FirstOrDefault(u => u.Email == model.Email
+            //                       && u.Senha == model.Senha);
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult>Login(LoginDto dto, string? returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
+            // if (usuario == null)
+            // {
+            //     ModelState.AddModelError("", "E-mail ou senha inválidos.");
+            //     return View(model);
+            // }
 
-            var result = await _signInManager.PasswordSingInAsync(dto.Email,dto.Password,isPersistent: false, lockoutOnFailure:false);
-            if (result.Succeeded)
-            {
-                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-                    return Redirect(returnUrl);
-                return RedirectToAction("Index", "Home");
-            }
-            ModelState.AddModelError(string.Empty, "Email ou senha inválidos.");
-            return View(dto);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterDto dto)
-        {
-            if (dto.Password != dto.ConfirmPassword)
-            {
-                ModelState.AddModelError(string.Empty, "As senhas não coincidem");
-                return View(dto);
-            }
+            TempData["Sucesso"] = "Login realizado com sucesso!";
 
-            var user = new IdentityUser
-            {
-                UserName = dto.Email,
-                Email = dto.Email
-            };
-
-            var result = await _userManager.CreateAsync(user, dto.Password);
-
-            if (result.Succeeded)
-            {
-                //Faz Login automático após o registro
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Home");
-            }
-
-            // Se falhou, exibe os erros
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-
-            return View(dto);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        //Página do acesso negado
+
+        // ==========================
+        // REGISTRO
+        // ==========================
 
         [HttpGet]
-        public IActionResult AccessDenied()
+        public IActionResult Registro()
         {
             return View();
         }
->>>>>>> Stashed changes
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Registro(RegistroViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // Aqui será salvo o usuário no banco
+
+            TempData["Sucesso"] = "Conta criada com sucesso!";
+
+            return RedirectToAction(nameof(Login));
+        }
+
+        // ==========================
+        // LOGOUT
+        // ==========================
+
+        public IActionResult Logout()
+        {
+            // Aqui será encerrada a sessão
+
+            TempData["Sucesso"] = "Logout realizado com sucesso!";
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        // ==========================
+        // ACESSO NEGADO
+        // ==========================
+
+        public IActionResult AcessoNegado()
+        {
+            return View();
+        }
     }
 }

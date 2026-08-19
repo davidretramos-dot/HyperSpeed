@@ -2,7 +2,7 @@
 @model ProdutoFormViewModel
 @{
     Layout = "_AdminLayout";
-    ViewData["Title"] = "Cadastrar Novo Game";
+    ViewData["Title"] = "Cadastrar Novo Produto";
 }
 
 <div class="row justify-content-center">
@@ -14,14 +14,14 @@
 
                 <div class="row g-3">
                     <div class="col-12">
-                        <label asp-for="NomeProduto" class="form-label">Título do Game</label>
-                        <input asp-for="NomeProduto" class="form-control" placeholder="Ex: God of War Ragnarök" required />
+                        <label asp-for="NomeProduto" class="form-label">Nome do Produto</label>
+                        <input asp-for="NomeProduto" class="form-control" placeholder="Ex: 4080 Ti" required />
                         <span asp-validation-for="NomeProduto" class="text-danger"></span>
                     </div>
 
                     <div class="col-12">
                         <label asp-for="Descricao" class="form-label">Descrição</label>
-                        <textarea asp-for="Descricao" class="form-control" rows="4" placeholder="Descreva o game..." required></textarea>
+                        <textarea asp-for="Descricao" class="form-control" rows="4" placeholder="Descreva o Produto..." required></textarea>
                         <span asp-validation-for="Descricao" class="text-danger"></span>
                     </div>
 
@@ -71,7 +71,7 @@
                         <i class="bi bi-arrow-left"></i> Cancelar
                     </a>
                     <button type="submit" class="btn btn-primary-senac">
-                        <i class="bi bi-check-lg"></i> Cadastrar Game
+                        <i class="bi bi-check-lg"></i> Cadastrar Produto
                     </button>
                 </div>
             </form>

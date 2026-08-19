@@ -4,101 +4,147 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
     <title>Hyper Speed</title>
 </head>
+
 <body>
-    <header>
+
+    <header class="site-header">
 
         <div class="top-bar">
 
             <div class="logo">
                 <img src="~/images/logo.png" alt="Hyper Speed">
-                </div>
+            </div>
 
-                <div class="search">
-                    <input type="text" placeholder="Pesquisa">
-                </div>
+            <div class="search">
+                <input type="text" placeholder="Pesquisa">
+            </div>
 
-                <div class="account">
-                    @* link para login/conta *@
-                    @if (User?.Identity?.IsAuthenticated == true)
+            <div class="account">
+
+                @if (User?.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-controller="Conta" asp-action="AccessDenied">
+                        Conta
+                    </a>
+
+                    @if (User.IsInRole("Admin"))
                     {
-                        <a asp-controller="Conta" asp-action="AccessDenied" class="me-2">Conta</a>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <a asp-controller="Admin" asp-action="Index" class="btn btn-sm btn-outline-secondary me-2">Admin</a>
-                        }
-                        <form asp-controller="Conta" asp-action="Logout" method="post" class="d-inline">
-                            @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-link p-0">Sair</button>
-                        </form>
-                    }
-                    else
-                    {
-                        <a asp-controller="Conta" asp-action="Login">Conta</a>
+                        <a asp-controller="Admin"
+                           asp-action="Index"
+                           class="admin-link">
+                            Admin
+                        </a>
                     }
 
-                    <span class="mx-2">★</span>
-                    <a asp-controller="Favorito" asp-action="Index">Favoritos</a>
-                </div>
+                    <form asp-controller="Conta"
+                          asp-action="Logout"
+                          method="post"
+                          class="logout-form">
+
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit">
+                            Sair
+                        </button>
+
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Conta" asp-action="Login">
+                        Conta
+                    </a>
+                }
+
+                <span class="favorite-icon">★</span>
+
+                <a asp-controller="Favorito" asp-action="Index">
+                    Favoritos
+                </a>
 
             </div>
 
-            <nav>
+        </div>
 
-                <a href="#">☰</a>
-                <a href="#">CARRINHO</a>
-                <a href="#">MONTE SEU PC</a>
-                <a href="#">DEPARTAMENTOS</a>
-                <a href="#">PERIFÉRICOS</a>
-                <a href="#">PROMOÇÕES</a>
 
-            </nav>
+        <nav class="main-nav">
 
-        </header>
+            <a href="#" class="menu-icon">☰</a>
 
-        <main>
-            @RenderBody()
-        </main>
+            <a href="#">
+                🛒 CARRINHO
+            </a>
 
-        <footer>
+            <a href="#">
+                MONTE SEU PC
+            </a>
 
-            <div class="footer-container">
+            <a href="#">
+                DEPARTAMENTOS
+            </a>
 
-                <div class="footer-box">
-                    <h2>AJUDA</h2>
+            <a href="#">
+                PERIFÉRICOS
+            </a>
 
-                    <a href="#">Fale conosco</a>
-                    <a href="#">Políticas e Privacidade</a>
-                    <a href="#">Termos de Aceite</a>
-                </div>
+            <a href="#" class="promotion">
+                PROMOÇÕES
+            </a>
 
-                <div class="footer-box">
-                    <h2>DÚVIDAS</h2>
+        </nav>
 
-                    <a href="#">Entrega</a>
-                    <a href="#">Garantia</a>
-                    <a href="#">Como pagar</a>
-                </div>
+    </header>
 
-                <div class="footer-box">
-                    <h2>PAGAMENTO</h2>
 
-                    <p>PIX</p>
-                    <p>VISA</p>
-                    <p>MASTERCARD</p>
-                    <p>BOLETO</p>
-                </div>
+    <main>
+        @RenderBody()
+    </main>
 
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-box">
+                <h2>AJUDA</h2>
+
+                <a href="#">Fale conosco</a>
+                <a href="#">Políticas e Privacidade</a>
+                <a href="#">Termos de Aceite</a>
             </div>
 
-            <div class="copyright">
-                © Desenvolvido Por Caramelo Tech - TI31
+            <div class="footer-box">
+                <h2>DÚVIDAS</h2>
+
+                <a href="#">Entrega</a>
+                <a href="#">Garantia</a>
+                <a href="#">Como pagar</a>
             </div>
 
-        </footer>
+            <div class="footer-box">
+                <h2>PAGAMENTO</h2>
 
-        @RenderSection("Scripts", required: false)
-    </body>
+                <p>PIX</p>
+                <p>VISA</p>
+                <p>MASTERCARD</p>
+                <p>BOLETO</p>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © Desenvolvido Por Caramelo Tech - TI31
+        </div>
+
+    </footer>
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
 </html>

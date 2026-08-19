@@ -1,161 +1,470 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
-<link rel="stylesheet" href="/css/style.css">
-<header>
 
-    <div class="top-bar">
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 
-        <div class="logo">
-            <a asp-controller="Home" asp-action="Index">
-                <img src="~/images/logo.png" alt="Logo">
-                </a>
+<!-- =====================================================
+     BANNER
+     ===================================================== -->
+
+<section class="banner">
+
+    <div class="banner-overlay"></div>
+
+    <img src="~/images/banner.jpg"
+         alt="HyperSpeed - Ofertas em hardware"
+         class="banner-img">
+
+    <div class="banner-content">
+
+        <span class="banner-tag">
+            HYPERSPEED
+        </span>
+
+        <h1>
+            MONTE O PC<br>
+            <strong>DOS SEUS SONHOS.</strong>
+        </h1>
+
+        <p>
+            Hardware de alta performance pelo melhor preço.
+        </p>
+
+        <a href="#produtos"
+           class="banner-button">
+
+            <i class="bi bi-cart-fill"></i>
+            Conferir produtos
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SLOGAN
+     ===================================================== -->
+
+<section class="slogan">
+
+    <div class="slogan-line"></div>
+
+    <p>
+        Tudo do bom e mais barato
+    </p>
+
+    <h1>
+        CONFIRA!
+    </h1>
+
+    <span>
+        Encontre os melhores componentes para seu setup.
+    </span>
+
+    <div class="slogan-line"></div>
+
+</section>
+
+
+<!-- =====================================================
+     MONTE SEU PC
+     ===================================================== -->
+
+<section class="categoria"
+         id="produtos">
+
+    <div class="categoria-header">
+
+        <div>
+
+            <span class="categoria-label">
+                HARDWARE
+            </span>
+
+            <h2>
+                MONTE SEU PC
+            </h2>
+
+            <p>
+                Componentes para levar sua máquina ao próximo nível.
+            </p>
+
+        </div>
+
+        <a href="#"
+           class="categoria-link">
+
+            Ver todos
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+
+    <div class="produtos">
+
+
+        <!-- CPU AMD -->
+
+        <div class="produto-card">
+
+            <div class="produto-image">
+
+                <span class="produto-badge">
+                    DESTAQUE
+                </span>
+
+                <img src="~/images/produtos/cpu-amd.png"
+                     alt="Processador Ryzen AMD">
+
             </div>
 
-            <div class="search">
-                <form asp-controller="Produto" asp-action="Pesquisar" method="get">
+            <div class="produto-info">
 
-                    <input type="text"
-                           name="pesquisa"
-                           placeholder="Pesquisar produtos..." />
+                <span class="produto-categoria">
+                    PROCESSADOR
+                </span>
 
-                </form>
-            </div>
+                <h3>
+                    Ryzen AMD
+                </h3>
 
-            <div class="account">
+                <div class="produto-bottom">
 
-                <a asp-controller="Conta" asp-action="Login">
-                    Conta
-                </a>
+                    <span class="produto-preco">
+                        R$ 1.999
+                    </span>
 
-                |
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
 
-                <a asp-controller="Favorito" asp-action="Index">
-                    Favoritos
-                </a>
-
+                </div>
 
             </div>
 
         </div>
 
 
-        <a href="#">Carrinho</a>
-        <a href="#">Monte seu PC</a>
-        <a href="#">Departamentos</a>
-        <a href="#">Periféricos</a>
-        <a href="#">Promoções</a>
+        <!-- GPU -->
 
-    </header>
+        <div class="produto-card">
+
+            <div class="produto-image">
+
+                <span class="produto-badge">
+                    DESTAQUE
+                </span>
+
+                <img src="~/images/produtos/gpu.png"
+                     alt="Placa de vídeo RTX">
+
+            </div>
+
+            <div class="produto-info">
+
+                <span class="produto-categoria">
+                    PLACA DE VÍDEO
+                </span>
+
+                <h3>
+                    RTX 4070
+                </h3>
+
+                <div class="produto-bottom">
+
+                    <span class="produto-preco">
+                        R$ 3.999
+                    </span>
+
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
+        <!-- SSD -->
 
-    <section class="banner">
+        <div class="produto-card">
+
+            <div class="produto-image">
+
+                <img src="~/images/produtos/ssd.png"
+                     alt="SSD">
+
+            </div>
+
+            <div class="produto-info">
+
+                <span class="produto-categoria">
+                    ARMAZENAMENTO
+                </span>
+
+                <h3>
+                    SSD
+                </h3>
+
+                <div class="produto-bottom">
+
+                    <span class="produto-preco">
+                        R$ 499
+                    </span>
+
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
 
 
-        <img src="~/images/banner.jpg" alt="Banner">
+        <!-- INTEL -->
 
-        <img src="~/images/banner.jpg" alt="Banner Principal">
+        <div class="produto-card">
+
+            <div class="produto-image">
+
+                <img src="~/images/produtos/cpu-intel.png"
+                     alt="Processador Intel">
+
+            </div>
+
+            <div class="produto-info">
+
+                <span class="produto-categoria">
+                    PROCESSADOR
+                </span>
+
+                <h3>
+                    Intel
+                </h3>
+
+                <div class="produto-bottom">
+
+                    <span class="produto-preco">
+                        R$ 1.799
+                    </span>
+
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 
-        </section>
+<!-- =====================================================
+     PERIFÉRICOS
+     ===================================================== -->
 
-        <section class="slogan">
+<section class="categoria categoria-perifericos">
 
-            <p>Tudo do bom e mais barato</p>
+    <div class="categoria-header">
 
-            <h1>CONFIRA!</h1>
+        <div>
 
-        </section>
+            <span class="categoria-label">
+                SETUP
+            </span>
 
-        <section class="categoria">
+            <h2>
+                PERIFÉRICOS / OUTROS
+            </h2>
 
-            <h2>MONTE SEU PC</h2>
+            <p>
+                Tudo para completar seu setup gamer.
+            </p>
 
-            <div class="produtos">
+        </div>
 
-                <div class="produto-card">
+        <a href="#"
+           class="categoria-link">
 
-                    <img src="~/images/produtos/cpu-amd.png">
+            Ver todos
+            <i class="bi bi-arrow-right"></i>
 
-                    <img src="~/images/produtos/cpu-amd.png" alt="Ryzen AMD">
+        </a>
 
-                        <span>R$ 1.999</span>
-                    </div>
+    </div>
 
-                    <div class="produto-card">
 
-                        <img src="~/images/produtos/gpu.png">
+    <div class="produtos">
 
-                        <img src="~/images/produtos/gpu.png" alt="RTX">
 
-                            <span>R$ 3.999</span>
-                        </div>
+        <!-- TECLADO -->
 
-                        <div class="produto-card">
+        <div class="produto-card">
 
-                            <img src="~/images/produtos/ssd.png">
+            <div class="produto-image">
 
-                            <img src="~/images/produtos/ssd.png" alt="SSD">
+                <img src="~/images/produtos/teclado.png"
+                     alt="Teclado">
 
-                                <span>R$ 499</span>
-                            </div>
+            </div>
 
-                            <div class="produto-card">
+            <div class="produto-info">
 
-                                <img src="~/images/produtos/cpu-intel.png">
+                <span class="produto-categoria">
+                    PERIFÉRICO
+                </span>
 
-                                <img src="~/images/produtos/cpu-intel.png" alt="Intel">
+                <h3>
+                    Teclado
+                </h3>
 
-                                    <span>R$ 1.799</span>
-                                </div>
+                <div class="produto-bottom">
 
-                            </div>
+                    <span class="produto-preco">
+                        R$ 399
+                    </span>
 
-                        </section>
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
 
-                        <section class="categoria">
+                </div>
 
-                            <h2>PERIFÉRICOS / OUTROS</h2>
+            </div>
 
-                            <div class="produtos">
+        </div>
 
-                                <div class="produto-card">
 
-                                    <img src="~/images/produtos/teclado.png">
+        <!-- HEADSET -->
 
-                                    <img src="~/images/produtos/teclado.png" alt="Teclado">
+        <div class="produto-card">
 
-                                        <span>R$ 399</span>
-                                    </div>
+            <div class="produto-image">
 
-                                    <div class="produto-card">
+                <img src="~/images/produtos/headset.png"
+                     alt="Headset">
 
-                                        <img src="~/images/produtos/headset.png">
+            </div>
 
-                                        <img src="~/images/produtos/headset.png" alt="Headset">
+            <div class="produto-info">
 
-                                            <span>R$ 299</span>
-                                        </div>
+                <span class="produto-categoria">
+                    ÁUDIO
+                </span>
 
-                                        <div class="produto-card">
+                <h3>
+                    Headset
+                </h3>
 
-                                            <img src="~/images/produtos/mouse.png">
+                <div class="produto-bottom">
 
-                                            <img src="~/images/produtos/mouse.png" alt="Mouse">
+                    <span class="produto-preco">
+                        R$ 299
+                    </span>
 
-                                                <span>R$ 199</span>
-                                            </div>
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
 
-                                            <div class="produto-card">
+                </div>
 
-                                                <img src="~/images/produtos/monitor.png">
+            </div>
 
-                                                <img src="~/images/produtos/monitor.png" alt="Monitor">
+        </div>
 
-                                                    <span>R$ 1.299</span>
-                                                </div>
 
-                                            </div>
+        <!-- MOUSE -->
 
-                                        </section>
+        <div class="produto-card">
+
+            <div class="produto-image">
+
+                <img src="~/images/produtos/mouse.png"
+                     alt="Mouse">
+
+            </div>
+
+            <div class="produto-info">
+
+                <span class="produto-categoria">
+                    PERIFÉRICO
+                </span>
+
+                <h3>
+                    Mouse
+                </h3>
+
+                <div class="produto-bottom">
+
+                    <span class="produto-preco">
+                        R$ 199
+                    </span>
+
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MONITOR -->
+
+        <div class="produto-card">
+
+            <div class="produto-image">
+
+                <span class="produto-badge">
+                    OFERTA
+                </span>
+
+                <img src="~/images/produtos/monitor.png"
+                     alt="Monitor">
+
+            </div>
+
+            <div class="produto-info">
+
+                <span class="produto-categoria">
+                    MONITOR
+                </span>
+
+                <h3>
+                    Monitor Gamer
+                </h3>
+
+                <div class="produto-bottom">
+
+                    <span class="produto-preco">
+                        R$ 1.299
+                    </span>
+
+                    <button class="produto-button">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

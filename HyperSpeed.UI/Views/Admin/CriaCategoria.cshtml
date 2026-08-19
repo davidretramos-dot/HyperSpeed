@@ -1,26 +1,141 @@
 ﻿@model CriacaoCategoriaDTo
+
 @{
     Layout = "_AdminLayout";
+    ViewData["Title"] = "Nova Categoria";
 }
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<div class="admin-page">
 
-<div class="row justify-content-center">
-    <div class="col-lg-6">
-        <div class="form-senac">
-            <form asp-action="CreateCategory" method="post">
-                <div class="mb-3">
-                    <label asp-for="Nome" class="form-label">Nome da Categoria</label>
-                    <input asp-for="Nome" class="form-control" placeholder="Ex: RPG, Ação, Terror..." required />
-                </div>
-                <hr class="my-4" />
-                <div class="d-flex justify-content-between">
-                    <a asp-action="Categories" class="btn btn-outline-secondary">
-                        <i class="bi bi-arrow-left"></i> Cancelar
-                    </a>
-                    <button type="submit" class="btn btn-primary-senac">
-                        <i class="bi bi-check-lg"></i> Cadastrar Categoria
-                    </button>
-                </div>
-            </form>
+    <!-- CABEÇALHO -->
+
+    <div class="admin-header">
+
+        <div>
+            <span class="admin-header-label">
+                HYPERSPEED / CATEGORIAS
+            </span>
+
+            <h1>Nova Categoria</h1>
+
+            <p>
+                Cadastre uma nova categoria para organizar seus produtos.
+            </p>
         </div>
+
+        <div class="admin-header-icon">
+            <i class="bi bi-tags-fill"></i>
+        </div>
+
     </div>
+
+
+    <!-- FORMULÁRIO -->
+
+    <div class="admin-form-section">
+
+        <div class="admin-form-header">
+
+            <div class="admin-form-title">
+
+                <div class="admin-form-icon">
+                    <i class="bi bi-tag-fill"></i>
+                </div>
+
+                <div>
+                    <span class="section-label">
+                        CATEGORIA
+                    </span>
+
+                    <h2>Informações da categoria</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <form asp-action="CreateCategory"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly"
+                 class="admin-validation mb-3">
+            </div>
+
+
+            <!-- NOME -->
+
+            <div class="admin-form-group">
+
+                <label asp-for="Nome">
+                    Nome da Categoria
+                </label>
+
+                <div class="admin-input-wrapper">
+
+                    <i class="bi bi-tag"></i>
+
+                    <input asp-for="Nome"
+                           class="admin-input"
+                           placeholder="Ex: RPG, Ação, Terror..."
+                           required />
+
+                </div>
+
+                <span asp-validation-for="Nome"
+                      class="admin-field-error">
+                </span>
+
+                <small>
+                    Escolha um nome que identifique facilmente os produtos dessa categoria.
+                </small>
+
+            </div>
+
+
+            <!-- DIVISOR -->
+
+            <div class="admin-form-divider"></div>
+
+
+            <!-- BOTÕES -->
+
+            <div class="admin-form-footer">
+
+                <a asp-action="Categories"
+                   class="admin-btn admin-btn-dark">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancelar
+
+                </a>
+
+
+                <button type="submit"
+                        class="admin-btn admin-btn-primary">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Cadastrar Categoria
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

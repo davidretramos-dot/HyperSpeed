@@ -98,7 +98,10 @@ namespace HyperSpeed.UI.Controllers
             ViewData["Subtitle"] = "Cadastre, edite e exclua produtos do catálogo";
 
             var produtos = await _produtoService.GetAllAsync();
-            return View(produtos);
+
+            // A view se chama "Produto.cshtml" na pasta Views/Admin.
+            // Força o caminho para evitar erro de procura por "Produtos.cshtml".
+            return View("~/Views/Admin/Produto.cshtml", produtos);
         }
 
         // GET: Admin/CreateProd

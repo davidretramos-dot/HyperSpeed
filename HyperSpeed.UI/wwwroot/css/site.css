@@ -1,37 +1,24 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
+/*==============================
+        PRODUTOS ADMIN
+===============================*/
 
-body {
-    background: #fff;
-}
-
-/* HEADER */
-
-.top-bar {
+.admin-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    padding: 10px;
-    background: #222;
+    margin-bottom: 30px;
 }
 
-.logo img {
-    width: 120px;
+.admin-search {
+    margin-bottom: 25px;
 }
 
-.search {
-    flex: 1;
-}
-
-    .search input {
+    .admin-search input {
         width: 100%;
-        padding: 15px;
+        max-width: 450px;
+        padding: 14px;
         border: none;
-        border-radius: 10px;
+        border-radius: 8px;
         font-size: 16px;
     }
 /* =========================================================
@@ -40,6 +27,7 @@ body {
    Preto + cinza escuro + vermelho/bordô
    ========================================================= */
 
+<<<<<<< HEAD
 :root {
     --hs-black: #000000;
     --hs-dark: #151515;
@@ -777,11 +765,44 @@ footer {
     }
 
 .copyright {
+=======
+.produto-admin-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
     background: white;
-    color: black;
-    text-align: center;
-    padding: 15px;
-    font-weight: bold;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.btn-editar {
+    background: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+    .btn-editar:hover {
+        background: #0063cc;
+    }
+
+.btn-excluir {
+    background: #c62828;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+    .btn-excluir:hover {
+        background: #9b1d1d;
+    }
+
+.admin-table td {
+    vertical-align: middle;
 }
 /* =========================================================
    FORMULÁRIOS ADMIN

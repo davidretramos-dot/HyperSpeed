@@ -1,9 +1,15 @@
 @model HyperSpeed.UI.Models.LoginViewModel
+<<<<<<< HEAD
 
 @{
     ViewData["Title"] = "Login";
 }
 
+=======
+@{
+    ViewData["Title"] = "Login";
+}
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,6 +35,7 @@
                         <h1>Bem-vindo!</h1>
                         <p>Faça login para continuar.</p>
 
+<<<<<<< HEAD
                         <form asp-controller="Conta" asp-action="Login" method="post">
                             @Html.AntiForgeryToken()
 
@@ -53,11 +60,38 @@
                             <a asp-controller="Conta" asp-action="Register">Criar conta</a>
                             <span> | </span>
                             <a asp-controller="Conta" asp-action="EsqueciSenha">Esqueci minha senha</a>
+=======
+                        <form asp-action="Login" method="post">
+                            <div class="input-group">
+                                <label>Email</label>
+                                <input type="email" name="Email" placeholder="Digite seu email" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Senha</label>
+                                <input type="password" name="Senha" placeholder="Digite sua senha" required>
+                            </div>
+
+                            <button type="submit" class="btn-login">
+                                Entrar
+                            </button>
+                        </form>
+
+                        <div class="login-links">
+                            <a asp-action="Cadastrar">Criar conta</a>
+                            <a asp-action="EsqueciSenha">Esqueci minha senha</a>
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
                         </div>
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
     </div>
+=======
+
+        </div> <!-- .auth-card -->
+    </div> <!-- .auth-page -->
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 </body>
 </html>

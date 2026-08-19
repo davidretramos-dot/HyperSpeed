@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 ﻿@model IEnumerable<CategoriasDTo>
 
 @{
     Layout = null;
+=======
+﻿@{
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
     ViewData["Title"] = "Gerenciar Categorias";
 }
 
@@ -117,12 +121,22 @@
 
                             <th>Ações</th>
 
+<<<<<<< HEAD
                         </tr>
+=======
+                        <a asp-action="Edit"
+                           class="btn-editar">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
                     </thead>
 
 
+<<<<<<< HEAD
                     <tbody>
+=======
+                        <a asp-action="Delete"
+                           class="btn-excluir">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
                         @foreach (var categoria in Model)
                         {
@@ -147,7 +161,12 @@
 
                                         <div class="category-icon">
 
+<<<<<<< HEAD
                                             <i class="bi bi-tag-fill"></i>
+=======
+                        <a asp-action="Edit"
+                           class="btn-editar">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
                                         </div>
 
@@ -155,7 +174,12 @@
                                             @categoria.Nome
                                         </strong>
 
+<<<<<<< HEAD
                                     </div>
+=======
+                        <a asp-action="Delete"
+                           class="btn-excluir">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
                                 </td>
 
@@ -175,16 +199,26 @@
                                 </td>
 
 
+<<<<<<< HEAD
                                 <!-- AÇÕES -->
+=======
+                        <a asp-action="Edit"
+                           class="btn-editar">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
                                 <td>
 
                                     <div class="category-actions">
 
+<<<<<<< HEAD
                                         <a asp-controller="Admin"
                                            asp-action="EditCategoria"
                                            asp-route-id="@categoria.Id"
                                            class="category-action-edit">
+=======
+                        <a asp-action="Delete"
+                           class="btn-excluir">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
                                             <i class="bi bi-pencil-fill"></i>
 
@@ -208,18 +242,28 @@
 
                                 </td>
 
+<<<<<<< HEAD
                             </tr>
                         }
+=======
+                        <a asp-action="Edit"
+                           class="btn-editar">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
                     </tbody>
 
                 </table>
 
+<<<<<<< HEAD
             </div>
         }
         else
         {
             <!-- ESTADO VAZIO -->
+=======
+                        <a asp-action="Delete"
+                           class="btn-excluir">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
             <div class="empty-state">
 
@@ -246,12 +290,22 @@
 
     </div>
 
+<<<<<<< HEAD
 </div>
+=======
+                        <a asp-action="Edit"
+                           class="btn-editar">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
 
 @section Scripts {
 
+<<<<<<< HEAD
     <script>
+=======
+                        <a asp-action="Delete"
+                           class="btn-excluir">
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
         document.addEventListener("DOMContentLoaded", function() {
 
@@ -266,6 +320,7 @@
 
             searchInput.addEventListener("input", function() {
 
+<<<<<<< HEAD
                 const search =
                     this.value.toLowerCase().trim();
 
@@ -291,3 +346,10 @@
     </script>
 
 }
+=======
+        </table>
+
+    </main>
+
+</div>
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb

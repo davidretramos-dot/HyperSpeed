@@ -1,13 +1,12 @@
-using hyperSpeed.Application.DTOs;
 using HyperSpeed.UI.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using SeuProjeto.ViewModels;
 
-namespace HyperSpeed.UI.Controllers
+namespace SeuProjeto.Controllers
 {
     public class ContaController : Controller
     {
+<<<<<<< HEAD
 
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -17,21 +16,31 @@ namespace HyperSpeed.UI.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+=======
+        // ==========================
+        // LOGIN
+        // ==========================
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
         // GET: /Conta/Login
         [HttpGet]
-        public IActionResult Login(string? returnUrl = null)
+        public IActionResult Login()
         {
+<<<<<<< HEAD
             ViewData["ReturnUrl"] = returnUrl;
             // view está em Views/Account/Login.cshtml
             return View("~/Views/Account/Login.cshtml", new LoginViewModel());
+=======
+            return View();
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
         }
 
         // POST: /Conta/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
+        public IActionResult Login(LoginViewModel model)
         {
+<<<<<<< HEAD
             ViewData["ReturnUrl"] = returnUrl;
 
             if (!ModelState.IsValid)
@@ -103,10 +112,72 @@ namespace HyperSpeed.UI.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+=======
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // Aqui será feita a validação do usuário no banco
+
+            // Exemplo:
+            // var usuario = _context.Usuarios
+            //     .FirstOrDefault(u => u.Email == model.Email
+            //                       && u.Senha == model.Senha);
+
+            // if (usuario == null)
+            // {
+            //     ModelState.AddModelError("", "E-mail ou senha inválidos.");
+            //     return View(model);
+            // }
+
+            TempData["Sucesso"] = "Login realizado com sucesso!";
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        // ==========================
+        // REGISTRO
+        // ==========================
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
         // Página do acesso negado
         [HttpGet]
-        public IActionResult AccessDenied()
+        public IActionResult Registro()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Registro(RegistroViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // Aqui será salvo o usuário no banco
+
+            TempData["Sucesso"] = "Conta criada com sucesso!";
+
+            return RedirectToAction(nameof(Login));
+        }
+
+        // ==========================
+        // LOGOUT
+        // ==========================
+
+        public IActionResult Logout()
+        {
+            // Aqui será encerrada a sessão
+
+            TempData["Sucesso"] = "Logout realizado com sucesso!";
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        // ==========================
+        // ACESSO NEGADO
+        // ==========================
+
+        public IActionResult AcessoNegado()
         {
             return View();
         }

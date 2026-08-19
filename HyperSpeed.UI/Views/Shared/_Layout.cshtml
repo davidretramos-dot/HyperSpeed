@@ -1,21 +1,40 @@
+<<<<<<< HEAD
 @* Views\Shared\_Layout.cshtml *@
+=======
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<<<<<<< HEAD
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     <title>Hyper Speed</title>
+=======
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
+
+    <title>@ViewData["Title"] - ByteTech</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 </head>
 
 <body>
 
+<<<<<<< HEAD
     <header class="site-header">
+=======
+    <partial name="_Header" />
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
-        <div class="top-bar">
+    <partial name="_Navbar" />
 
+<<<<<<< HEAD
             <div class="logo">
                 <img src="~/images/logo.png" alt="Hyper Speed">
             </div>
@@ -66,9 +85,17 @@
                 <a asp-controller="Favorito" asp-action="Index">
                     Favoritos
                 </a>
+=======
+    <main>
 
-            </div>
+        @RenderBody()
 
+    </main>
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+
+    <partial name="_Footer" />
+
+<<<<<<< HEAD
         </div>
 
 
@@ -147,4 +174,11 @@
     @RenderSection("Scripts", required: false)
 
 </body>
+=======
+    <script src="~/js/menu.js"></script>
+    <script src="~/js/carousel.js"></script>
+
+</body>
+
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 </html>

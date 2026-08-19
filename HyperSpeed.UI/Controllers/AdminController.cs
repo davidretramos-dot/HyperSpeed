@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,16 @@ using hyperSpeed.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+=======
+﻿using Microsoft.AspNetCore.Mvc;
+using SeuProjeto.ViewModels;
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
-namespace HyperSpeed.UI.Controllers
+namespace SeuProjeto.Controllers
 {
     public class AdminController : Controller
     {
+<<<<<<< HEAD
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IProdutoService _produtoService;
@@ -89,10 +95,23 @@ namespace HyperSpeed.UI.Controllers
             }
 
             return Ok(new { message = "Usuário registrado com sucesso." });
+=======
+        // Dashboard
+        public IActionResult Index()
+        {
+            return View();
         }
 
-        public async Task<IActionResult> Produtos()
+        // Produtos
+        public IActionResult Produtos()
         {
+            return View();
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+        }
+
+        public IActionResult CriarProduto()
+        {
+<<<<<<< HEAD
             ViewData["ActiveMenu"] = "Produtos";
             ViewData["Title"] = "Gerenciar Produtos";
             ViewData["Subtitle"] = "Cadastre, edite e exclua produtos do catálogo";
@@ -242,56 +261,68 @@ namespace HyperSpeed.UI.Controllers
         {
             ViewData["ActiveMenu"] = "Categories";
             ViewData["Title"] = "Nova Categoria";
+=======
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+<<<<<<< HEAD
         public async Task<IActionResult> CreateCategoria(CriacaoCategoriaDTo dto)
+=======
+        public IActionResult CriarProduto(ProdutoViewModel model)
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
         {
-            await _categoriaService.CreateAsync(dto);
-            TempData["Success"] = "Categoria cadastrada com sucesso!";
-            return RedirectToAction(nameof(Categorias));
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // Salvar produto no banco
+
+            TempData["Sucesso"] = "Produto cadastrado com sucesso!";
+
+            return RedirectToAction(nameof(Produtos));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EditCategoria(int id)
+        // Categorias
+        public IActionResult Categorias()
         {
-            ViewData["ActiveMenu"] = "Categorias";
-            ViewData["Title"] = "Editar Categoria";
+            return View();
+        }
 
-            var categoria = await _categoriaService.GetByIdAsync(id);
-            if (categoria == null) return NotFound();
-            return View(categoria);
+        public IActionResult CriarCategoria()
+        {
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+<<<<<<< HEAD
         public async Task<IActionResult> EditCategoria(int id, AtualizacaoCategoriaDTo dto)
+=======
+        public IActionResult CriarCategoria(CategoriaViewModel model)
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
         {
-            var result = await _categoriaService.UpdateAsync(id, dto);
-            if (result == null) return NotFound();
+            if (!ModelState.IsValid)
+                return View(model);
 
-            TempData["Success"] = "Categoria atualizada com sucesso!";
+            // Salvar categoria
+
+            TempData["Sucesso"] = "Categoria cadastrada com sucesso!";
+
             return RedirectToAction(nameof(Categorias));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> DeleteCategoria(int id)
+        // Usuários
+        public IActionResult Usuarios()
         {
-            ViewData["ActiveMenu"] = "Categorias";
-            ViewData["Title"] = "Excluir Categoria";
-
-            var categoria = await _categoriaService.GetByIdAsync(id);
-            if (categoria == null) return NotFound();
-
-            return View(categoria);
+            return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteCategoriaConfirmed(int id)
+        // Pedidos
+        public IActionResult Pedidos()
         {
+<<<<<<< HEAD
             var deleted = await _categoriaService.DeleteAsync(id);
             if (!deleted)
             {
@@ -383,6 +414,9 @@ namespace HyperSpeed.UI.Controllers
             public int TotalProdutos { get; set; }
             public int TotalCategorias { get; set; }
             public IEnumerable<ProdutoDTo> RecentProdutos { get; set; } = Enumerable.Empty<ProdutoDTo>();
+=======
+            return View();
+>>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
         }
     }
 }

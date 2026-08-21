@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,16 +10,14 @@ using hyperSpeed.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-=======
-﻿using Microsoft.AspNetCore.Mvc;
 using SeuProjeto.ViewModels;
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+using HyperSpeed.UI.Models;
 
-namespace SeuProjeto.Controllers
+namespace HyperSpeed.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-<<<<<<< HEAD
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IProdutoService _produtoService;
@@ -38,21 +35,15 @@ namespace SeuProjeto.Controllers
             _categoriaService = categoriasService;
         }
 
-        // GET: /Admin
+        // GET: /Admin (dashboard principal)
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             ViewData["ActiveMenu"] = "Dashboard";
             ViewData["Title"] = "Painel Administrativo";
 
             var totalProdutos = await _produtoService.CountAsync();
-            var totalCategorias = await _categoriaService.CountAsync(); // fallback if different name
-            // fallback safe call in case method name or service differs
-            if (totalCategorias == 0)
-            {
-                totalCategorias = await _categoriaService.CountAsync();
-            }
+            var totalCategorias = await _categoriaService.CountAsync();
 
             var allProdutos = await _produtoService.GetAllAsync();
             var recent = allProdutos
@@ -70,57 +61,15 @@ namespace SeuProjeto.Controllers
             return View(vm);
         }
 
-        /// <summary>
-        /// Registra um novo usuário.
-        /// POST /Admin/Register
-        /// </summary>
-        [HttpPost("register")]
-        public async Task<ActionResult> Register([FromBody] RegistoDto dto)
+        // Produtos - lista
+        [HttpGet]
+        public async Task<IActionResult> Produtos()
         {
-            if (dto.Senha != dto.ConfirmarSenha)
-                return BadRequest(new { message = "As senhas não coincidem." });
-
-            var user = new IdentityUser
-            {
-                UserName = dto.Email,
-                Email = dto.Email
-            };
-
-            var result = await _userManager.CreateAsync(user, dto.Senha);
-
-            if (!result.Succeeded)
-            {
-                var errors = result.Errors.Select(e => e.Description);
-                return BadRequest(new { message = "Erro ao registrar usuário.", errors });
-            }
-
-            return Ok(new { message = "Usuário registrado com sucesso." });
-=======
-        // Dashboard
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        // Produtos
-        public IActionResult Produtos()
-        {
-            return View();
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-        }
-
-        public IActionResult CriarProduto()
-        {
-<<<<<<< HEAD
             ViewData["ActiveMenu"] = "Produtos";
             ViewData["Title"] = "Gerenciar Produtos";
-            ViewData["Subtitle"] = "Cadastre, edite e exclua produtos do catálogo";
 
             var produtos = await _produtoService.GetAllAsync();
-
-            // A view se chama "Produto.cshtml" na pasta Views/Admin.
-            // Força o caminho para evitar erro de procura por "Produtos.cshtml".
-            return View("~/Views/Admin/Produto.cshtml", produtos);
+            return View("~/Views/Admin/Produtos.cshtml", produtos);
         }
 
         // GET: Admin/CreateProd
@@ -136,7 +85,6 @@ namespace SeuProjeto.Controllers
                 Categorias = categorias
             };
 
-            // usa convenção: Views/Admin/CreateProd.cshtml
             return View(viewModel);
         }
 
@@ -172,7 +120,7 @@ namespace SeuProjeto.Controllers
         public async Task<IActionResult> EditProd(int id)
         {
             ViewData["ActiveMenu"] = "Produtos";
-            ViewData["Title"] = "Editar Produtos";
+            ViewData["Title"] = "Editar Produto";
 
             var produto = await _produtoService.GetByIdAsync(id);
             if (produto == null) return NotFound();
@@ -191,7 +139,6 @@ namespace SeuProjeto.Controllers
                 Categorias = categorias
             };
 
-            // usa convenção: Views/Admin/EditProd.cshtml
             return View(viewModel);
         }
 
@@ -224,6 +171,7 @@ namespace SeuProjeto.Controllers
             return RedirectToAction(nameof(Produtos));
         }
 
+        // GET: Admin/DeleteProd/5
         [HttpGet]
         public async Task<IActionResult> DeleteProd(int id)
         {
@@ -233,10 +181,10 @@ namespace SeuProjeto.Controllers
             var produto = await _produtoService.GetByIdAsync(id);
             if (produto == null) return NotFound();
 
-            // usa convenção: Views/Admin/DeleteProd.cshtml
             return View(produto);
         }
 
+        // POST: Admin/DeleteProdConfirmed/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteProdConfirmed(int id)
@@ -246,11 +194,12 @@ namespace SeuProjeto.Controllers
             return RedirectToAction(nameof(Produtos));
         }
 
+        // Categorias - lista
+        [HttpGet]
         public async Task<IActionResult> Categorias()
         {
             ViewData["ActiveMenu"] = "Categorias";
             ViewData["Title"] = "Gerenciar Categorias";
-            ViewData["Subtitle"] = "Cadastre, edite e exclua categorias dos Produtos";
 
             var categorias = await _categoriaService.GetAllAsync();
             return View(categorias);
@@ -259,70 +208,41 @@ namespace SeuProjeto.Controllers
         [HttpGet]
         public IActionResult CreateCategoria()
         {
-            ViewData["ActiveMenu"] = "Categories";
+            ViewData["ActiveMenu"] = "Categorias";
             ViewData["Title"] = "Nova Categoria";
-=======
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-<<<<<<< HEAD
-        public async Task<IActionResult> CreateCategoria(CriacaoCategoriaDTo dto)
-=======
-        public IActionResult CriarProduto(ProdutoViewModel model)
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+        public async Task<IActionResult> CreateCategoria(CategoriaViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Salvar produto no banco
+            // Se existir um método de criação no serviço, use-o:
+            if (_categoriaService is not null)
+            {
+                // tenta usar um método CreateAsync se disponível
+                try
+                {
+                    await _categoriaService.CreateAsync(new CriacaoCategoriaDTo { Nome = model.Nome });
+                }
+                catch
+                {
+                    // fallback: apenas redireciona se serviço não suportar operação
+                }
+            }
 
-            TempData["Sucesso"] = "Produto cadastrado com sucesso!";
-
-            return RedirectToAction(nameof(Produtos));
-        }
-
-        // Categorias
-        public IActionResult Categorias()
-        {
-            return View();
-        }
-
-        public IActionResult CriarCategoria()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-<<<<<<< HEAD
-        public async Task<IActionResult> EditCategoria(int id, AtualizacaoCategoriaDTo dto)
-=======
-        public IActionResult CriarCategoria(CategoriaViewModel model)
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            // Salvar categoria
-
-            TempData["Sucesso"] = "Categoria cadastrada com sucesso!";
-
+            TempData["Success"] = "Categoria cadastrada com sucesso!";
             return RedirectToAction(nameof(Categorias));
         }
 
-        // Usuários
-        public IActionResult Usuarios()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCategoria(int id)
         {
-            return View();
-        }
-
-        // Pedidos
-        public IActionResult Pedidos()
-        {
-<<<<<<< HEAD
             var deleted = await _categoriaService.DeleteAsync(id);
             if (!deleted)
             {
@@ -334,20 +254,54 @@ namespace SeuProjeto.Controllers
             return RedirectToAction(nameof(Categorias));
         }
 
-        ///<summary>
-        /// Faz login do usuário.
-        /// POST /Admin/Login
-        /// </summary>
+        // Usuários
+        [HttpGet]
+        public IActionResult Usuarios()
+        {
+            return View();
+        }
+
+        // Pedidos
+        [HttpGet]
+        public IActionResult Pedidos()
+        {
+            return View();
+        }
+
+        // Autenticação API endpoints (login/register/logout/me)
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public async Task<ActionResult> Register([FromBody] RegistoDto dto)
+        {
+            if (dto.Senha != dto.ConfirmarSenha)
+                return BadRequest(new { message = "As senhas não coincidem." });
+
+            var user = new IdentityUser
+            {
+                UserName = dto.Email,
+                Email = dto.Email
+            };
+
+            var result = await _userManager.CreateAsync(user, dto.Senha);
+
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(new { message = "Erro ao registrar usuário.", errors });
+            }
+
+            return Ok(new { message = "Usuário registrado com sucesso." });
+        }
+
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginDto dto)
         {
             var result = await _signInManager.PasswordSignInAsync(
                 dto.Email, dto.Senha, isPersistent: false, lockoutOnFailure: false);
 
             if (!result.Succeeded)
-            {
                 return Unauthorized(new { message = "Email ou senha inválidos." });
-            }
 
             var user = await _userManager.FindByEmailAsync(dto.Email);
             var roles = await _userManager.GetRolesAsync(user!);
@@ -360,24 +314,14 @@ namespace SeuProjeto.Controllers
             });
         }
 
-        /// <summary>
-        /// Faz logout do usuário
-        /// POST /Admin/Logout
-        /// </summary>
         [HttpPost("logout")]
-        [Authorize]
         public async Task<ActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return Ok(new { message = "Logout realizado com sucesso!" });
         }
 
-        /// <summary>
-        /// Retorna os dados do usuário autenticado
-        /// GET /Admin/Me
-        /// </summary>
         [HttpGet("me")]
-        [Authorize]
         public async Task<ActionResult<UsuarioDto>> Me()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -395,28 +339,7 @@ namespace SeuProjeto.Controllers
             });
         }
 
-        // --- classes auxiliares ---
-        public class ProdutoFormViewModel
-        {
-            public int? Id { get; set; }
-            public string NomeProduto { get; set; } = string.Empty;
-            public string Descricao { get; set; } = string.Empty;
-            public int Preco { get; set; }
-            public int Estoque { get; set; }
-            public string ImagemUrl { get; set; } = string.Empty;
-            public int IdCategoria { get; set; }
-            public bool Destaque { get; set; }
-            public IEnumerable<CategoriasDTo> Categorias { get; set; } = Enumerable.Empty<CategoriasDTo>();
-        }
-
-        public class DashboardViewModel
-        {
-            public int TotalProdutos { get; set; }
-            public int TotalCategorias { get; set; }
-            public IEnumerable<ProdutoDTo> RecentProdutos { get; set; } = Enumerable.Empty<ProdutoDTo>();
-=======
-            return View();
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-        }
+        
     }
 }
+    

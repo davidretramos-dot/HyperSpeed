@@ -15,7 +15,7 @@ namespace hyperSpeed.Application.Interfaces
         Task<ProdutoDTo?> UpdateAsync(int id, AutualizacaoProdutoDTo dto);
         Task<bool> DeleteAsync(int id);
         Task<int> CountAsync();
-        Task CreateAsync(CriacaoCategoriaDTo dto);
+        Task<IEnumerable<ProdutoDTo>> SearchAsync(string query);
     }
 }
 

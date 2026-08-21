@@ -1,355 +1,164 @@
-<<<<<<< HEAD
-﻿@model IEnumerable<CategoriasDTo>
+@model IEnumerable<hyperSpeed.Application.DTOs.CategoriasDTo>
 
 @{
     Layout = null;
-=======
-﻿@{
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
     ViewData["Title"] = "Gerenciar Categorias";
 }
 
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <link rel="stylesheet"
-          href="~/css/site.css"
-          asp-append-version="true" />
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - HyperSpeed</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
+<body>
+    <div class="admin-page">
 
-<div class="admin-page">
-
-    <!-- CABEÇALHO -->
-
-    <div class="admin-header">
-
-        <div>
-
-            <span class="admin-header-label">
-                HYPERSPEED / CATEGORIAS
-            </span>
-
-            <h1>Gerenciar Categorias</h1>
-
-            <p>
-                Consulte, edite e organize as categorias dos produtos da loja.
-            </p>
-
-        </div>
-
-        <div class="admin-header-actions">
-
-            <div class="admin-header-icon">
-                <i class="bi bi-tags-fill"></i>
-            </div>
-
-            <a asp-controller="Admin"
-               asp-action="CreateCategoria"
-               class="admin-btn admin-btn-primary">
-
-                <i class="bi bi-plus-lg"></i>
-
-                Nova Categoria
-
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <!-- ÁREA DE CATEGORIAS -->
-
-    <div class="admin-section categories-section">
-
-
-        <!-- CABEÇALHO DA LISTAGEM -->
-
-        <div class="admin-section-header">
-
+        <!-- CABEÇALHO -->
+        <div class="admin-header">
             <div>
-
-                <span class="section-label">
-                    ORGANIZAÇÃO
-                </span>
-
-                <h2>Categorias cadastradas</h2>
-
+                <span class="admin-header-label">HYPERSPEED / CATEGORIAS</span>
+                <h1>Gerenciar Categorias</h1>
+                <p>Consulte, edite e organize as categorias dos produtos da loja.</p>
             </div>
 
-            <span class="admin-count">
-
-                @(Model?.Count() ?? 0) categorias
-
-            </span>
-
-        </div>
-
-
-        <!-- PESQUISA -->
-
-        <div class="admin-search">
-
-            <div class="admin-search-wrapper">
-
-                <i class="bi bi-search"></i>
-
-                <input type="text"
-                       id="categorySearch"
-                       placeholder="Pesquisar categoria..." />
-
-            </div>
-
-        </div>
-
-
-        <!-- TABELA -->
-        @if (Model != null && Model.Any())
-        {
-            <div class="admin-table-wrapper">
-
-                <table class="admin-table"
-                       id="categoriesTable">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ID</th>
-
-                            <th>Categoria</th>
-
-                            <th>Produtos</th>
-
-                            <th>Ações</th>
-
-<<<<<<< HEAD
-                        </tr>
-=======
-                        <a asp-action="Edit"
-                           class="btn-editar">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-                    </thead>
-
-
-<<<<<<< HEAD
-                    <tbody>
-=======
-                        <a asp-action="Delete"
-                           class="btn-excluir">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-                        @foreach (var categoria in Model)
-                        {
-                            <tr>
-
-                                <!-- ID -->
-
-                                <td>
-
-                                    <span class="category-id">
-                                        #@categoria.Id
-                                    </span>
-
-                                </td>
-
-
-                                <!-- CATEGORIA -->
-
-                                <td>
-
-                                    <div class="category-name">
-
-                                        <div class="category-icon">
-
-<<<<<<< HEAD
-                                            <i class="bi bi-tag-fill"></i>
-=======
-                        <a asp-action="Edit"
-                           class="btn-editar">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-                                        </div>
-
-                                        <strong>
-                                            @categoria.Nome
-                                        </strong>
-
-<<<<<<< HEAD
-                                    </div>
-=======
-                        <a asp-action="Delete"
-                           class="btn-excluir">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-                                </td>
-
-
-                                <!-- PRODUTOS -->
-
-                                <td>
-
-                                    <span class="category-status">
-
-                                        <i class="bi bi-check-circle-fill"></i>
-
-                                        Ativa
-
-                                    </span>
-
-                                </td>
-
-
-<<<<<<< HEAD
-                                <!-- AÇÕES -->
-=======
-                        <a asp-action="Edit"
-                           class="btn-editar">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-                                <td>
-
-                                    <div class="category-actions">
-
-<<<<<<< HEAD
-                                        <a asp-controller="Admin"
-                                           asp-action="EditCategoria"
-                                           asp-route-id="@categoria.Id"
-                                           class="category-action-edit">
-=======
-                        <a asp-action="Delete"
-                           class="btn-excluir">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-                                            <i class="bi bi-pencil-fill"></i>
-
-                                            Editar
-
-                                        </a>
-
-
-                                        <a asp-controller="Admin"
-                                           asp-action="DeleteCategoria"
-                                           asp-route-id="@categoria.Id"
-                                           class="category-action-delete">
-
-                                            <i class="bi bi-trash-fill"></i>
-
-                                            Excluir
-
-                                        </a>
-
-                                    </div>
-
-                                </td>
-
-<<<<<<< HEAD
-                            </tr>
-                        }
-=======
-                        <a asp-action="Edit"
-                           class="btn-editar">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-                    </tbody>
-
-                </table>
-
-<<<<<<< HEAD
-            </div>
-        }
-        else
-        {
-            <!-- ESTADO VAZIO -->
-=======
-                        <a asp-action="Delete"
-                           class="btn-excluir">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-            <div class="empty-state">
-
-                <i class="bi bi-tags"></i>
-
-                <h3>Nenhuma categoria encontrada</h3>
-
-                <p>
-                    Ainda não existem categorias cadastradas no sistema.
-                </p>
+            <div class="admin-header-actions">
+                <div class="admin-header-icon">
+                    <i class="bi bi-tags-fill"></i>
+                </div>
 
                 <a asp-controller="Admin"
                    asp-action="CreateCategoria"
                    class="admin-btn admin-btn-primary">
-
-                    <i class="bi bi-plus-circle"></i>
-
-                    Cadastrar primeira categoria
-
+                    <i class="bi bi-plus-lg"></i>
+                    Nova Categoria
                 </a>
-
             </div>
-        }
+        </div>
 
+        <!-- ÁREA DE CATEGORIAS -->
+        <div class="admin-section categories-section">
+
+            <!-- CABEÇALHO DA LISTAGEM -->
+            <div class="admin-section-header">
+                <div>
+                    <span class="section-label">ORGANIZAÇÃO</span>
+                    <h2>Categorias cadastradas</h2>
+                </div>
+
+                <span class="admin-count">
+                    @(Model?.Count() ?? 0) categorias
+                </span>
+            </div>
+
+            <!-- PESQUISA -->
+            <div class="admin-search">
+                <div class="admin-search-wrapper">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="categorySearch" placeholder="Pesquisar categoria..." />
+                </div>
+            </div>
+
+            <!-- TABELA -->
+            @if (Model != null && Model.Any())
+            {
+                <div class="admin-table-wrapper">
+                    <table class="admin-table" id="categoriesTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Categoria</th>
+                                <th>Produtos</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var categoria in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="category-id">#@categoria.Id</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="category-name">
+                                            <div class="category-icon">
+                                                <i class="bi bi-tag-fill"></i>
+                                            </div>
+                                            <strong>@categoria.Nome</strong>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <span class="category-status">
+                                            <i class="bi bi-check-circle-fill"></i>
+                                            Ativa
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <div class="category-actions">
+                                            <a asp-controller="Admin"
+                                               asp-action="EditCategoria"
+                                               asp-route-id="@categoria.Id"
+                                               class="category-action-edit">
+                                                <i class="bi bi-pencil-fill"></i>
+                                                Editar
+                                            </a>
+
+                                            <form asp-controller="Admin" asp-action="DeleteCategoria" asp-route-id="@categoria.Id" method="post" class="d-inline">
+                                                <button type="submit" class="category-action-delete" onclick="return confirm('Confirma exclusão desta categoria?');">
+                                                    <i class="bi bi-trash-fill"></i>
+                                                    Excluir
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <!-- ESTADO VAZIO -->
+                <div class="empty-state">
+                    <i class="bi bi-tags"></i>
+                    <h3>Nenhuma categoria encontrada</h3>
+                    <p>Ainda não existem categorias cadastradas no sistema.</p>
+
+                    <a asp-controller="Admin"
+                       asp-action="CreateCategoria"
+                       class="admin-btn admin-btn-primary">
+                        <i class="bi bi-plus-circle"></i>
+                        Cadastrar primeira categoria
+                    </a>
+                </div>
+            }
+        </div>
     </div>
 
-<<<<<<< HEAD
-</div>
-=======
-                        <a asp-action="Edit"
-                           class="btn-editar">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+    @section Scripts {
+        <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const searchInput = document.getElementById("categorySearch");
+                    const table = document.getElementById("categoriesTable");
+                    if (!searchInput || !table) return;
 
-
-@section Scripts {
-
-<<<<<<< HEAD
-    <script>
-=======
-                        <a asp-action="Delete"
-                           class="btn-excluir">
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-        document.addEventListener("DOMContentLoaded", function() {
-
-            const searchInput =
-                document.getElementById("categorySearch");
-
-            const table =
-                document.getElementById("categoriesTable");
-
-            if (!searchInput || !table)
-                return;
-
-            searchInput.addEventListener("input", function() {
-
-<<<<<<< HEAD
-                const search =
-                    this.value.toLowerCase().trim();
-
-                const rows =
-                    table.querySelectorAll("tbody tr");
-
-                rows.forEach(function(row) {
-
-                    const text =
-                        row.textContent.toLowerCase();
-
-                    row.style.display =
-                        text.includes(search)
-                            ? ""
-                            : "none";
-
+                    searchInput.addEventListener("input", function() {
+                        const search = this.value.toLowerCase().trim();
+                        const rows = table.querySelectorAll("tbody tr");
+                        rows.forEach(function(row) {
+                            const text = row.textContent.toLowerCase();
+                            row.style.display = text.includes(search) ? "" : "none";
+                        });
+                    });
                 });
+        </script>
+    }
 
-            });
-
-        });
-
-    </script>
-
-}
-=======
-        </table>
-
-    </main>
-
-</div>
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+</body>
+</html>

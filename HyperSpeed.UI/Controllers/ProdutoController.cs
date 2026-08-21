@@ -1,104 +1,72 @@
-<<<<<<< HEAD
-﻿using System.Linq;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using hyperSpeed.Application.DTOs;
 using hyperSpeed.Application.Interfaces;
-using HyperSpeed.Domain.Entities;
-using HyperSpeed.UI.Models;
 using Microsoft.AspNetCore.Mvc;
-=======
-﻿using Microsoft.AspNetCore.Mvc;
 using SeuProjeto.ViewModels;
-using HyperSpeed.Domain.Entities; // ou namespace correto
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 
-namespace SeuProjeto.Controllers
+namespace HyperSpeed.UI.Controllers
 {
     public class ProdutoController : Controller
     {
-<<<<<<< HEAD
         private readonly IProdutoService _produtoService;
         private readonly ICategoriasService _categoriaService;
 
         public ProdutoController(IProdutoService produtoService, ICategoriasService categoriaService)
-=======
-        // Lista de produtos
-        [HttpGet]
-        public IActionResult Index()
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
         {
-            var model = new ProdutoListViewModel
-            {
-<<<<<<< HEAD
-                Produtos = await _produtoService.GetAllAsync(),
-                Categorias = await _categoriaService.GetAllAsync(),
-                SelectedIdCategoria = IdCategoria
-            };
+            _produtoService = produtoService;
+            _categoriaService = categoriaService;
+        }
 
-            if (IdCategoria.HasValue)
+        // Lista de produtos (opcionalmente por categoria ou pesquisa)
+        [HttpGet]
+        public async Task<IActionResult> Index(int? idCategoria = null, string? pesquisa = null)
+        {
+            IEnumerable<ProdutoDTo> produtos;
+            if (!string.IsNullOrWhiteSpace(pesquisa))
             {
-                viewModel.Produtos = await _produtoService.GetByCategoryAsync(IdCategoria.Value);
+                produtos = await _produtoService.SearchAsync(pesquisa);
+            }
+            else if (idCategoria.HasValue)
+            {
+                produtos = await _produtoService.GetByCategoryAsync(idCategoria.Value);
             }
             else
             {
-                viewModel.Categorias = await _categoriaService.GetAllAsync();
+                produtos = await _produtoService.GetAllAsync();
             }
 
-            return View(viewModel);
-=======
-                Produtos = new List<Produto>
-                {
-                    new Produto
-                    {
-                        Id = 1,
-                        Nome = "Ryzen 7 7700X",
-                        Descricao = "Processador AMD Ryzen 7",
-                        Preco = 1999.90m,
-                        Estoque = 10,
-                        IdCategoria = 1,
-                        Imagem = "/images/produtos/cpu-amd.png"
-                    },
-                    new Produto
-                    {
-                        Id = 2,
-                        Nome = "RTX 4070",
-                        Descricao = "Placa de vídeo NVIDIA",
-                        Preco = 4299.90m,
-                        Estoque = 5,
-                        IdCategoria = 2,
-                        Imagem = "/images/produtos/gpu.png"
-                    }
-                }
+            var categorias = await _categoriaService.GetAllAsync();
+
+            var model = new ProdutoListViewModel
+            {
+                Produtos = produtos,
+                Categorias = categorias,
+                SelectedIdCategoria = idCategoria,
+                Pesquisa = pesquisa
             };
 
             return View(model);
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
         }
 
         // Detalhes do produto
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-<<<<<<< HEAD
             var produto = await _produtoService.GetByIdAsync(id);
             if (produto == null) return NotFound();
 
-            var relatedProdutos = await _produtoService.GetByCategoryAsync(produto.IdCategoria);
+            var related = await _produtoService.GetByCategoryAsync(produto.IdCategoria);
+            var relatedFiltered = related.Where(p => p.Id != produto.Id).Take(4);
 
-            var viewModel = new ProdutoDetailsViewModel 
-=======
-            var produto = new ProdutoDetailsViewModel
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+            var model = new ProdutoDetailsViewModel
             {
-                Id = id,
-                Nome = "Ryzen 7 7700X",
-                Descricao = "Processador AMD Ryzen 7 7700X",
-                Preco = 1999.90m,
-                Estoque = 10,
-                Categoria = "Processadores",
-                ImagemUrl = "/images/produtos/cpu-amd.png"
+                Produto = produto,
+                RelatedProdutos = relatedFiltered
             };
 
-            return View(produto);
+            return View(model);
         }
 
         // Página de cadastro
@@ -116,10 +84,8 @@ namespace SeuProjeto.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Salvar no banco futuramente
-
+            // TODO: salvar usando _produtoService.CreateAsync(...)
             TempData["Sucesso"] = "Produto cadastrado com sucesso!";
-
             return RedirectToAction(nameof(Index));
         }
 
@@ -127,15 +93,16 @@ namespace SeuProjeto.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            // TODO: buscar dados reais via _produtoService.GetByIdAsync(id)
             var produto = new ProdutoViewModel
             {
                 Id = id,
-                Nome = "Ryzen 7 7700X",
-                Descricao = "Processador AMD",
-                Preco = 1999.90m,
-                Estoque = 10,
-                CategoriaId = 1,
-                ImagemUrl = "/images/produtos/cpu-amd.png"
+                Nome = "Exemplo",
+                Descricao = string.Empty,
+                Preco = 0m,
+                Estoque = 0,
+                CategoriaId = 0,
+                ImagemUrl = string.Empty
             };
 
             return View(produto);
@@ -148,10 +115,8 @@ namespace SeuProjeto.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Atualizar no banco
-
+            // TODO: atualizar via _produtoService.UpdateAsync(...)
             TempData["Sucesso"] = "Produto atualizado!";
-
             return RedirectToAction(nameof(Index));
         }
 
@@ -159,12 +124,7 @@ namespace SeuProjeto.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var produto = new ProdutoViewModel
-            {
-                Id = id,
-                Nome = "Ryzen 7 7700X"
-            };
-
+            var produto = new ProdutoViewModel { Id = id, Nome = "Exemplo" };
             return View(produto);
         }
 
@@ -172,55 +132,30 @@ namespace SeuProjeto.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            // Remover do banco
-
+            // TODO: remover via _produtoService.DeleteAsync(id)
             TempData["Sucesso"] = "Produto removido!";
-
             return RedirectToAction(nameof(Index));
         }
 
-        // Pesquisa
+        // Promoções / Periféricos (apontam para lista ou filtros)
         [HttpGet]
-        public IActionResult Pesquisa(string pesquisa)
-        {
-            var model = new ProdutoListViewModel
-            {
-                Pesquisa = pesquisa,
-                Produtos = new List<Produto>() // antes: new List<ProdutoViewModel>()
-            };
+        public IActionResult Promocoes() => RedirectToAction(nameof(Index));
 
-            return View("Index", model);
-        }
-
-        // Promoções
         [HttpGet]
-        public IActionResult Promocoes()
-        {
-            return View("Index");
-        }
-
-        // Periféricos
-        [HttpGet]
-        public IActionResult Perifericos()
-        {
-            return View("Index");
-        }
+        public IActionResult Perifericos() => RedirectToAction(nameof(Index));
     }
-<<<<<<< HEAD
 
     internal class ProdutoListViewModel
     {
-        public IEnumerable<ProdutoDTo> Produtos { get; set; }
-        public IEnumerable<CategoriasDTo> Categorias { get; set; }
+        public IEnumerable<ProdutoDTo> Produtos { get; set; } = Enumerable.Empty<ProdutoDTo>();
+        public IEnumerable<CategoriasDTo> Categorias { get; set; } = Enumerable.Empty<CategoriasDTo>();
         public int? SelectedIdCategoria { get; set; }
+        public string? Pesquisa { get; set; }
     }
 
     internal class ProdutoDetailsViewModel
     {
-        public ProdutoDTo Produto { get; set; }
-        public IEnumerable<ProdutoDTo> RelatedProdutos { get; set; }
+        public ProdutoDTo Produto { get; set; } = null!;
+        public IEnumerable<ProdutoDTo> RelatedProdutos { get; set; } = Enumerable.Empty<ProdutoDTo>();
     }
 }
-=======
-}
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb

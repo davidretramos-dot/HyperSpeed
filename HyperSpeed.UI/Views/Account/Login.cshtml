@@ -1,97 +1,231 @@
 @model HyperSpeed.UI.Models.LoginViewModel
-<<<<<<< HEAD
 
 @{
     ViewData["Title"] = "Login";
 }
 
-=======
-@{
-    ViewData["Title"] = "Login";
-}
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - HyperSpeed</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <script src="~/js/theme.js"></script>
-</head>
-<body>
-    <div class="auth-page">
-        <div class="auth-card animate-in">
-            <div class="auth-logo">
-                <p>Acesse sua conta para continuar</p>
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+<div class="login-page">
+
+    <!-- LADO ESQUERDO -->
+
+    <div class="login-brand">
+
+        <div class="login-brand-content">
+
+            <div class="login-logo">
+                <span>HYPER</span>
+                <strong>SPEED</strong>
             </div>
 
-            <div class="login-page">
-                <div class="login-container">
-                    <div class="login-card">
-                        <h1>Bem-vindo!</h1>
-                        <p>Faça login para continuar.</p>
+            <div class="login-brand-line"></div>
 
-<<<<<<< HEAD
-                        <form asp-controller="Conta" asp-action="Login" method="post">
-                            @Html.AntiForgeryToken()
+            <h1>
+                SEU SETUP.<br>
+                <strong>SEU DESEMPENHO.</strong>
+            </h1>
 
-                            <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input asp-for="Email" class="form-control" type="email" placeholder="Digite seu email" required />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
+            <p>
+                Entre na sua conta e continue montando
+                o setup dos seus sonhos.
+            </p>
 
-                            <div class="mb-3">
-                                <label class="form-label">Senha</label>
-                                <input asp-for="Password" class="form-control" type="password" placeholder="Digite sua senha" required />
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-
-                            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
-
-                            <button type="submit" class="btn btn-primary btn-login">Entrar</button>
-                        </form>
-
-                        <div class="login-links mt-3">
-                            <a asp-controller="Conta" asp-action="Register">Criar conta</a>
-                            <span> | </span>
-                            <a asp-controller="Conta" asp-action="EsqueciSenha">Esqueci minha senha</a>
-=======
-                        <form asp-action="Login" method="post">
-                            <div class="input-group">
-                                <label>Email</label>
-                                <input type="email" name="Email" placeholder="Digite seu email" required>
-                            </div>
-
-                            <div class="input-group">
-                                <label>Senha</label>
-                                <input type="password" name="Senha" placeholder="Digite sua senha" required>
-                            </div>
-
-                            <button type="submit" class="btn-login">
-                                Entrar
-                            </button>
-                        </form>
-
-                        <div class="login-links">
-                            <a asp-action="Cadastrar">Criar conta</a>
-                            <a asp-action="EsqueciSenha">Esqueci minha senha</a>
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-                        </div>
-                    </div>
-                </div>
-            </div>
-<<<<<<< HEAD
         </div>
-    </div>
-=======
 
-        </div> <!-- .auth-card -->
-    </div> <!-- .auth-page -->
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-</body>
-</html>
+    </div>
+
+
+    <!-- LADO DIREITO -->
+
+    <div class="login-area">
+
+        <div class="login-card">
+
+            <div class="login-header">
+
+                <span class="login-label">
+                    HYPERSPEED / CONTA
+                </span>
+
+                <h2>
+                    Bem-vindo!
+                </h2>
+
+                <p>
+                    Faça login para continuar.
+                </p>
+
+            </div>
+
+
+            <form asp-controller="Conta"
+                  asp-action="Login"
+                  method="post">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly"
+                     class="login-validation">
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="login-field">
+
+                    <label asp-for="Email">
+                        Email
+                    </label>
+
+                    <div class="login-input">
+
+                        <i class="bi bi-envelope"></i>
+
+                        <input asp-for="Email"
+                               type="email"
+                               placeholder="Digite seu email"
+                               autocomplete="email"
+                               required />
+
+                    </div>
+
+                    <span asp-validation-for="Email"
+                          class="login-error">
+                    </span>
+
+                </div>
+
+
+                <!-- SENHA -->
+
+                <div class="login-field">
+
+                    <div class="login-password-header">
+
+                        <label asp-for="Password">
+                            Senha
+                        </label>
+
+                        <a asp-controller="Conta"
+                           asp-action="EsqueciSenha">
+
+                            Esqueci minha senha
+
+                        </a>
+
+                    </div>
+
+                    <div class="login-input">
+
+                        <i class="bi bi-lock"></i>
+
+                        <input asp-for="Password"
+                               type="password"
+                               id="password"
+                               placeholder="Digite sua senha"
+                               autocomplete="current-password"
+                               required />
+
+                        <button type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()">
+
+                            <i class="bi bi-eye"
+                               id="passwordIcon">
+                            </i>
+
+                        </button>
+
+                    </div>
+
+                    <span asp-validation-for="Password"
+                          class="login-error">
+                    </span>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button type="submit"
+                        class="login-button">
+
+                    <span>
+                        Entrar na conta
+                    </span>
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- CADASTRO -->
+
+            <div class="login-register">
+
+                <span>
+                    Ainda não possui uma conta?
+                </span>
+
+                <a asp-controller="Conta"
+                   asp-action="Register">
+
+                    Criar conta
+
+                </a>
+
+            </div>
+
+
+            <div class="login-footer">
+
+                <i class="bi bi-shield-check"></i>
+
+                Ambiente seguro e protegido
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const icon =
+                document.getElementById("passwordIcon");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("bi-eye");
+                icon.classList.add("bi-eye-slash");
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove("bi-eye-slash");
+                icon.classList.add("bi-eye");
+
+            }
+
+        }
+
+    </script>
+}

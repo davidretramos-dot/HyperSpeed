@@ -1,16 +1,10 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using hyperSpeed.Application.DTOs;
+﻿using hyperSpeed.Application.DTOs;
 using hyperSpeed.Application.Interfaces;
 using HyperSpeed.Domain.Entities;
 using HyperSpeed.Domain.interfaces;
-using static System.Net.WebRequestMethods;
-
-
-
+using static System.Net.Mime.MediaTypeNames;
 
 namespace hyperSpeed.Application.Services
-
 {
     public class ProdutoService : IProdutoService
     {
@@ -20,11 +14,13 @@ namespace hyperSpeed.Application.Services
         {
             _ProdutoRepository = produtoRepository;
         }
+
         public async Task<ProdutoDTo?> GetAllAsync(int id)
         {
             var Produto = await _ProdutoRepository.GetByIdAsync(id);
             return Produto == null ? null : MapToDTo(Produto);
         }
+
         public async Task<ProdutoDTo> CreateAsync(CriacaoProdutoDTo dto)
         {
             var produto = new Produto
@@ -35,7 +31,6 @@ namespace hyperSpeed.Application.Services
                 IdCategoria = dto.IdCategoria,
                 Preco = dto.Preco,
                 Estoque = dto.Estoque,
-                
             };
 
             await _ProdutoRepository.AddAsync(produto);
@@ -55,10 +50,8 @@ namespace hyperSpeed.Application.Services
             produto.Preco = dto.Preco;
             produto.Estoque = dto.Estoque;
 
-
             await _ProdutoRepository.UpdateAsync(produto);
             return MapToDTo(produto);
-
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -93,6 +86,7 @@ namespace hyperSpeed.Application.Services
         {
             throw new NotImplementedException();
         }
+
         public async Task<ProdutoDTo?> GetByIdAsync(int id)
         {
             var produto = await _ProdutoRepository.GetByIdAsync(id);
@@ -110,18 +104,34 @@ namespace hyperSpeed.Application.Services
         {
             return await _ProdutoRepository.CountAsync();
         }
+
         public async Task<IEnumerable<ProdutoDTo>> GetAllAsync()
         {
             var produtos = await _ProdutoRepository.GetAllAsync();
             return produtos.Select(MapToDTo);
         }
+
         public async Task<IEnumerable<ProdutoDTo>> GetFeaturedAsync()
         {
             // Exemplo: Retorna os produtos com base em algum critério de destaque.
             var produtos = await _ProdutoRepository.GetAllAsync();
-           
+
             return produtos.Take(5).Select(MapToDTo);
+        }
+
+        public async Task<IEnumerable<ProdutoDTo>> SearchAsync(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return Enumerable.Empty<ProdutoDTo>();
+
+            var produtos = await _ProdutoRepository.GetAllAsync();
+            var termos = query.Trim().ToLowerInvariant();
+
+            return produtos
+                .Where(p =>
+                    (!string.IsNullOrEmpty(p.Nome) && p.Nome.ToLowerInvariant().Contains(termos)) ||
+                    (!string.IsNullOrEmpty(p.Descricao) && p.Descricao.ToLowerInvariant().Contains(termos)))
+                .Select(MapToDTo);
         }
     }
 }
-

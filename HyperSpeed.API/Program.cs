@@ -11,14 +11,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+
+// ===============================
+// SERVICES
+// ===============================
 
 builder.Services.AddDbContext<HyperSpeedDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
-    // Configurações de senha (simplificadas para ensino)
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireUppercase = true;
@@ -35,6 +38,7 @@ builder.Services.ConfigureApplicationCookie(options =>
         context.Response.StatusCode = 401;
         return Task.CompletedTask;
     };
+
     options.Events.OnRedirectToAccessDenied = context =>
     {
         context.Response.StatusCode = 403;
@@ -44,14 +48,15 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriasRepository>();
+
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<ICategoriasService, CategoriasService>();
 
+// Web + API
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
-
-
-// -------
-builder.Services.AddControllers();
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -59,9 +64,11 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "HyperSpeed API",
         Version = "v1",
-        Description = "API REST do sistema HyperSpeed — Loja de Periféricos Visando o publico Gamer"
+        Description = "API REST do sistema HyperSpeed"
     });
 });
+
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -72,9 +79,18 @@ builder.Services.AddCors(options =>
     });
 });
 
-var apps = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ===============================
+// BUILD
+// ===============================
+
+var app = builder.Build();
+
+
+// ===============================
+// PIPELINE
+// ===============================
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -82,17 +98,26 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+// ===============================
+// ROTAS
+// ===============================
 app.MapControllers();
+app.MapRazorPages();
+
+
+// ===============================
+// SEED
+// ===============================
 
 await SeedData.SeedAsync(app.Services);
 
-app.UseStaticFiles();
-
-app.MapRazorPages();
 app.Run();
-

@@ -1,42 +1,38 @@
-<<<<<<< HEAD
+
 @* Views\Shared\_Layout.cshtml *@
-=======
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<<<<<<< HEAD
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    <title>Hyper Speed</title>
-=======
 <head>
+    <title>Hyper Speed</title>
 
     <meta charset="utf-8" />
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1" />
 
-    <title>@ViewData["Title"] - ByteTech</title>
+    <title>@ViewData["Title"] - Hyper Speed</title>
 
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="icon"
+          type="image/png"
+          href="img/Icone HS.png">
 
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 </head>
 
 <body>
 
-<<<<<<< HEAD
+
     <header class="site-header">
-=======
+
     <partial name="_Header" />
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
+
 
     <partial name="_Navbar" />
 
-<<<<<<< HEAD
             <div class="logo">
-                <img src="~/images/logo.png" alt="Hyper Speed">
+                <img src="img/Logo HS.png" alt="Hyper Speed">
             </div>
 
             <div class="search">
@@ -85,47 +81,15 @@
                 <a asp-controller="Favorito" asp-action="Index">
                     Favoritos
                 </a>
-=======
+                </div>
+                </header>
     <main>
 
         @RenderBody()
 
     </main>
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
-
-    <partial name="_Footer" />
-
-<<<<<<< HEAD
-        </div>
 
 
-        <nav class="main-nav">
-
-            <a href="#" class="menu-icon">☰</a>
-
-            <a href="#">
-                🛒 CARRINHO
-            </a>
-
-            <a href="#">
-                MONTE SEU PC
-            </a>
-
-            <a href="#">
-                DEPARTAMENTOS
-            </a>
-
-            <a href="#">
-                PERIFÉRICOS
-            </a>
-
-            <a href="#" class="promotion">
-                PROMOÇÕES
-            </a>
-
-        </nav>
-
-    </header>
 
 
     <main>
@@ -174,11 +138,7 @@
     @RenderSection("Scripts", required: false)
 
 </body>
-=======
     <script src="~/js/menu.js"></script>
     <script src="~/js/carousel.js"></script>
 
-</body>
-
->>>>>>> 77b9e2b5d73459be3d72769acc8838d9d0b54edb
 </html>

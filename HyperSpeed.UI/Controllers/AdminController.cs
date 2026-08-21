@@ -214,6 +214,55 @@ namespace HyperSpeed.UI.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditCategoria(int id)
+        {
+            ViewData["ActiveMenu"] = "Categories";
+            ViewData["Title"] = "Editar Categoria";
+
+            var category = await _categoriaService.GetByIdAsync(id);
+
+            if (category == null)
+                return NotFound();
+
+            var model = new AtualizacaoCategoriaDTo
+            {
+                Id = category.Id,
+                Nome = category.Nome
+            };
+
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCategoria(AtualizacaoCategoriaDTo model)
+        {
+            ViewData["ActiveMenu"] = "Categories";
+            ViewData["Title"] = "Editar Categoria";
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.Id == null)
+            {
+                return NotFound();
+            }
+
+            var categoria = await _categoriaService.UpdateAsync(
+                model.Id.Value,
+                model
+            );
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction(nameof(Categorias));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateCategoria(CategoriaViewModel model)

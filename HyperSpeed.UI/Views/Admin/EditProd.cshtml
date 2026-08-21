@@ -1,81 +1,266 @@
-
 @using HyperSpeed.UI.Models
 @model ProdutoFormViewModel
+
 @{
-    Layout = null;
     ViewData["Title"] = "Editar Produto";
 }
 
-<div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="form-senac">
-            <form asp-action="EditProd" asp-route-id="@Model.Id" method="post">
-                @Html.AntiForgeryToken()
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="edit-produto-page">
 
-                <div class="row g-3">
-                    <div class="col-12">
-                        <label asp-for="NomeProduto" class="form-label">Título do Game</label>
-                        <input asp-for="NomeProduto" class="form-control" required />
-                        <span asp-validation-for="NomeProduto" class="text-danger"></span>
-                    </div>
+    <div class="edit-produto-header">
+        <div>
+            <span class="edit-produto-kicker">ADMINISTRAÇÃO</span>
+            <h1>Editar Produto</h1>
+            <p>Atualize as informações e configurações deste produto.</p>
+        </div>
 
-                    <div class="col-12">
-                        <label asp-for="Descricao" class="form-label">Descrição</label>
-                        <textarea asp-for="Descricao" class="form-control" rows="4" required></textarea>
-                        <span asp-validation-for="Descricao" class="text-danger"></span>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label asp-for="Preco" class="form-label">Preço</label>
-                        <input asp-for="Preco" type="number" class="form-control" min="0" required />
-                        <span asp-validation-for="Preco" class="text-danger"></span>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label asp-for="Estoque" class="form-label">Estoque</label>
-                        <input asp-for="Estoque" type="number" class="form-control" min="0" required />
-                        <span asp-validation-for="Estoque" class="text-danger"></span>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label asp-for="IdCategoria" class="form-label">Categoria</label>
-                        <select asp-for="IdCategoria" class="form-select" required>
-                            <option value="">Selecione</option>
-                            @foreach (var category in Model.Categorias)
-                            {
-                                <option value="@category.Id">@category.Nome</option>
-                            }
-                        </select>
-                        <span asp-validation-for="IdCategoria" class="text-danger"></span>
-                    </div>
-
-                    <div class="col-12">
-                        <label asp-for="ImagemUrl" class="form-label">URL da Imagem</label>
-                        <input asp-for="ImagemUrl" class="form-control" />
-                        <span asp-validation-for="ImagemUrl" class="text-danger"></span>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input asp-for="Destaque" class="form-check-input" type="checkbox" />
-                            <label asp-for="Destaque" class="form-check-label">
-                                <i class="bi bi-star-fill text-warning"></i> Destaque
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="my-4" />
-                <div class="d-flex justify-content-between">
-                    <a asp-action="Produtos" class="btn btn-outline-secondary">
-                        <i class="bi bi-arrow-left"></i> Cancelar
-                    </a>
-                    <button type="submit" class="btn btn-primary-senac">
-                        <i class="bi bi-check-lg"></i> Salvar Alterações
-                    </button>
-                </div>
-            </form>
+        <div class="produto-id">
+            ID #@Model.Id
         </div>
     </div>
+
+
+    <div class="edit-produto-card">
+
+        <form asp-action="EditProd"
+              asp-route-id="@Model.Id"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary"></div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <span>01</span>
+
+                    <div>
+                        <h2>Informações do produto</h2>
+                        <p>Dados principais que serão exibidos na loja.</p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-field full">
+
+                        <label asp-for="NomeProduto">
+                            Nome do Produto
+                        </label>
+
+                        <input asp-for="NomeProduto"
+                               class="hs-input"
+                               placeholder="Ex: Ryzen 7 7800X3D"
+                               required />
+
+                        <span asp-validation-for="NomeProduto"
+                              class="field-error"></span>
+
+                    </div>
+
+
+                    <div class="form-field full">
+
+                        <label asp-for="Descricao">
+                            Descrição
+                        </label>
+
+                        <textarea asp-for="Descricao"
+                                  class="hs-input hs-textarea"
+                                  rows="5"
+                                  placeholder="Descreva as características do produto..."
+                                  required></textarea>
+
+                        <span asp-validation-for="Descricao"
+                              class="field-error"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <span>02</span>
+
+                    <div>
+                        <h2>Preço e estoque</h2>
+                        <p>Controle os valores e a disponibilidade do produto.</p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid three-columns">
+
+                    <div class="form-field">
+
+                        <label asp-for="Preco">
+                            Preço
+                        </label>
+
+                        <div class="input-prefix">
+                            <span>R$</span>
+
+                            <input asp-for="Preco"
+                                   type="number"
+                                   class="hs-input"
+                                   min="0"
+                                   step="0.01"
+                                   required />
+                        </div>
+
+                        <span asp-validation-for="Preco"
+                              class="field-error"></span>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label asp-for="Estoque">
+                            Estoque
+                        </label>
+
+                        <input asp-for="Estoque"
+                               type="number"
+                               class="hs-input"
+                               min="0"
+                               required />
+
+                        <span asp-validation-for="Estoque"
+                              class="field-error"></span>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label asp-for="IdCategoria">
+                            Categoria
+                        </label>
+
+                        <select asp-for="IdCategoria"
+                                class="hs-input hs-select"
+                                required>
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            @foreach (var category in Model.Categorias)
+                            {
+                                <option value="@category.Id">
+                                    @category.Nome
+                                </option>
+                            }
+
+                        </select>
+
+                        <span asp-validation-for="IdCategoria"
+                              class="field-error"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <span>03</span>
+
+                    <div>
+                        <h2>Imagem e destaque</h2>
+                        <p>Defina a imagem e a visibilidade do produto.</p>
+                    </div>
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-field full">
+
+                        <label asp-for="ImagemUrl">
+                            URL da Imagem
+                        </label>
+
+                        <input asp-for="ImagemUrl"
+                               class="hs-input"
+                               placeholder="Ex: /images/produtos/cpu-amd.png" />
+
+                        <span asp-validation-for="ImagemUrl"
+                              class="field-error"></span>
+
+                        <small class="input-help">
+                            Informe o caminho da imagem armazenada no site.
+                        </small>
+
+                    </div>
+
+
+                    <div class="highlight-option">
+
+                        <div class="highlight-icon">
+                            ★
+                        </div>
+
+                        <div class="highlight-text">
+
+                            <strong>
+                                Produto em destaque
+                            </strong>
+
+                            <span>
+                                Exibir este produto como destaque na loja.
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input asp-for="Destaque"
+                                   type="checkbox" />
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="edit-actions">
+
+                <a asp-action="Produtos"
+                   class="btn-cancel">
+
+                    ← Cancelar
+
+                </a>
+
+                <button type="submit"
+                        class="btn-save">
+
+                    ✓ Salvar Alterações
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>

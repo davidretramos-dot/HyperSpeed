@@ -1,27 +1,154 @@
 ﻿@* Editar Categoria *@
-@model CategoriasDTo
+@model AtualizacaoCategoriaDTo
+
 @{
     Layout = "_AdminLayout";
+    ViewData["Title"] = "Editar Categoria";
 }
 
-<div class="row justify-content-center">
-    <div class="col-lg-6">
-        <div class="form-senac">
-            <form asp-action="EditCategory" asp-route-id="@Model.Id" method="post">
-                <div class="mb-3">
-                    <label class="form-label">Nome da Categoria</label>
-                    <input name="Name" class="form-control" value="@Model.Nome" required />
-                </div>
-                <hr class="my-4" />
-                <div class="d-flex justify-content-between">
-                    <a asp-action="Categories" class="btn btn-outline-secondary">
-                        <i class="bi bi-arrow-left"></i> Cancelar
-                    </a>
-                    <button type="submit" class="btn btn-primary-senac">
-                        <i class="bi bi-check-lg"></i> Salvar Alterações
-                    </button>
-                </div>
-            </form>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<div class="edit-categoria-page">
+
+    <div class="edit-categoria-header">
+
+        <div>
+            <span class="edit-categoria-kicker">
+                ADMINISTRAÇÃO
+            </span>
+
+            <h1>Editar Categoria</h1>
+
+            <p>
+                Atualize o nome da categoria do seu catálogo.
+            </p>
         </div>
+
+        <div class="categoria-id">
+            ID #@Model.Id
+        </div>
+
     </div>
+
+
+    <div class="edit-categoria-card">
+
+        <form asp-action="EditCategoria"
+              asp-route-id="@Model.Id"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary">
+            </div>
+
+
+            <div class="categoria-section">
+
+                <div class="categoria-section-title">
+
+                    <span>01</span>
+
+                    <div>
+                        <h2>Informações da categoria</h2>
+
+                        <p>
+                            Defina como a categoria será exibida na loja.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="categoria-field">
+
+                    <label asp-for="Nome">
+                        Nome da Categoria
+                    </label>
+
+                    <input asp-for="Nome"
+                           class="categoria-input"
+                           placeholder="Ex: Processadores"
+                           autocomplete="off"
+                           required />
+
+                    <span asp-validation-for="Nome"
+                          class="field-error">
+                    </span>
+
+                    <small>
+                        Use um nome curto e fácil de identificar.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="categoria-preview">
+
+                <div class="preview-icon">
+                    #
+                </div>
+
+                <div class="preview-content">
+
+                    <span>PRÉVIA</span>
+
+                    <strong id="categoriaPreview">
+                        @Model.Nome
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="categoria-actions">
+
+                <a asp-action="Categories"
+                   class="categoria-btn-cancel">
+
+                    ← Cancelar
+
+                </a>
+
+
+                <button type="submit"
+                        class="categoria-btn-save">
+
+                    ✓ Salvar Alterações
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const categoriaInput = document.getElementById("Nome");
+        const categoriaPreview = document.getElementById("categoriaPreview");
+
+        if (categoriaInput && categoriaPreview) {
+
+            categoriaInput.addEventListener("input", function() {
+
+                categoriaPreview.textContent =
+                    this.value.trim() || "Nome da categoria";
+
+            });
+
+        }
+    </script>
+}

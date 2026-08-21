@@ -2046,3 +2046,831 @@ footer {
         min-width: 650px;
     }
 }
+/* =========================================================
+   EDITAR PRODUTO
+   ========================================================= */
+
+.edit-produto-page {
+    width: calc(100% - 40px);
+    max-width: 1100px;
+    margin: 45px auto 80px;
+    color: #fff;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.edit-produto-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.edit-produto-kicker {
+    display: block;
+    margin-bottom: 8px;
+    color: #d60055;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.edit-produto-header h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.edit-produto-header p {
+    margin: 8px 0 0;
+    color: #858585;
+    font-size: 14px;
+}
+
+.produto-id {
+    padding: 8px 13px;
+    border: 1px solid #303030;
+    border-radius: 7px;
+    background: #151515;
+    color: #999;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+   ========================================================= */
+
+.edit-produto-card {
+    padding: 30px;
+    background: #151515;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .30);
+}
+
+
+/* =========================================================
+   SEÇÕES
+   ========================================================= */
+
+.form-section {
+    padding: 5px 0 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #292929;
+}
+
+    .form-section:last-of-type {
+        margin-bottom: 0;
+    }
+
+
+.form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+    .form-section-title > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        border-radius: 7px;
+        background: rgba(214, 0, 85, .12);
+        border: 1px solid rgba(214, 0, 85, .30);
+        color: #d60055;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .form-section-title h2 {
+        margin: 0;
+        color: #fff;
+        font-size: 17px;
+        font-weight: 650;
+    }
+
+    .form-section-title p {
+        margin: 4px 0 0;
+        color: #777;
+        font-size: 12px;
+    }
+
+
+/* =========================================================
+   GRID DO FORMULÁRIO
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+    .form-grid.three-columns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+.form-field {
+    min-width: 0;
+}
+
+    .form-field.full {
+        grid-column: 1 / -1;
+    }
+
+
+    /* =========================================================
+   LABELS
+   ========================================================= */
+
+    .form-field label {
+        display: block;
+        margin-bottom: 8px;
+        color: #d6d6d6;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.hs-input {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 10px 13px;
+    border: 1px solid #333;
+    border-radius: 7px;
+    outline: none;
+    background: #0e0e0e;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+    .hs-input::placeholder {
+        color: #555;
+    }
+
+    .hs-input:hover {
+        border-color: #444;
+    }
+
+    .hs-input:focus {
+        background: #111;
+        border-color: #a00045;
+        box-shadow: 0 0 0 3px rgba(214, 0, 85, .12);
+    }
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+.hs-textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SELECT
+   ========================================================= */
+
+.hs-select {
+    cursor: pointer;
+    appearance: auto;
+}
+
+
+/* =========================================================
+   PREÇO
+   ========================================================= */
+
+.input-prefix {
+    position: relative;
+}
+
+    .input-prefix > span {
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        color: #888;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .input-prefix .hs-input {
+        padding-left: 38px;
+    }
+
+
+/* =========================================================
+   AJUDA
+   ========================================================= */
+
+.input-help {
+    display: block;
+    margin-top: 7px;
+    color: #666;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ERROS
+   ========================================================= */
+
+.field-error {
+    display: block;
+    margin-top: 6px;
+    color: #ff4f82;
+    font-size: 11px;
+}
+
+.validation-summary {
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 50, 100, .35);
+    border-radius: 7px;
+    background: rgba(255, 50, 100, .08);
+    color: #ff6b93;
+    font-size: 13px;
+}
+
+    .validation-summary:empty {
+        display: none;
+    }
+
+
+/* =========================================================
+   OPÇÃO DE DESTAQUE
+   ========================================================= */
+
+.highlight-option {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 17px;
+    border: 1px solid #303030;
+    border-radius: 9px;
+    background: #101010;
+}
+
+.highlight-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(214, 0, 85, .12);
+    color: #d60055;
+    font-size: 18px;
+}
+
+.highlight-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+}
+
+    .highlight-text strong {
+        color: #eee;
+        font-size: 13px;
+    }
+
+    .highlight-text span {
+        color: #666;
+        font-size: 11px;
+    }
+
+
+/* =========================================================
+   SWITCH
+   ========================================================= */
+
+.switch {
+    position: relative;
+    display: block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+    .switch input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    background: #333;
+    transition: .2s ease;
+}
+
+    .slider::before {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        left: 3px;
+        top: 3px;
+        border-radius: 50%;
+        background: #888;
+        transition: .2s ease;
+    }
+
+.switch input:checked + .slider {
+    background: #a00045;
+}
+
+    .switch input:checked + .slider::before {
+        transform: translateX(20px);
+        background: #fff;
+    }
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.edit-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+.btn-cancel,
+.btn-save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.btn-cancel {
+    border: 1px solid #383838;
+    background: transparent;
+    color: #aaa;
+}
+
+    .btn-cancel:hover {
+        border-color: #555;
+        background: #202020;
+        color: #fff;
+    }
+
+.btn-save {
+    border: 1px solid #b0004c;
+    background: #b0004c;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(176, 0, 76, .18);
+}
+
+    .btn-save:hover {
+        transform: translateY(-2px);
+        border-color: #d60055;
+        background: #d60055;
+        box-shadow: 0 8px 22px rgba(214, 0, 85, .28);
+    }
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .edit-produto-page {
+        width: calc(100% - 25px);
+        margin-top: 30px;
+    }
+
+    .edit-produto-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .edit-produto-card {
+        padding: 20px;
+    }
+
+    .form-grid.three-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-field.full {
+        grid-column: auto;
+    }
+
+    .highlight-option {
+        grid-column: auto;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .edit-produto-header h1 {
+        font-size: 26px;
+    }
+
+    .edit-produto-card {
+        padding: 16px;
+    }
+
+    .form-section-title {
+        align-items: flex-start;
+    }
+
+    .edit-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .btn-cancel,
+    .btn-save {
+        width: 100%;
+    }
+}
+/* =========================================================
+   EDITAR CATEGORIA
+   ========================================================= */
+
+.edit-categoria-page {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 45px auto 80px;
+    color: #fff;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.edit-categoria-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.edit-categoria-kicker {
+    display: block;
+    margin-bottom: 8px;
+    color: #d60055;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.edit-categoria-header h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.edit-categoria-header p {
+    margin: 8px 0 0;
+    color: #858585;
+    font-size: 14px;
+}
+
+.categoria-id {
+    padding: 8px 13px;
+    border: 1px solid #303030;
+    border-radius: 7px;
+    background: #151515;
+    color: #999;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.edit-categoria-card {
+    padding: 30px;
+    background: #151515;
+    border: 1px solid #292929;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .30);
+}
+
+
+/* =========================================================
+   SEÇÃO
+   ========================================================= */
+
+.categoria-section {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #292929;
+}
+
+.categoria-section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 28px;
+}
+
+    .categoria-section-title > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        border-radius: 7px;
+        background: rgba(214, 0, 85, .12);
+        border: 1px solid rgba(214, 0, 85, .30);
+        color: #d60055;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .categoria-section-title h2 {
+        margin: 0;
+        color: #fff;
+        font-size: 17px;
+        font-weight: 650;
+    }
+
+    .categoria-section-title p {
+        margin: 4px 0 0;
+        color: #777;
+        font-size: 12px;
+    }
+
+
+/* =========================================================
+   CAMPO
+   ========================================================= */
+
+.categoria-field {
+    width: 100%;
+}
+
+    .categoria-field label {
+        display: block;
+        margin-bottom: 8px;
+        color: #d6d6d6;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+.categoria-input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 46px;
+    padding: 0 14px;
+    border: 1px solid #333;
+    border-radius: 7px;
+    outline: none;
+    background: #0e0e0e;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+    .categoria-input::placeholder {
+        color: #555;
+    }
+
+    .categoria-input:hover {
+        border-color: #444;
+    }
+
+    .categoria-input:focus {
+        background: #111;
+        border-color: #a00045;
+        box-shadow: 0 0 0 3px rgba(214, 0, 85, .12);
+    }
+
+.categoria-field small {
+    display: block;
+    margin-top: 8px;
+    color: #666;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PRÉVIA DA CATEGORIA
+   ========================================================= */
+
+.categoria-preview {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 25px;
+    padding: 16px 18px;
+    border: 1px solid #303030;
+    border-radius: 9px;
+    background: #101010;
+}
+
+.preview-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(214, 0, 85, .12);
+    color: #d60055;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.preview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+    .preview-content span {
+        color: #666;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+    }
+
+    .preview-content strong {
+        overflow: hidden;
+        color: #eee;
+        font-size: 14px;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.categoria-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 25px;
+}
+
+.categoria-btn-cancel,
+.categoria-btn-save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+
+/* =========================================================
+   CANCELAR
+   ========================================================= */
+
+.categoria-btn-cancel {
+    border: 1px solid #383838;
+    background: transparent;
+    color: #aaa;
+}
+
+    .categoria-btn-cancel:hover {
+        border-color: #555;
+        background: #202020;
+        color: #fff;
+    }
+
+
+/* =========================================================
+   SALVAR
+   ========================================================= */
+
+.categoria-btn-save {
+    border: 1px solid #b0004c;
+    background: #b0004c;
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(176, 0, 76, .18);
+}
+
+    .categoria-btn-save:hover {
+        transform: translateY(-2px);
+        border-color: #d60055;
+        background: #d60055;
+        box-shadow: 0 8px 22px rgba(214, 0, 85, .28);
+    }
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .edit-categoria-page {
+        width: calc(100% - 25px);
+        margin-top: 30px;
+    }
+
+    .edit-categoria-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .edit-categoria-card {
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .edit-categoria-header h1 {
+        font-size: 26px;
+    }
+
+    .edit-categoria-card {
+        padding: 16px;
+    }
+
+    .categoria-section-title {
+        align-items: flex-start;
+    }
+
+    .categoria-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .categoria-btn-cancel,
+    .categoria-btn-save {
+        width: 100%;
+    }
+}
+/* =========================================================
+   EDITAR CATEGORIA
+   ========================================================= */
+
+.edit-categoria-page {
+    width: calc(100% - 40px);
+    max-width: 900px;
+    margin: 45px auto 80px;
+    color: #fff;
+}

@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using hyperSpeed.Application.DTOs;
 using hyperSpeed.Application.Interfaces;
+using HyperSpeed.Domain.Entities;
+using HyperSpeed.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using SeuProjeto.ViewModels;
 
@@ -23,27 +25,40 @@ namespace HyperSpeed.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int? idCategoria = null, string? pesquisa = null)
         {
-            IEnumerable<ProdutoDTo> produtos;
+            IEnumerable<ProdutoDTo> produtosDto;
             if (!string.IsNullOrWhiteSpace(pesquisa))
             {
-                produtos = await _produtoService.SearchAsync(pesquisa);
+                produtosDto = await _produtoService.SearchAsync(pesquisa);
             }
             else if (idCategoria.HasValue)
             {
-                produtos = await _produtoService.GetByCategoryAsync(idCategoria.Value);
+                produtosDto = await _produtoService.GetByCategoryAsync(idCategoria.Value);
             }
             else
             {
-                produtos = await _produtoService.GetAllAsync();
+                produtosDto = await _produtoService.GetAllAsync();
             }
 
             var categorias = await _categoriaService.GetAllAsync();
 
+            // Mapear DTO -> Produto (ajuste campos conforme necessário)
+            var produtos = produtosDto.Select(d => new Produto
+            {
+                Id = d.Id,
+                Nome = d.NomeProduto,
+                Descricao = d.Descricao,
+                Preco = (decimal)d.Preco,
+                Estoque = d.Estoque,
+                Imagem = d.ImagemUrl,
+                IdCategoria = d.IdCategoria,
+                Categorias = null
+            });
+
             var model = new ProdutoListViewModel
             {
                 Produtos = produtos,
-                Categorias = categorias,
-                SelectedIdCategoria = idCategoria,
+                CategoriaNome = categorias.FirstOrDefault(c => c.Id == idCategoria)?.Nome,
+                CategoriaId = idCategoria,
                 Pesquisa = pesquisa
             };
 
@@ -145,17 +160,4 @@ namespace HyperSpeed.UI.Controllers
         public IActionResult Perifericos() => RedirectToAction(nameof(Index));
     }
 
-    internal class ProdutoListViewModel
-    {
-        public IEnumerable<ProdutoDTo> Produtos { get; set; } = Enumerable.Empty<ProdutoDTo>();
-        public IEnumerable<CategoriasDTo> Categorias { get; set; } = Enumerable.Empty<CategoriasDTo>();
-        public int? SelectedIdCategoria { get; set; }
-        public string? Pesquisa { get; set; }
-    }
-
-    internal class ProdutoDetailsViewModel
-    {
-        public ProdutoDTo Produto { get; set; } = null!;
-        public IEnumerable<ProdutoDTo> RelatedProdutos { get; set; } = Enumerable.Empty<ProdutoDTo>();
-    }
 }

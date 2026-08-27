@@ -1,11 +1,8 @@
-
-@* Views\Shared\_Layout.cshtml *@
+@* Views/Shared/_Layout.cshtml *@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-
 <head>
-    <title>Hyper Speed</title>
 
     <meta charset="utf-8" />
 
@@ -14,131 +11,207 @@
 
     <title>@ViewData["Title"] - Hyper Speed</title>
 
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    @* Ícone que aparece na aba do navegador *@
     <link rel="icon"
           type="image/png"
-          href="img/Icone HS.png">
+          href="~/img/Icone HS.png" />
+
+    @* Bootstrap Icons, caso as páginas utilizem bi bi-* *@
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    @RenderSection("Styles", required: false)
 
 </head>
 
 <body>
 
-
     <header class="site-header">
 
-    <partial name="_Header" />
+        @* Logo da Hyper Speed *@
+        <div class="logo">
 
+            <a asp-controller="Home"
+               asp-action="Index">
 
-    <partial name="_Navbar" />
+                <img src="~/img/Logo HS.png"
+                     alt="Hyper Speed" />
 
-            <div class="logo">
-                <img src="img/Logo HS.png" alt="Hyper Speed">
-            </div>
+            </a>
 
-            <div class="search">
-                <input type="text" placeholder="Pesquisa">
-            </div>
+        </div>
 
-            <div class="account">
+ 
+        @* Barra de pesquisa *@
+        <div class="search">
 
-                @if (User?.Identity?.IsAuthenticated == true)
+            <input type="text"
+                   placeholder="Pesquisar..." />
+
+        </div>
+
+ 
+        @* Área da conta *@
+        <div class="account">
+
+            @if (User?.Identity?.IsAuthenticated == true)
+            {
+                <a asp-controller="Conta"
+                   asp-action="Perfil">
+
+                    <i class="bi bi-person-circle"></i>
+
+                    Conta
+
+                </a>
+
+ 
+                @if (User.IsInRole("Admin"))
                 {
-                    <a asp-controller="Conta" asp-action="AccessDenied">
-                        Conta
-                    </a>
+                    <a asp-controller="Admin"
+                       asp-action="Index"
+                       class="admin-link">
 
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a asp-controller="Admin"
-                           asp-action="Index"
-                           class="admin-link">
-                            Admin
-                        </a>
-                    }
+                        <i class="bi bi-speedometer2"></i>
 
-                    <form asp-controller="Conta"
-                          asp-action="Logout"
-                          method="post"
-                          class="logout-form">
+                        Admin
 
-                        @Html.AntiForgeryToken()
-
-                        <button type="submit">
-                            Sair
-                        </button>
-
-                    </form>
-                }
-                else
-                {
-                    <a asp-controller="Conta" asp-action="Login">
-                        Conta
                     </a>
                 }
+
+ 
+                <form asp-controller="Conta"
+                      asp-action="Logout"
+                      method="post"
+                      class="logout-form">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit">
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Sair
+
+                    </button>
+
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Conta"
+                   asp-action="Login">
+
+                    <i class="bi bi-person-circle"></i>
+
+                    Conta
+
+                </a>
+            }
+
+ 
+            <a asp-controller="Favorito"
+               asp-action="Index">
 
                 <span class="favorite-icon">★</span>
 
-                <a asp-controller="Favorito" asp-action="Index">
-                    Favoritos
-                </a>
-                </div>
-                </header>
+                Favoritos
+
+            </a>
+
+        </div>
+
+    </header>
+
+ 
+    @* Navbar *@
+    <partial name="_Navbar" />
+
+ 
+    @* Conteúdo de cada página *@
     <main>
 
         @RenderBody()
 
     </main>
 
-
-
-
-    <main>
-        @RenderBody()
-    </main>
-
-
+ 
     <footer>
 
         <div class="footer-container">
 
             <div class="footer-box">
+
                 <h2>AJUDA</h2>
 
-                <a href="#">Fale conosco</a>
-                <a href="#">Políticas e Privacidade</a>
-                <a href="#">Termos de Aceite</a>
+                <a href="#">
+                    Fale conosco
+                </a>
+
+                <a href="#">
+                    Políticas e Privacidade
+                </a>
+
+                <a href="#">
+                    Termos de Aceite
+                </a>
+
             </div>
 
+ 
             <div class="footer-box">
+
                 <h2>DÚVIDAS</h2>
 
-                <a href="#">Entrega</a>
-                <a href="#">Garantia</a>
-                <a href="#">Como pagar</a>
+                <a href="#">
+                    Entrega
+                </a>
+
+                <a href="#">
+                    Garantia
+                </a>
+
+                <a href="#">
+                    Como pagar
+                </a>
+
             </div>
 
+ 
             <div class="footer-box">
+
                 <h2>PAGAMENTO</h2>
 
                 <p>PIX</p>
                 <p>VISA</p>
                 <p>MASTERCARD</p>
                 <p>BOLETO</p>
+
             </div>
 
         </div>
 
+ 
         <div class="copyright">
+
             © Desenvolvido Por Caramelo Tech - TI31
+
         </div>
 
     </footer>
 
-
+ 
     @RenderSection("Scripts", required: false)
 
-</body>
+ 
     <script src="~/js/menu.js"></script>
+
     <script src="~/js/carousel.js"></script>
+
+</body>
 
 </html>

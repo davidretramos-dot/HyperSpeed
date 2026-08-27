@@ -1,0 +1,117 @@
+﻿@using HyperSpeed.UI.Models
+@model PerfilViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Minha Conta";
+}
+
+<head>
+<link rel="stylesheet" href="~/css/site.css" />
+</head>
+<div class="perfilHS-page">
+
+    <div class="perfilHS-container">
+
+        <div class="perfilHS-header">
+
+            <span class="perfilHS-label">
+                HYPERSPEED / CONTA
+            </span>
+
+            <h1>Minha Conta</h1>
+
+            <p>
+                Consulte e gerencie as informações da sua conta.
+            </p>
+
+        </div>
+
+
+        <div class="perfilHS-card">
+
+            <div class="perfilHS-avatar">
+
+                <i class="bi bi-person-fill"></i>
+
+            </div>
+
+
+            <div class="perfilHS-info">
+
+                <div class="perfilHS-field">
+
+                    <span>Nome</span>
+
+                    <strong>
+                        @Model.Nome
+                    </strong>
+
+                </div>
+
+
+                <div class="perfilHS-field">
+
+                    <span>Email</span>
+
+                    <strong>
+                        @Model.Email
+                    </strong>
+
+                </div>
+
+
+                <div class="perfilHS-field">
+
+                    <span>Tipo de conta</span>
+
+                    <strong>
+                        @(Model.IsAdmin ? "Administrador" : "Cliente")
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="perfilHS-actions">
+
+            <a asp-controller="Conta"
+               asp-action="EditarPerfil"
+               class="perfilHS-btn perfilHS-btn-primary">
+
+                <i class="bi bi-pencil"></i>
+
+                Editar Perfil
+
+            </a>
+
+
+            <a asp-controller="Conta"
+               asp-action="EsqueciSenha"
+               class="perfilHS-btn">
+
+                <i class="bi bi-lock"></i>
+
+                Alterar Senha
+
+            </a>
+
+
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="perfilHS-btn">
+
+                <i class="bi bi-arrow-left"></i>
+
+                Voltar ao Site
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

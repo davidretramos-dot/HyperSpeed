@@ -4,6 +4,7 @@ using HyperSpeed.UI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeuProjeto.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HyperSpeed.UI.Controllers
 {
@@ -101,9 +102,27 @@ namespace HyperSpeed.UI.Controllers
 
         // Acesso negado
         [HttpGet]
-        public IActionResult AcessoNegado()
+        public IActionResult AcessDenied()
         {
             return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Perfil()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return RedirectToAction("Login");
+
+            var model = new PerfilViewModel
+            {
+                Nome = user.UserName ?? "",
+                Email = user.Email ?? "",
+                IsAdmin = User.IsInRole("Admin")
+            };
+
+            return View("~/Views/Account/Perfil.cshtml", model);
         }
     }
 }

@@ -4,13 +4,7 @@ using System.Collections.Generic;
 using hyperSpeed.Application.DTOs;
 
 namespace HyperSpeed.UI.Models
-{
-    internal class ProdutoListViewModel
-    {
-        public IEnumerable<CategoriasDTo> Categorias { get; set; }
-        public int? SelectedIdCategoria { get; set; }
-    }
-    namespace SeuProjeto.ViewModels
+
     {
         public class ProdutoListViewModel
         {
@@ -28,4 +22,3 @@ namespace HyperSpeed.UI.Models
         }
 
     }
-}

@@ -15,12 +15,6 @@ namespace hyperSpeed.Application.Services
             _ProdutoRepository = produtoRepository;
         }
 
-        public async Task<ProdutoDTo?> GetAllAsync(int id)
-        {
-            var Produto = await _ProdutoRepository.GetByIdAsync(id);
-            return Produto == null ? null : MapToDTo(Produto);
-        }
-
         public async Task<ProdutoDTo> CreateAsync(CriacaoProdutoDTo dto)
         {
             var produto = new Produto
@@ -80,11 +74,6 @@ namespace hyperSpeed.Application.Services
                 Estoque = produto.Estoque,
                 // Adicione outros campos conforme necessário
             };
-        }
-
-        public Task CreateAsync(CriacaoCategoriaDTo DTo)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<ProdutoDTo?> GetByIdAsync(int id)

@@ -21,7 +21,7 @@ namespace SeuProjeto.ViewModels
         [Required(ErrorMessage = "Informe o preço.")]
         [Display(Name = "Preço")]
         [Range(0.01, 999999.99)]
-        public decimal Preco { get; set; }
+        public int Preco { get; set; }
 
         [Required(ErrorMessage = "Informe a quantidade em estoque.")]
         [Display(Name = "Estoque")]

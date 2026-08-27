@@ -4,82 +4,80 @@ using System.Linq;
 using System.Threading.Tasks;
 using hyperSpeed.Application.DTOs;
 using hyperSpeed.Application.ViewModels;
-using HyperSpeed.Domain.Entities;
-using HyperSpeed.Domain.interfaces;
-using hyperSpeed.Application.Interfaces;
+using HyperSpeed.UI.Models;
+using HyperSpeed.UI.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeuProjeto.ViewModels;
-using HyperSpeed.UI.Models;
 
 namespace HyperSpeed.UI.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IProdutoService _produtoService;
-        private readonly ICategoriasService _categoriaService;
+        private readonly HttpProdutoService _produtoApi;
+        private readonly HttpCategoriaService _categoriaApi;
 
         public AdminController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            IProdutoService produtoService,
-            ICategoriasService categoriasService)
+            HttpProdutoService produtoApi,
+            HttpCategoriaService categoriaApi)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _produtoService = produtoService;
-            _categoriaService = categoriasService;
+            _produtoApi = produtoApi;
+            _categoriaApi = categoriaApi;
         }
 
-        // GET: /Admin (dashboard principal)
+        // ============================================================
+        // DASHBOARD
+        // ============================================================
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             ViewData["ActiveMenu"] = "Dashboard";
             ViewData["Title"] = "Painel Administrativo";
 
-            var totalProdutos = await _produtoService.CountAsync();
-            var totalCategorias = await _categoriaService.CountAsync();
+            var produtos = await _produtoApi.GetAllAsync();
+            var categorias = await _categoriaApi.GetAllAsync();
 
-            var allProdutos = await _produtoService.GetAllAsync();
-            var recent = allProdutos
+            var recent = produtos
                 .OrderByDescending(p => p.CriacaoAt)
                 .Take(5)
                 .ToList();
 
             var vm = new DashboardViewModel
             {
-                TotalProdutos = totalProdutos,
-                TotalCategorias = totalCategorias,
+                TotalProdutos = produtos.Count(),
+                TotalCategorias = categorias.Count(),
                 RecentProdutos = recent
             };
 
             return View(vm);
         }
 
-        // Produtos - lista
+        // ============================================================
+        // PRODUTOS
+        // ============================================================
+
         [HttpGet]
         public async Task<IActionResult> Produtos()
         {
             ViewData["ActiveMenu"] = "Produtos";
             ViewData["Title"] = "Gerenciar Produtos";
 
-            var produtos = await _produtoService.GetAllAsync();
+            var produtos = await _produtoApi.GetAllAsync();
+
             return View("~/Views/Admin/Produtos.cshtml", produtos);
         }
 
-        // GET: Admin/CreateProd
+        // Criar produto - GET
         [HttpGet]
         public async Task<IActionResult> CreateProd()
         {
             ViewData["ActiveMenu"] = "Produtos";
             ViewData["Title"] = "Inserir Novo Produto";
 
-            var categorias = await _categoriaService.GetAllAsync();
+            var categorias = await _categoriaApi.GetAllAsync();
+
             var viewModel = new ProdutoFormViewModel
             {
                 Categorias = categorias
@@ -88,14 +86,17 @@ namespace HyperSpeed.UI.Controllers
             return View(viewModel);
         }
 
-        // POST: Admin/CreateProd
+        // Criar produto - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateProd(ProdutoFormViewModel viewModel)
+        public async Task<IActionResult> CreateProd(
+            ProdutoFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Categorias = await _categoriaService.GetAllAsync();
+                viewModel.Categorias =
+                    await _categoriaApi.GetAllAsync();
+
                 return View(viewModel);
             }
 
@@ -110,22 +111,40 @@ namespace HyperSpeed.UI.Controllers
                 Destaque = viewModel.Destaque
             };
 
-            await _produtoService.CreateAsync(dto);
-            TempData["Success"] = "Produto cadastrado com sucesso";
+            var produto = await _produtoApi.CreateAsync(dto);
+
+            if (produto == null)
+            {
+                ModelState.AddModelError(
+                    "",
+                    "Não foi possível cadastrar o produto.");
+
+                viewModel.Categorias =
+                    await _categoriaApi.GetAllAsync();
+
+                return View(viewModel);
+            }
+
+            TempData["Success"] =
+                "Produto cadastrado com sucesso!";
+
             return RedirectToAction(nameof(Produtos));
         }
 
-        // GET: Admin/EditProd/5
+        // Editar produto - GET
         [HttpGet]
         public async Task<IActionResult> EditProd(int id)
         {
             ViewData["ActiveMenu"] = "Produtos";
             ViewData["Title"] = "Editar Produto";
 
-            var produto = await _produtoService.GetByIdAsync(id);
-            if (produto == null) return NotFound();
+            var produto = await _produtoApi.GetByIdAsync(id);
 
-            var categorias = await _categoriaService.GetAllAsync();
+            if (produto == null)
+                return NotFound();
+
+            var categorias = await _categoriaApi.GetAllAsync();
+
             var viewModel = new ProdutoFormViewModel
             {
                 Id = produto.Id,
@@ -142,14 +161,18 @@ namespace HyperSpeed.UI.Controllers
             return View(viewModel);
         }
 
-        // POST: Admin/EditProd/5
+        // Editar produto - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProd(int id, ProdutoFormViewModel viewModel)
+        public async Task<IActionResult> EditProd(
+            int id,
+            ProdutoFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Categorias = await _categoriaService.GetAllAsync();
+                viewModel.Categorias =
+                    await _categoriaApi.GetAllAsync();
+
                 return View(viewModel);
             }
 
@@ -164,47 +187,70 @@ namespace HyperSpeed.UI.Controllers
                 Destaque = viewModel.Destaque
             };
 
-            var result = await _produtoService.UpdateAsync(id, dto);
-            if (result == null) return NotFound();
+            var result =
+                await _produtoApi.UpdateAsync(id, dto);
 
-            TempData["Success"] = "Produto atualizado com sucesso!";
+            if (result == null)
+                return NotFound();
+
+            TempData["Success"] =
+                "Produto atualizado com sucesso!";
+
             return RedirectToAction(nameof(Produtos));
         }
 
-        // GET: Admin/DeleteProd/5
+        // Excluir produto - GET
         [HttpGet]
         public async Task<IActionResult> DeleteProd(int id)
         {
             ViewData["ActiveMenu"] = "Produtos";
             ViewData["Title"] = "Excluir Produto";
 
-            var produto = await _produtoService.GetByIdAsync(id);
-            if (produto == null) return NotFound();
+            var produto = await _produtoApi.GetByIdAsync(id);
+
+            if (produto == null)
+                return NotFound();
 
             return View(produto);
         }
 
-        // POST: Admin/DeleteProdConfirmed/5
+        // Excluir produto - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteProdConfirmed(int id)
         {
-            await _produtoService.DeleteAsync(id);
-            TempData["Success"] = "Produto excluído com sucesso!";
+            var sucesso = await _produtoApi.DeleteAsync(id);
+
+            if (!sucesso)
+            {
+                TempData["Error"] =
+                    "Não foi possível excluir o produto.";
+
+                return RedirectToAction(nameof(Produtos));
+            }
+
+            TempData["Success"] =
+                "Produto excluído com sucesso!";
+
             return RedirectToAction(nameof(Produtos));
         }
 
-        // Categorias - lista
+        // ============================================================
+        // CATEGORIAS
+        // ============================================================
+
         [HttpGet]
         public async Task<IActionResult> Categorias()
         {
             ViewData["ActiveMenu"] = "Categorias";
             ViewData["Title"] = "Gerenciar Categorias";
 
-            var categorias = await _categoriaService.GetAllAsync();
+            var categorias = await _categoriaApi.GetAllAsync();
+
             return View(categorias);
         }
 
+        // Criar categoria - GET
         [HttpGet]
         public IActionResult CreateCategoria()
         {
@@ -214,181 +260,130 @@ namespace HyperSpeed.UI.Controllers
             return View();
         }
 
+        // Criar categoria - POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCategoria(
+            CategoriaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var dto = new CriacaoCategoriaDTo
+            {
+                Nome = model.Nome
+            };
+
+            var categoria =
+                await _categoriaApi.CreateAsync(dto);
+
+            if (categoria == null)
+            {
+                ModelState.AddModelError(
+                    "",
+                    "Não foi possível cadastrar a categoria.");
+
+                return View(model);
+            }
+
+            TempData["Success"] =
+                "Categoria cadastrada com sucesso!";
+
+            return RedirectToAction(nameof(Categorias));
+        }
+
+        // Editar categoria - GET
         [HttpGet]
         public async Task<IActionResult> EditCategoria(int id)
         {
-            ViewData["ActiveMenu"] = "Categories";
+            ViewData["ActiveMenu"] = "Categorias";
             ViewData["Title"] = "Editar Categoria";
 
-            var category = await _categoriaService.GetByIdAsync(id);
+            var categoria =
+                await _categoriaApi.GetByIdAsync(id);
 
-            if (category == null)
+            if (categoria == null)
                 return NotFound();
 
             var model = new AtualizacaoCategoriaDTo
             {
-                Id = category.Id,
-                Nome = category.Nome
+                Id = categoria.Id,
+                Nome = categoria.Nome
             };
 
             return View(model);
         }
+
+        // Editar categoria - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCategoria(AtualizacaoCategoriaDTo model)
+        public async Task<IActionResult> EditCategoria(
+            AtualizacaoCategoriaDTo model)
         {
-            ViewData["ActiveMenu"] = "Categories";
+            ViewData["ActiveMenu"] = "Categorias";
             ViewData["Title"] = "Editar Categoria";
 
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             if (model.Id == null)
-            {
                 return NotFound();
-            }
 
-            var categoria = await _categoriaService.UpdateAsync(
-                model.Id.Value,
-                model
-            );
+            var categoria =
+                await _categoriaApi.UpdateAsync(
+                    model.Id.Value,
+                    model);
 
             if (categoria == null)
-            {
                 return NotFound();
-            }
+
+            TempData["Success"] =
+                "Categoria atualizada com sucesso!";
 
             return RedirectToAction(nameof(Categorias));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCategoria(CategoriaViewModel model)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            // Se existir um método de criação no serviço, use-o:
-            if (_categoriaService is not null)
-            {
-                // tenta usar um método CreateAsync se disponível
-                try
-                {
-                    await _categoriaService.CreateAsync(new CriacaoCategoriaDTo { Nome = model.Nome });
-                }
-                catch
-                {
-                    // fallback: apenas redireciona se serviço não suportar operação
-                }
-            }
-
-            TempData["Success"] = "Categoria cadastrada com sucesso!";
-            return RedirectToAction(nameof(Categorias));
-        }
-
+        // Excluir categoria
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteCategoria(int id)
         {
-            var deleted = await _categoriaService.DeleteAsync(id);
+            var deleted =
+                await _categoriaApi.DeleteAsync(id);
+
             if (!deleted)
             {
-                TempData["Error"] = "Não foi possível excluir a categoria. Verifique se há produtos associados.";
+                TempData["Error"] =
+                    "Não foi possível excluir a categoria. " +
+                    "Verifique se há produtos associados.";
+
                 return RedirectToAction(nameof(Categorias));
             }
 
-            TempData["Success"] = "Categoria excluída com sucesso!";
+            TempData["Success"] =
+                "Categoria excluída com sucesso!";
+
             return RedirectToAction(nameof(Categorias));
         }
 
-        // Usuários
+        // ============================================================
+        // USUÁRIOS
+        // ============================================================
+
         [HttpGet]
         public IActionResult Usuarios()
         {
             return View();
         }
 
-        // Pedidos
+        // ============================================================
+        // PEDIDOS
+        // ============================================================
+
         [HttpGet]
         public IActionResult Pedidos()
         {
             return View();
         }
-
-        // Autenticação API endpoints (login/register/logout/me)
-        [HttpPost("register")]
-        [AllowAnonymous]
-        public async Task<ActionResult> Register([FromBody] RegistoDto dto)
-        {
-            if (dto.Senha != dto.ConfirmarSenha)
-                return BadRequest(new { message = "As senhas não coincidem." });
-
-            var user = new IdentityUser
-            {
-                UserName = dto.Email,
-                Email = dto.Email
-            };
-
-            var result = await _userManager.CreateAsync(user, dto.Senha);
-
-            if (!result.Succeeded)
-            {
-                var errors = result.Errors.Select(e => e.Description);
-                return BadRequest(new { message = "Erro ao registrar usuário.", errors });
-            }
-
-            return Ok(new { message = "Usuário registrado com sucesso." });
-        }
-
-        [HttpPost("login")]
-        [AllowAnonymous]
-        public async Task<ActionResult> Login([FromBody] LoginDto dto)
-        {
-            var result = await _signInManager.PasswordSignInAsync(
-                dto.Email, dto.Senha, isPersistent: false, lockoutOnFailure: false);
-
-            if (!result.Succeeded)
-                return Unauthorized(new { message = "Email ou senha inválidos." });
-
-            var user = await _userManager.FindByEmailAsync(dto.Email);
-            var roles = await _userManager.GetRolesAsync(user!);
-
-            return Ok(new UsuarioDto
-            {
-                Id = user!.Id,
-                Email = user.Email!,
-                Regras = roles
-            });
-        }
-
-        [HttpPost("logout")]
-        public async Task<ActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return Ok(new { message = "Logout realizado com sucesso!" });
-        }
-
-        [HttpGet("me")]
-        public async Task<ActionResult<UsuarioDto>> Me()
-        {
-            var user = await _userManager.GetUserAsync(User);
-
-            if (user == null)
-                return Unauthorized(new { message = "Usuário não autenticado." });
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            return Ok(new UsuarioDto
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Regras = roles
-            });
-        }
-
-        
     }
 }
-    

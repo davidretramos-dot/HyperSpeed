@@ -8,7 +8,7 @@
 // - API: retorna JSON (dados) — AddControllers()
 // - MVC: retorna HTML (páginas) — AddControllersWithViews()
 // =============================================================================
-
+using HyperSpeed.UI.Services;
 using hyperSpeed.Application.Interfaces;
 using hyperSpeed.Application.Services;
 using HyperSpeed.Domain.interfaces;
@@ -72,6 +72,15 @@ builder.Services.AddScoped<ICategoriasService, CategoriasService>();
 //AddControllersWithViews: Configura o ASP.NET Core para usar o padrão MVC,
 //permitindo retornar páginas HTML renderizadas (Razor Views) a partir dos controladores.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<HttpProdutoService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5153/");
+});
+
+builder.Services.AddHttpClient<HttpCategoriaService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5153/");
+});
 
 //Cria a aplicação a partir do Builder configurado
 var app = builder.Build();

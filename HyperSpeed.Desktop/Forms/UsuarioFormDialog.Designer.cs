@@ -71,6 +71,7 @@
             btnCancelar.Size = new Size(105, 34);
             btnCancelar.TabIndex = 13;
             btnCancelar.Text = "Cancelar";
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnSalvar
             // 
@@ -86,6 +87,7 @@
             btnSalvar.Size = new Size(105, 34);
             btnSalvar.TabIndex = 14;
             btnSalvar.Text = "Salvar";
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // cmbPerfil
             // 
@@ -251,7 +253,6 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "UsuarioFormDialog";
             Text = "UsuarioFormDialog";
-            Load += UsuarioFormDialog_Load;
             ResumeLayout(false);
         }
 

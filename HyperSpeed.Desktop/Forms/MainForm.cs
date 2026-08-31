@@ -150,5 +150,10 @@ namespace HyperSpeed.Desktop.Forms
         private void btnUsuarios_Click(object sender, EventArgs e) => Navegar(new UsuariosUserControl(), btnUsuarios);
 
         private void btnPerfil_Click(object sender, EventArgs e) => Navegar(new PerfilUserControl(), btnPerfil);
+
+        private void pnlConteudo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

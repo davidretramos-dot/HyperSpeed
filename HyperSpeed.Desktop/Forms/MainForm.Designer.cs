@@ -270,7 +270,7 @@
             pnlConteudo.BackColor = Color.FromArgb(15, 15, 15);
             pnlConteudo.Location = new Point(209, 109);
             pnlConteudo.Name = "pnlConteudo";
-            pnlConteudo.Size = new Size(651, 496);
+            pnlConteudo.Size = new Size(802, 496);
             pnlConteudo.TabIndex = 9;
             // 
             // pnlHeader
@@ -280,7 +280,7 @@
             pnlHeader.Controls.Add(lblTituloApp);
             pnlHeader.Location = new Point(209, 3);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(651, 100);
+            pnlHeader.Size = new Size(802, 100);
             pnlHeader.TabIndex = 10;
             // 
             // btnLogout
@@ -295,7 +295,7 @@
             btnLogout.FillColor = Color.Maroon;
             btnLogout.Font = new Font("Segoe UI", 9F);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(547, 37);
+            btnLogout.Location = new Point(693, 37);
             btnLogout.Name = "btnLogout";
             btnLogout.ShadowDecoration.CustomizableEdges = customizableEdges12;
             btnLogout.Size = new Size(90, 33);
@@ -325,7 +325,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 21, 21);
-            ClientSize = new Size(966, 613);
+            ClientSize = new Size(1023, 613);
             Controls.Add(pnlHeader);
             Controls.Add(pnlConteudo);
             Controls.Add(pnlLogo);

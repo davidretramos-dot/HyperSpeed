@@ -1,0 +1,135 @@
+﻿@model IEnumerable<CategoriasDTo>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gerenciar Categorias";
+}
+
+<div class="admin-content">
+
+    <div class="admin-header">
+
+        <div>
+            <span class="admin-eyebrow">HYPERSPEED / ADMIN</span>
+            <h1>Categorias</h1>
+        </div>
+
+        <a asp-controller="Categorias"
+           asp-action="Create"
+           class="admin-btn">
+
+            <i class="bi bi-plus-lg"></i>
+            Nova Categoria
+
+        </a>
+
+    </div>
+
+ 
+    @if (TempData["Sucesso"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Sucesso"]
+        </div>
+    }
+
+ 
+    <div class="admin-search mb-4">
+
+        <i class="bi bi-search"></i>
+
+        <input type="text"
+               class="form-control"
+               placeholder="Pesquisar categoria..." />
+
+    </div>
+
+ 
+    @if (Model != null && Model.Any())
+    {
+        <div class="admin-table-container">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+
+                </thead>
+
+ 
+                <tbody>
+
+                    @foreach (var categoria in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                #@categoria.Id
+                            </td>
+
+                            <td>
+                                <strong>@categoria.Nome</strong>
+                            </td>
+
+                            <td class="admin-actions">
+
+                                <a asp-controller="Categorias"
+                                   asp-action="Edit"
+                                   asp-route-id="@categoria.Id"
+                                   class="btn-editar">
+
+                                    <i class="bi bi-pencil-square"></i>
+                                    Editar
+
+                                </a>
+
+ 
+                                <form asp-controller="Categorias"
+                                      asp-action="Delete"
+                                      asp-route-id="@categoria.Id"
+                                      method="post"
+                                      class="delete-form">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit"
+                                            class="btn-excluir"
+                                            onclick="return confirm('Deseja realmente excluir esta categoria?')">
+
+                                        <i class="bi bi-trash"></i>
+                                        Excluir
+
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+    }
+    else
+    {
+        <div class="admin-empty">
+
+            <i class="bi bi-folder-x"></i>
+
+            <h3>Nenhuma categoria encontrada</h3>
+
+            <p>Cadastre uma categoria para começar.</p>
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,154 @@
+﻿@using HyperSpeed.UI.Models
+@using System.Linq
+@model ProdutoListViewModel
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Gerenciar Produtos";
+}
+
+<div class="admin-page-header">
+
+    <div>
+
+        <span class="admin-page-label">
+            HYPERSPEED / PRODUTOS
+        </span>
+
+        <h1>Produtos</h1>
+
+        <p class="admin-page-description">
+            Gerencie os produtos cadastrados na loja.
+        </p>
+
+    </div>
+
+
+    <a asp-controller="Admin"
+       asp-action="CreateProd"
+       class="admin-btn">
+
+        <i class="bi bi-plus-lg"></i>
+        Novo Produto
+
+    </a>
+
+</div>
+
+
+<div class="admin-search">
+
+    <input type="text"
+           placeholder="Pesquisar produto..." />
+
+</div>
+
+
+<div class="admin-panel">
+
+    <div class="admin-table-wrapper">
+
+        <table class="admin-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Imagem</th>
+                    <th>Produto</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @if (Model?.Produtos != null && Model.Produtos.Any())
+                {
+
+                    @foreach (var produto in Model.Produtos)
+                    {
+
+                        <tr>
+
+                            <td>
+
+                                <img src="@produto.Imagem"
+                                     class="produto-admin-img"
+                                     alt="@produto.Nome" />
+
+                            </td>
+
+                            <td>
+
+                                <strong>
+                                    @produto.Nome
+                                </strong>
+
+                            </td>
+
+                            <td>
+                                @(produto.Categorias?.FirstOrDefault()?.Nome ?? "—")
+                            </td>
+
+                            <td>
+                                R$ @produto.Preco.ToString("N2")
+                            </td>
+
+                            <td>
+                                @produto.Estoque
+                            </td>
+
+                            <td>
+
+                                <a asp-controller="ProdutoAdmin"
+                                   asp-action="Edit"
+                                   asp-route-id="@produto.Id"
+                                   class="btn-editar">
+
+                                    Editar
+
+                                </a>
+
+                                <a asp-controller="ProdutoAdmin"
+                                   asp-action="Delete"
+                                   asp-route-id="@produto.Id"
+                                   class="btn-excluir">
+
+                                    Excluir
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+                }
+                else
+                {
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            Nenhum produto encontrado.
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

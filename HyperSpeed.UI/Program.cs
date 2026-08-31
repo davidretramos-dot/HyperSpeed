@@ -72,6 +72,18 @@ builder.Services.AddScoped<ICategoriasService, CategoriasService>();
 //AddControllersWithViews: Configura o ASP.NET Core para usar o padrão MVC,
 //permitindo retornar páginas HTML renderizadas (Razor Views) a partir dos controladores.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient("HyperSpeedAPI", client =>
+
+{
+
+    client.BaseAddress = new Uri(
+
+        builder.Configuration["ApiSettings:BaseUrl"]!
+
+    );
+
+});
+
 builder.Services.AddHttpClient<HttpProdutoService>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5153/");

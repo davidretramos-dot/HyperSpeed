@@ -1,43 +1,131 @@
 @{
-    Layout = "_Layout";
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
 }
 
-<div class="admin-layout d-flex">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <aside class="admin-sidebar p-3" style="min-width:220px;">
-        <h4 class="mb-3">ADMIN</h4>
+<head>
 
-        <nav class="nav flex-column">
-            <a asp-controller="Admin" asp-action="Index" class="nav-link">Dashboard</a>
-            <a asp-controller="Admin" asp-action="Produtos" class="nav-link">Produtos</a>
-            <a asp-controller="Admin" asp-action="Categorias" class="nav-link">Categorias</a>
-            <a asp-controller="Pedido" asp-action="Index" class="nav-link">Pedidos</a>
-            <a asp-controller="Home" asp-action="Index" class="nav-link">Voltar ao Site</a>
-        </nav>
-    </aside>
+    <meta charset="utf-8" />
 
-    <main class="admin-main flex-fill p-4">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h1 class="h4">@ViewData["Title"]</h1>
-                @if (ViewData["Subtitle"] != null)
-                {
-                    <small class="text-muted">@ViewData["Subtitle"]</small>
-                }
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - HyperSpeed Admin</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+</head>
+
+<body class="admin-body">
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+
+            <div class="admin-brand">
+
+                <div class="admin-brand-icon">
+                    <i class="bi bi-speedometer2"></i>
+                </div>
+
+                <div>
+                    <strong>HYPER</strong>
+                    <strong>SPEED</strong>
+                </div>
+
             </div>
 
-            <div class="admin-actions">
-                <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary me-2">
-                    <i class="bi bi-speedometer2"></i> Ir para Dashboard
+
+            <div class="admin-divider"></div>
+
+
+            <div class="admin-menu-title">
+                ADMINISTRAÇÃO
+            </div>
+
+
+            <nav class="admin-menu">
+
+                <a asp-controller="Admin"
+                   asp-action="Index"
+                   class="@(controller == "Admin" && action == "Index" ? "active" : "")">
+
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Dashboard</span>
+
                 </a>
-                <a asp-controller="Admin" asp-action="CreateProd" class="btn btn-primary me-2">Novo Produto</a>
-                <a asp-controller="Admin" asp-action="CreateCategoria" class="btn btn-outline-primary">Nova Categoria</a>
+
+
+                <a asp-controller="Produto" asp-action="Index"
+                   class="@(controller == "Produto" ? "active" : "")">
+                    <i class="bi bi-box-seam-fill"></i><span>Produtos</span>
+                </a>
+                <a asp-controller="Categoria" asp-action="Index"
+                   class="@(controller == "Categoria" ? "active" : "")">
+                    <i class="bi bi-tags-fill"></i><span>Categorias</span>
+                </a>
+
+
+
+                <a asp-controller="Pedido"
+                   asp-action="Index"
+                   class="@(controller == "Pedido" ? "active" : "")">
+
+                    <i class="bi bi-cart-fill"></i>
+                    <span>Pedidos</span>
+
+                </a>
+
+            </nav>
+
+
+            <div class="admin-sidebar-bottom">
+
+                <a asp-controller="Home"
+                   asp-action="Index">
+
+                    <i class="bi bi-arrow-left-circle-fill"></i>
+
+                    <span>Voltar ao Site</span>
+
+                </a>
+
             </div>
-        </div>
 
-        @RenderBody()
-    </main>
-</div>
+        </aside>
 
-@RenderSection("Scripts", required: false)
 
+        <!-- CONTEÚDO -->
+        <main class="admin-main">
+
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

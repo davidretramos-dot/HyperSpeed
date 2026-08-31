@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace SeuProjeto.ViewModels
+namespace HyperSpeed.ViewModels
 {
     public class CategoriaViewModel
     {

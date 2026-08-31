@@ -105,7 +105,7 @@ namespace HyperSpeed.UI.Controllers
 
             ViewBag.Categorias = categorias;
 
-            return View(new ProdutoViewModel());
+            return View("~Views/Admin/CreateProd.cshtml",new ProdutoViewModel());
         }
 
         // Cadastro
@@ -118,7 +118,7 @@ namespace HyperSpeed.UI.Controllers
                 ViewBag.Categorias =
                     await _categoriaApi.GetAllAsync();
 
-                return View(model);
+                return View("~Views/Admin/CreateProd.cshtml",model);
             }
 
             var dto = new CriacaoProdutoDTo
@@ -174,7 +174,7 @@ namespace HyperSpeed.UI.Controllers
                 ImagemUrl = produto.ImagemUrl
             };
 
-            return View(model);
+            return View("~Views/Admin/EditProd.cshtml", model);
         }
 
         // Atualização
@@ -189,7 +189,7 @@ namespace HyperSpeed.UI.Controllers
                 ViewBag.Categorias =
                     await _categoriaApi.GetAllAsync();
 
-                return View(model);
+                return View("~Views/Admin/EditProd.cshtml", model);
             }
 
             var dto = new AutualizacaoProdutoDTo

@@ -1,5 +1,4 @@
 using HyperSpeed.Domain.Entities;
-using SeuProjeto.ViewModels;
 using System.Collections.Generic;
 using hyperSpeed.Application.DTOs;
 

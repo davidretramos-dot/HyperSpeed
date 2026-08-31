@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="HyperSpeed.API/HyperSpeed.API.csproj" />
   <Project Path="hyperSpeed.Application/hyperSpeed.Application.csproj" />
+  <Project Path="HyperSpeed.Desktop/HyperSpeed.Desktop.csproj" Id="7d9ad998-d416-4b4a-afb9-71403a6ef0c9" />
   <Project Path="HyperSpeed.Infrastruture/HyperSpeed.Infrastructure.csproj" />
   <Project Path="HyperSpeed.UI/HyperSpeed.UI.csproj" />
   <Project Path="HyperSpeed/HyperSpeed.Domain.csproj" />

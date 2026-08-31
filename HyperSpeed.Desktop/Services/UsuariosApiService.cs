@@ -1,0 +1,83 @@
+﻿using HyperSpeed.Desktop.DTOs;
+using HyperSpeed.Desktop.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace HyperSpeed.Desktop.Services
+{
+    public class UsuariosApiService
+    {
+        private readonly HttpClientHelper _http;
+
+        public UsuariosApiService()
+        {
+            _http = HttpClientHelper.Instance;
+        }
+
+        public async Task<List<UsuarioResponseDto>> GetAllAsync()
+        {
+            try
+            {
+                var usuarios = await _http.GetAsync<List<UsuarioResponseDto>>("/api/usuarios");
+                return usuarios ?? new List<UsuarioResponseDto>();
+            }
+            catch
+            {
+                return new List<UsuarioResponseDto>();
+            }
+        }
+
+        public async Task<(bool Success, UsuarioResponseDto? Usuario, string ErrorMessage)> CreateAsync(CreateUsuarioDto dto)
+        {
+            try
+            {
+                var (success, usuario, errorMessage) = await _http.PostAsync<UsuarioResponseDto>("/api/usuarios", dto);
+                return (success, usuario, errorMessage);
+            }
+            catch (Exception ex) 
+            {
+                return (false, null, ex.Message);
+            }
+        }
+
+        public async Task<(bool Success, UsuarioResponseDto? Usuario, string ErrorMessage)> UpdateAsync(string id, UpdateUsuarioDto dto)
+        {
+            try
+            {
+                var (success, data, errorMessage) = await _http.PutAsync<UsuarioResponseDto>($"/api/usuarios/{id}", dto);
+                return (success, data, errorMessage);
+            }
+            catch (Exception ex)
+            {
+                return (false, null, ex.Message);
+            }
+        }
+
+        public async Task<(bool Success, string ErrorMessage)> DeleteAsync(string id)
+        {
+            try
+            {
+                await _http.DeleteAsync($"/api/usuarios/{id}");
+                return (true, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message);
+            }
+        }
+
+        public async Task<List<string>> GetPerfisAsync()
+        {
+            try
+            {
+                var perfis = await _http.GetAsync<List<string>>("/api/usuarios/perfis");
+                return perfis ?? new List<string>();
+            }
+            catch
+            {
+                return new List<string>();
+            }
+        }
+    }
+}

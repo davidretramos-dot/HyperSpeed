@@ -14,14 +14,20 @@ namespace HyperSpeed.Desktop.Services
         {
             _http = HttpClientHelper.Instance;
         }
-                
+
         public async Task<(bool Success, UserResponseDto? User, string ErrorMessage)>
-            LoginAsync(string email, string password)
+     LoginAsync(string email, string password)
         {
+            // ✅ Normaliza o email para MAIÚSCULAS (compatível com ASP.NET Identity)
+            var normalizedEmail = email?.ToUpperInvariant() ?? string.Empty;
+
+            System.Diagnostics.Debug.WriteLine($"[AUTH SERVICE] Email recebido: '{email}'");
+            System.Diagnostics.Debug.WriteLine($"[AUTH SERVICE] Email normalizado: '{normalizedEmail}'");
+
             var loginDto = new LoginRequestDto
             {
-                Email = email,
-                Password = password
+                Email = normalizedEmail,      // ✅ Sincronizado com API
+                Senha = password              // ✅ Sincronizado com API (Senha, não Password)
             };
 
             var (success, data, error) = await _http.PostAsync<UserResponseDto>(
@@ -48,8 +54,8 @@ namespace HyperSpeed.Desktop.Services
             var registerDto = new RegisterRequestDto
             {
                 Email = email,
-                Password = password,
-                ConfirmPassword = confirmPassword
+                Senha = password,
+                ConfirmarSenha = confirmPassword
             };
             var (success, _, error) = await _http.PostAsync<object>(
                 "/api/auth/register", registerDto);

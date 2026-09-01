@@ -12,21 +12,21 @@ namespace HyperSpeed.Desktop.Helpers
         private static bool _resolved = false;
         private const string ApiProjectName = "HyperSpeed.API";
 
-        private const string LaunchSettingsRelativePath = $"{ApiProjectName}/Properties/lauchSetting.json";
+        private const string LaunchSettingsRelativePath = $"{ApiProjectName}/Properties/launchSettings.json";
 
-        private static readonly string[] PreferredProfiles = ["http", "https", "IIS Express"];
+        private static readonly string[] PreferredProfiles = new[] { "http", "https", "IIS Express" };
 
         public static string? Resolve()
         {
             if (_resolved) return _resolvedUrl;
             _resolved = true;
 
-            var fromLauchSettings = TryResolveFromAppSettings();
-            if (fromLauchSettings != null)
+            var fromLaunchSettings = TryResolveFromLaunchSettings();
+            if (fromLaunchSettings != null)
             {
-                _resolvedUrl = fromLauchSettings;
-                Log($"Api localizada em: {_resolved}");
-                Log($"Origem: lauchSettings.json do {ApiProjectName}");
+                _resolvedUrl = fromLaunchSettings;
+                Log($"Api localizada em: {_resolvedUrl}");
+                Log($"Origem: launchSettings.json do {ApiProjectName}");
                 return _resolvedUrl;
             }
 

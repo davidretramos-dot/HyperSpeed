@@ -40,71 +40,7 @@ namespace HyperSpeed.Desktop.Forms
 
         private async void btnEntrar_Click(object sender, EventArgs e)
         {
-            //Limpa erros anteriores
-            ExibirErro(string.Empty);
-
-            //Validação dos campos
-            if (string.IsNullOrWhiteSpace(txtEmail.Text))
-            {
-                ExibirErro("⚠️ Informe seu e-mail!");
-                txtEmail.Focus();
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtSenha.Text))
-            {
-                ExibirErro("⚠️ Informe sua senha!");
-                txtSenha.Focus();
-                return;
-            }
-
-            // ===================== Estado de carregamento ======================
-            SetCarregando(true);
-
-            try
-            {
-                // Chamada da API
-                var (success, user, errorMessage) = await _authService.LoginAsync(
-                    txtEmail.Text.Trim(),
-                    txtSenha.Text);
-
-                if (success && user != null)
-                {
-                    // Armazena os dados do usuário na sessão (Singleton)
-                    SessionManager.Instance.SetUser(user);
-
-                    // Esconde a tela de login
-                    this.Hide();
-
-                    //Abrir a tela principal da aplicação
-                    using var mainform = new MainForm();
-                    mainform.ShowDialog();
-
-                    // quando o MainForm fechar. fecha o LoginForm também
-                    this.Close();
-                }
-                else
-                {
-                    ExibirErro($"❌ {errorMessage}");
-                    MessageBox.Show($"❌ {errorMessage}");
-                }
-
-            }
-            catch (HttpRequestException exHttp)
-            {
-                ExibirErro($"❌ Não foi possível conectar à API. \nVerifique se a API está em execução erro do sistema: {exHttp.Message}");
-                MessageBox.Show($"❌ Não foi possível conectar à API. \nVerifique se a API está em execução erro do sistema: {exHttp.Message}");
-            }
-            catch (Exception ex)
-            {
-                ExibirErro($"❌ Erro inesperado: {ex.Message}");
-                MessageBox.Show($"❌ Erro inesperado: {ex.Message}");
-            }
-            finally
-            {
-                SetCarregando(false);
-            }
-
+           
         }
 
         private void ExibirErro(string mensagem)
@@ -146,7 +82,71 @@ namespace HyperSpeed.Desktop.Forms
 
         private void txtSenha_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) btnEntrar_Click(sender, e);
+            if (e.KeyCode == Keys.Enter) btnEntrar_Click_1(sender, e);
+        }
+
+        private async void btnEntrar_Click_1(object sender, EventArgs e)
+        {
+            ExibirErro(string.Empty);
+
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                ExibirErro("⚠️ Informe seu e-mail!");
+                txtEmail.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtSenha.Text))
+            {
+                ExibirErro("⚠️ Informe sua senha!");
+                txtSenha.Focus();
+                return;
+            }
+
+            SetCarregando(true);
+
+            try
+            {
+                var email = txtEmail.Text.Trim();
+                var senha = txtSenha.Text.Trim();
+
+                // 🔍 DEBUG: Log dos dados sendo enviados
+                System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] Email: '{email}' (length: {email.Length})");
+                System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] Senha: '{senha}' (length: {senha.Length})");
+                System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] API Base URL: {AppConfig.ApiBaseUrl}");
+
+                var (success, user, errorMessage) = await _authService.LoginAsync(email, senha);
+
+                if (success && user != null)
+                {
+                    SessionManager.Instance.SetUser(user);
+                    this.Hide();
+                    using var mainform = new MainForm();
+                    mainform.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    ExibirErro($"❌ {errorMessage}");
+                    System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] Erro: {errorMessage}");
+                    MessageBox.Show($"❌ {errorMessage}");
+                }
+            }
+            catch (HttpRequestException exHttp)
+            {
+                ExibirErro($"❌ Não foi possível conectar à API. \nVerifique se a API está em execução erro do sistema: {exHttp.Message}");
+                MessageBox.Show($"❌ Não foi possível conectar à API. \nVerifique se a API está em execução erro do sistema: {exHttp.Message}");
+            }
+            catch (Exception ex)
+            {
+                ExibirErro($"❌ Erro inesperado: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] Erro inesperado: {ex}");
+                MessageBox.Show($"❌ Erro inesperado: {ex.Message}");
+            }
+            finally
+            {
+                SetCarregando(false);
+            }
         }
     }
 }

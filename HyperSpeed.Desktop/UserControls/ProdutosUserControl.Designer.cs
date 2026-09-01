@@ -155,6 +155,8 @@
             btnPesquisar.Size = new Size(93, 44);
             btnPesquisar.TabIndex = 1;
             btnPesquisar.Text = "🔎 Pesquisar";
+            btnPesquisar.Click += btnPesquisar_Click;
+            btnPesquisar.KeyUp += btnPesquisar_KeyUp;
             // 
             // btnAtualizar
             // 
@@ -173,7 +175,7 @@
             btnAtualizar.Size = new Size(90, 41);
             btnAtualizar.TabIndex = 1;
             btnAtualizar.Text = "🔄️ Atualizar";
-       
+
             // 
             // btnExcluir
             // 
@@ -192,6 +194,7 @@
             btnExcluir.Size = new Size(90, 41);
             btnExcluir.TabIndex = 1;
             btnExcluir.Text = "🗑️ Excluir";
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnEditar
             // 
@@ -210,6 +213,7 @@
             btnEditar.Size = new Size(90, 41);
             btnEditar.TabIndex = 1;
             btnEditar.Text = "✏️ Editar";
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnNova
             // 
@@ -228,6 +232,7 @@
             btnNova.Size = new Size(90, 41);
             btnNova.TabIndex = 1;
             btnNova.Text = "+ Novo Game";
+            btnNova.Click += btnNova_Click;
             // 
             // lblTitulo
             // 

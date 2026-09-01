@@ -68,5 +68,22 @@ namespace HyperSpeed.Desktop.UserControls
                 SetCarregando(false);
             }
         }
+
+        private void AtualizarNumeroCard(Guna.UI2.WinForms.Guna2Panel card, string numero)
+        {
+            var lblNumero = card.Controls.OfType<Label>().FirstOrDefault(l => l.Tag?.ToString() == "Numero");
+            if (lblNumero != null)
+            {
+                lblNumero.Text = numero;
+            }
+        }
+
+        private void SetCarregando(bool carregando)
+        {
+            lblCarregando.Visible = carregando;
+            gridUltimosGames.Enabled = !carregando;
+            cardGames.Enabled = !carregando;
+            cardCategorias.Enabled = !carregando;
+        }
     }
 }

@@ -164,6 +164,7 @@
             btnEntrar.Size = new Size(349, 38);
             btnEntrar.TabIndex = 13;
             btnEntrar.Text = "Entrar";
+            btnEntrar.Click += btnEntrar_Click_1;
             // 
             // pnSeparador
             // 

@@ -95,6 +95,8 @@ namespace HyperSpeed.Desktop.Helpers
             try
             {
                 var json = JsonSerializer.Serialize(body);
+                System.Diagnostics.Debug.WriteLine($"[POST {endpoint}] JSON Enviado: {json}");  // 👈 NOVO LOG
+
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await _client.PostAsync(endpoint, content);

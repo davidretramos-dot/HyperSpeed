@@ -1,10 +1,10 @@
-using System.Threading.Tasks;
 using hyperSpeed.Application.DTOs;
-using HyperSpeed.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using SeuProjeto.ViewModels;
-using Microsoft.AspNetCore.Authorization;
+using hyperSpeed.Application.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace HyperSpeed.UI.Controllers
 {

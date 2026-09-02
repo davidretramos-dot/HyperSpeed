@@ -1,28 +1,59 @@
 ﻿using hyperSpeed.Application.ViewModels;
-using hyperSpeed.Application.Interfaces;
+
+using HyperSpeed.UI.Services;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace HyperSpeed.UI.Controllers
-{
-    public class HomeController : Controller
-    {
-        private readonly IProdutoService _produtoService;
-        private readonly ICategoriasService _categoriasService;
 
-        public HomeController(IProdutoService produtoService, ICategoriasService categoriasService)
+{
+
+    public class HomeController : Controller
+
+    {
+
+        private readonly HttpProdutoService _produtoApi;
+
+        public HomeController(
+
+            HttpProdutoService produtoApi)
+
         {
-            _produtoService = produtoService;
-            _categoriasService = categoriasService;
+
+            _produtoApi = produtoApi;
+
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var viewModel = new HomeViewModels
+            var produtos =
+                (await _produtoApi.GetAllAsync())
+                .ToList();
+
+            var destaques = produtos
+                .Where(p => p.Destaque)
+                .Take(4)
+                .ToList();
+
+            if (!destaques.Any())
             {
-                Categorias = await _categoriasService.GetAllAsync(),
-                ProdutosRecentes = await _produtoService.GetAllAsync(),
+                destaques = produtos
+                    .Take(4)
+                    .ToList();
+            }
+
+            var model = new HomeViewModels
+            {
+                Produtos = produtos,
+
+                ProdutosDestaque = destaques
             };
-            return View(viewModel);
+
+            return View(model);
+
+
         }
+
     }
 }

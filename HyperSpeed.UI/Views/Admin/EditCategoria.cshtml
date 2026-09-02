@@ -1,8 +1,13 @@
-﻿@model AtualizacaoCategoriaDTo
+﻿@using hyperSpeed.Application.DTOs
+
+@model AtualizacaoCategoriaDTo
 
 @{
+
     Layout = "_AdminLayout";
+
     ViewData["Title"] = "Editar Categoria";
+
 }
 
 <div class="formHS-page">
@@ -12,33 +17,39 @@
         <div class="formHS-header">
 
             <span class="formHS-label">
+
                 HYPERSPEED / CATEGORIAS
             </span>
 
-            <h1>Editar Categoria</h1>
+            <h1>
+
+                Editar Categoria
+            </h1>
 
             <p>
+
                 Altere as informações da categoria abaixo.
             </p>
 
         </div>
 
-
+ 
         <form asp-controller="Admin"
               asp-action="EditCategoria"
               method="post">
 
             @Html.AntiForgeryToken()
 
+ 
             <input type="hidden"
                    asp-for="Id" />
 
-
+ 
             <div asp-validation-summary="ModelOnly"
                  class="text-danger mb-3">
             </div>
 
-
+ 
             <div class="mb-3">
 
                 <label asp-for="Nome"
@@ -48,37 +59,41 @@
 
                 </label>
 
+ 
                 <input asp-for="Nome"
                        class="form-control"
                        placeholder="Ex: Periféricos"
                        required />
 
+ 
                 <span asp-validation-for="Nome"
                       class="text-danger">
                 </span>
 
             </div>
 
-
+ 
             <hr class="my-4" />
 
-
+ 
             <div class="formHS-actions">
 
-                <a asp-controller="Categoria"
-                   asp-action="Index"
+                <a asp-controller="Admin"
+                   asp-action="Categorias"
                    class="admin-btn admin-btn-outline">
 
                     <i class="bi bi-arrow-left"></i>
+
                     Cancelar
 
                 </a>
 
-
+ 
                 <button type="submit"
                         class="admin-btn">
 
                     <i class="bi bi-check-lg"></i>
+
                     Salvar Alterações
 
                 </button>
@@ -91,9 +106,11 @@
 
 </div>
 
-
+ 
 @section Scripts {
 
     <partial name="_ValidationScriptsPartial" />
 
 }
+
+ 

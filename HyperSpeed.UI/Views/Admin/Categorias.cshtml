@@ -1,8 +1,15 @@
-﻿@model IEnumerable<CategoriasDTo>
+﻿@using hyperSpeed.Application.DTOs
+
+@using System.Linq
+
+@model IEnumerable<CategoriasDTo>
 
 @{
+
     Layout = "_AdminLayout";
+
     ViewData["Title"] = "Gerenciar Categorias";
+
 }
 
 <div class="admin-content">
@@ -10,15 +17,23 @@
     <div class="admin-header">
 
         <div>
-            <span class="admin-eyebrow">HYPERSPEED / ADMIN</span>
+
+            <span class="admin-eyebrow">
+
+                HYPERSPEED / ADMIN
+            </span>
+
             <h1>Categorias</h1>
+
         </div>
 
+ 
         <a asp-controller="Admin"
            asp-action="CreateCategoria"
            class="admin-btn">
 
             <i class="bi bi-plus-lg"></i>
+
             Nova Categoria
 
         </a>
@@ -27,10 +42,23 @@
 
  
     @if (TempData["Sucesso"] != null)
+
     {
         <div class="alert alert-success">
+
             @TempData["Sucesso"]
         </div>
+
+    }
+
+    @if (TempData["Erro"] != null)
+
+    {
+        <div class="alert alert-danger">
+
+            @TempData["Erro"]
+        </div>
+
     }
 
  
@@ -46,6 +74,7 @@
 
  
     @if (Model != null && Model.Any())
+
     {
         <div class="admin-table-container">
 
@@ -54,9 +83,11 @@
                 <thead>
 
                     <tr>
+
                         <th>ID</th>
                         <th>Categoria</th>
                         <th>Ações</th>
+
                     </tr>
 
                 </thead>
@@ -65,52 +96,57 @@
                 <tbody>
 
                     @foreach (var categoria in Model)
+
                     {
                         <tr>
 
                             <td>
+
                                 #@categoria.Id
                             </td>
 
+ 
                             <td>
-                                <strong>@categoria.Nome</strong>
+
+                                <strong>
+
+                                    @categoria.Nome
+                                </strong>
+
                             </td>
 
+ 
                             <td class="admin-actions">
 
+                                <!-- EDITAR -->
                                 <a asp-controller="Admin"
                                    asp-action="EditCategoria"
                                    asp-route-id="@categoria.Id"
                                    class="btn-editar">
 
                                     <i class="bi bi-pencil-square"></i>
+
                                     Editar
 
                                 </a>
 
  
-                                <form asp-controller="Admin"
-                                      asp-action="DeleteCategoria"
-                                      asp-route-id="@categoria.Id"
-                                      method="post"
-                                      class="delete-form">
+                                <!-- EXCLUIR -->
+                                <a asp-controller="Admin"
+                                   asp-action="DeleteCategoria"
+                                   asp-route-id="@categoria.Id"
+                                   class="btn-excluir">
 
-                                    @Html.AntiForgeryToken()
+                                    <i class="bi bi-trash"></i>
 
-                                    <button type="submit"
-                                            class="btn-excluir"
-                                            onclick="return confirm('Deseja realmente excluir esta categoria?')">
+                                    Excluir
 
-                                        <i class="bi bi-trash"></i>
-                                        Excluir
-
-                                    </button>
-
-                                </form>
+                                </a>
 
                             </td>
 
                         </tr>
+
                     }
 
                 </tbody>
@@ -118,8 +154,11 @@
             </table>
 
         </div>
+
     }
+
     else
+
     {
         <div class="admin-empty">
 
@@ -127,9 +166,15 @@
 
             <h3>Nenhuma categoria encontrada</h3>
 
-            <p>Cadastre uma categoria para começar.</p>
+            <p>
+
+                Cadastre uma categoria para começar.
+            </p>
 
         </div>
+
     }
 
 </div>
+
+ 

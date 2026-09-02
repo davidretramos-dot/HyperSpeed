@@ -1,12 +1,9 @@
 using hyperSpeed.Application.DTOs;
 using HyperSpeed.Domain.Entities;
-using HyperSpeed.UI.Models;
 using HyperSpeed.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using SeuProjeto.ViewModels;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using hyperSpeed.Application.ViewModels;
 
 namespace HyperSpeed.UI.Controllers
 {
@@ -232,12 +229,16 @@ namespace HyperSpeed.UI.Controllers
                 ImagemUrl = produto.ImagemUrl
             };
 
-            return View(model);
+            return View(
+                "~/Views/Admin/DeleteProd.cshtml",
+                model
+            );
         }
 
         // Exclusão
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var sucesso = await _produtoApi.DeleteAsync(id);
@@ -245,7 +246,7 @@ namespace HyperSpeed.UI.Controllers
             if (!sucesso)
                 return NotFound();
 
-            TempData["Sucesso"] = "Produto removido!";
+            TempData["Sucesso"] = "Produto removido com sucesso!";
 
             return RedirectToAction(nameof(Index));
         }

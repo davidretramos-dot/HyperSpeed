@@ -1,11 +1,15 @@
 ﻿@using System.Linq
-@using hyperSpeed.Application.ViewModels
 
-@model ProdutoListViewModel
+@using hyperSpeed.Application.DTOs
+
+@model List<ProdutoDTo>
 
 @{
+
     Layout = "_AdminLayout";
+
     ViewData["Title"] = "Gerenciar Produtos";
+
 }
 
 <div class="admin-page-header">
@@ -13,30 +17,32 @@
     <div>
 
         <span class="admin-page-label">
+
             HYPERSPEED / PRODUTOS
         </span>
 
         <h1>Produtos</h1>
 
         <p class="admin-page-description">
+
             Gerencie os produtos cadastrados na loja.
         </p>
 
     </div>
-
 
     <a asp-controller="Admin"
        asp-action="CreateProd"
        class="admin-btn">
 
         <i class="bi bi-plus-lg"></i>
+
         Novo Produto
 
     </a>
 
 </div>
 
-
+ 
 <div class="admin-search">
 
     <input type="text"
@@ -44,7 +50,7 @@
 
 </div>
 
-
+ 
 <div class="admin-panel">
 
     <div class="admin-table-wrapper">
@@ -66,52 +72,70 @@
 
             </thead>
 
+ 
             <tbody>
 
-                @if (Model?.Produtos != null && Model.Produtos.Any())
+                @if (Model != null && Model.Any())
+
                 {
 
-                    @foreach (var produto in Model.Produtos)
-                    {
+                    @foreach (var produto in Model)
 
+                    {
                         <tr>
 
                             <td>
 
-                                <img src="@produto.Imagem"
+                                <img src="@produto.ImagemUrl"
                                      class="produto-admin-img"
-                                     alt="@produto.Nome" />
+                                     alt="@produto.NomeProduto" />
 
                             </td>
 
+ 
                             <td>
 
                                 <strong>
-                                    @produto.Nome
+
+                                    @produto.NomeProduto
                                 </strong>
 
                             </td>
 
+ 
                             <td>
-                                @(produto.Categorias?.FirstOrDefault()?.Nome ?? "—")
+
+                                @produto.IdCategoria
+
                             </td>
 
+ 
                             <td>
+
                                 R$ @produto.Preco.ToString("N2")
+
                             </td>
 
+ 
                             <td>
+
                                 @produto.Estoque
+
                             </td>
-                            
+
+ 
                             <td>
 
                                 <a asp-controller="Admin"
                                    asp-action="EditProd"
                                    asp-route-id="@produto.Id"
                                    class="btn-editar">
-                                    Editar 
 
+                                    Editar
+
+                                </a>
+
+ 
                                 <a asp-controller="Admin"
                                    asp-action="DeleteProd"
                                    asp-route-id="@produto.Id"
@@ -121,18 +145,17 @@
 
                                 </a>
 
-                                </a>
                             </td>
-
 
                         </tr>
 
                     }
 
                 }
-                else
-                {
 
+                else
+
+                {
                     <tr>
 
                         <td colspan="6">
@@ -152,3 +175,5 @@
     </div>
 
 </div>
+
+ 

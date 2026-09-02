@@ -31,7 +31,9 @@
     <link rel="stylesheet"
           href="~/css/site.css"
           asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/img/Icone HS.png" />
 
+         
 </head>
 
 <body class="admin-body">
@@ -73,15 +75,19 @@
                     <span>Dashboard</span>
 
                 </a>
+                <a asp-controller="Admin"
+                   asp-action="Produtos">
 
+                    Produtos
 
-                <a asp-controller="Produto" asp-action="Index"
-                   class="@(controller == "Produto" ? "active" : "")">
-                    <i class="bi bi-box-seam-fill"></i><span>Produtos</span>
                 </a>
-                <a asp-controller="Categoria" asp-action="Index"
-                   class="@(controller == "Categoria" ? "active" : "")">
-                    <i class="bi bi-tags-fill"></i><span>Categorias</span>
+
+                <a asp-controller="Admin"
+                   asp-action="Categorias">
+                    <i class="bi bi-tags"></i>
+
+                    Categorias
+
                 </a>
 
 

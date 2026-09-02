@@ -35,7 +35,7 @@ namespace HyperSpeed.UI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<ProdutoDTo>> Create([FromBody] CriacaoProdutoDTo dto)
         {
             var game = await _produtoSerivce.CreateAsync(dto);
@@ -43,7 +43,7 @@ namespace HyperSpeed.UI.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<ProdutoDTo>> Update(int id, [FromBody] AutualizacaoProdutoDTo dto)
         {
             var game = await _produtoSerivce.UpdateAsync(id, dto);
@@ -55,7 +55,7 @@ namespace HyperSpeed.UI.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             var deleted = await _produtoSerivce.DeleteAsync(id);

@@ -1,0 +1,136 @@
+﻿@using hyperSpeed.Application.DTOs
+
+@model CategoriasDTo
+
+@{
+
+    Layout = "_AdminLayout";
+
+    ViewData["Title"] = "Excluir Categoria";
+
+}
+
+<div class="formHS-page">
+
+    <div class="formHS delete-category-card">
+
+        <div class="formHS-header">
+
+            <span class="formHS-label">
+
+                HYPERSPEED / CATEGORIAS
+
+            </span>
+
+            <h1>
+
+                <i class="bi bi-trash3"></i>
+
+                Excluir Categoria
+
+            </h1>
+
+            <p>
+
+                Você está prestes a excluir esta categoria.
+            </p>
+
+        </div>
+
+ 
+        <div class="delete-warning">
+
+            <i class="bi bi-exclamation-triangle-fill"></i>
+
+            <div>
+
+                <strong>
+
+                    Atenção!
+                </strong>
+
+                <p>
+
+                    Esta ação não poderá ser desfeita.
+                </p>
+
+            </div>
+
+        </div>
+
+ 
+        <div class="delete-category-info">
+
+            <div class="delete-category-icon">
+
+                <i class="bi bi-folder-fill"></i>
+
+            </div>
+
+ 
+            <div class="delete-category-details">
+
+                <span>
+
+                    Categoria selecionada
+                </span>
+
+                <h2>
+
+                    @Model.Nome
+                </h2>
+
+                <small>
+
+                    ID: #@Model.Id
+                </small>
+
+            </div>
+
+        </div>
+
+ 
+        <form asp-controller="Admin"
+              asp-action="DeleteCategoria"
+              asp-route-id="@Model.Id"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+ 
+            <input type="hidden"
+                   name="id"
+                   value="@Model.Id" />
+
+ 
+            <div class="formHS-actions">
+
+                <a asp-controller="Admin"
+                   asp-action="Categorias"
+                   class="admin-btn admin-btn-outline">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Cancelar
+
+                </a>
+
+ 
+                <button type="submit"
+                        class="btn-delete-product">
+
+                    <i class="bi bi-trash3"></i>
+
+                    Excluir Categoria
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+ 

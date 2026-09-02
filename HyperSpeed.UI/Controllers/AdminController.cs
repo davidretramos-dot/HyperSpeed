@@ -1,5 +1,6 @@
 using hyperSpeed.Application.DTOs;
-using HyperSpeed.UI.Models;
+using hyperSpeed.Application.ViewModels;
+using HyperSpeed.UI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
@@ -10,11 +11,17 @@ namespace HyperSpeed.UI.Controllers
     public class AdminController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpProdutoService _produtoApi;
+        private readonly HttpCategoriaService _categoriaApi;
 
         public AdminController(
+            HttpProdutoService produtoApi,
+            HttpCategoriaService categoriaApi,
             IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
+            _produtoApi = produtoApi;
+            _categoriaApi = categoriaApi;
         }
 
 
@@ -107,7 +114,7 @@ namespace HyperSpeed.UI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProd(
-            ProdutoFormViewModel model)
+    ProdutoFormViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -122,7 +129,6 @@ namespace HyperSpeed.UI.Controllers
                 return View(model);
             }
 
-
             var dto = new CriacaoProdutoDTo
             {
                 NomeProduto = model.NomeProduto,
@@ -134,7 +140,6 @@ namespace HyperSpeed.UI.Controllers
                 Destaque = model.Destaque
             };
 
-
             var client =
                 _httpClientFactory.CreateClient("HyperSpeedAPI");
 
@@ -143,12 +148,13 @@ namespace HyperSpeed.UI.Controllers
                 dto
             );
 
-
             if (!response.IsSuccessStatusCode)
             {
+                var erroApi = await response.Content.ReadAsStringAsync();
+
                 ModelState.AddModelError(
                     "",
-                    "Não foi possível cadastrar o produto."
+                    $"Erro da API: {erroApi}"
                 );
 
                 model.Categorias = await client
@@ -158,7 +164,6 @@ namespace HyperSpeed.UI.Controllers
 
                 return View(model);
             }
-
 
             TempData["Sucesso"] =
                 "Produto cadastrado com sucesso!";
@@ -287,40 +292,64 @@ namespace HyperSpeed.UI.Controllers
 
 
         // =====================================================
-        // DELETE PRODUTO
+        // DELETE PRODUTO - GET
         // =====================================================
+        [HttpGet]
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteProd(int id)
+
         {
-            var client =
-                _httpClientFactory.CreateClient("HyperSpeedAPI");
 
+            var produto = await _produtoApi.GetByIdAsync(id);
 
-            var response = await client.DeleteAsync(
-                $"api/Produtos/{id}"
+            if (produto == null)
+
+                return NotFound();
+
+            return View(
+
+                "~/Views/Admin/DeleteProd.cshtml",
+
+                produto
+
             );
 
+        }
 
-            if (response.IsSuccessStatusCode)
-            {
-                TempData["Sucesso"] =
-                    "Produto excluído com sucesso!";
-            }
-            else
+
+
+        // =====================================================
+        // DELETE PRODUTO - POST
+        // =====================================================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProdConfirmed(int id)
+        {
+            var sucesso = await _produtoApi.DeleteAsync(id);
+
+            if (!sucesso)
             {
                 TempData["Erro"] =
                     "Não foi possível excluir o produto.";
+
+                return RedirectToAction(
+                    nameof(DeleteProd),
+                    new { id }
+                );
             }
 
+            TempData["Sucesso"] =
+                "Produto removido com sucesso!";
 
             return RedirectToAction(nameof(Produtos));
         }
 
 
+
         // =====================================================
+
         // CATEGORIAS - LISTA
+
         // =====================================================
 
         [HttpGet]
@@ -329,187 +358,277 @@ namespace HyperSpeed.UI.Controllers
             var client =
                 _httpClientFactory.CreateClient("HyperSpeedAPI");
 
-
             var categorias = await client
                 .GetFromJsonAsync<List<CategoriasDTo>>(
                     "api/Categorias"
-                );
-
+                ) ?? new List<CategoriasDTo>();
 
             return View(
-                categorias ?? new List<CategoriasDTo>()
+                "~/Views/Admin/Categorias.cshtml",
+                categorias
             );
         }
 
 
         // =====================================================
+
         // CREATE CATEGORIA - GET
+
         // =====================================================
 
         [HttpGet]
+
         public IActionResult CreateCategoria()
+
         {
+
             return View(
+
+                "~/Views/Admin/CreateCategoria.cshtml",
+
                 new CriacaoCategoriaDTo()
+
             );
+
         }
 
 
         // =====================================================
+
         // CREATE CATEGORIA - POST
+
         // =====================================================
 
         [HttpPost]
+
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> CreateCategoria(
+
             CriacaoCategoriaDTo dto)
+
         {
+
             if (!ModelState.IsValid)
-                return View(dto);
 
-
-            var client =
-                _httpClientFactory.CreateClient("HyperSpeedAPI");
-
-
-            var response = await client.PostAsJsonAsync(
-                "api/Categorias",
-                dto
-            );
-
-
-            if (!response.IsSuccessStatusCode)
             {
-                ModelState.AddModelError(
-                    "",
-                    "Não foi possível cadastrar a categoria."
+
+                return View(
+
+                    "~/Views/Admin/CreateCategoria.cshtml",
+
+                    dto
+
                 );
 
-                return View(dto);
             }
 
-
-            TempData["Sucesso"] =
-                "Categoria cadastrada com sucesso!";
-
-
-            return RedirectToAction(
-                nameof(Categorias)
-            );
-        }
-
-
-        // =====================================================
-        // EDIT CATEGORIA - GET
-        // =====================================================
-
-        [HttpGet]
-        public async Task<IActionResult> EditCategoria(
-            int id)
-        {
-            var client =
-                _httpClientFactory.CreateClient("HyperSpeedAPI");
-
-
-            var categoria = await client
-                .GetFromJsonAsync<CategoriasDTo>(
-                    $"api/Categorias/{id}"
-                );
-
+            var categoria = await _categoriaApi.CreateAsync(dto);
 
             if (categoria == null)
-                return NotFound();
 
-
-            var model =
-                new AtualizacaoCategoriaDTo
-                {
-                    Id = categoria.Id,
-                    Nome = categoria.Nome
-                };
-
-
-            return View(model);
-        }
-
-
-        // =====================================================
-        // EDIT CATEGORIA - POST
-        // =====================================================
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCategoria(
-            AtualizacaoCategoriaDTo dto)
-        {
-            if (!ModelState.IsValid)
-                return View(dto);
-
-
-            var client =
-                _httpClientFactory.CreateClient("HyperSpeedAPI");
-
-
-            var response = await client.PutAsJsonAsync(
-                $"api/Categorias/{dto.Id}",
-                dto
-            );
-
-
-            if (!response.IsSuccessStatusCode)
             {
+
                 ModelState.AddModelError(
+
                     "",
-                    "Não foi possível atualizar a categoria."
+
+                    "Não foi possível cadastrar a categoria."
+
                 );
 
-                return View(dto);
+                return View(
+
+                    "~/Views/Admin/CreateCategoria.cshtml",
+
+                    dto
+
+                );
+
             }
 
-
             TempData["Sucesso"] =
-                "Categoria atualizada com sucesso!";
 
+                "Categoria cadastrada com sucesso!";
 
-            return RedirectToAction(
-                nameof(Categorias)
-            );
+            return RedirectToAction(nameof(Categorias));
+
         }
 
 
         // =====================================================
-        // DELETE CATEGORIA
+
+        // EDIT CATEGORIA - GET
+
+        // =====================================================
+
+        [HttpGet]
+
+        public async Task<IActionResult> EditCategoria(int id)
+
+        {
+
+            var categoria =
+
+                await _categoriaApi.GetByIdAsync(id);
+
+            if (categoria == null)
+
+            {
+
+                return NotFound();
+
+            }
+
+            var model = new AtualizacaoCategoriaDTo
+
+            {
+
+                Id = categoria.Id,
+
+                Nome = categoria.Nome
+
+            };
+
+            return View(
+
+                "~/Views/Admin/EditCategoria.cshtml",
+
+                model
+
+            );
+
+        }
+
+
+        // =====================================================
+
+        // EDIT CATEGORIA - POST
+
+        // =====================================================
+
+        [HttpPost]
+
+        [ValidateAntiForgeryToken]
+
+        [ActionName("EditCategoria")]
+
+        public async Task<IActionResult> EditCategoriaConfirmed(
+
+            AtualizacaoCategoriaDTo dto)
+
+        {
+
+            if (!ModelState.IsValid)
+
+            {
+
+                return View(
+
+                    "~/Views/Admin/EditCategoria.cshtml",
+
+                    dto
+
+                );
+
+            }
+
+            var categoria = await _categoriaApi.UpdateAsync(
+
+                dto.Id,
+
+                dto
+
+            );
+
+            if (categoria == null)
+
+            {
+
+                ModelState.AddModelError(
+
+                    "",
+
+                    "Não foi possível atualizar a categoria."
+
+                );
+
+                return View(
+
+                    "~/Views/Admin/EditCategoria.cshtml",
+
+                    dto
+
+                );
+
+            }
+
+            TempData["Sucesso"] =
+
+                "Categoria atualizada com sucesso!";
+
+            return RedirectToAction(nameof(Categorias));
+
+        }
+
+        // =====================================================
+
+        // DELETE CATEGORIA - GET
+
+        // =====================================================
+
+        [HttpGet]
+
+        public async Task<IActionResult> DeleteCategoria(int id)
+
+        {
+
+            var categoria = await _categoriaApi.GetByIdAsync(id);
+
+            if (categoria == null)
+
+            {
+
+                return NotFound();
+
+            }
+
+            return View(
+
+                "~/Views/Admin/DeleteCategoria.cshtml",
+
+                categoria
+
+            );
+
+        }
+        // =====================================================
+        // DELETE CATEGORIA - POST
         // =====================================================
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteCategoria(
-            int id)
+        [ActionName("DeleteCategoria")]
+        public async Task<IActionResult> DeleteCategoriaConfirmed(int id)
         {
-            var client =
-                _httpClientFactory.CreateClient("HyperSpeedAPI");
+            var sucesso = await _categoriaApi.DeleteAsync(id);
 
-
-            var response = await client.DeleteAsync(
-                $"api/Categorias/{id}"
-            );
-
-
-            if (response.IsSuccessStatusCode)
-            {
-                TempData["Sucesso"] =
-                    "Categoria excluída com sucesso!";
-            }
-            else
+            if (!sucesso)
             {
                 TempData["Erro"] =
                     "Não foi possível excluir a categoria.";
+
+                return RedirectToAction(
+                    nameof(DeleteCategoria),
+                    new { id }
+                );
             }
 
+            TempData["Sucesso"] =
+                "Categoria excluída com sucesso!";
 
-            return RedirectToAction(
-                nameof(Categorias)
-            );
+            return RedirectToAction(nameof(Categorias));
         }
+
     }
 }

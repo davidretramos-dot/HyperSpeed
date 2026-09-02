@@ -4363,3 +4363,262 @@ footer {
         flex-wrap: wrap;
     }
 }
+
+
+/* =========================================
+
+   EXCLUIR PRODUTO - HYPERSPEED
+
+========================================= */
+
+.delete-product-card {
+    max-width: 850px;
+}
+
+.delete-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px 20px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 12px;
+    background: rgba(239, 68, 68, 0.08);
+}
+
+    .delete-warning i {
+        font-size: 1.5rem;
+        color: #ef4444;
+    }
+
+    .delete-warning strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #ef4444;
+    }
+
+    .delete-warning p {
+        margin: 0;
+        color: #b9b9b9;
+    }
+
+
+/* INFORMAÇÕES DO PRODUTO */
+
+.delete-product-info {
+    display: flex;
+    gap: 25px;
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+
+.delete-product-image {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #151515;
+    overflow: hidden;
+}
+
+
+    .delete-product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+
+.delete-product-details {
+    flex: 1;
+}
+
+
+    .delete-product-details h2 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+        color: #fff;
+    }
+
+
+.delete-description {
+    margin-bottom: 20px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+
+/* DADOS */
+
+.delete-product-data {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+
+    .delete-product-data div {
+        min-width: 130px;
+        padding: 12px 15px;
+        border-radius: 10px;
+        background: #151515;
+        border: 1px solid #292929;
+    }
+
+
+    .delete-product-data span {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: #888;
+    }
+
+
+    .delete-product-data strong {
+        color: #fff;
+    }
+
+
+/* BOTÃO DE EXCLUSÃO */
+
+.btn-delete-product {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #dc2626;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+
+    .btn-delete-product:hover {
+        background: #b91c1c;
+        transform: translateY(-1px);
+    }
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 650px) {
+
+    .delete-product-info {
+        flex-direction: column;
+    }
+
+
+    .delete-product-image {
+        width: 100%;
+        height: 200px;
+    }
+
+
+    .delete-product-data {
+        flex-direction: column;
+    }
+
+
+        .delete-product-data div {
+            width: 100%;
+        }
+}
+/* =========================================
+
+   DELETE CATEGORIA
+
+========================================= */
+
+.delete-category-card {
+    max-width: 650px;
+}
+
+
+.delete-category-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    background: #f8f9fa;
+}
+
+
+.delete-category-icon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #eeeeee;
+    font-size: 28px;
+}
+
+
+.delete-category-details {
+    display: flex;
+    flex-direction: column;
+}
+
+
+    .delete-category-details span {
+        font-size: 13px;
+        color: #777;
+    }
+
+
+    .delete-category-details h2 {
+        margin: 4px 0;
+        font-size: 22px;
+    }
+
+
+    .delete-category-details small {
+        color: #888;
+    }
+
+
+.delete-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px;
+    margin: 25px 0;
+    border-radius: 10px;
+    background: #fff3cd;
+    border: 1px solid #ffe69c;
+}
+
+
+    .delete-warning i {
+        font-size: 22px;
+    }
+
+
+    .delete-warning strong {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+
+    .delete-warning p {
+        margin: 0;
+        font-size: 14px;
+        color: #666;
+    }
+  

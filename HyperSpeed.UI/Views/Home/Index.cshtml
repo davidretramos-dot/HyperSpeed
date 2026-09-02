@@ -1,36 +1,56 @@
-﻿@{
+﻿@using hyperSpeed.Application.ViewModels
+
+@model HomeViewModels
+
+@{
+
     ViewData["Title"] = "Home";
+
 }
 
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet"
+      href="~/css/site.css"
+      asp-append-version="true" />
+
 <link rel="icon"
       type="image/png"
-      href="img/Icone HS.png">
+      href="~/img/Icone HS.png">
 
+ 
 <!-- =====================================================
+
      BANNER
-     ===================================================== -->
+
+===================================================== -->
 
 <section class="banner">
 
     <div class="banner-overlay"></div>
 
-    @* <img src="~/img/BannerIndexRemake.png"
-         alt="HyperSpeed - Ofertas em hardware"
-         class="banner-img"> *@
+    @*
+<img src="~/img/BannerIndexRemake.png"
 
+         alt="HyperSpeed - Ofertas em hardware"
+
+         class="banner-img">
+
+    *@
+ 
     <div class="banner-content">
 
         <span class="banner-tag">
+
             HYPERSPEED
         </span>
 
         <h1>
+
             MONTE O PC<br>
             <strong>DOS SEUS SONHOS.</strong>
         </h1>
 
         <p>
+
             Hardware de alta performance pelo melhor preço.
         </p>
 
@@ -38,6 +58,7 @@
            class="banner-button">
 
             <i class="bi bi-cart-fill"></i>
+
             Conferir produtos
 
         </a>
@@ -46,24 +67,29 @@
 
 </section>
 
-
+ 
 <!-- =====================================================
+
      SLOGAN
-     ===================================================== -->
+
+===================================================== -->
 
 <section class="slogan">
 
     <div class="slogan-line"></div>
 
     <p>
+
         Tudo do bom e mais barato
     </p>
 
     <h1>
+
         CONFIRA!
     </h1>
 
     <span>
+
         Encontre os melhores componentes para seu setup.
     </span>
 
@@ -71,10 +97,12 @@
 
 </section>
 
-
+ 
 <!-- =====================================================
+
      MONTE SEU PC
-     ===================================================== -->
+
+===================================================== -->
 
 <section class="categoria"
          id="produtos">
@@ -84,200 +112,135 @@
         <div>
 
             <span class="categoria-label">
+
                 HARDWARE
             </span>
 
             <h2>
+
                 MONTE SEU PC
             </h2>
 
             <p>
+
                 Componentes para levar sua máquina ao próximo nível.
             </p>
 
         </div>
 
-        <a href="#"
+ 
+        <a asp-controller="Produto"
+           asp-action="Index"
            class="categoria-link">
 
             Ver todos
+
             <i class="bi bi-arrow-right"></i>
 
         </a>
 
     </div>
 
-
+ 
     <div class="produtos">
 
+        @if (Model?.ProdutosDestaque != null &&
 
-        <!-- CPU AMD -->
+                     Model.ProdutosDestaque.Any())
 
-        <div class="produto-card">
+        {
 
-            <div class="produto-image">
+            @foreach (var produto in Model.ProdutosDestaque)
 
-                <span class="produto-badge">
-                    DESTAQUE
-                </span>
+            {
+                <div class="produto-card">
 
-                <img src="~/images/produtos/cpu-amd.png"
-                     alt="Processador Ryzen AMD">
+                    <div class="produto-image">
 
-            </div>
+                        @if (produto.Destaque)
 
-            <div class="produto-info">
+                        {
+                            <span class="produto-badge">
 
-                <span class="produto-categoria">
-                    PROCESSADOR
-                </span>
+                                DESTAQUE
+                            </span>
 
-                <h3>
-                    Ryzen AMD
-                </h3>
+                        }
 
-                <div class="produto-bottom">
+                        @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
 
-                    <span class="produto-preco">
-                        R$ 1.999
-                    </span>
+                        {
+                            <img src="@produto.ImagemUrl"
+                                 alt="@produto.NomeProduto"
+                                 onerror="this.style.display='none'" />
 
-                    <button class="produto-button">
-                        <i class="bi bi-cart-plus"></i>
-                    </button>
+                        }
 
-                </div>
+                    </div>
 
-            </div>
+ 
+                    <div class="produto-info">
 
-        </div>
+                        <span class="produto-categoria">
 
+                            PRODUTO
+                        </span>
 
-        <!-- GPU -->
+ 
+                        <h3>
 
-        <div class="produto-card">
+                            @produto.NomeProduto
+                        </h3>
 
-            <div class="produto-image">
+ 
+                        <div class="produto-bottom">
 
-                <span class="produto-badge">
-                    DESTAQUE
-                </span>
+                            <span class="produto-preco">
 
-                <img src="~/images/produtos/gpu.png"
-                     alt="Placa de vídeo RTX">
+                                R$ @produto.Preco.ToString("N2")
 
-            </div>
+                            </span>
 
-            <div class="produto-info">
+ 
+                            <a asp-controller="Produto"
+                               asp-action="Details"
+                               asp-route-id="@produto.Id"
+                               class="produto-button">
 
-                <span class="produto-categoria">
-                    PLACA DE VÍDEO
-                </span>
+                                <i class="bi bi-cart-plus"></i>
 
-                <h3>
-                    RTX 4070
-                </h3>
+                            </a>
 
-                <div class="produto-bottom">
+                        </div>
 
-                    <span class="produto-preco">
-                        R$ 3.999
-                    </span>
-
-                    <button class="produto-button">
-                        <i class="bi bi-cart-plus"></i>
-                    </button>
+                    </div>
 
                 </div>
 
-            </div>
+            }
 
-        </div>
+        }
 
+        else
 
-        <!-- SSD -->
+        {
+            <p class="sem-produtos">
 
-        <div class="produto-card">
+                Nenhum produto disponível no momento.
+            </p>
 
-            <div class="produto-image">
-
-                <img src="~/images/produtos/ssd.png"
-                     alt="SSD">
-
-            </div>
-
-            <div class="produto-info">
-
-                <span class="produto-categoria">
-                    ARMAZENAMENTO
-                </span>
-
-                <h3>
-                    SSD
-                </h3>
-
-                <div class="produto-bottom">
-
-                    <span class="produto-preco">
-                        R$ 499
-                    </span>
-
-                    <button class="produto-button">
-                        <i class="bi bi-cart-plus"></i>
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- INTEL -->
-
-        <div class="produto-card">
-
-            <div class="produto-image">
-
-                <img src="~/images/produtos/cpu-intel.png"
-                     alt="Processador Intel">
-
-            </div>
-
-            <div class="produto-info">
-
-                <span class="produto-categoria">
-                    PROCESSADOR
-                </span>
-
-                <h3>
-                    Intel
-                </h3>
-
-                <div class="produto-bottom">
-
-                    <span class="produto-preco">
-                        R$ 1.799
-                    </span>
-
-                    <button class="produto-button">
-                        <i class="bi bi-cart-plus"></i>
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
+        }
 
     </div>
 
 </section>
 
-
+ 
 <!-- =====================================================
+
      PERIFÉRICOS
-     ===================================================== -->
+
+===================================================== -->
 
 <section class="categoria categoria-perifericos">
 
@@ -286,32 +249,37 @@
         <div>
 
             <span class="categoria-label">
+
                 SETUP
             </span>
 
             <h2>
+
                 PERIFÉRICOS / OUTROS
             </h2>
 
             <p>
+
                 Tudo para completar seu setup gamer.
             </p>
 
         </div>
 
-        <a href="#"
+ 
+        <a asp-controller="Produto"
+           asp-action="Index"
            class="categoria-link">
 
             Ver todos
+
             <i class="bi bi-arrow-right"></i>
 
         </a>
 
     </div>
 
-
+ 
     <div class="produtos">
-
 
         <!-- TECLADO -->
 
@@ -324,24 +292,31 @@
 
             </div>
 
+ 
             <div class="produto-info">
 
                 <span class="produto-categoria">
+
                     PERIFÉRICO
                 </span>
 
                 <h3>
+
                     Teclado
                 </h3>
 
+ 
                 <div class="produto-bottom">
 
                     <span class="produto-preco">
+
                         R$ 399
                     </span>
 
                     <button class="produto-button">
+
                         <i class="bi bi-cart-plus"></i>
+
                     </button>
 
                 </div>
@@ -350,7 +325,7 @@
 
         </div>
 
-
+ 
         <!-- HEADSET -->
 
         <div class="produto-card">
@@ -362,24 +337,31 @@
 
             </div>
 
+ 
             <div class="produto-info">
 
                 <span class="produto-categoria">
+
                     ÁUDIO
                 </span>
 
                 <h3>
+
                     Headset
                 </h3>
 
+ 
                 <div class="produto-bottom">
 
                     <span class="produto-preco">
+
                         R$ 299
                     </span>
 
                     <button class="produto-button">
+
                         <i class="bi bi-cart-plus"></i>
+
                     </button>
 
                 </div>
@@ -388,7 +370,7 @@
 
         </div>
 
-
+ 
         <!-- MOUSE -->
 
         <div class="produto-card">
@@ -400,24 +382,31 @@
 
             </div>
 
+ 
             <div class="produto-info">
 
                 <span class="produto-categoria">
+
                     PERIFÉRICO
                 </span>
 
                 <h3>
+
                     Mouse
                 </h3>
 
+ 
                 <div class="produto-bottom">
 
                     <span class="produto-preco">
+
                         R$ 199
                     </span>
 
                     <button class="produto-button">
+
                         <i class="bi bi-cart-plus"></i>
+
                     </button>
 
                 </div>
@@ -426,7 +415,7 @@
 
         </div>
 
-
+ 
         <!-- MONITOR -->
 
         <div class="produto-card">
@@ -434,6 +423,7 @@
             <div class="produto-image">
 
                 <span class="produto-badge">
+
                     OFERTA
                 </span>
 
@@ -442,24 +432,31 @@
 
             </div>
 
+ 
             <div class="produto-info">
 
                 <span class="produto-categoria">
+
                     MONITOR
                 </span>
 
                 <h3>
+
                     Monitor Gamer
                 </h3>
 
+ 
                 <div class="produto-bottom">
 
                     <span class="produto-preco">
+
                         R$ 1.299
                     </span>
 
                     <button class="produto-button">
+
                         <i class="bi bi-cart-plus"></i>
+
                     </button>
 
                 </div>
@@ -471,3 +468,5 @@
     </div>
 
 </section>
+
+ 

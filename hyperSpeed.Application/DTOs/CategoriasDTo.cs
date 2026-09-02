@@ -19,6 +19,6 @@ namespace hyperSpeed.Application.DTOs
     public class AtualizacaoCategoriaDTo
     {
         public string Nome { get; set; } = string.Empty;
-        public int? Id { get; set; }
+        public int Id { get; set; }
     }    
 }

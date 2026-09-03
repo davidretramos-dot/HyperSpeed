@@ -18,7 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<HyperSpeedDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions =>
+            sqlOptions.MigrationsAssembly("HyperSpeed.Infrastructure")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {

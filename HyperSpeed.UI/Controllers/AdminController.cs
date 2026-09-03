@@ -35,24 +35,36 @@ namespace HyperSpeed.UI.Controllers
             var client =
                 _httpClientFactory.CreateClient("HyperSpeedAPI");
 
+            // Busca produtos pela API
             var produtos = await client
                 .GetFromJsonAsync<List<ProdutoDTo>>(
                     "api/Produtos"
                 ) ?? new List<ProdutoDTo>();
 
-
+            // Busca categorias pela API
             var categorias = await client
                 .GetFromJsonAsync<List<CategoriasDTo>>(
                     "api/Categorias"
                 ) ?? new List<CategoriasDTo>();
 
+            // Relaciona cada produto com sua categoria
+            foreach (var produto in produtos)
+            {
+                var categoria = categorias
+                    .FirstOrDefault(c => c.Id == produto.IdCategoria);
+
+                produto.NomeCategoria =
+                    categoria?.Nome ?? "Sem categoria";
+            }
 
             var model = new DashboardViewModel
             {
                 TotalProdutos = produtos.Count,
+
                 TotalCategorias = categorias.Count,
 
                 RecentProdutos = produtos
+                    .OrderByDescending(p => p.CriacaoAt)
                     .Take(5)
                     .ToList()
             };

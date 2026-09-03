@@ -93,8 +93,10 @@
                             </td>
 
                             <td>
-                                @(produto.Categorias?.FirstOrDefault()?.Nome ?? "—")
-                            </td>
+                                <td>
+                                    @(produto.Categoria?.Nome ?? "—")
+                                </td>
+                            
 
                             <td>
                                 R$ @produto.Preco.ToString("N2")

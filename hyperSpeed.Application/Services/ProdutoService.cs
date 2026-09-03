@@ -15,7 +15,8 @@ namespace hyperSpeed.Application.Services
             _ProdutoRepository = produtoRepository;
         }
 
-        public async Task<ProdutoDTo> CreateAsync(CriacaoProdutoDTo dto)
+        public async Task<ProdutoDTo> CreateAsync(
+            CriacaoProdutoDTo dto)
         {
             var produto = new Produto
             {
@@ -25,6 +26,9 @@ namespace hyperSpeed.Application.Services
                 IdCategoria = dto.IdCategoria,
                 Preco = dto.Preco,
                 Estoque = dto.Estoque,
+                Destaque = dto.Destaque,
+
+                CriacaoAt = DateTime.Now
             };
 
             await _ProdutoRepository.AddAsync(produto);
@@ -32,10 +36,15 @@ namespace hyperSpeed.Application.Services
             return MapToDTo(produto);
         }
 
-        public async Task<ProdutoDTo?> UpdateAsync(int id, AutualizacaoProdutoDTo dto)
+        public async Task<ProdutoDTo?> UpdateAsync(
+            int id,
+            AutualizacaoProdutoDTo dto)
         {
-            var produto = await _ProdutoRepository.GetByIdAsync(id);
-            if (produto == null) return null;
+            var produto =
+                await _ProdutoRepository.GetByIdAsync(id);
+
+            if (produto == null)
+                return null;
 
             produto.Nome = dto.NomeProduto;
             produto.Descricao = dto.Descricao;
@@ -43,8 +52,10 @@ namespace hyperSpeed.Application.Services
             produto.IdCategoria = dto.IdCategoria;
             produto.Preco = dto.Preco;
             produto.Estoque = dto.Estoque;
+            produto.Destaque = dto.Destaque;
 
             await _ProdutoRepository.UpdateAsync(produto);
+
             return MapToDTo(produto);
         }
 
@@ -66,13 +77,25 @@ namespace hyperSpeed.Application.Services
             return new ProdutoDTo
             {
                 Id = produto.Id,
+
                 NomeProduto = produto.Nome,
+
                 Descricao = produto.Descricao,
+
                 ImagemUrl = produto.Imagem,
+
                 IdCategoria = produto.IdCategoria,
+
+                NomeCategoria =
+                    produto.Categoria?.Nome ?? "Sem categoria",
+
                 Preco = (int)produto.Preco,
+
                 Estoque = produto.Estoque,
-                // Adicione outros campos conforme necessário
+
+                CriacaoAt = produto.CriacaoAt,
+
+                Destaque = produto.Destaque
             };
         }
 

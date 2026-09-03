@@ -53,7 +53,7 @@ namespace HyperSpeed.UI.Controllers
                 Estoque = d.Estoque,
                 Imagem = d.ImagemUrl,
                 IdCategoria = d.IdCategoria,
-                Categorias = null
+                Categoria = null
             });
 
             var model = new ProdutoListViewModel

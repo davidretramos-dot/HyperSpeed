@@ -54,6 +54,9 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriasRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<ICategoriasService, CategoriasService>();
 
+builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+builder.Services.AddScoped<PedidoService>();
+
 // Web + API
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

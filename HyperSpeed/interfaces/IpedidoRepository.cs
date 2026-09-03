@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HyperSpeed.Domain.interfaces
 {
-    public interface IpedidoRepository
+    public interface IPedidoRepository
     {
         Task<IEnumerable<Pedido>> GetAllAsync();
 

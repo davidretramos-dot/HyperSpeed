@@ -15,8 +15,12 @@ namespace HyperSpeed.Infrastruture.Context
             : base(options)
         {
         }
-        public DbSet<Categorias> Categorias { get; set; }
 
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<ItemPedido> ItensPedido { get; set; }
+        public DbSet<Pagamento> Pagamentos { get; set; }
+        public DbSet<Entrega> Entregas { get; set; }
+        public DbSet<Categorias> Categorias { get; set; }
         public DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

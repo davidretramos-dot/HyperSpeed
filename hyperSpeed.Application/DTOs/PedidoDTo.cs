@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HyperSpeed.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,6 +11,12 @@ namespace hyperSpeed.Application.DTOs
         public string Status { get; set; } = string.Empty;
         public int Valor { get; set; }
     }
+    public class CreatePedidoDto
+    {
+        public List<CreateItemPedidoDto> Itens { get; set; } = new List<CreateItemPedidoDto>();
 
+
+        public TipoPagamento TipoPagamento { get; set; }
+    }
 
 }

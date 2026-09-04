@@ -69,24 +69,27 @@
 
                 <a asp-controller="Admin"
                    asp-action="Index"
-                   class="@(controller == "Admin" && action == "Index" ? "active" : "")">
+                   class="admin-menu-item @(controller == "Admin" && action == "Index" ? "active" : "")">
 
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
 
                 </a>
                 <a asp-controller="Admin"
-                   asp-action="Produtos">
+                   asp-action="Produtos"
+                   class="admin-menu-item @(controller == "Admin" && action == "Produtos" ? "active" : "")">
 
-                    Produtos
+                    <i class="bi bi-box-seam"></i>
+                    <span>Produtos</span>
 
                 </a>
 
                 <a asp-controller="Admin"
-                   asp-action="Categorias">
+                   asp-action="Categorias"
+                   class="admin-menu-item @(controller == "Admin" && action == "Categorias" ? "active" : "")">
                     <i class="bi bi-tags"></i>
 
-                    Categorias
+                    <span>Categorias</span>
 
                 </a>
 

@@ -30,6 +30,35 @@
     --hs-border-light: #383838;
 }
 
+/* Estilos para os itens do menu admin (ativa o mesmo visual do Dashboard para outros botões) */
+.admin-menu .admin-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    color: #ddd;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: background .12s ease, color .12s ease;
+}
+
+.admin-menu .admin-menu-item i {
+    font-size: 18px;
+    width: 22px;
+    text-align: center;
+}
+
+.admin-menu .admin-menu-item.active {
+    background: var(--hs-red);
+    color: white;
+}
+
+.admin-menu .admin-menu-item.active i {
+    color: white;
+}
+
+
 
 /* =========================================================
    RESET

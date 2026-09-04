@@ -38,7 +38,7 @@ namespace hyperSpeed.Application.Services
 
                 var itemPedido = new ItemPedido
                 {
-                    IdProduto = produto.Id,
+                    ProdutoId = produto.Id,
                     Quantidade = itemDto.Quantidade,
                     PrecoUni = produto.Preco,
                     SubTotal = subtotal

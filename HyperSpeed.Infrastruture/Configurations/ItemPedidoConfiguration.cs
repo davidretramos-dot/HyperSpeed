@@ -26,12 +26,12 @@ namespace HyperSpeed.Infrastruture.Configurations
 
             builder.HasOne(i => i.Pedido)
                 .WithMany(p => p.ItemPedidos)
-                .HasForeignKey(i => i.IdPedido)
+                .HasForeignKey(i => i.PedidoId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(i => i.Produto)
                 .WithMany()
-                .HasForeignKey(i => i.IdProduto)
+                .HasForeignKey(i => i.ProdutoId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 

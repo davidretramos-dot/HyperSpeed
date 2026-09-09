@@ -19,11 +19,20 @@ namespace HyperSpeed.Desktop.Services
         {
             try
             {
-                var usuarios = await _http.GetAsync<List<UsuarioResponseDto>>("/api/usuarios");
+                var usuarios =
+                    await _http.GetAsync<List<UsuarioResponseDto>>(
+                        "/api/usuarios");
+
                 return usuarios ?? new List<UsuarioResponseDto>();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(
+                    $"Erro ao carregar usuários:\n{ex.Message}",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return new List<UsuarioResponseDto>();
             }
         }
@@ -71,11 +80,20 @@ namespace HyperSpeed.Desktop.Services
         {
             try
             {
-                var perfis = await _http.GetAsync<List<string>>("/api/usuarios/perfis");
+                var perfis =
+                    await _http.GetAsync<List<string>>(
+                        "/api/usuarios/perfis");
+
                 return perfis ?? new List<string>();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(
+                    $"Erro ao carregar perfis:\n{ex.Message}",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return new List<string>();
             }
         }

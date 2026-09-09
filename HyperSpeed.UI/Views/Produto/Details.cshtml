@@ -1,0 +1,73 @@
+﻿@using hyperSpeed.Application.ViewModels
+@model ProdutoDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Produto.NomeProduto;
+}
+
+
+<div class="produto-detalhes">
+
+    <div class="produto-detalhes-imagem">
+
+        @if (!string.IsNullOrWhiteSpace(Model.Produto.ImagemUrl))
+        {
+            <img src="@Model.Produto.ImagemUrl"
+                 alt="@Model.Produto.NomeProduto" />
+        }
+        else
+        {
+            <p>Imagem não disponível</p>
+        }
+
+    </div>
+
+    <div class="produto-detalhes-info">
+
+        <span class="produto-categoria">
+            PRODUTO
+        </span>
+
+        <h1>
+            @Model.Produto.NomeProduto
+        </h1>
+
+        <p>
+            @Model.Produto.Descricao
+        </p>
+
+        <h2>
+            R$ @Model.Produto.Preco.ToString("N2")
+        </h2>
+
+        <p>
+            Estoque: @Model.Produto.Estoque
+        </p>
+
+        <form asp-controller="Carrinho"
+              asp-action="Adicionar"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden"
+                   name="produtoId"
+                   value="@Model.Produto.Id" />
+
+            <input type="hidden"
+                   name="nome"
+                   value="@Model.Produto.NomeProduto" />
+
+            <input type="hidden"
+                   name="preco"
+                   value="@Model.Produto.Preco" />
+
+            <button type="submit" class="perfilHS-btn perfilHS-btn-primary">
+                Adicionar ao carrinho
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

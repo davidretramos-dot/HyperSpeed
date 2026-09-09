@@ -65,6 +65,7 @@ builder.Services.AddScoped<IProdutoRepository,ProdutoRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriasRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<ICategoriasService, CategoriasService>();
+builder.Services.AddScoped<CarrinhoService>();
 
 // ========================================================================
 // MVC - Adiciona suporte para controladores e views (páginas HTML) | Razor

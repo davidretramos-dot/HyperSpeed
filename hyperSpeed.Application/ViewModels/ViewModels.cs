@@ -212,4 +212,16 @@ namespace hyperSpeed.Application.ViewModels
         // Lista para preencher o DropDown das categorias
         public IEnumerable<SelectListItem>? CategoriasPai { get; set; }
     }
+    public class CarrinhoItem
+    {
+        public int ProdutoId { get; set; }
+
+        public string Nome { get; set; } = string.Empty;
+
+        public decimal Preco { get; set; }
+
+        public int Quantidade { get; set; }
+
+        public decimal SubTotal => Preco * Quantidade;
+    }
 }

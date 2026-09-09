@@ -44,7 +44,7 @@
             colId = new DataGridViewTextBoxColumn();
             colTitle = new DataGridViewTextBoxColumn();
             colCategoryName = new DataGridViewTextBoxColumn();
-            colReleaseYear = new DataGridViewTextBoxColumn();
+            colPrice = new DataGridViewTextBoxColumn();
             colIsFeatured = new DataGridViewCheckBoxColumn();
             colCreatedAt = new DataGridViewTextBoxColumn();
             pnlToolbar = new Panel();
@@ -63,7 +63,7 @@
             // 
             gridProdutos.BackgroundColor = Color.FromArgb(15, 15, 15);
             gridProdutos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridProdutos.Columns.AddRange(new DataGridViewColumn[] { colId, colTitle, colCategoryName, colReleaseYear, colIsFeatured, colCreatedAt });
+            gridProdutos.Columns.AddRange(new DataGridViewColumn[] { colId, colTitle, colCategoryName, colPrice, colIsFeatured, colCreatedAt });
             gridProdutos.Location = new Point(18, 165);
             gridProdutos.Name = "gridProdutos";
             gridProdutos.Size = new Size(768, 316);
@@ -87,8 +87,8 @@
             // 
             // colReleaseYear
             // 
-            colReleaseYear.HeaderText = "Ano";
-            colReleaseYear.Name = "colReleaseYear";
+            colPrice.HeaderText = "Preço";
+            colPrice.Name = "colPrice";
             // 
             // colIsFeatured
             // 
@@ -175,6 +175,7 @@
             btnAtualizar.Size = new Size(90, 41);
             btnAtualizar.TabIndex = 1;
             btnAtualizar.Text = "🔄️ Atualizar";
+            btnAtualizar.Click += btnAtualizar_Click;
 
             // 
             // btnExcluir
@@ -267,7 +268,7 @@
         private DataGridViewTextBoxColumn colId;
         private DataGridViewTextBoxColumn colTitle;
         private DataGridViewTextBoxColumn colCategoryName;
-        private DataGridViewTextBoxColumn colReleaseYear;
+        private DataGridViewTextBoxColumn colPrice;
         private DataGridViewCheckBoxColumn colIsFeatured;
         private DataGridViewTextBoxColumn colCreatedAt;
         private Panel pnlToolbar;

@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+
         }
 
         #region Código gerado pelo Designer de Componentes
@@ -232,6 +233,7 @@
             Controls.Add(lblTitulo);
             Name = "UsuariosUserControl";
             Size = new Size(875, 465);
+            Load += UsuariosUserControl_Load_1;
             ((System.ComponentModel.ISupportInitialize)gridUsuarios).EndInit();
             pnlToolbar.ResumeLayout(false);
             ResumeLayout(false);
@@ -252,5 +254,6 @@
         private Guna.UI2.WinForms.Guna2Button btnExcluir;
         private Guna.UI2.WinForms.Guna2Button btnAtualizar;
         private Label lblTitulo;
+        
     }
 }

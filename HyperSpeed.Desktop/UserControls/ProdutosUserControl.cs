@@ -24,19 +24,23 @@ namespace HyperSpeed.Desktop.UserControls
         public ProdutosUserControl()
         {
             InitializeComponent();
+            Load += ProdutosUserControl_Load;
         }
 
-        private async void GamesUserControl_Load(object sender, EventArgs e)
+        private async void ProdutosUserControl_Load(object sender, EventArgs e)
         {
+
             _produtoService = new ProdutosApiService();
             _categoriasService = new CategoriasApiService();
             ConfigurarPermissoes();
+
             await CarregarDadosAsync();
         }
 
         private void ConfigurarPermissoes()
         {
             bool isAdmin = SessionManager.Instance.IsAdmin;
+
             btnNova.Visible = isAdmin;
             btnEditar.Visible = isAdmin;
             btnExcluir.Visible = isAdmin;
@@ -47,14 +51,19 @@ namespace HyperSpeed.Desktop.UserControls
             gridProdutos.Rows.Clear();
             try
             {
-                var tarefaProdutos = _produtoService.GetAllAsync();
-                var tarefaCategorias = _categoriasService.GetAllAsync();
-                await Task.WhenAll(tarefaProdutos, tarefaCategorias);
 
-                _todosProdutos = tarefaProdutos.Result;
-                _categorias = tarefaCategorias.Result;
+                _todosProdutos = await _produtoService.GetAllAsync();
+                _categorias = await _categoriasService.GetAllAsync();
+
+                foreach (var produto in _todosProdutos)
+                {
+                    var categoria = _categorias
+                        .FirstOrDefault(c => c.Id == produto.CategoryId);
+
+                    produto.CategoryName = categoria?.Name ?? "Sem categoria";
+                }
+
                 PopularGrid(_todosProdutos);
-
             }
             catch (Exception ex)
             {
@@ -68,15 +77,18 @@ namespace HyperSpeed.Desktop.UserControls
         private void PopularGrid(List<ProdutosDtos> produtos)
         {
             gridProdutos.Rows.Clear();
-            foreach (var g in produtos)
+
+            foreach (var produto in produtos)
             {
                 gridProdutos.Rows.Add(
-                    g.Id,
-                    g.Title,
-                    g.CategoryName,
-                    g.Price,
-                    g.IsFeatured,
-                    g.CreatedAt.ToString("dd/MM/yyyy HH:mm"));
+                    produto.Id,
+                    produto.Title,
+                    produto.CategoryName,
+                    produto.Price.ToString("C2"),
+                    produto.IsFeatured,
+                    produto.CreatedAt == DateTime.MinValue
+                        ? "-"
+                        : produto.CreatedAt.ToString("dd/MM/yyyy HH:mm"));
             }
         }
 
@@ -197,6 +209,6 @@ namespace HyperSpeed.Desktop.UserControls
             }
         }
 
-        private async Task btnAtualizar_Click(object sender, EventArgs e) => await CarregarDadosAsync();
+        private async void btnAtualizar_Click(object sender, EventArgs e) => await CarregarDadosAsync();
     }
 }

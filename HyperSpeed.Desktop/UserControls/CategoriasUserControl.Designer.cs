@@ -297,6 +297,7 @@
             Controls.Add(lblTitulo);
             Name = "CategoriasUserControl";
             Size = new Size(805, 501);
+            Load += CategoriasUserControl_Load_1;
             pnlForm.ResumeLayout(false);
             pnlForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridCategorias).EndInit();

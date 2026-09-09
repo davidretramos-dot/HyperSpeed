@@ -110,10 +110,6 @@ namespace HyperSpeed.Desktop.Forms
                 var email = txtEmail.Text.Trim();
                 var senha = txtSenha.Text.Trim();
 
-                // 🔍 DEBUG: Log dos dados sendo enviados
-                System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] Email: '{email}' (length: {email.Length})");
-                System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] Senha: '{senha}' (length: {senha.Length})");
-                System.Diagnostics.Debug.WriteLine($"[LOGIN DEBUG] API Base URL: {AppConfig.ApiBaseUrl}");
 
                 var (success, user, errorMessage) = await _authService.LoginAsync(email, senha);
 

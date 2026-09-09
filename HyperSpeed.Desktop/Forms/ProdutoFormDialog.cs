@@ -20,12 +20,15 @@ namespace HyperSpeed.Desktop.Forms
         public ProdutoFormDialog()
         {
             InitializeComponent();
+            Load += ProdutoFormDialog_Load;
+
         }
         public ProdutoFormDialog(List<CategoriaResponseDtos> categorias, ProdutosDtos? game)
         {
             _categorias = categorias;
             _gameExistente = game;
             InitializeComponent();
+
         }
 
 
@@ -35,25 +38,8 @@ namespace HyperSpeed.Desktop.Forms
         // =====================================================================
 
         private void GameFormDialog_Load(object sender, EventArgs e)
-        {
-            //Guard
-            if (DesignMode) return;
+        {   }
 
-            // Configura título baseado no modo (criação/edição)
-            this.Text = _gameExistente == null ? "Novo Game" : "Editar Game";
-            lblTituloForm.Text = _gameExistente == null ? "➕ Novo Game" : "✏️ Editar Game";
-
-            //Popula o ComboBox de categorias
-            cmbCategoria.Items.Clear();
-            cmbCategoria.Items.Add("Selecione uma categoria...");
-            foreach (var cat in _categorias)
-                cmbCategoria.Items.Add(cat.Name);
-            cmbCategoria.SelectedIndex = 0;
-
-            //Preenche campos se estiver no modo edição
-            PreencherCampos();
-
-        }
 
         // =====================================================================
         // PREENCHIMENTO (MODO EDIÇÃO)
@@ -82,6 +68,14 @@ namespace HyperSpeed.Desktop.Forms
         // SALVAR
         // =====================================================================
         private void BtnSalvar_Click(object? sender, EventArgs e)
+        { }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSalvar_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTitulo.Text))
             {
@@ -143,12 +137,30 @@ namespace HyperSpeed.Desktop.Forms
 
             this.DialogResult = DialogResult.OK;
             this.Close();
-
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ProdutoFormDialog_Load(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+
+            // Configura título baseado no modo (criação/edição)
+            this.Text = _gameExistente == null ? "Novo Produto" : "Editar Produto";
+            lblTituloForm.Text = _gameExistente == null ? "➕ Novo Produto" : "✏️ Editar Produto";
+
+            //Popula o ComboBox de categorias
+            cmbCategoria.Items.Clear();
+            cmbCategoria.Items.Add("Selecione uma categoria...");
+            foreach (var cat in _categorias)
+                cmbCategoria.Items.Add(cat.Name);
+            cmbCategoria.SelectedIndex = 0;
+
+            //Preenche campos se estiver no modo edição
+            PreencherCampos();
         }
     }
 }

@@ -113,6 +113,7 @@ namespace HyperSpeed.API.Controllers
             {
                 Id = user!.Id,
                 Email = user.Email!,
+                Regras = roles
                
             });
         }

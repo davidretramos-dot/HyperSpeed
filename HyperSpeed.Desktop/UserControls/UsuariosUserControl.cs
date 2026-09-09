@@ -22,16 +22,13 @@ namespace HyperSpeed.Desktop.UserControls
         public UsuariosUserControl()
         {
             InitializeComponent();
+            _usuariosService = new UsuariosApiService();
+            this.Load += UsuariosUserControl_Load_1;
         }
 
         private async void UsuariosUserControl_Load(object sender, EventArgs e)
         {
-            if (DesignMode) return;
 
-            _usuariosService = new UsuariosApiService();
-            ConfigurarPermissoes();
-
-            await CarregarDadosAsync();
         }
 
         private void ConfigurarPermissoes()
@@ -180,5 +177,17 @@ namespace HyperSpeed.Desktop.UserControls
         }
 
         private void btnPesquisar_Click(object sender, EventArgs e) => FiltrarUsuarios();
+
+        private async void UsuariosUserControl_Load_1(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+
+            ConfigurarPermissoes();
+            
+
+            await CarregarDadosAsync();
+        }
+
     }
+
 }

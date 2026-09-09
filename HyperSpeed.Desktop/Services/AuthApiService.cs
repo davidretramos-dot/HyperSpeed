@@ -60,6 +60,9 @@ namespace HyperSpeed.Desktop.Services
             var (success, _, error) = await _http.PostAsync<object>(
                 "/api/auth/register", registerDto);
             return (success, error);
+
         }
+
+
     }
 }

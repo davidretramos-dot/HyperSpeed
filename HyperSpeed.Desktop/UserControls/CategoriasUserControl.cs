@@ -13,19 +13,19 @@ namespace HyperSpeed.Desktop.UserControls
     public partial class CategoriasUserControl : UserControl
     {
 
-        private CategoriasApiService _categoriasService = null;
+        private CategoriasApiService _categoriasService;
         private List<CategoriaResponseDtos> _categorias = new();
 
         private int? _editandoId = null;
         public CategoriasUserControl()
         {
             InitializeComponent();
+            _categoriasService = new CategoriasApiService();
         }
 
         private async void CategoriasUserControl_Load(object sender, EventArgs e)
         {
             if (DesignMode) return;
-            _categoriasService = new CategoriasApiService();
             await CarregarDadosAsync();
         }
 
@@ -79,40 +79,48 @@ namespace HyperSpeed.Desktop.UserControls
         private async void btnExcluir_Click(object sender, EventArgs e)
         {
             var cat = ObterCategoriaSelecionada();
+
             if (cat == null)
             {
-                MessageBox.Show("Selecione uma categoria para excluir.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (cat.GameCount > 0)
-            {
                 MessageBox.Show(
-                    $"A categoria \"{cat.Name}\" possui {cat.GameCount} game(s) vinculado(s).\nRemova os games antes de excluir.",
-                    "Não é possível excluir",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "Selecione uma categoria para excluir.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
                 return;
             }
 
             var conf = MessageBox.Show(
                 $"Excluir a categoria \"{cat.Name}\"?",
                 "Confirmar Exclusão",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-            if (conf != DialogResult.Yes) return;
+            if (conf != DialogResult.Yes)
+                return;
 
             var (success, error) = await _categoriasService.DeleteAsync(cat.Id);
+
             if (success)
             {
-                MessageBox.Show("✅ Categoria excluída!", "Sucesso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Categoria excluída!",
+                    "Sucesso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 await CarregarDadosAsync();
             }
             else
             {
-                MessageBox.Show($"❌ {error}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    error,
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
+
         }
 
         private async void btnAtualizar_Click(object sender, EventArgs e) => await CarregarDadosAsync();
@@ -157,7 +165,7 @@ namespace HyperSpeed.Desktop.UserControls
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)=> OcultarFormulario();
+        private void btnCancelar_Click(object sender, EventArgs e) => OcultarFormulario();
 
         private CategoriaResponseDtos? ObterCategoriaSelecionada()
         {
@@ -166,6 +174,10 @@ namespace HyperSpeed.Desktop.UserControls
             return _categorias.FirstOrDefault(c => c.Id == id);
         }
 
-
+        private async void CategoriasUserControl_Load_1(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+            await CarregarDadosAsync();
+        }
     }
 }

@@ -104,15 +104,16 @@ namespace HyperSpeed.Desktop.Forms
             {
                 _botaoAtivo.FillColor = Color.Transparent;
                 _botaoAtivo.ForeColor = Color.White;
+                _botaoAtivo.CustomBorderColor = Color.Transparent;
+            }
 
-                _botaoAtivo = botao;
-                if (_botaoAtivo != null)
-                {
-                    _botaoAtivo.FillColor = Color.FromArgb(0, 50, 110);
-                    _botaoAtivo.ForeColor = Color.White;
-                    _botaoAtivo.CustomBorderColor = HyperSpeedTheme.RedHyper;
+            _botaoAtivo = botao;
 
-                }
+            if (_botaoAtivo != null)
+            {
+                _botaoAtivo.FillColor = Color.FromArgb(0, 50, 110);
+                _botaoAtivo.ForeColor = Color.White;
+                _botaoAtivo.CustomBorderColor = HyperSpeedTheme.RedHyper;
             }
         }
 

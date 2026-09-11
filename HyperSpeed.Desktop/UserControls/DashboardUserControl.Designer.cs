@@ -40,7 +40,7 @@
             colId = new DataGridViewTextBoxColumn();
             colTitle = new DataGridViewTextBoxColumn();
             colCategoryName = new DataGridViewTextBoxColumn();
-            colReleaseYear = new DataGridViewTextBoxColumn();
+            colPrice = new DataGridViewTextBoxColumn();
             colIsFeatured = new DataGridViewCheckBoxColumn();
             colCreatedAt = new DataGridViewTextBoxColumn();
             pnlCorCategorias = new Guna.UI2.WinForms.Guna2Panel();
@@ -66,7 +66,7 @@
             // 
             gridUltimosGames.BackgroundColor = Color.FromArgb(15, 15, 15);
             gridUltimosGames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridUltimosGames.Columns.AddRange(new DataGridViewColumn[] { colId, colTitle, colCategoryName, colReleaseYear, colIsFeatured, colCreatedAt });
+            gridUltimosGames.Columns.AddRange(new DataGridViewColumn[] { colId, colTitle, colCategoryName, colPrice, colIsFeatured, colCreatedAt });
             gridUltimosGames.Location = new Point(21, 269);
             gridUltimosGames.Name = "gridUltimosGames";
             gridUltimosGames.Size = new Size(770, 217);
@@ -89,10 +89,10 @@
             colCategoryName.HeaderText = "Categoria";
             colCategoryName.Name = "colCategoryName";
             // 
-            // colReleaseYear
+            // colPrice
             // 
-            colReleaseYear.HeaderText = "Ano";
-            colReleaseYear.Name = "colReleaseYear";
+            colPrice.HeaderText = "Preço";
+            colPrice.Name = "colPrice";
             // 
             // colIsFeatured
             // 
@@ -290,6 +290,7 @@
             Controls.Add(lblTitulo);
             Name = "DashboardUserControl";
             Size = new Size(805, 501);
+            Load += DashboardUserControl_Load;
             ((System.ComponentModel.ISupportInitialize)gridUltimosGames).EndInit();
             cardCategorias.ResumeLayout(false);
             cardCategorias.PerformLayout();
@@ -305,7 +306,7 @@
         private DataGridViewTextBoxColumn colId;
         private DataGridViewTextBoxColumn colTitle;
         private DataGridViewTextBoxColumn colCategoryName;
-        private DataGridViewTextBoxColumn colReleaseYear;
+        private DataGridViewTextBoxColumn colPrice;
         private DataGridViewCheckBoxColumn colIsFeatured;
         private DataGridViewTextBoxColumn colCreatedAt;
         private Guna.UI2.WinForms.Guna2Panel pnlCorCategorias;

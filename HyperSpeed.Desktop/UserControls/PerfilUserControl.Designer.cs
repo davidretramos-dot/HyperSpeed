@@ -209,6 +209,7 @@
             Controls.Add(card);
             Name = "PerfilUserControl";
             Size = new Size(805, 501);
+            Load += PerfilUserControl_Load;
             card.ResumeLayout(false);
             pnlAvatar.ResumeLayout(false);
             ResumeLayout(false);

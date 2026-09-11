@@ -20,15 +20,7 @@ namespace HyperSpeed.Desktop.UserControls
             InitializeComponent();
         }
 
-        private async void DashboardUserControl_Load(object sender, EventArgs e)
-        {
-            if (DesignMode) return;
-            _produtosService = new ProdutosApiService();
-            _categoriasService = new CategoriasApiService();
-            lblTitulo.Text = $"Olá, {SessionManager.Instance.GetDisplayName()!}";
-            lblSubtitulo.Text = $"Seja bem-vindo(a) ao HyperSpeed, {DateTime.Now:dd/MM/yyyy}";
-            await CarregarDadosAsync();
-        }
+
 
         private async Task CarregarDadosAsync()
         {
@@ -46,20 +38,23 @@ namespace HyperSpeed.Desktop.UserControls
                 cardCategoriasLblNumero.Text = categorias.Count.ToString();
 
                 gridUltimosGames.Rows.Clear();
-                foreach(var produto in produtos.OrderByDescending(x => x.CreatedAt).Take(10))
+                foreach (var produto in produtos.OrderByDescending(x => x.CreatedAt).Take(10))
                 {
                     gridUltimosGames.Rows.Add(
                         produto.Id,
                         produto.Title,
                         produto.CategoryName,
                         produto.Price.ToString("C"),
-                        produto.CreatedAt.ToString("dd/MM/yyyy")
+                        produto.IsFeatured,
+                        produto.CreatedAt == DateTime.MinValue
+                            ? "-"
+                            : produto.CreatedAt.ToString("dd/MM/yyyy")
                     );
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao carregar dados: {ex.Message}", 
+                MessageBox.Show($"Erro ao carregar dados: {ex.Message}",
                     "Erro",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -84,6 +79,16 @@ namespace HyperSpeed.Desktop.UserControls
             gridUltimosGames.Enabled = !carregando;
             cardGames.Enabled = !carregando;
             cardCategorias.Enabled = !carregando;
+        }
+
+        private async void DashboardUserControl_Load(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+            _produtosService = new ProdutosApiService();
+            _categoriasService = new CategoriasApiService();
+            lblTitulo.Text = $"Olá, {SessionManager.Instance.GetDisplayName()!}";
+            lblSubtitulo.Text = $"Seja bem-vindo(a) ao HyperSpeed, {DateTime.Now:dd/MM/yyyy}";
+            await CarregarDadosAsync();
         }
     }
 }

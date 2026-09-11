@@ -49,8 +49,14 @@ namespace hyperSpeed.Application.ViewModels
     public class DashboardViewModel
     {
         public int TotalProdutos { get; set; }
+
         public int TotalCategorias { get; set; }
-        public IEnumerable<ProdutoDTo> RecentProdutos { get; set; } = new List<ProdutoDTo>();
+
+        public IEnumerable<ProdutoDTo> RecentProdutos { get; set; }
+            = new List<ProdutoDTo>();
+
+        public IEnumerable<PedidoDTo> Pedidos { get; set; }
+            = new List<PedidoDTo>();
     }
 
     // -------------------------------------------------------------------

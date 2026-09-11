@@ -1,0 +1,139 @@
+﻿@using HyperSpeed.Domain.Entities
+@using hyperSpeed.Application.DTOs
+
+@model IEnumerable<PedidoDTo>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Pedidos";
+}
+
+<div class="admin-page-header">
+
+    <div>
+
+        <span class="admin-page-label">
+            HYPERSPEED / ADMIN / PEDIDOS
+        </span>
+
+        <h1>Pedidos</h1>
+
+        <p class="admin-page-description">
+            Visualize e acompanhe os pedidos realizados na loja.
+        </p>
+
+    </div>
+
+    <div class="admin-card-icon">
+        <i class="bi bi-cart-fill"></i>
+    </div>
+
+</div>
+
+
+<div class="admin-panel">
+
+    <div class="admin-panel-header">
+
+        <div>
+
+            <span>VENDAS</span>
+
+            <h2>Todos os Pedidos</h2>
+
+        </div>
+
+        <a asp-controller="Admin"
+           asp-action="Index"
+           class="admin-btn-outline">
+
+            <i class="bi bi-arrow-left"></i>
+            Voltar ao Dashboard
+
+        </a>
+
+    </div>
+
+
+    @if (Model != null && Model.Any())
+    {
+
+        <div class="admin-table-wrapper">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Data do Pedido</th>
+                        <th>Status</th>
+                        <th>Valor Total</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var pedido in Model)
+                    {
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    #@pedido.Id
+                                </strong>
+                            </td>
+
+                            <td>
+                                @pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+
+                            <td>
+
+                                <span class="pedido-status status-@pedido.Status.ToString().ToLower()">
+
+                                    @(pedido.Status == StatusPedido.EmPreparacao
+                                        ? "Em preparação"
+                                        : pedido.Status.ToString())
+
+                                </span>
+
+                            </td>
+
+                            <td>
+                                <strong>
+                                    R$ @pedido.Valor.ToString("N2")
+                                </strong>
+                            </td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    }
+    else
+    {
+
+        <div class="admin-empty-state">
+
+            <i class="bi bi-cart-x"></i>
+
+            <h3>Nenhum pedido encontrado</h3>
+
+            <p>
+                Ainda não existem pedidos cadastrados na loja.
+            </p>
+
+        </div>
+
+    }
+
+</div>

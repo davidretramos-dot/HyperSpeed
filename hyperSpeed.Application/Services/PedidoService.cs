@@ -54,5 +54,9 @@ namespace hyperSpeed.Application.Services
 
             return pedido;
         }
+        public async Task<IEnumerable<Pedido>> GetAllAsync()
+        {
+            return await _pedidoRepository.GetAllAsync();
+        }
     }
 }

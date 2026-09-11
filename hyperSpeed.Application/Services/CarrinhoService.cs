@@ -1,23 +1,46 @@
-﻿using hyperSpeed.Application.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json;
+using hyperSpeed.Application.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace hyperSpeed.Application.Services
 {
     public class CarrinhoService
     {
-        private readonly List<CarrinhoItem> _itens = new();
+        private const string SessionKey = "Carrinho";
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public CarrinhoService(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        private ISession Session =>
+            _httpContextAccessor.HttpContext!.Session;
 
         public List<CarrinhoItem> GetItens()
         {
-            return _itens;
+            var json = Session.GetString(SessionKey);
+
+            if (string.IsNullOrEmpty(json))
+                return new List<CarrinhoItem>();
+
+            return JsonSerializer.Deserialize<List<CarrinhoItem>>(json)
+                   ?? new List<CarrinhoItem>();
+        }
+
+        private void SalvarItens(List<CarrinhoItem> itens)
+        {
+            var json = JsonSerializer.Serialize(itens);
+            Session.SetString(SessionKey, json);
         }
 
         public void AdicionarItem(CarrinhoItem item)
         {
-            var itemExistente = _itens
-                .FirstOrDefault(i => i.ProdutoId == item.ProdutoId);
+            var itens = GetItens();
+
+            var itemExistente = itens.FirstOrDefault(
+                i => i.ProdutoId == item.ProdutoId);
 
             if (itemExistente != null)
             {
@@ -25,40 +48,48 @@ namespace hyperSpeed.Application.Services
             }
             else
             {
-                _itens.Add(item);
+                itens.Add(item);
             }
+
+            SalvarItens(itens);
         }
 
         public void RemoverItem(int produtoId)
         {
-            var item = _itens
-                .FirstOrDefault(i => i.ProdutoId == produtoId);
+            var itens = GetItens();
+
+            var item = itens.FirstOrDefault(
+                i => i.ProdutoId == produtoId);
 
             if (item != null)
             {
-                _itens.Remove(item);
+                itens.Remove(item);
+                SalvarItens(itens);
             }
         }
 
         public void AlterarQuantidade(int produtoId, int quantidade)
         {
-            var item = _itens
-                .FirstOrDefault(i => i.ProdutoId == produtoId);
+            var itens = GetItens();
+
+            var item = itens.FirstOrDefault(
+                i => i.ProdutoId == produtoId);
 
             if (item != null)
             {
                 item.Quantidade = quantidade;
+                SalvarItens(itens);
             }
         }
 
         public decimal GetTotal()
         {
-            return _itens.Sum(i => i.SubTotal);
+            return GetItens().Sum(i => i.SubTotal);
         }
 
         public void LimparCarrinho()
         {
-            _itens.Clear();
+            Session.Remove(SessionKey);
         }
     }
 }

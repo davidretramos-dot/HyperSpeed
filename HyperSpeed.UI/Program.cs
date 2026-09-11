@@ -94,9 +94,27 @@ builder.Services.AddHttpClient<HttpCategoriaService>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5153/");
 });
+builder.Services.AddHttpClient<HttpPedidoService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5153/");
+});
+
+// -----------------------------
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddHttpContextAccessor();
 
 //Cria a aplicação a partir do Builder configurado
 var app = builder.Build();
+
 
 // =====================================================================================
 // PIPELINES DE MIDDLEWARE - Configura a sequência de processamento das requisições HTTP
@@ -114,6 +132,8 @@ app.UseStaticFiles(); // Permite servir arquivos estáticos (CSS, JS, Imagens) d
 
 // Configura o roteamento das requisições para os controladores(controllers) e ações.
 app.UseRouting();
+
+app.UseSession();
 
 // Configura a autenticação e autorização para proteger rotas que exigem
 // login ou permissões específicas.
@@ -145,3 +165,29 @@ await SeedData.SeedAsync(app.Services);
 
 // Inicia o servidor web e começa a ouvir as requisições HTTP.
 app.Run();
+
+// -----------------------------------------------
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+
+app.UseSession();
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseSession();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// -----------------------------------------------
+

@@ -5253,4 +5253,359 @@ footer {
         grid-row: 1;
     }
 }
- 
+
+// ------------------------------
+
+/* =========================================================
+   CARRINHO
+   ========================================================= */
+
+.carrinho-page {
+    width: calc(100% - 80px);
+    max-width: 1200px;
+    margin: 50px auto 100px;
+}
+
+.carrinho-header {
+    margin-bottom: 30px;
+}
+
+.carrinho-header h1 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-size: 36px;
+}
+
+.carrinho-header p {
+    margin: 0;
+    color: #888;
+}
+
+
+/* CARRINHO VAZIO */
+
+.carrinho-vazio {
+    padding: 70px 30px;
+    text-align: center;
+
+    background: #111;
+    border: 1px solid #292929;
+    border-radius: 14px;
+}
+
+.carrinho-vazio i {
+    font-size: 55px;
+    color: var(--hs-red);
+}
+
+.carrinho-vazio h2 {
+    color: #fff;
+    margin: 20px 0 10px;
+}
+
+.carrinho-vazio p {
+    color: #888;
+}
+
+.carrinho-voltar {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 13px 25px;
+
+    background: var(--hs-red);
+    color: #fff;
+
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+
+/* CONTEÚDO */
+
+.carrinho-conteudo {
+    display: grid;
+    grid-template-columns: 1fr 330px;
+    gap: 25px;
+}
+
+
+/* ITEM */
+
+.carrinho-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.carrinho-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    align-items: center;
+    gap: 25px;
+
+    padding: 22px;
+
+    background: #111;
+    border: 1px solid #292929;
+    border-radius: 10px;
+}
+
+.carrinho-item h3 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-size: 17px;
+}
+
+.carrinho-item-info span {
+    color: #888;
+    font-size: 14px;
+}
+
+.carrinho-item-quantidade {
+    color: #aaa;
+    font-size: 14px;
+}
+
+.carrinho-item-subtotal {
+    color: #fff;
+    font-size: 17px;
+}
+
+.carrinho-remover {
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #333;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #e00050;
+
+    cursor: pointer;
+}
+
+.carrinho-remover:hover {
+    background: #e00050;
+    color: #fff;
+}
+
+
+/* RESUMO */
+
+.carrinho-resumo {
+    height: fit-content;
+
+    padding: 25px;
+
+    background: #111;
+    border: 1px solid #292929;
+    border-radius: 10px;
+}
+
+.carrinho-resumo h2 {
+    margin: 0 0 25px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.carrinho-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 20px;
+    border-top: 1px solid #292929;
+
+    color: #aaa;
+}
+
+.carrinho-total strong {
+    color: #fff;
+    font-size: 22px;
+}
+
+.carrinho-finalizar {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: var(--hs-red);
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.carrinho-finalizar:hover {
+    background: var(--hs-red-light);
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 800px) {
+
+    .carrinho-page {
+        width: calc(100% - 30px);
+    }
+
+    .carrinho-conteudo {
+        grid-template-columns: 1fr;
+    }
+
+    .carrinho-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+}
+/* =========================================================
+   PEDIDO FINALIZADO
+   ========================================================= */
+
+.pedido-finalizado {
+    width: calc(100% - 40px);
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 60px 40px;
+    text-align: center;
+    background: var(--hs-dark);
+    border: 1px solid var(--hs-border);
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .35);
+}
+
+.pedido-finalizado-icon {
+    margin-bottom: 25px;
+}
+
+    .pedido-finalizado-icon i {
+        color: var(--hs-red-hover);
+        font-size: 70px;
+    }
+
+.pedido-finalizado h1 {
+    margin: 0 0 15px;
+    color: #fff;
+    font-size: 32px;
+}
+
+.pedido-finalizado p {
+    margin-bottom: 30px;
+    color: #888;
+    font-size: 16px;
+}
+
+.pedido-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 25px;
+    background: var(--hs-red);
+    color: #fff;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+    .pedido-voltar:hover {
+        background: var(--hs-red-light);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+/* =====================================================
+   PEDIDOS - ADMIN
+   ===================================================== */
+
+.pedido-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* Pendente */
+
+.status-pendente {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+
+/* Pago */
+
+.status-pago {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+
+/* Em preparação */
+
+.status-empreparacao {
+    background-color: #cff4fc;
+    color: #055160;
+}
+
+
+/* Enviado */
+
+.status-enviado {
+    background-color: #e2d9f3;
+    color: #59359a;
+}
+
+
+/* Entregue */
+
+.status-entregue {
+    background-color: #d1e7dd;
+    color: #146c43;
+}
+
+
+/* Cancelado */
+
+.status-cancelado {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+
+/* =====================================================
+   ESTADO VAZIO
+   ===================================================== */
+
+.admin-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+    .admin-empty-state i {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 15px;
+        opacity: 0.5;
+    }
+
+    .admin-empty-state h3 {
+        margin-bottom: 8px;
+        font-size: 1.2rem;
+    }
+
+    .admin-empty-state p {
+        margin: 0;
+        opacity: 0.7;
+    }

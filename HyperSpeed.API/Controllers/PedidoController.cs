@@ -1,7 +1,10 @@
 ﻿using hyperSpeed.Application.DTOs;
 using hyperSpeed.Application.Services;
 using HyperSpeed.Domain.interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+
 
 namespace HyperSpeed.API.Controllers
 {
@@ -51,7 +54,16 @@ namespace HyperSpeed.API.Controllers
                 Id = pedido.Id,
                 Status = pedido.Status,
                 Valor = pedido.ValorTotal,
-                DataPedido = pedido.DataPedido
+                DataPedido = pedido.DataPedido,
+
+                Itens = pedido.ItemPedidos.Select(item => new ItemPedidoDTo
+                {
+                    ProdutoId = item.ProdutoId,
+                    NomeProduto = item.Produto.Nome,
+                    Quantidade = item.Quantidade,
+                    PrecoUni = item.PrecoUni,
+                    SubTotal = item.SubTotal
+                }).ToList()
             };
 
             return Ok(pedidoDto);
@@ -80,6 +92,24 @@ namespace HyperSpeed.API.Controllers
                     detalhes = ex.InnerException?.Message
                 });
             }
+        }
+
+        // GET: api/Pedido/MeusPedidos
+        [Authorize]
+        [HttpGet("MeusPedidos")]
+        public async Task<IActionResult> MeusPedidos()
+        {
+            var userId = User.FindFirst(
+                System.Security.Claims.ClaimTypes.NameIdentifier
+            )?.Value;
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var pedidos = await _pedidoRepository
+                .GetByUserIdAsync(userId);
+
+            return Ok(pedidos);
         }
     }
 }

@@ -48,4 +48,13 @@ public class PedidoRepository : IPedidoRepository
     {
         return await _context.Pedidos.CountAsync();
     }
+    public async Task<IEnumerable<Pedido>> GetByUserIdAsync(string userId)
+    {
+        return await _context.Pedidos
+            .Include(p => p.ItemPedidos)
+            .ThenInclude(i => i.Produto)
+            .Where(p => p.UserId == userId)
+            .OrderByDescending(p => p.DataPedido)
+            .ToListAsync();
+    }
 }

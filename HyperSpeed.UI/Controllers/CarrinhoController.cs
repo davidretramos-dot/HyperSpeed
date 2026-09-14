@@ -3,6 +3,7 @@ using hyperSpeed.Application.Services;
 using hyperSpeed.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
+using System.Security.Claims;
 
 namespace HyperSpeed.UI.Controllers
 {
@@ -55,10 +56,6 @@ namespace HyperSpeed.UI.Controllers
             return RedirectToAction("Index");
         }
 
-        // ==========================================
-        // FINALIZAR PEDIDO
-        // ==========================================
-
         [HttpPost]
         public async Task<IActionResult> FinalizarPedido()
         {
@@ -70,13 +67,23 @@ namespace HyperSpeed.UI.Controllers
                 return RedirectToAction("Index");
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                TempData["Erro"] = "Você precisa estar logado para finalizar o pedido.";
+                return RedirectToAction("Login", "Conta");
+            }
+
             var dto = new CreatePedidoDto
             {
                 Itens = itens.Select(item => new CreateItemPedidoDto
                 {
                     ProdutoId = item.ProdutoId,
                     Quantidade = item.Quantidade
-                }).ToList()
+                }).ToList(),
+
+                UserId = userId
             };
 
             var client = _httpClientFactory
@@ -95,12 +102,10 @@ namespace HyperSpeed.UI.Controllers
                 return RedirectToAction("Index");
             }
 
-            // Pedido criado com sucesso
             _carrinhoService.LimparCarrinho();
 
             return RedirectToAction("PedidoFinalizado");
         }
-
         public IActionResult PedidoFinalizado()
         {
             return View();

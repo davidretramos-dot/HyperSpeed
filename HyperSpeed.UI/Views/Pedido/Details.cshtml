@@ -1,0 +1,121 @@
+﻿@using HyperSpeed.Domain.Entities
+@model hyperSpeed.Application.DTOs.PedidoDTo
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = $"Pedido #{Model.Id}";
+
+    var statusClass = Model.Status switch
+    {
+        StatusPedido.Pendente => "status-pendente",
+        StatusPedido.Pago => "status-pago",
+        StatusPedido.EmPreparacao => "status-preparacao",
+        StatusPedido.Enviado => "status-enviado",
+        StatusPedido.Entregue => "status-entregue",
+        StatusPedido.Cancelado => "status-cancelado",
+        _ => "status-pendente"
+    };
+}
+
+<div class="pedido-detalhes">
+
+    <div class="pedido-topo">
+        <div>
+            <a asp-controller="Pedido"
+               asp-action="Index"
+               class="btn-voltar">
+                ← Voltar para meus pedidos
+            </a>
+
+            <h1>Pedido #@Model.Id</h1>
+            <p>
+                Realizado em @Model.DataPedido.ToString("dd/MM/yyyy 'às' HH:mm")
+            </p>
+        </div>
+
+        <span class="status @statusClass">
+            @Model.Status
+        </span>
+    </div>
+
+    <div class="pedido-resumo">
+
+        <div class="resumo-card">
+            <span class="resumo-label">Número do pedido</span>
+            <strong>#@Model.Id</strong>
+        </div>
+
+        <div class="resumo-card">
+            <span class="resumo-label">Data do pedido</span>
+            <strong>@Model.DataPedido.ToString("dd/MM/yyyy")</strong>
+        </div>
+
+        <div class="resumo-card">
+            <span class="resumo-label">Status</span>
+            <strong>@Model.Status</strong>
+        </div>
+
+        <div class="resumo-card">
+            <span class="resumo-label">Total</span>
+            <strong>R$ @Model.Valor.ToString("N2")</strong>
+        </div>
+
+    </div>
+
+    <section class="pedido-itens">
+
+        <div class="secao-titulo">
+            <h2>Itens do pedido</h2>
+        </div>
+
+        @if (Model.Itens != null && Model.Itens.Any())
+        {
+            <div class="itens-lista">
+
+                @foreach (var item in Model.Itens)
+                {
+                    <div class="item-pedido">
+
+                        <div class="item-info">
+                            <h3>@item.NomeProduto</h3>
+
+                            <span>
+                                Quantidade: @item.Quantidade
+                            </span>
+                        </div>
+
+                        <div class="item-precos">
+                            <span>
+                                R$ @item.PrecoUni.ToString("N2") cada
+                            </span>
+
+                            <strong>
+                                R$ @item.SubTotal.ToString("N2")
+                            </strong>
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="sem-itens">
+                <p>Não há itens disponíveis para este pedido.</p>
+            </div>
+        }
+
+    </section>
+
+    <section class="pedido-total">
+
+        <span>Total do pedido</span>
+
+        <strong>
+            R$ @Model.Valor.ToString("N2")
+        </strong>
+
+    </section>
+
+</div>

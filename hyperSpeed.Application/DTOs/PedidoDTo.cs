@@ -13,6 +13,7 @@ namespace hyperSpeed.Application.DTOs
         public decimal Valor { get; set; }
 
         public DateTime DataPedido { get; set; }
+        public List<ItemPedidoDTo> Itens { get; set; } = new();
     }
 
     public class CreatePedidoDto
@@ -20,5 +21,6 @@ namespace hyperSpeed.Application.DTOs
         public List<CreateItemPedidoDto> Itens { get; set; } = new();
 
         public TipoPagamento TipoPagamento { get; set; }
+        public string UserId { get; set; } = string.Empty;
     }
 }

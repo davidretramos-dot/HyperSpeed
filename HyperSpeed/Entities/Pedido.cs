@@ -12,6 +12,7 @@
     public class Pedido
     {
         public int Id { get; set; }
+        public string UserId { get; set; }
         public DateTime DataPedido { get; set; } = DateTime.Now;
 
         public StatusPedido Status { get; set; } = StatusPedido.Pendente;

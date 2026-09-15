@@ -5904,6 +5904,5 @@ footer {
     .btn-voltar:hover {
         background: #8d0038;
         border-color: #555;
-        color: var(--hs-red-light);
-        
+        color: #fff;
     }

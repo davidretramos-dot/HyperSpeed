@@ -33,7 +33,7 @@ namespace HyperSpeed.API.Controllers
             {
                 Id = p.Id,
                 Status = p.Status,
-                Valor = p.ValorTotal,
+                ValorTotal = p.ValorTotal,
                 DataPedido = p.DataPedido
             });
 
@@ -53,7 +53,7 @@ namespace HyperSpeed.API.Controllers
             {
                 Id = pedido.Id,
                 Status = pedido.Status,
-                Valor = pedido.ValorTotal,
+                ValorTotal = pedido.ValorTotal,
                 DataPedido = pedido.DataPedido,
 
                 Itens = pedido.ItemPedidos.Select(item => new ItemPedidoDTo

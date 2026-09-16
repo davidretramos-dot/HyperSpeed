@@ -32,64 +32,185 @@
 
     <header class="site-header">
 
-        @* Logo da Hyper Speed *@
-        <div class="logo">
+        <div class="top-bar">
 
-            <a asp-controller="Home"
-               asp-action="Index">
+            @* Logo da Hyper Speed *@
+            <div class="logo">
 
-                <img src="~/img/Logo HS.png"
-                     alt="Hyper Speed" />
+                <a asp-controller="Home"
+                   asp-action="Index">
 
-            </a>
-
-        </div>
-
- 
-        @* Barra de pesquisa *@
-        <div class="search">
-
-            <input type="text"
-                   placeholder="Pesquisar..." />
-
-        </div>
-
- 
-        @* Área da conta *@
-        <div class="account">
-
-            @if (User?.Identity?.IsAuthenticated == true)
-            {
-                <a asp-controller="Conta"
-                   asp-action="Perfil">
-
-                    <i class="bi bi-person-circle"></i>
-
-                    Conta
+                    <img src="~/img/Logo HS.png"
+                         alt="Hyper Speed" />
 
                 </a>
 
- 
-                @if (User.IsInRole("Admin"))
+            </div>
+
+
+            @* Barra de pesquisa *@
+            <form class="search"
+                  asp-controller="Produto"
+                  asp-action="Index"
+                  method="get">
+
+                <input type="text"
+                       name="pesquisa"
+                       placeholder="Pesquisar..." />
+
+                <button type="submit"
+                        aria-label="Pesquisar">
+                    <i class="bi bi-search"></i>
+                </button>
+
+            </form>
+
+
+            @* Área da conta *@
+            <div class="account">
+
+                @if (User?.Identity?.IsAuthenticated == true)
                 {
-                    <a asp-controller="Admin"
-                       asp-action="Index"
-                       class="admin-link">
+                    <a asp-controller="Conta"
+                       asp-action="Perfil">
 
-                        <i class="bi bi-speedometer2"></i>
+                        <i class="bi bi-person-circle"></i>
 
-                        Admin
+                        Conta
+
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Conta"
+                       asp-action="Login">
+
+                        <i class="bi bi-person-circle"></i>
+
+                        Conta
 
                     </a>
                 }
 
- 
+
+                <a asp-controller="Favorito"
+                   asp-action="Index">
+
+                    <span class="favorite-icon">★</span>
+
+                    Favoritos
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        @* Menu principal *@
+        <nav class="main-nav">
+
+            <!-- MENU SUSPENSO -->
+            <div class="menu-dropdown">
+
+                <button type="button"
+                        class="menu-icon"
+                        id="menuDropdownButton"
+                        aria-label="Abrir menu"
+                        aria-expanded="false">
+
+                    <i class="bi bi-list"></i>
+
+                </button>
+
+
+                <div class="menu-dropdown-content" id="menuDropdownContent">
+
+                    @if (User?.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Admin"
+                           asp-action="Index"
+                           class="dropdown-item">
+
+                            <i class="bi bi-speedometer2"></i>
+
+                            <span>Admin</span>
+
+                        </a>
+                    }
+
+
+                    <a asp-controller="Carrinho"
+                       asp-action="Index"
+                       class="dropdown-item">
+
+                        <i class="bi bi-cart3"></i>
+
+                        <span>Carrinho</span>
+
+                    </a>
+
+
+                    @if (User?.Identity?.IsAuthenticated == true)
+                    {
+                        <a asp-controller="Pedido"
+                           asp-action="Index"
+                           class="dropdown-item">
+
+                            <i class="bi bi-bag-check"></i>
+
+                            <span>Meus Pedidos</span>
+
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- RESTANTE DO MENU -->
+
+            <a asp-controller="Produto"
+               asp-action="Index"
+               asp-fragment="produtos">
+
+                Monte seu PC
+
+            </a>
+
+
+            <a asp-controller="Categoria"
+               asp-action="Index">
+
+                Departamentos
+
+            </a>
+
+
+            <a asp-controller="Produto"
+               asp-action="Perifericos">
+
+                Periféricos
+
+            </a>
+
+
+            <a asp-controller="Produto"
+               asp-action="Promocoes"
+               class="promotion">
+
+                Promoções
+
+            </a>
+
+
+            @if (User?.Identity?.IsAuthenticated == true)
+            {
                 <form asp-controller="Conta"
                       asp-action="Logout"
                       method="post"
                       class="logout-form">
-
-                    @Html.AntiForgeryToken()
 
                     <button type="submit">
 
@@ -101,54 +222,10 @@
 
                 </form>
             }
-            else
-            {
-                <a asp-controller="Conta"
-                   asp-action="Login">
 
-                    <i class="bi bi-person-circle"></i>
-
-                    Conta
-
-                </a>
-            }
-
- 
-            <a asp-controller="Favorito"
-               asp-action="Index">
-
-                <span class="favorite-icon">★</span>
-
-                Favoritos
-
-            </a>
-
-
-            <a asp-controller="Carrinho"
-               asp-action="Index"
-               class="header-carrinho">
-                <i class="bi bi-cart3"></i>
-                Carrinho
-            </a>
-
-            @if (User.Identity?.IsAuthenticated == true)
-            {
-                <a asp-controller="Pedido"
-                   asp-action="Index"
-                   class="btn-pedidos">
-
-                    <i class="bi bi-bag-check"></i>
-                    Meus Pedidos
-
-                </a>
-            }
-        </div>
+        </nav>
 
     </header>
-
- 
-    @* Navbar *@
-    <partial name="_Navbar" />
 
  
     @* Conteúdo de cada página *@
@@ -227,9 +304,9 @@
     @RenderSection("Scripts", required: false)
 
  
-    <script src="~/js/menu.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script src="~/js/carousel.js"></script>
+  
 
 </body>
 

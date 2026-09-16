@@ -10,7 +10,7 @@ namespace hyperSpeed.Application.DTOs
 
         public StatusPedido Status { get; set; }
 
-        public decimal Valor { get; set; }
+        public decimal ValorTotal { get; set; }
 
         public DateTime DataPedido { get; set; }
         public List<ItemPedidoDTo> Itens { get; set; } = new();

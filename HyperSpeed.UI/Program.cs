@@ -146,6 +146,17 @@ builder.Services.AddHttpClient<HttpPedidoService>(client =>
         UseCookies = false
     })
 .AddHttpMessageHandler<ApiCookieHandler>();
+
+builder.Services.AddHttpClient<HttpFavoritoService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5153/");
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        UseCookies = false
+    })
+.AddHttpMessageHandler<ApiCookieHandler>();
 // -----------------------------
 
 builder.Services.AddDistributedMemoryCache();

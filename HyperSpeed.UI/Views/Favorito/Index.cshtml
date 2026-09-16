@@ -1,0 +1,138 @@
+﻿@using HyperSpeed.Domain.Entities
+
+@model IEnumerable<Favorito>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Meus Favoritos";
+}
+
+<div class="favoritos-page">
+
+    <div class="favoritos-header">
+
+        <div>
+            <span class="favoritos-label">
+                HYPERSPEED
+            </span>
+
+            <h1>Meus Favoritos</h1>
+
+            <p>
+                Produtos que você salvou para comprar depois.
+            </p>
+        </div>
+
+        <i class="bi bi-star-fill favoritos-header-icon"></i>
+
+    </div>
+
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="favoritos-grid">
+
+            @foreach (var favorito in Model)
+            {
+                var produto = favorito.Produto;
+
+                <div class="favorito-card">
+
+                    <div class="favorito-imagem">
+
+                        @if (!string.IsNullOrEmpty(produto.Imagem))
+                        {
+                            <img src="@produto.Imagem"
+                                 alt="@produto.Nome" />
+                        }
+                        else
+                        {
+                            <i class="bi bi-image"></i>
+                        }
+
+                    </div>
+
+
+                    <div class="favorito-info">
+
+                        <h2>
+                            @produto.Nome
+                        </h2>
+
+                        <p class="favorito-descricao">
+                            @produto.Descricao
+                        </p>
+
+                        <strong class="favorito-preco">
+                            @produto.Preco.ToString("C")
+                        </strong>
+
+                    </div>
+
+
+                    <div class="favorito-actions">
+
+                        <a asp-controller="Produto"
+                           asp-action="Details"
+                           asp-route-id="@produto.Id"
+                           class="favorito-btn">
+
+                            <i class="bi bi-eye"></i>
+                            Ver produto
+
+                        </a>
+
+
+                        <form asp-controller="Favorito"
+                              asp-action="Remover"
+                              method="post">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="produtoId"
+                                   value="@produto.Id" />
+
+                            <button type="submit"
+                                    class="favorito-remove">
+
+                                <i class="bi bi-star-fill"></i>
+
+                                Remover
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="favoritos-vazio">
+
+            <i class="bi bi-star"></i>
+
+            <h2>Você ainda não tem favoritos</h2>
+
+            <p>
+                Encontre um produto que você goste
+                e clique na estrela para salvá-lo aqui.
+            </p>
+
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="favorito-btn">
+
+                Ver produtos
+
+            </a>
+
+        </div>
+    }
+
+</div>

@@ -77,7 +77,8 @@ builder.Services.AddScoped<ICategoriasService, CategoriasService>();
 
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<PedidoService>();
-
+builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
+builder.Services.AddScoped<FavoritoService>();
 // Web + API
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options =>

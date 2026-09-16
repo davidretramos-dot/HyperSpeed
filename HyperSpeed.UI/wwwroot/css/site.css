@@ -117,7 +117,8 @@ a {
     border: 1px solid var(--hs-border);
     border-radius: 14px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
-    overflow: hidden;
+    /* Permite que dropdowns posicionados absolutamente fiquem visíveis fora do header */
+    overflow: visible;
 }
 
 

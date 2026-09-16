@@ -33,8 +33,8 @@ namespace HyperSpeed.Infrastruture.Identity
     {
         new Categorias { Nome = "Processadores" },
         new Categorias { Nome = "Placas de Vídeo" },
-        new Categorias{ Nome = "SSD" },
-        new Categorias{ Nome = "Teclados" },
+        new Categorias { Nome = "SSD" },
+        new Categorias { Nome = "Teclados" },
         new Categorias { Nome = "Placas-Mãe" },
         new Categorias { Nome = "Headsets e Fones" },
         new Categorias { Nome = "Controles" },

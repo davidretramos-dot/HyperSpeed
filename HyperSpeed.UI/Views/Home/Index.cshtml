@@ -156,63 +156,79 @@
             {
                 <div class="produto-card">
 
-                    <div class="produto-image">
+                    <a asp-controller="Produto"
+                       asp-action="Details"
+                       asp-route-id="@produto.Id"
+                       class="produto-card-link">
 
-                        @if (produto.Destaque)
+                        <div class="produto-image">
 
-                        {
-                            <span class="produto-badge">
+                            @if (produto.Destaque)
 
-                                DESTAQUE
-                            </span>
+                            {
+                                <span class="produto-badge">
 
-                        }
+                                    DESTAQUE
+                                </span>
 
-                        @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
+                            }
 
-                        {
-                            <img src="@produto.ImagemUrl"
-                                 alt="@produto.NomeProduto"
-                                 onerror="this.style.display='none'" />
+                            @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
 
-                        }
+                            {
+                                <img src="@produto.ImagemUrl"
+                                     alt="@produto.NomeProduto"
+                                     onerror="this.style.display='none'" />
 
-                    </div>
+                            }
+
+                        </div>
 
  
-                    <div class="produto-info">
+                        <div class="produto-info">
 
-                        <span class="produto-categoria">
+                            <span class="produto-categoria">
 
-                            PRODUTO
+                                PRODUTO
+                            </span>
+
+ 
+                            <h3>
+
+                                @produto.NomeProduto
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+ 
+                    <div class="produto-bottom">
+
+                        <span class="produto-preco">
+
+                            R$ @produto.Preco.ToString("N2")
+
                         </span>
 
  
-                        <h3>
+                        <form asp-controller="Carrinho"
+                              asp-action="Adicionar"
+                              method="post">
 
-                            @produto.NomeProduto
-                        </h3>
+                            @Html.AntiForgeryToken()
 
- 
-                        <div class="produto-bottom">
+                            <input type="hidden" name="produtoId" value="@produto.Id" />
+                            <input type="hidden" name="nome" value="@produto.NomeProduto" />
+                            <input type="hidden" name="preco" value="@produto.Preco" />
 
-                            <span class="produto-preco">
-
-                                R$ @produto.Preco.ToString("N2")
-
-                            </span>
-
- 
-                            <a asp-controller="Produto"
-                               asp-action="Details"
-                               asp-route-id="@produto.Id"
-                               class="produto-button">
+                            <button type="submit" class="produto-button" title="Adicionar ao carrinho">
 
                                 <i class="bi bi-cart-plus"></i>
 
-                            </a>
+                            </button>
 
-                        </div>
+                        </form>
 
                     </div>
 
@@ -293,65 +309,81 @@
             {
                 <div class="produto-card">
 
-                    <div class="produto-image">
+                    <a asp-controller="Produto"
+                       asp-action="Details"
+                       asp-route-id="@produto.Id"
+                       class="produto-card-link">
 
-                        @if (produto.Destaque)
+                        <div class="produto-image">
 
-                        {
-                            <span class="produto-badge">
+                            @if (produto.Destaque)
 
-                                DESTAQUE
-                            </span>
+                            {
+                                <span class="produto-badge">
 
-                        }
+                                    DESTAQUE
+                                </span>
 
-                        @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
+                            }
 
-                        {
-                            <img src="@produto.ImagemUrl"
-                                 alt="@produto.NomeProduto"
-                                 onerror="this.style.display='none'" />
+                            @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
 
-                        }
+                            {
+                                <img src="@produto.ImagemUrl"
+                                     alt="@produto.NomeProduto"
+                                     onerror="this.style.display='none'" />
 
-                    </div>
+                            }
+
+                        </div>
 
  
-                    <div class="produto-info">
+                        <div class="produto-info">
 
-                        <span class="produto-categoria">
+                            <span class="produto-categoria">
 
-                            @(string.IsNullOrWhiteSpace(produto.NomeCategoria)
-                                ? "PRODUTO"
-                                : produto.NomeCategoria.ToUpper())
+                                @(string.IsNullOrWhiteSpace(produto.NomeCategoria)
+                                    ? "PRODUTO"
+                                    : produto.NomeCategoria.ToUpper())
+                            </span>
+
+ 
+                            <h3>
+
+                                @produto.NomeProduto
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+ 
+                    <div class="produto-bottom">
+
+                        <span class="produto-preco">
+
+                            R$ @produto.Preco.ToString("N2")
+
                         </span>
 
  
-                        <h3>
+                        <form asp-controller="Carrinho"
+                              asp-action="Adicionar"
+                              method="post">
 
-                            @produto.NomeProduto
-                        </h3>
+                            @Html.AntiForgeryToken()
 
- 
-                        <div class="produto-bottom">
+                            <input type="hidden" name="produtoId" value="@produto.Id" />
+                            <input type="hidden" name="nome" value="@produto.NomeProduto" />
+                            <input type="hidden" name="preco" value="@produto.Preco" />
 
-                            <span class="produto-preco">
-
-                                R$ @produto.Preco.ToString("N2")
-
-                            </span>
-
- 
-                            <a asp-controller="Produto"
-                               asp-action="Details"
-                               asp-route-id="@produto.Id"
-                               class="produto-button">
+                            <button type="submit" class="produto-button" title="Adicionar ao carrinho">
 
                                 <i class="bi bi-cart-plus"></i>
 
-                            </a>
+                            </button>
 
-                        </div>
+                        </form>
 
                     </div>
 

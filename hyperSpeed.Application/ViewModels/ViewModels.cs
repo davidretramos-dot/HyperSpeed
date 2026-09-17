@@ -95,11 +95,104 @@ namespace hyperSpeed.Application.ViewModels
     // -------------------------------------------------------------------
     // Adicional abaixo
     // -------------------------------------------------------------------
+
+    public class CategoriaListViewModel
+    {
+        public IEnumerable<CategoriasDTo> Categorias { get; set; }
+            = new List<CategoriasDTo>();
+
+        // IdCategoria -> quantidade de produtos
+        public Dictionary<int, int> TotalPorCategoria { get; set; }
+            = new Dictionary<int, int>();
+
+        public int TotalDe(int idCategoria)
+        {
+            return TotalPorCategoria.TryGetValue(idCategoria, out var total)
+                ? total
+                : 0;
+        }
+    }
+
+    // -------------------------------------------------------------------
+
+    public class CategoriaProdutosViewModel
+    {
+        public CategoriasDTo Categoria { get; set; } = new CategoriasDTo();
+
+        public IEnumerable<ProdutoDTo> Produtos { get; set; }
+            = new List<ProdutoDTo>();
+
+        // Usada para os chips de troca rapida de categoria
+        public IEnumerable<CategoriasDTo> Categorias { get; set; }
+            = new List<CategoriasDTo>();
+
+        public string? Pesquisa { get; set; }
+
+        public string? Ordem { get; set; }
+
+        public int Total => Produtos.Count();
+    }
+
+    // -------------------------------------------------------------------
+    public class EditarPerfilViewModel
+    {
+        [Required(ErrorMessage = "Informe seu nome.")]
+        [Display(Name = "Nome")]
+        [StringLength(100, ErrorMessage = "O nome pode ter no máximo 100 caracteres.")]
+        public string Nome { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Informe seu e-mail.")]
+        [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; } = string.Empty;
+
+        public bool IsAdmin { get; set; }
+    }
+
+    // -------------------------------------------------------------------
+
     public class PerfilViewModel
     {
         public string Nome { get; set; }
         public string Email { get; set; }
         public bool IsAdmin { get; set; }
+    }
+
+    // -------------------------------------------------------------------
+
+    public class EsqueciSenhaViewModel
+    {
+        [Required(ErrorMessage = "Informe seu e-mail.")]
+        [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; } = string.Empty;
+    }
+
+    // -------------------------------------------------------------------
+
+    public class RedefinirSenhaViewModel
+    {
+        [Required]
+        [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Informe o token de recuperação.")]
+        [Display(Name = "Token")]
+        public string Token { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Informe a nova senha.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Nova senha")]
+        [StringLength(100, MinimumLength = 6,
+            ErrorMessage = "A senha deve ter entre 6 e 100 caracteres.")]
+        public string NovaSenha { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Confirme a nova senha.")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar nova senha")]
+        [Compare("NovaSenha", ErrorMessage = "As senhas não coincidem.")]
+        public string ConfirmarNovaSenha { get; set; } = string.Empty;
     }
 
     // -------------------------------------------------------------------

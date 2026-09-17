@@ -58,8 +58,10 @@ namespace HyperSpeed.UI.Controllers
             };
 
             return View(model);
-
-
+        }
+        public IActionResult Sobre()
+        {
+            return View();
         }
 
     }

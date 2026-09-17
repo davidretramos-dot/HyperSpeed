@@ -1,0 +1,112 @@
+﻿@using hyperSpeed.Application.ViewModels
+@model EditarPerfilViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Editar Perfil";
+}
+
+<div class="perfilHS-page">
+
+    <div class="perfilHS-container">
+
+        <div class="perfilHS-header">
+
+            <span class="perfilHS-label">
+                HYPERSPEED / CONTA
+            </span>
+
+            <h1>Editar Perfil</h1>
+
+            <p>
+                Atualize as informações da sua conta.
+            </p>
+
+        </div>
+
+
+        <div class="perfilHS-form-card">
+
+            <div class="perfilHS-avatar perfilHS-avatar-sm">
+                <i class="bi bi-person-fill"></i>
+            </div>
+
+
+            <form asp-controller="Conta"
+                  asp-action="EditarPerfil"
+                  method="post"
+                  class="perfilHS-form">
+
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="login-validation"></div>
+
+
+                <div class="login-field">
+
+                    <label asp-for="Nome">Nome</label>
+
+                    <div class="login-input">
+
+                        <i class="bi bi-person"></i>
+
+                        <input asp-for="Nome"
+                               type="text"
+                               placeholder="Seu nome"
+                               autofocus
+                               required />
+
+                    </div>
+
+                    <span asp-validation-for="Nome" class="login-error"></span>
+
+                </div>
+
+
+                <div class="login-field">
+
+                    <label asp-for="Email">Email</label>
+
+                    <div class="login-input">
+
+                        <i class="bi bi-envelope"></i>
+
+                        <input asp-for="Email"
+                               type="email"
+                               placeholder="Seu e-mail"
+                               autocomplete="email"
+                               required />
+
+                    </div>
+
+                    <span asp-validation-for="Email" class="login-error"></span>
+
+                </div>
+
+
+                <div class="perfilHS-form-actions">
+
+                    <button type="submit" class="perfilHS-btn perfilHS-btn-primary">
+                        <i class="bi bi-check2"></i>
+                        Salvar alterações
+                    </button>
+
+                    <a asp-controller="Conta" asp-action="Perfil" class="perfilHS-btn">
+                        <i class="bi bi-x-lg"></i>
+                        Cancelar
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

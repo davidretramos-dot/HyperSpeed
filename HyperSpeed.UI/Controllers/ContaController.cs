@@ -37,8 +37,14 @@ namespace HyperSpeed.UI.Controllers
             if (!ModelState.IsValid)
                 return View("~/Views/Account/Login.cshtml", model);
 
-            var result = await _signInManager.PasswordSignInAsync(
-                model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
+            // Buscamos sempre pelo e-mail: o UserName pode ter sido alterado
+            // em "Editar Perfil" e não é mais garantido que seja igual ao e-mail.
+            var usuarioParaLogin = await _userManager.FindByEmailAsync(model.Email);
+
+            var result = usuarioParaLogin == null
+                ? Microsoft.AspNetCore.Identity.SignInResult.Failed
+                : await _signInManager.PasswordSignInAsync(
+                    usuarioParaLogin, model.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
@@ -50,6 +56,91 @@ namespace HyperSpeed.UI.Controllers
 
             ModelState.AddModelError(string.Empty, "Email ou senha inválidos.");
             return View("~/Views/Account/Login.cshtml", model);
+        }
+
+        // GET: /Conta/EsqueciSenha
+        [HttpGet]
+        public IActionResult EsqueciSenha()
+        {
+            return View("~/Views/Account/EsqueciSenha.cshtml", new EsqueciSenhaViewModel());
+        }
+
+        // POST: /Conta/EsqueciSenha
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EsqueciSenha(EsqueciSenhaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View("~/Views/Account/EsqueciSenha.cshtml", model);
+
+            var usuario = await _userManager.FindByEmailAsync(model.Email);
+
+            if (usuario == null)
+            {
+                // Não revelamos se o e-mail existe ou não na base.
+                ModelState.AddModelError(string.Empty,
+                    "Se este e-mail estiver cadastrado, você poderá continuar a recuperação.");
+
+                return View("~/Views/Account/EsqueciSenha.cshtml", model);
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(usuario);
+
+            var redefinirModel = new RedefinirSenhaViewModel
+            {
+                Email = model.Email,
+                Token = token
+            };
+
+            // Versão acadêmica: o token é exibido na própria tela,
+            // já preenchido, em vez de ser enviado por e-mail.
+            TempData["TokenGerado"] = "true";
+
+            return View("~/Views/Account/RedefinirSenha.cshtml", redefinirModel);
+        }
+
+        // GET: /Conta/RedefinirSenha
+        [HttpGet]
+        public IActionResult RedefinirSenha(string? email = null, string? token = null)
+        {
+            var model = new RedefinirSenhaViewModel
+            {
+                Email = email ?? string.Empty,
+                Token = token ?? string.Empty
+            };
+
+            return View("~/Views/Account/RedefinirSenha.cshtml", model);
+        }
+
+        // POST: /Conta/RedefinirSenha
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RedefinirSenha(RedefinirSenhaViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View("~/Views/Account/RedefinirSenha.cshtml", model);
+
+            var usuario = await _userManager.FindByEmailAsync(model.Email);
+
+            if (usuario == null)
+            {
+                ModelState.AddModelError(string.Empty, "Usuário não encontrado.");
+                return View("~/Views/Account/RedefinirSenha.cshtml", model);
+            }
+
+            var resultado = await _userManager.ResetPasswordAsync(
+                usuario, model.Token, model.NovaSenha);
+
+            if (!resultado.Succeeded)
+            {
+                foreach (var erro in resultado.Errors)
+                    ModelState.AddModelError(string.Empty, erro.Description);
+
+                return View("~/Views/Account/RedefinirSenha.cshtml", model);
+            }
+
+            TempData["Sucesso"] = "Senha redefinida com sucesso! Faça login com sua nova senha.";
+            return RedirectToAction(nameof(Login));
         }
 
         // GET: /Conta/Register
@@ -123,6 +214,90 @@ namespace HyperSpeed.UI.Controllers
             };
 
             return View("~/Views/Account/Perfil.cshtml", model);
+        }
+
+        // GET: /Conta/EditarPerfil
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> EditarPerfil()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return RedirectToAction(nameof(Login));
+
+            var model = new EditarPerfilViewModel
+            {
+                Nome = user.UserName ?? "",
+                Email = user.Email ?? "",
+                IsAdmin = User.IsInRole("Admin")
+            };
+
+            return View("~/Views/Account/EditarPerfil.cshtml", model);
+        }
+
+        // POST: /Conta/EditarPerfil
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditarPerfil(EditarPerfilViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+                return RedirectToAction(nameof(Login));
+
+            model.IsAdmin = User.IsInRole("Admin");
+
+            if (!ModelState.IsValid)
+                return View("~/Views/Account/EditarPerfil.cshtml", model);
+
+            // E-mail em uso por outra conta?
+            var emailAlterado = !string.Equals(
+                user.Email, model.Email, StringComparison.OrdinalIgnoreCase);
+
+            if (emailAlterado)
+            {
+                var usuarioComEsseEmail = await _userManager.FindByEmailAsync(model.Email);
+
+                if (usuarioComEsseEmail != null && usuarioComEsseEmail.Id != user.Id)
+                {
+                    ModelState.AddModelError(
+                        nameof(model.Email),
+                        "Este e-mail já está em uso por outra conta.");
+
+                    return View("~/Views/Account/EditarPerfil.cshtml", model);
+                }
+            }
+
+            var nomeResult = await _userManager.SetUserNameAsync(user, model.Nome);
+
+            if (!nomeResult.Succeeded)
+            {
+                foreach (var erro in nomeResult.Errors)
+                    ModelState.AddModelError(string.Empty, erro.Description);
+
+                return View("~/Views/Account/EditarPerfil.cshtml", model);
+            }
+
+            if (emailAlterado)
+            {
+                var emailResult = await _userManager.SetEmailAsync(user, model.Email);
+
+                if (!emailResult.Succeeded)
+                {
+                    foreach (var erro in emailResult.Errors)
+                        ModelState.AddModelError(string.Empty, erro.Description);
+
+                    return View("~/Views/Account/EditarPerfil.cshtml", model);
+                }
+            }
+
+            // Mantém o cookie de login coerente com os novos dados.
+            await _signInManager.RefreshSignInAsync(user);
+
+            TempData["Sucesso"] = "Perfil atualizado com sucesso!";
+            return RedirectToAction(nameof(Perfil));
         }
     }
 }

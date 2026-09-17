@@ -1,0 +1,218 @@
+﻿@using hyperSpeed.Application.ViewModels
+
+@model CategoriaProdutosViewModel
+
+@{
+    ViewData["Title"] = Model.Categoria.Nome;
+}
+
+<section class="produtos-page">
+
+    <div class="produtos-page-header">
+
+        <div>
+            <span class="produtos-page-label">
+                HYPERSPEED / CATEGORIAS
+            </span>
+
+            <h1>@Model.Categoria.Nome</h1>
+
+            <p>
+                @Model.Total @(Model.Total == 1 ? "produto encontrado" : "produtos encontrados")
+                nesta categoria.
+            </p>
+        </div>
+
+        <div class="produtos-page-icon">
+            <i class="bi bi-grid-3x3-gap-fill"></i>
+        </div>
+
+    </div>
+
+
+    <a asp-controller="Categoria"
+       asp-action="Index"
+       class="categoria-voltar">
+
+        <i class="bi bi-arrow-left"></i>
+        Todas as categorias
+
+    </a>
+
+
+    <div class="produtos-filtros">
+
+        <form asp-controller="Categoria"
+              asp-action="Produtos"
+              method="get"
+              class="produtos-busca">
+
+            <input type="hidden" name="id" value="@Model.Categoria.Id" />
+            <input type="hidden" name="ordem" value="@Model.Ordem" />
+
+            <i class="bi bi-search"></i>
+
+            <input type="text"
+                   name="pesquisa"
+                   value="@Model.Pesquisa"
+                   placeholder="Pesquisar nesta categoria..." />
+
+            <button type="submit">
+                Buscar
+            </button>
+
+        </form>
+
+        <form asp-controller="Categoria"
+              asp-action="Produtos"
+              method="get"
+              class="categoria-ordenar">
+
+            <input type="hidden" name="id" value="@Model.Categoria.Id" />
+            <input type="hidden" name="pesquisa" value="@Model.Pesquisa" />
+
+            <label for="ordem">Ordenar por</label>
+
+            <select id="ordem"
+                    name="ordem"
+                    onchange="this.form.submit()">
+
+                <option value="" selected="@(string.IsNullOrEmpty(Model.Ordem))">
+                    Relevância
+                </option>
+
+                <option value="menor" selected="@(Model.Ordem == "menor")">
+                    Menor preço
+                </option>
+
+                <option value="maior" selected="@(Model.Ordem == "maior")">
+                    Maior preço
+                </option>
+
+                <option value="nome" selected="@(Model.Ordem == "nome")">
+                    Nome (A-Z)
+                </option>
+
+            </select>
+
+        </form>
+
+    </div>
+
+
+    @if (Model.Categorias != null && Model.Categorias.Any())
+    {
+        <div class="produtos-categorias categoria-troca">
+
+            @foreach (var categoria in Model.Categorias)
+            {
+                <a asp-controller="Categoria"
+                   asp-action="Produtos"
+                   asp-route-id="@categoria.Id"
+                   class="categoria-chip @(categoria.Id == Model.Categoria.Id ? "ativa" : "")">
+                    @categoria.Nome
+                </a>
+            }
+
+        </div>
+    }
+
+
+    <div class="produtos">
+
+        @if (Model.Produtos != null && Model.Produtos.Any())
+        {
+            @foreach (var produto in Model.Produtos)
+            {
+                <div class="produto-card">
+
+                    <a asp-controller="Produto"
+                       asp-action="Details"
+                       asp-route-id="@produto.Id"
+                       class="produto-card-link">
+
+                        <div class="produto-image">
+
+                            @if (produto.Destaque)
+                            {
+                                <span class="produto-badge">
+                                    DESTAQUE
+                                </span>
+                            }
+
+                            @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
+                            {
+                                <img src="@produto.ImagemUrl"
+                                     alt="@produto.NomeProduto"
+                                     onerror="this.style.display='none'" />
+                            }
+
+                        </div>
+
+                        <div class="produto-info">
+
+                            <span class="produto-categoria">
+                                @Model.Categoria.Nome
+                            </span>
+
+                            <h3>
+                                @produto.NomeProduto
+                            </h3>
+
+                        </div>
+
+                    </a>
+
+                    <div class="produto-bottom">
+
+                        <span class="produto-preco">
+                            R$ @produto.Preco.ToString("N2")
+                        </span>
+
+                        <form asp-controller="Carrinho"
+                              asp-action="Adicionar"
+                              method="post">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" name="produtoId" value="@produto.Id" />
+                            <input type="hidden" name="nome" value="@produto.NomeProduto" />
+                            <input type="hidden" name="preco" value="@produto.Preco" />
+
+                            <button type="submit" class="produto-button" title="Adicionar ao carrinho">
+                                <i class="bi bi-cart-plus"></i>
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div class="categoria-sem-produtos">
+
+                <i class="bi bi-box-seam"></i>
+
+                <h2>Nenhum produto nesta categoria</h2>
+
+                <p>
+                    @(string.IsNullOrWhiteSpace(Model.Pesquisa)
+                        ? "Ainda não há produtos cadastrados aqui. Volte em breve."
+                        : "Nada encontrado para a sua busca. Tente outro termo.")
+                </p>
+
+                <a asp-controller="Produto"
+                   asp-action="Index"
+                   class="favorito-btn">
+                    Ver todos os produtos
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+</section>

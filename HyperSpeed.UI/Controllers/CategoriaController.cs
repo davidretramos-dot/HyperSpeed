@@ -1,4 +1,5 @@
 ﻿using hyperSpeed.Application.DTOs;
+using hyperSpeed.Application.ViewModels;
 using HyperSpeed.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,11 +8,14 @@ namespace HyperSpeed.UI.Controllers
     public class CategoriaController : Controller
     {
         private readonly HttpCategoriaService _categoriaApi;
+        private readonly HttpProdutoService _produtoApi;
 
         public CategoriaController(
-            HttpCategoriaService categoriaApi)
+            HttpCategoriaService categoriaApi,
+            HttpProdutoService produtoApi)
         {
             _categoriaApi = categoriaApi;
+            _produtoApi = produtoApi;
         }
 
 
@@ -25,7 +29,91 @@ namespace HyperSpeed.UI.Controllers
             var categorias =
                 await _categoriaApi.GetAllAsync();
 
-            return View(categorias);
+            var produtos =
+                await _produtoApi.GetAllAsync();
+
+
+            var model = new CategoriaListViewModel
+            {
+                Categorias = categorias,
+
+                TotalPorCategoria = produtos
+                    .GroupBy(p => p.IdCategoria)
+                    .ToDictionary(g => g.Key, g => g.Count())
+            };
+
+
+            return View(model);
+        }
+
+
+        // =========================
+        // PRODUTOS DE UMA CATEGORIA
+        // =========================
+
+        [HttpGet]
+        public async Task<IActionResult> Produtos(
+            int id,
+            string? pesquisa = null,
+            string? ordem = null)
+        {
+            var categorias =
+                (await _categoriaApi.GetAllAsync()).ToList();
+
+
+            var categoria =
+                categorias.FirstOrDefault(c => c.Id == id);
+
+            if (categoria == null)
+                return NotFound();
+
+
+            var produtos =
+                await _produtoApi.GetByCategoryAsync(id);
+
+
+            // Filtro por texto dentro da categoria
+            if (!string.IsNullOrWhiteSpace(pesquisa))
+            {
+                var termo = pesquisa.Trim();
+
+                produtos = produtos.Where(p =>
+                    p.NomeProduto.Contains(
+                        termo,
+                        StringComparison.OrdinalIgnoreCase)
+                    ||
+                    p.Descricao.Contains(
+                        termo,
+                        StringComparison.OrdinalIgnoreCase));
+            }
+
+
+            // Ordenacao
+            produtos = ordem switch
+            {
+                "menor" => produtos.OrderBy(p => p.Preco),
+
+                "maior" => produtos.OrderByDescending(p => p.Preco),
+
+                "nome" => produtos.OrderBy(p => p.NomeProduto),
+
+                _ => produtos
+                        .OrderByDescending(p => p.Destaque)
+                        .ThenBy(p => p.NomeProduto)
+            };
+
+
+            var model = new CategoriaProdutosViewModel
+            {
+                Categoria = categoria,
+                Categorias = categorias,
+                Produtos = produtos.ToList(),
+                Pesquisa = pesquisa,
+                Ordem = ordem
+            };
+
+
+            return View(model);
         }
 
 

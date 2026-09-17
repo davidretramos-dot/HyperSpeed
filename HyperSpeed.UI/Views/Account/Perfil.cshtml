@@ -8,11 +8,19 @@
 }
 
 <head>
-<link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <div class="perfilHS-page">
 
     <div class="perfilHS-container">
+
+        @if (TempData["Sucesso"] != null)
+        {
+            <div class="perfilHS-alert">
+                <i class="bi bi-check-circle-fill"></i>
+                @TempData["Sucesso"]
+            </div>
+        }
 
         <div class="perfilHS-header">
 

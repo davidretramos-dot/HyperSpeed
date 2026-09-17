@@ -1,5 +1,6 @@
-﻿@using hyperSpeed.Application.DTOs
-@model IEnumerable<CategoriasDTo>
+﻿@using hyperSpeed.Application.ViewModels
+
+@model CategoriaListViewModel
 
 @{
     ViewData["Title"] = "Categorias";
@@ -17,13 +18,18 @@
         </p>
     </div>
 
-    @if (Model != null && Model.Any())
+    @if (Model.Categorias != null && Model.Categorias.Any())
     {
         <div class="categoria-grid">
 
-            @foreach (var categoria in Model)
+            @foreach (var categoria in Model.Categorias)
             {
-                <div class="categoria-card">
+                var total = Model.TotalDe(categoria.Id);
+
+                <a asp-controller="Categoria"
+                   asp-action="Produtos"
+                   asp-route-id="@categoria.Id"
+                   class="categoria-card">
 
                     <div class="categoria-card-icon">
                         <i class="bi bi-grid-3x3-gap"></i>
@@ -31,19 +37,21 @@
 
                     <div class="categoria-card-content">
 
-   
-                        @if (!string.IsNullOrWhiteSpace(categoria.Nome))
-                        {
-                            <p>@categoria.Nome</p>
-                        }
-                        else
-                        {
-                            <p>Confira os produtos desta categoria.</p>
-                        }
+                        <p>
+                            @(string.IsNullOrWhiteSpace(categoria.Nome)
+                                ? "Categoria"
+                                : categoria.Nome)
+                        </p>
+
+                        <span class="categoria-card-count">
+                            @total @(total == 1 ? "produto" : "produtos")
+                        </span>
+
                     </div>
 
-                </div>
+                    <i class="bi bi-chevron-right categoria-card-seta"></i>
 
+                </a>
             }
 
         </div>

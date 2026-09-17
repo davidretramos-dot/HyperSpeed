@@ -106,60 +106,53 @@
 
         </div>
 
+    </header>
 
-        @* Menu principal *@
-        <nav class="main-nav">
 
-            <!-- MENU SUSPENSO -->
+    @* Menu principal *@
+    <nav class="main-nav">
+
+        <div class="main-nav-inner">
+
             <div class="menu-dropdown">
 
                 <button type="button"
-                        class="menu-icon"
                         id="menuDropdownButton"
-                        aria-label="Abrir menu"
+                        class="menu-icon"
+                        aria-haspopup="true"
                         aria-expanded="false">
-
                     <i class="bi bi-list"></i>
-
                 </button>
 
-
-                <div class="menu-dropdown-content" id="menuDropdownContent">
+                <div id="menuDropdownContent"
+                     class="menu-dropdown-panel">
 
                     @if (User?.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
                     {
                         <a asp-controller="Admin"
-                           asp-action="Index"
-                           class="dropdown-item">
+                           asp-action="Index">
 
                             <i class="bi bi-speedometer2"></i>
-
-                            <span>Admin</span>
+                            Admin
 
                         </a>
                     }
 
-
                     <a asp-controller="Carrinho"
                        asp-action="Index"
-                       class="dropdown-item">
-
+                       class="header-carrinho">
                         <i class="bi bi-cart3"></i>
-
-                        <span>Carrinho</span>
-
+                        Carrinho
                     </a>
-
 
                     @if (User?.Identity?.IsAuthenticated == true)
                     {
                         <a asp-controller="Pedido"
                            asp-action="Index"
-                           class="dropdown-item">
+                           class="btn-pedidos">
 
                             <i class="bi bi-bag-check"></i>
-
-                            <span>Meus Pedidos</span>
+                            Meus Pedidos
 
                         </a>
                     }
@@ -168,42 +161,27 @@
 
             </div>
 
-
-            <!-- RESTANTE DO MENU -->
-
             <a asp-controller="Produto"
                asp-action="Index"
                asp-fragment="produtos">
-
                 Monte seu PC
-
             </a>
-
 
             <a asp-controller="Categoria"
                asp-action="Index">
-
                 Departamentos
-
             </a>
-
 
             <a asp-controller="Produto"
                asp-action="Perifericos">
-
                 Periféricos
-
             </a>
-
 
             <a asp-controller="Produto"
                asp-action="Promocoes"
                class="promotion">
-
                 Promoções
-
             </a>
-
 
             @if (User?.Identity?.IsAuthenticated == true)
             {
@@ -211,6 +189,8 @@
                       asp-action="Logout"
                       method="post"
                       class="logout-form">
+
+                    @Html.AntiForgeryToken()
 
                     <button type="submit">
 
@@ -223,9 +203,9 @@
                 </form>
             }
 
-        </nav>
+        </div>
 
-    </header>
+    </nav>
 
  
     @* Conteúdo de cada página *@
@@ -304,9 +284,12 @@
     @RenderSection("Scripts", required: false)
 
  
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/menu.js"></script>
 
-  
+    <script src="~/js/carousel.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true"></script>
 
 </body>
 

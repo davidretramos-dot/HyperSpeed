@@ -9,6 +9,7 @@ namespace hyperSpeed.Application.ViewModels
     public class HomeViewModels
     {
         public IEnumerable<ProdutoDTo> ProdutosDestaque { get; set; } = new List<ProdutoDTo>();
+        public IEnumerable<ProdutoDTo> ProdutosRecentes { get; set; } = new List<ProdutoDTo>();
         public IEnumerable<CategoriasDTo> Categorias { get; set; } = new List<CategoriasDTo>();
         public IEnumerable<ProdutoDTo> Produtos { get; set; } = new List<ProdutoDTo>();
     }

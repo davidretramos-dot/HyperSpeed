@@ -40,13 +40,11 @@ namespace HyperSpeed.UI.Controllers
                     "Não foi possível adicionar o produto aos favoritos.";
 
                 return RedirectToAction(
-                    "Index",
-                    "Home");
+                    "Index");
             }
 
             return RedirectToAction(
-                "Index",
-                "Home");
+                "Index");
         }
 
         [HttpPost]

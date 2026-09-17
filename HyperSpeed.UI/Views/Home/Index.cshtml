@@ -251,17 +251,17 @@
 
             <span class="categoria-label">
 
-                SETUP
+                NOVIDADES
             </span>
 
             <h2>
 
-                PERIFÉRICOS / OUTROS
+                PRODUTOS RECENTES
             </h2>
 
             <p>
 
-                Tudo para completar seu setup gamer.
+                Os últimos lançamentos que chegaram na loja.
             </p>
 
         </div>
@@ -282,188 +282,94 @@
  
     <div class="produtos">
 
-        <!-- TECLADO -->
+        @if (Model?.ProdutosRecentes != null &&
 
-        <div class="produto-card">
+                     Model.ProdutosRecentes.Any())
 
-            <div class="produto-image">
+        {
 
-                <img src="~/images/produtos/teclado.png"
-                     alt="Teclado">
+            @foreach (var produto in Model.ProdutosRecentes)
 
-            </div>
+            {
+                <div class="produto-card">
+
+                    <div class="produto-image">
+
+                        @if (produto.Destaque)
+
+                        {
+                            <span class="produto-badge">
+
+                                DESTAQUE
+                            </span>
+
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(produto.ImagemUrl))
+
+                        {
+                            <img src="@produto.ImagemUrl"
+                                 alt="@produto.NomeProduto"
+                                 onerror="this.style.display='none'" />
+
+                        }
+
+                    </div>
 
  
-            <div class="produto-info">
+                    <div class="produto-info">
 
-                <span class="produto-categoria">
+                        <span class="produto-categoria">
 
-                    PERIFÉRICO
-                </span>
-
-                <h3>
-
-                    Teclado
-                </h3>
+                            @(string.IsNullOrWhiteSpace(produto.NomeCategoria)
+                                ? "PRODUTO"
+                                : produto.NomeCategoria.ToUpper())
+                        </span>
 
  
-                <div class="produto-bottom">
+                        <h3>
 
-                    <span class="produto-preco">
+                            @produto.NomeProduto
+                        </h3>
 
-                        R$ 399
-                    </span>
+ 
+                        <div class="produto-bottom">
 
-                    <button class="produto-button">
+                            <span class="produto-preco">
 
-                        <i class="bi bi-cart-plus"></i>
+                                R$ @produto.Preco.ToString("N2")
 
-                    </button>
+                            </span>
+
+ 
+                            <a asp-controller="Produto"
+                               asp-action="Details"
+                               asp-route-id="@produto.Id"
+                               class="produto-button">
+
+                                <i class="bi bi-cart-plus"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-            </div>
+            }
 
-        </div>
+        }
 
- 
-        <!-- HEADSET -->
+        else
 
-        <div class="produto-card">
+        {
+            <p class="sem-produtos">
 
-            <div class="produto-image">
+                Nenhum produto disponível no momento.
+            </p>
 
-                <img src="~/images/produtos/headset.png"
-                     alt="Headset">
-
-            </div>
-
- 
-            <div class="produto-info">
-
-                <span class="produto-categoria">
-
-                    ÁUDIO
-                </span>
-
-                <h3>
-
-                    Headset
-                </h3>
-
- 
-                <div class="produto-bottom">
-
-                    <span class="produto-preco">
-
-                        R$ 299
-                    </span>
-
-                    <button class="produto-button">
-
-                        <i class="bi bi-cart-plus"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
- 
-        <!-- MOUSE -->
-
-        <div class="produto-card">
-
-            <div class="produto-image">
-
-                <img src="~/images/produtos/mouse.png"
-                     alt="Mouse">
-
-            </div>
-
- 
-            <div class="produto-info">
-
-                <span class="produto-categoria">
-
-                    PERIFÉRICO
-                </span>
-
-                <h3>
-
-                    Mouse
-                </h3>
-
- 
-                <div class="produto-bottom">
-
-                    <span class="produto-preco">
-
-                        R$ 199
-                    </span>
-
-                    <button class="produto-button">
-
-                        <i class="bi bi-cart-plus"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
- 
-        <!-- MONITOR -->
-
-        <div class="produto-card">
-
-            <div class="produto-image">
-
-                <span class="produto-badge">
-
-                    OFERTA
-                </span>
-
-                <img src="~/images/produtos/monitor.png"
-                     alt="Monitor">
-
-            </div>
-
- 
-            <div class="produto-info">
-
-                <span class="produto-categoria">
-
-                    MONITOR
-                </span>
-
-                <h3>
-
-                    Monitor Gamer
-                </h3>
- 
-                <div class="produto-bottom">
-
-                    <span class="produto-preco">
-
-                        R$ 1.299
-                    </span>
-
-                    <button class="produto-button">
-
-                        <i class="bi bi-cart-plus"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
+        }
 
     </div>
 

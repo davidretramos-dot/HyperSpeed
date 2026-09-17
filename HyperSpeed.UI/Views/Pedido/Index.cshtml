@@ -1,0 +1,158 @@
+﻿@using hyperSpeed.Application.DTOs
+
+@using HyperSpeed.Domain.Entities
+
+@model IEnumerable<PedidoDTo>
+
+@{
+
+    ViewData["Title"] = "Meus Pedidos";
+
+}
+
+<section class="meus-pedidos-page">
+
+    <div class="meus-pedidos-header">
+
+        <div>
+            <span class="meus-pedidos-label">
+
+                HYPERSPEED / MINHA CONTA
+            </span>
+
+            <h1>Meus Pedidos</h1>
+
+            <p>
+
+                Acompanhe seus pedidos e veja o status das suas compras.
+            </p>
+        </div>
+
+        <div class="meus-pedidos-icon">
+            <i class="bi bi-bag-check-fill"></i>
+        </div>
+
+    </div>
+
+ 
+    @if (Model != null && Model.Any())
+
+    {
+        <div class="pedidos-lista">
+
+            @foreach (var pedido in Model)
+
+            {
+                <div class="pedido-card">
+
+                    <div class="pedido-card-top">
+
+                        <div>
+                            <span class="pedido-label">
+
+                                PEDIDO
+                            </span>
+
+                            <h2>
+
+                                #@pedido.Id
+                            </h2>
+                        </div>
+
+                        <span class="pedido-status status-@pedido.Status.ToString().ToLower()">
+
+                            @(pedido.Status == StatusPedido.EmPreparacao
+
+                                ? "Em preparação"
+
+                                : pedido.Status.ToString())
+                        </span>
+
+                    </div>
+
+ 
+                    <div class="pedido-card-info">
+
+                        <div>
+                            <span>Data do pedido</span>
+
+                            <strong>
+
+                                @pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                            </strong>
+                        </div>
+
+ 
+                        <div>
+                            <span>Valor total</span>
+
+                            <strong>
+
+                                R$ @pedido.ValorTotal.ToString("N2")
+                            </strong>
+                        </div>
+
+                    </div>
+
+ 
+                    <div class="pedido-card-footer">
+
+                        <span>
+                            <i class="bi bi-box-seam"></i>
+
+                            Pedido realizado com sucesso
+                        </span>
+
+                        <a asp-controller="Pedido"
+                           asp-action="Details"
+                           asp-route-id="@pedido.Id"
+                           class="pedido-detalhes-btn">
+
+                            Ver detalhes
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+
+    }
+
+    else
+
+    {
+        <div class="pedidos-vazio">
+
+            <i class="bi bi-bag-x"></i>
+
+            <h2>Você ainda não possui pedidos</h2>
+
+            <p>
+
+                Quando você realizar uma compra,
+
+                seus pedidos aparecerão aqui.
+            </p>
+
+            <a asp-controller="Produto"
+               asp-action="Index"
+               class="pedido-comprar-btn">
+
+                <i class="bi bi-cart-fill"></i>
+
+                Ver produtos
+
+            </a>
+
+        </div>
+
+    }
+</section>
+
+ 

@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Pedido Finalizado";
+}
+
+<div class="pedido-finalizado">
+
+    <div class="pedido-finalizado-icon">
+        <i class="bi bi-check-circle-fill"></i>
+    </div>
+
+    <h1>Pedido realizado com sucesso!</h1>
+
+    <p>
+        Seu pedido foi registrado e salvo com sucesso.
+    </p>
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="pedido-voltar">
+        Continuar comprando
+    </a>
+
+</div>

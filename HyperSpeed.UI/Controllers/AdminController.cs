@@ -1,5 +1,6 @@
 using hyperSpeed.Application.DTOs;
 using hyperSpeed.Application.ViewModels;
+using HyperSpeed.Domain.Entities;
 using HyperSpeed.UI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +14,19 @@ namespace HyperSpeed.UI.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly HttpProdutoService _produtoApi;
         private readonly HttpCategoriaService _categoriaApi;
+        private readonly HttpPedidoService _pedidoApi;
 
         public AdminController(
             HttpProdutoService produtoApi,
             HttpCategoriaService categoriaApi,
+            HttpPedidoService pedidoApi,
             IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
             _produtoApi = produtoApi;
             _categoriaApi = categoriaApi;
+            _pedidoApi = pedidoApi;
         }
-
 
         // =====================================================
         // DASHBOARD
@@ -35,19 +38,30 @@ namespace HyperSpeed.UI.Controllers
             var client =
                 _httpClientFactory.CreateClient("HyperSpeedAPI");
 
-            // Busca produtos pela API
+            // =========================
+            // PRODUTOS
+            // =========================
+
             var produtos = await client
                 .GetFromJsonAsync<List<ProdutoDTo>>(
                     "api/Produtos"
                 ) ?? new List<ProdutoDTo>();
 
-            // Busca categorias pela API
+
+            // =========================
+            // CATEGORIAS
+            // =========================
+
             var categorias = await client
                 .GetFromJsonAsync<List<CategoriasDTo>>(
                     "api/Categorias"
                 ) ?? new List<CategoriasDTo>();
 
-            // Relaciona cada produto com sua categoria
+
+            // =========================
+            // RELACIONA PRODUTO + CATEGORIA
+            // =========================
+
             foreach (var produto in produtos)
             {
                 var categoria = categorias
@@ -56,6 +70,21 @@ namespace HyperSpeed.UI.Controllers
                 produto.NomeCategoria =
                     categoria?.Nome ?? "Sem categoria";
             }
+
+
+            // =========================
+            // PEDIDOS
+            // =========================
+
+            var pedidos = await client
+                .GetFromJsonAsync<List<PedidoDTo>>(
+                    "api/Pedido"
+                ) ?? new List<PedidoDTo>();
+
+
+            // =========================
+            // DASHBOARD
+            // =========================
 
             var model = new DashboardViewModel
             {
@@ -66,6 +95,10 @@ namespace HyperSpeed.UI.Controllers
                 RecentProdutos = produtos
                     .OrderByDescending(p => p.CriacaoAt)
                     .Take(5)
+                    .ToList(),
+
+                Pedidos = pedidos
+                    .OrderByDescending(p => p.DataPedido)
                     .ToList()
             };
 
@@ -641,6 +674,19 @@ namespace HyperSpeed.UI.Controllers
 
             return RedirectToAction(nameof(Categorias));
         }
+        // =====================================================
+        // PEDIDOS - LISTA
+        // =====================================================
 
+        [HttpGet]
+        public async Task<IActionResult> Pedidos()
+        {
+            var pedidos = await _pedidoApi.GetAllAsync();
+
+            return View(
+                "~/Views/Admin/Pedidos.cshtml",
+                pedidos
+            );
+        }
     }
 }

@@ -9,6 +9,7 @@
 // - MVC: retorna HTML (páginas) — AddControllersWithViews()
 // =============================================================================
 using HyperSpeed.UI.Services;
+using HyperSpeed.UI.Helpers;
 using hyperSpeed.Application.Interfaces;
 using hyperSpeed.Application.Services;
 using HyperSpeed.Domain.interfaces;
@@ -18,6 +19,8 @@ using HyperSpeed.Infrastruture.Identity;
 using HyperSpeed.Infrastruture.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.DataProtection;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,11 +50,31 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 //Configuração dos cookies de autenticação 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    // Ajustado para usar o controller "Conta" existente no projeto
-    options.LoginPath = "/Conta/Login"; // Redireciona para Página de login
-    options.LogoutPath = "/Conta/Logout"; // Redireciona para Página de logout
-    options.AccessDeniedPath = "/Conta/AccessDenied"; // Redireciona para Página de acesso negado
+    options.Cookie.Name = ".HyperSpeed.Auth";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.Lax; // ajustar se necessário para domínios diferentes
+    options.Cookie.IsEssential = true;
+
+    options.LoginPath = "/Conta/Login";
+    options.LogoutPath = "/Conta/Logout";
+    options.AccessDeniedPath = "/Conta/AccessDenied";
+
+    options.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = 401;
+        return Task.CompletedTask;
+    };
+
+    options.Events.OnRedirectToAccessDenied = context =>
+    {
+        context.Response.StatusCode = 403;
+        return Task.CompletedTask;
+    };
 });
+builder.Services
+    .AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, "..", "SharedKeys")))
+    .SetApplicationName("HyperSpeed");
 
 // ========================================================================
 // DEPENDENCY INJECTION - Injeção de Dependências | Repositórios e Serviços
@@ -73,30 +96,83 @@ builder.Services.AddScoped<CarrinhoService>();
 //AddControllersWithViews: Configura o ASP.NET Core para usar o padrão MVC,
 //permitindo retornar páginas HTML renderizadas (Razor Views) a partir dos controladores.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddTransient<ApiCookieHandler>();
+
 builder.Services.AddHttpClient("HyperSpeedAPI", client =>
-
 {
-
     client.BaseAddress = new Uri(
-
         builder.Configuration["ApiSettings:BaseUrl"]!
-
     );
-
-});
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        UseCookies = false
+    })
+.AddHttpMessageHandler<ApiCookieHandler>();
 
 builder.Services.AddHttpClient<HttpProdutoService>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5153/");
-});
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        UseCookies = false
+    })
+.AddHttpMessageHandler<ApiCookieHandler>();
 
 builder.Services.AddHttpClient<HttpCategoriaService>(client =>
 {
     client.BaseAddress = new Uri("http://localhost:5153/");
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        UseCookies = false
+    })
+.AddHttpMessageHandler<ApiCookieHandler>();
+
+builder.Services.AddHttpClient<HttpPedidoService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5153/");
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        UseCookies = false
+    })
+.AddHttpMessageHandler<ApiCookieHandler>();
+
+builder.Services.AddHttpClient<HttpFavoritoService>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5153/");
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        UseCookies = false
+    })
+.AddHttpMessageHandler<ApiCookieHandler>();
+// -----------------------------
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddHttpContextAccessor();
 
 //Cria a aplicação a partir do Builder configurado
 var app = builder.Build();
+
 
 // =====================================================================================
 // PIPELINES DE MIDDLEWARE - Configura a sequência de processamento das requisições HTTP
@@ -114,6 +190,8 @@ app.UseStaticFiles(); // Permite servir arquivos estáticos (CSS, JS, Imagens) d
 
 // Configura o roteamento das requisições para os controladores(controllers) e ações.
 app.UseRouting();
+
+app.UseSession();
 
 // Configura a autenticação e autorização para proteger rotas que exigem
 // login ou permissões específicas.
@@ -144,4 +222,32 @@ app.MapControllerRoute(
 await SeedData.SeedAsync(app.Services);
 
 // Inicia o servidor web e começa a ouvir as requisições HTTP.
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+
+app.UseSession();
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseSession();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.Run();
+
+
+// -----------------------------------------------
+
+
+// -----------------------------------------------
+

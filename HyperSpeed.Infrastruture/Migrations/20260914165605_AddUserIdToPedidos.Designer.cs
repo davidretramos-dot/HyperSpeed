@@ -4,6 +4,7 @@ using HyperSpeed.Infrastruture.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HyperSpeed.Infrastructure.Migrations
 {
     [DbContext(typeof(HyperSpeedDbContext))]
-    partial class HyperSpeedDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260914165605_AddUserIdToPedidos")]
+    partial class AddUserIdToPedidos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,28 +85,6 @@ namespace HyperSpeed.Infrastructure.Migrations
                     b.HasIndex("IdPedidosId");
 
                     b.ToTable("Entregas");
-                });
-
-            modelBuilder.Entity("HyperSpeed.Domain.Entities.Favorito", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("Favoritos");
                 });
 
             modelBuilder.Entity("HyperSpeed.Domain.Entities.ItemPedido", b =>
@@ -451,17 +432,6 @@ namespace HyperSpeed.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("IdPedidos");
-                });
-
-            modelBuilder.Entity("HyperSpeed.Domain.Entities.Favorito", b =>
-                {
-                    b.HasOne("HyperSpeed.Domain.Entities.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("HyperSpeed.Domain.Entities.ItemPedido", b =>

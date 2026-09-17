@@ -16,6 +16,7 @@ namespace HyperSpeed.Infrastruture.Context
         {
         }
 
+        public DbSet<Favorito> Favoritos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }

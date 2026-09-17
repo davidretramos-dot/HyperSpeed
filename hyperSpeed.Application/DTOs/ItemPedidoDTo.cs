@@ -4,8 +4,17 @@ using System.Text;
 
 namespace hyperSpeed.Application.DTOs
 {
-  
-        public class CreateItemPedidoDto
+
+    public class ItemPedidoDTo
+    {
+        public int ProdutoId { get; set; }
+        public string NomeProduto { get; set; } = string.Empty;
+        public int Quantidade { get; set; }
+        public decimal PrecoUni { get; set; }
+        public decimal SubTotal { get; set; }
+    }
+
+    public class CreateItemPedidoDto
         {
             public int ProdutoId { get; set; }
 

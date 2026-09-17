@@ -1,156 +1,145 @@
-﻿@using System.Linq
-@using hyperSpeed.Application.ViewModels
+﻿@using hyperSpeed.Application.ViewModels
 
 @model ProdutoListViewModel
 
 @{
-    Layout = "_AdminLayout";
-    ViewData["Title"] = "Gerenciar Produtos";
+    ViewData["Title"] = "Produtos";
 }
 
-<div class="admin-page-header">
+<section class="produtos-page">
 
-    <div>
+    <div class="produtos-page-header">
 
-        <span class="admin-page-label">
-            HYPERSPEED / PRODUTOS
-        </span>
+        <div>
+            <span class="produtos-page-label">
+                HYPERSPEED / PRODUTOS
+            </span>
 
-        <h1>Produtos</h1>
+            <h1>
+                @(string.IsNullOrWhiteSpace(Model.CategoriaNome)
+                    ? "Todos os Produtos"
+                    : Model.CategoriaNome)
+            </h1>
 
-        <p class="admin-page-description">
-            Gerencie os produtos cadastrados na loja.
-        </p>
+            <p>
+                Explore nosso catálogo completo de hardware e periféricos.
+            </p>
+        </div>
+
+        <div class="produtos-page-icon">
+            <i class="bi bi-grid-fill"></i>
+        </div>
 
     </div>
 
+    <div class="produtos-filtros">
 
-    <a asp-controller="Admin"
-       asp-action="CreateProd"
-       class="admin-btn">
+        <form asp-controller="Produto"
+              asp-action="Index"
+              method="get"
+              class="produtos-busca">
 
-        <i class="bi bi-plus-lg"></i>
-        Novo Produto
+            <i class="bi bi-search"></i>
 
-    </a>
+            <input type="text"
+                   name="pesquisa"
+                   value="@Model.Pesquisa"
+                   placeholder="Pesquisar produto..." />
 
-</div>
+            <button type="submit">
+                Buscar
+            </button>
 
+        </form>
 
-<div class="admin-search">
+        @if (Model.Categorias != null && Model.Categorias.Any())
+        {
+            <div class="produtos-categorias">
 
-    <input type="text"
-           placeholder="Pesquisar produto..." />
+                <a asp-controller="Produto"
+                   asp-action="Index"
+                   class="categoria-chip @(Model.CategoriaId == null ? "ativa" : "")">
+                    Todas
+                </a>
 
-</div>
-
-
-<div class="admin-panel">
-
-    <div class="admin-table-wrapper">
-
-        <table class="admin-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>Imagem</th>
-                    <th>Produto</th>
-                    <th>Categoria</th>
-                    <th>Preço</th>
-                    <th>Estoque</th>
-                    <th>Ações</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                @if (Model?.Produtos != null && Model.Produtos.Any())
+                @foreach (var categoria in Model.Categorias)
                 {
+                    <a asp-controller="Produto"
+                       asp-action="Index"
+                       asp-route-idCategoria="@categoria.Id"
+                       class="categoria-chip @(Model.CategoriaId == categoria.Id ? "ativa" : "")">
+                        @categoria.Nome
+                    </a>
+                }
 
-                    @foreach (var produto in Model.Produtos)
-                    {
+            </div>
+        }
 
-                        <tr>
+    </div>
 
-                            <td>
+    <div class="produtos">
 
-                                <img src="@produto.Imagem"
-                                     class="produto-admin-img"
-                                     alt="@produto.Nome" />
+        @if (Model.Produtos != null && Model.Produtos.Any())
+        {
+            @foreach (var produto in Model.Produtos)
+            {
+                <div class="produto-card">
 
-                            </td>
+                    <div class="produto-image">
 
-                            <td>
+                        @if (produto.Destaque)
+                        {
+                            <span class="produto-badge">
+                                DESTAQUE
+                            </span>
+                        }
 
-                                <strong>
-                                    @produto.Nome
-                                </strong>
+                        @if (!string.IsNullOrWhiteSpace(produto.Imagem))
+                        {
+                            <img src="@produto.Imagem"
+                                 alt="@produto.Nome"
+                                 onerror="this.style.display='none'" />
+                        }
 
-                            </td>
+                    </div>
 
-                            <td>
-                                <td>
-                                    @(produto.Categoria?.Nome ?? "—")
-                                </td>
-                            
+                    <div class="produto-info">
 
-                            <td>
+                        <span class="produto-categoria">
+                            @(produto.Categoria?.Nome ?? "PRODUTO")
+                        </span>
+
+                        <h3>
+                            @produto.Nome
+                        </h3>
+
+                        <div class="produto-bottom">
+
+                            <span class="produto-preco">
                                 R$ @produto.Preco.ToString("N2")
-                            </td>
+                            </span>
 
-                            <td>
-                                @produto.Estoque
-                            </td>
-                            
-                            <td>
+                            <a asp-controller="Produto"
+                               asp-action="Details"
+                               asp-route-id="@produto.Id"
+                               class="produto-button">
+                                <i class="bi bi-cart-plus"></i>
+                            </a>
 
-                                <a asp-controller="Admin"
-                                   asp-action="EditProd"
-                                   asp-route-id="@produto.Id"
-                                   class="btn-editar">
-                                    Editar 
+                        </div>
 
-                                <a asp-controller="Admin"
-                                   asp-action="DeleteProd"
-                                   asp-route-id="@produto.Id"
-                                   class="btn-excluir">
+                    </div>
 
-                                    Excluir
-
-                                </a>
-
-                                </a>
-                            </td>
-
-
-                        </tr>
-
-                    }
-
-                }
-                else
-                {
-
-                    <tr>
-
-                        <td colspan="6">
-
-                            Nenhum produto encontrado.
-
-                        </td>
-
-                    </tr>
-
-                }
-
-            </tbody>
-
-        </table>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="sem-produtos">
+                Nenhum produto encontrado.
+            </p>
+        }
 
     </div>
 
-</div>
+</section>

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using System.Text.Json.Serialization;
+using System.IO;
+using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,9 +35,27 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 })
 .AddEntityFrameworkStores<HyperSpeedDbContext>()
 .AddDefaultTokenProviders();
+builder.Services
+    .AddDataProtection()
+    .PersistKeysToFileSystem(
+        new DirectoryInfo(
+            Path.Combine(
+                builder.Environment.ContentRootPath,
+                "..",
+                "SharedKeys"
+            )
+        )
+    )
+    .SetApplicationName("HyperSpeed");
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
+    // Deve ser igual ao nome configurado na UI
+    options.Cookie.Name = ".HyperSpeed.Auth";
+
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+
     options.Events.OnRedirectToLogin = context =>
     {
         context.Response.StatusCode = 401;
@@ -57,6 +77,8 @@ builder.Services.AddScoped<ICategoriasService, CategoriasService>();
 
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 builder.Services.AddScoped<PedidoService>();
+builder.Services.AddScoped<IFavoritoRepository, FavoritoRepository>();
+builder.Services.AddScoped<FavoritoService>();
 
 // Web + API
 builder.Services.AddControllersWithViews()

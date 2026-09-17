@@ -8,8 +8,9 @@ namespace hyperSpeed.Application.ViewModels
 {
     public class HomeViewModels
     {
-        public IEnumerable<ProdutoDTo> ProdutosDestaque {  get; set; } = new List<ProdutoDTo>();
-        public IEnumerable<CategoriasDTo> Categorias {  get; set; } = new List<CategoriasDTo>();
+        public IEnumerable<ProdutoDTo> ProdutosDestaque { get; set; } = new List<ProdutoDTo>();
+        public IEnumerable<ProdutoDTo> ProdutosRecentes { get; set; } = new List<ProdutoDTo>();
+        public IEnumerable<CategoriasDTo> Categorias { get; set; } = new List<CategoriasDTo>();
         public IEnumerable<ProdutoDTo> Produtos { get; set; } = new List<ProdutoDTo>();
     }
 
@@ -49,8 +50,14 @@ namespace hyperSpeed.Application.ViewModels
     public class DashboardViewModel
     {
         public int TotalProdutos { get; set; }
+
         public int TotalCategorias { get; set; }
-        public IEnumerable<ProdutoDTo> RecentProdutos { get; set; } = new List<ProdutoDTo>();
+
+        public IEnumerable<ProdutoDTo> RecentProdutos { get; set; }
+            = new List<ProdutoDTo>();
+
+        public IEnumerable<PedidoDTo> Pedidos { get; set; }
+            = new List<PedidoDTo>();
     }
 
     // -------------------------------------------------------------------
@@ -73,6 +80,8 @@ namespace hyperSpeed.Application.ViewModels
     public class ProdutoListViewModel
     {
         public IEnumerable<Produto> Produtos { get; set; } = new List<Produto>();
+
+        public IEnumerable<CategoriasDTo> Categorias { get; set; } = new List<CategoriasDTo>();
 
         public string? Pesquisa { get; set; }
 

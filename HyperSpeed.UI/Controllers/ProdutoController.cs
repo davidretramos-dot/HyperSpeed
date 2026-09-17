@@ -59,6 +59,7 @@ namespace HyperSpeed.UI.Controllers
             var model = new ProdutoListViewModel
             {
                 Produtos = produtos,
+                Categorias = categorias,
                 CategoriaNome = categorias
                     .FirstOrDefault(c => c.Id == idCategoria)?.Nome,
 
@@ -102,7 +103,7 @@ namespace HyperSpeed.UI.Controllers
 
             ViewBag.Categorias = categorias;
 
-            return View("~Views/Admin/CreateProd.cshtml",new ProdutoViewModel());
+            return View("~Views/Admin/CreateProd.cshtml", new ProdutoViewModel());
         }
 
         // Cadastro
@@ -115,7 +116,7 @@ namespace HyperSpeed.UI.Controllers
                 ViewBag.Categorias =
                     await _categoriaApi.GetAllAsync();
 
-                return View("~Views/Admin/CreateProd.cshtml",model);
+                return View("~Views/Admin/CreateProd.cshtml", model);
             }
 
             var dto = new CriacaoProdutoDTo

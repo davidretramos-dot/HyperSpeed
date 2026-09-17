@@ -1,134 +1,63 @@
-﻿@model IEnumerable<CategoriasDTo>
+﻿@using hyperSpeed.Application.DTOs
+@model IEnumerable<CategoriasDTo>
 
 @{
-    Layout = "_AdminLayout";
-    ViewData["Title"] = "Gerenciar Categorias";
+    ViewData["Title"] = "Categorias";
 }
 
-<div class="admin-content">
+<div class="categoria-page">
 
-    <div class="admin-header">
+    <div class="categoria-header">
+        <span class="categoria-label">HYPERSPEED STORE</span>
 
-        <div>
-            <span class="admin-eyebrow">HYPERSPEED / ADMIN</span>
-            <h1>Categorias</h1>
-        </div>
+        <h1>Explore nossas categorias</h1>
 
-        <a asp-controller="Admin"
-           asp-action="CreateCategoria"
-           class="admin-btn">
-
-            <i class="bi bi-plus-lg"></i>
-            Nova Categoria
-
-        </a>
-
+        <p>
+            Encontre os produtos que você procura navegando pelas nossas categorias.
+        </p>
     </div>
 
- 
-    @if (TempData["Sucesso"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["Sucesso"]
-        </div>
-    }
-
- 
-    <div class="admin-search mb-4">
-
-        <i class="bi bi-search"></i>
-
-        <input type="text"
-               class="form-control"
-               placeholder="Pesquisar categoria..." />
-
-    </div>
-
- 
     @if (Model != null && Model.Any())
     {
-        <div class="admin-table-container">
+        <div class="categoria-grid">
 
-            <table class="admin-table">
+            @foreach (var categoria in Model)
+            {
+                <div class="categoria-card">
 
-                <thead>
+                    <div class="categoria-card-icon">
+                        <i class="bi bi-grid-3x3-gap"></i>
+                    </div>
 
-                    <tr>
-                        <th>ID</th>
-                        <th>Categoria</th>
-                        <th>Ações</th>
-                    </tr>
+                    <div class="categoria-card-content">
 
-                </thead>
+   
+                        @if (!string.IsNullOrWhiteSpace(categoria.Nome))
+                        {
+                            <p>@categoria.Nome</p>
+                        }
+                        else
+                        {
+                            <p>Confira os produtos desta categoria.</p>
+                        }
+                    </div>
 
- 
-                <tbody>
+                </div>
 
-                    @foreach (var categoria in Model)
-                    {
-                        <tr>
-
-                            <td>
-                                #@categoria.Id
-                            </td>
-
-                            <td>
-                                <strong>@categoria.Nome</strong>
-                            </td>
-
-                            <td class="admin-actions">
-
-                                <a asp-controller="Admin"
-                                   asp-action="EditCategoria"
-                                   asp-route-id="@categoria.Id"
-                                   class="btn-editar">
-
-                                    <i class="bi bi-pencil-square"></i>
-                                    Editar
-
-                                </a>
-
- 
-                                <form asp-controller="Admin"
-                                      asp-action="DeleteCategoria"
-                                      asp-route-id="@categoria.Id"
-                                      method="post"
-                                      class="delete-form">
-
-                                    @Html.AntiForgeryToken()
-
-                                    <button type="submit"
-                                            class="btn-excluir"
-                                            onclick="return confirm('Deseja realmente excluir esta categoria?')">
-
-                                        <i class="bi bi-trash"></i>
-                                        Excluir
-
-                                    </button>
-
-                                </form>
-
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-
-            </table>
+            }
 
         </div>
     }
     else
     {
-        <div class="admin-empty">
+        <div class="categoria-empty">
+            <i class="bi bi-inbox"></i>
 
-            <i class="bi bi-folder-x"></i>
+            <h2>Nenhuma categoria encontrada</h2>
 
-            <h3>Nenhuma categoria encontrada</h3>
-
-            <p>Cadastre uma categoria para começar.</p>
-
+            <p>
+                Ainda não existem categorias cadastradas.
+            </p>
         </div>
     }
 

@@ -1,22 +1,26 @@
 ﻿using HyperSpeed.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace hyperSpeed.Application.DTOs
 {
     public class PedidoDTo
     {
         public int Id { get; set; }
-        public string Status { get; set; } = string.Empty;
-        public int Valor { get; set; }
+
+        public StatusPedido Status { get; set; }
+
+        public decimal ValorTotal { get; set; }
+
+        public DateTime DataPedido { get; set; }
+        public List<ItemPedidoDTo> Itens { get; set; } = new();
     }
+
     public class CreatePedidoDto
     {
-        public List<CreateItemPedidoDto> Itens { get; set; } = new List<CreateItemPedidoDto>();
-
+        public List<CreateItemPedidoDto> Itens { get; set; } = new();
 
         public TipoPagamento TipoPagamento { get; set; }
+        public string UserId { get; set; } = string.Empty;
     }
-
 }

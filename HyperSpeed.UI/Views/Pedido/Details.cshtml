@@ -1,0 +1,95 @@
+﻿@using HyperSpeed.Domain.Entities
+@model hyperSpeed.Application.DTOs.PedidoDTo
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = $"Pedido #{Model.Id}";
+
+    var statusClass = Model.Status switch
+    {
+        StatusPedido.Pendente => "status-pendente",
+        StatusPedido.Pago => "status-pago",
+        StatusPedido.EmPreparacao => "status-preparacao",
+        StatusPedido.Enviado => "status-enviado",
+        StatusPedido.Entregue => "status-entregue",
+        StatusPedido.Cancelado => "status-cancelado",
+        _ => "status-pendente"
+    };
+}
+
+<div class="pedido-detalhes">
+
+    <a asp-controller="Pedido" asp-action="Index" class="btn-voltar">← Voltar para meus pedidos</a>
+
+    <div class="pedido-card">
+
+        <div class="pedido-card-top">
+
+            <div>
+                <span class="pedido-label">PEDIDO</span>
+                <h2>#@Model.Id</h2>
+            </div>
+
+            <span class="pedido-status status-@Model.Status.ToString().ToLower()">@Model.Status</span>
+
+        </div>
+
+        <div class="pedido-card-info">
+
+            <div>
+                <span>Data do pedido</span>
+                <strong>@Model.DataPedido.ToString("dd/MM/yyyy HH:mm")</strong>
+            </div>
+
+            <div>
+                <span>Valor total</span>
+                <strong>R$ @Model.ValorTotal.ToString("N2")</strong>
+            </div>
+
+        </div>
+
+        <div class="pedido-card-footer">
+            <span><i class="bi bi-box-seam"></i> Detalhes do pedido</span>
+            <span class="pedido-data">Realizado em @Model.DataPedido.ToString("dd/MM/yyyy 'às' HH:mm")</span>
+        </div>
+
+    </div>
+
+    <section class="pedido-itens">
+        <div class="secao-titulo">
+            <h2>Itens do pedido</h2>
+        </div>
+
+        @if (Model.Itens != null && Model.Itens.Any())
+        {
+            <div class="itens-lista">
+                @foreach (var item in Model.Itens)
+                {
+                    <div class="pedido-item-card">
+                        <div class="pedido-item-left">
+                            <h3>@item.NomeProduto</h3>
+                            <div class="muted">Quantidade: @item.Quantidade</div>
+                        </div>
+                        <div class="pedido-item-right">
+                            <div class="muted">R$ @item.PrecoUni.ToString("N2") cada</div>
+                            <strong>R$ @item.SubTotal.ToString("N2")</strong>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="sem-itens">
+                <p>Não há itens disponíveis para este pedido.</p>
+            </div>
+        }
+
+        <div class="pedido-total">
+            <span>Total do pedido</span>
+            <strong>R$ @Model.ValorTotal.ToString("N2")</strong>
+        </div>
+
+    </section>
+
+</div>

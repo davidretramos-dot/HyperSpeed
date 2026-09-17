@@ -1,4 +1,5 @@
-﻿@model List<hyperSpeed.Application.ViewModels.CarrinhoItem>
+﻿@using hyperSpeed.Application.ViewModels
+@model List<CarrinhoItem>
 
 @{
     ViewData["Title"] = "Meu Carrinho";
@@ -7,95 +8,64 @@
 <div class="carrinho-page">
 
     <div class="carrinho-header">
-        <div>
-            <span class="carrinho-label">HYPERSPEED / PEDIDO</span>
-            <h1>Meu Carrinho</h1>
-            <p>Confira os produtos que você adicionou.</p>
-        </div>
-
-        <a asp-controller="Home"
-           asp-action="Index"
-           class="carrinho-continuar">
-            <i class="bi bi-arrow-left"></i>
-            Continuar comprando
-        </a>
+        <h1>Meu Carrinho</h1>
+        <p>Confira os produtos que você adicionou.</p>
     </div>
 
- 
     @if (Model == null || !Model.Any())
     {
         <div class="carrinho-vazio">
-
-            <div class="carrinho-vazio-icon">
-                <i class="bi bi-cart-x"></i>
-            </div>
+            <i class="bi bi-cart-x"></i>
 
             <h2>Seu carrinho está vazio</h2>
 
             <p>
-                Você ainda não adicionou nenhum produto ao seu carrinho.
+                Adicione alguns produtos para continuar.
             </p>
 
             <a asp-controller="Home"
                asp-action="Index"
-               class="carrinho-btn">
-                <i class="bi bi-shop"></i>
-                Ver produtos
+               class="carrinho-voltar">
+                Continuar comprando
             </a>
-
         </div>
     }
     else
     {
-        <div class="carrinho-layout">
+        <div class="carrinho-conteudo">
 
-            <!-- PRODUTOS -->
-
-            <div class="carrinho-produtos">
+            <div class="carrinho-itens">
 
                 @foreach (var item in Model)
                 {
                     <div class="carrinho-item">
 
-                        <div class="carrinho-item-icon">
-                            <i class="bi bi-cpu"></i>
-                        </div>
-
                         <div class="carrinho-item-info">
 
-                            <h3>@item.Nome</h3>
+                            <div>
+                                <h3>@item.Nome</h3>
 
-                            <span>
-                                Produto HyperSpeed
-                            </span>
-
-                            <div class="carrinho-preco">
-                                R$ @item.Preco.ToString("N2")
+                                <span>
+                                    R$ @item.Preco.ToString("N2")
+                                </span>
                             </div>
 
                         </div>
 
-                        <div class="carrinho-quantidade">
-
-                            <span>QUANTIDADE</span>
-
-                            <strong>
-                                @item.Quantidade
-                            </strong>
-
+                        <div class="carrinho-item-quantidade">
+                            <span>
+                                Quantidade: @item.Quantidade
+                            </span>
                         </div>
 
-                        <div class="carrinho-subtotal">
-
-                            <span>SUBTOTAL</span>
-
+                        <div class="carrinho-item-subtotal">
                             <strong>
                                 R$ @item.SubTotal.ToString("N2")
                             </strong>
-
                         </div>
 
-                        <form asp-action="Remover"
+                        <form asp-controller="Carrinho"
+                              asp-action="Remover"
                               method="post">
 
                             <input type="hidden"
@@ -103,62 +73,46 @@
                                    value="@item.ProdutoId" />
 
                             <button type="submit"
-                                    class="carrinho-remover"
-                                    title="Remover produto">
-
-                                <i class="bi bi-trash3"></i>
-
+                                    class="carrinho-remover">
+                                <i class="bi bi-trash"></i>
                             </button>
 
                         </form>
 
                     </div>
                 }
+                            <a asp-controller="Home"
+                               asp-action="Index"
+                               class="carrinho-voltar">
+                                Continuar comprando
+                            </a>
 
             </div>
 
- 
-            <!-- RESUMO -->
+            <div class="carrinho-resumo">
 
-            <aside class="carrinho-resumo">
+                <h2>Resumo do pedido</h2>
 
-                <span class="carrinho-label">
-                    RESUMO DO PEDIDO
-                </span>
-
-                <h2>Seu pedido</h2>
-
-                <div class="resumo-linha">
-                    <span>Produtos</span>
-                    <strong>@Model.Count</strong>
-                </div>
-
-                <div class="resumo-linha">
-                    <span>Frete</span>
-                    <strong>Grátis</strong>
-                </div>
-
-                <div class="resumo-divisor"></div>
-
-                <div class="resumo-total">
-
+                <div class="carrinho-total">
                     <span>Total</span>
 
                     <strong>
                         R$ @ViewBag.Total.ToString("N2")
                     </strong>
-
                 </div>
 
-                <button class="carrinho-finalizar"
-                        type="button">
+                <form asp-controller="Carrinho"
+                      asp-action="FinalizarPedido"
+                      method="post">
 
-                    Finalizar pedido
-                    <i class="bi bi-arrow-right"></i>
+                    <button type="submit" class="carrinho-finalizar">
+                        <i class="bi bi-check-circle"></i>
+                        Finalizar pedido
+                    </button>
 
-                </button>
+                </form>
 
-            </aside>
+            </div>
 
         </div>
     }

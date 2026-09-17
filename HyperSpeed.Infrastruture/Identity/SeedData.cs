@@ -17,7 +17,7 @@ namespace HyperSpeed.Infrastruture.Identity
 
             try
             {
-               
+
                 await context.Database.MigrateAsync();
             }
             catch (Exception)
@@ -33,8 +33,8 @@ namespace HyperSpeed.Infrastruture.Identity
                 {
                     new Categorias { Nome = "Processadores" },
                     new Categorias { Nome = "Placas de Vídeo" },
-                    new Categorias{ Nome = "SSD" },
-                    new Categorias{ Nome = "Teclados" },
+                    new Categorias { Nome = "SSD" },
+                    new Categorias { Nome = "Teclados" },
                     new Categorias { Nome = "Placas-Mãe" },
                     new Categorias { Nome = "Headsets e Fones" },
                     new Categorias { Nome = "Controles" },
@@ -45,6 +45,7 @@ namespace HyperSpeed.Infrastruture.Identity
                     new Categorias { Nome = "Notebooks" },
                     new Categorias { Nome = "Mesas" }
                 };
+
 
                 await context.Categorias.AddRangeAsync(categorias);
                 await context.SaveChangesAsync();
@@ -64,6 +65,7 @@ namespace HyperSpeed.Infrastruture.Identity
             var mouses = await context.Categorias.FirstAsync(x => x.Nome == "Mouses");
             var notebooks = await context.Categorias.FirstAsync(x => x.Nome == "Notebooks");
             var mesas = await context.Categorias.FirstAsync(x => x.Nome == "Mesas");
+
             if (!context.Produtos.Any())
             {
                 var produtos = new List<Produto>
@@ -72,7 +74,8 @@ namespace HyperSpeed.Infrastruture.Identity
         {
             Nome = "AMD Ryzen 5 5600X",
             Descricao = "Processador AMD Ryzen 5 6 núcleos",
-            Imagem = "...",
+            Imagem = "https://m.media-amazon.com/images/I/51So7GoGvxL._AC_UF894,1000_QL80_.jpg",
+            CriacaoAt = DateTime.UtcNow,
             Preco = 899.90m,
             Estoque = 50,
             IdCategoria = processadores.Id
@@ -82,7 +85,8 @@ namespace HyperSpeed.Infrastruture.Identity
         {
             Nome = "RTX 4070 12GB",
             Descricao = "Placa de vídeo NVIDIA RTX 4070",
-            Imagem = "...",
+            Imagem = "https://images.kabum.com.br/produtos/fotos/517749/placa-de-video-rtx-4070-super-gigabyte-gaming-oc-nvidia-geforce-12gb-gddr6-dlss-ray-tracing-gv-n407sgaming-oc-12gd_1707241123_gg.jpg",
+            CriacaoAt = DateTime.UtcNow,
             Preco = 3899.90m,
             Estoque = 20,
             IdCategoria = placasVideo.Id
@@ -92,7 +96,8 @@ namespace HyperSpeed.Infrastruture.Identity
         {
             Nome = "SSD NVMe 1TB",
             Descricao = "SSD M.2 NVMe Gen4 1TB",
-            Imagem = "...",
+            Imagem = "https://images.kabum.com.br/produtos/fotos/621162/ssd-pcie-kingston-nv3-1-tb-m-2-2280-nvme-leitura-6000-mb-s-e-gravacao-4000-mb-s-snv3s-1000g_1726082185_gg.jpg",
+            CriacaoAt = DateTime.UtcNow,
             Preco = 429.90m,
             Estoque = 80,
             IdCategoria = ssd.Id
@@ -102,7 +107,8 @@ namespace HyperSpeed.Infrastruture.Identity
         {
             Nome = "Teclado Mecânico RGB",
             Descricao = "Teclado mecânico gamer RGB",
-            Imagem = "...",
+            Imagem = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2ZFGD8U3HNxFzpJnzsteo6l6PXMnF0ANzD8xSaGzfrgux5Qk6_fabP4c&s=10",
+            CriacaoAt = DateTime.UtcNow,
             Preco = 249.90m,
             Estoque = 60,
             IdCategoria = teclados.Id

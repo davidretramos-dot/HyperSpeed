@@ -43,11 +43,18 @@ namespace HyperSpeed.UI.Controllers
                     .ToList();
             }
 
+            var recentes = produtos
+                .OrderByDescending(p => p.CriacaoAt)
+                .Take(4)
+                .ToList();
+
             var model = new HomeViewModels
             {
                 Produtos = produtos,
 
-                ProdutosDestaque = destaques
+                ProdutosDestaque = destaques,
+
+                ProdutosRecentes = recentes
             };
 
             return View(model);

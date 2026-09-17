@@ -120,11 +120,11 @@ namespace HyperSpeed.Desktop.Forms
             }
         }
 
-        private void btnDashboard_Click(object sender, EventArgs e) 
+        private void btnDashboard_Click(object sender, EventArgs e)
         {
             Navegar(new DashboardUserControl(), btnDashboard);
             this.ActiveControl = pnlConteudo;
-        } 
+        }
 
         private void btnProdutos_Click(object sender, EventArgs e) => Navegar(new ProdutosUserControl(), btnProdutos);
 
@@ -164,5 +164,6 @@ namespace HyperSpeed.Desktop.Forms
             //Abre o DashBoard como tela inicial
             NavegarParaDashboard();
         }
+        private void btnInfoProj_Click(object sender, EventArgs e) => Navegar(new InfoUserControl(), btnInfoProj);
     }
 }

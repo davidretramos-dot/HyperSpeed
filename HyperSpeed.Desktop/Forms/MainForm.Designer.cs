@@ -55,10 +55,10 @@
             lblSidebarSub = new Label();
             lblSidebarLogo = new Label();
             pnlConteudo = new Panel();
-            pnlHeader = new Panel();
-            btnLogout = new Guna.UI2.WinForms.Guna2Button();
-            lblTituloApp = new Label();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
+            lblTituloApp = new Label();
+            btnLogout = new Guna.UI2.WinForms.Guna2Button();
+            pnlHeader = new Panel();
             pnlSidebar.SuspendLayout();
             pnlUsuario.SuspendLayout();
             pnlLogo.SuspendLayout();
@@ -81,19 +81,24 @@
             // 
             // btnPerfil
             // 
+            btnPerfil.Animated = true;
             btnPerfil.BackColor = Color.Transparent;
-            btnPerfil.BorderColor = Color.FromArgb(166, 2, 73);
+            btnPerfil.BorderColor = Color.Transparent;
             btnPerfil.BorderRadius = 5;
             btnPerfil.BorderThickness = 1;
+            btnPerfil.CheckedState.FillColor = Color.Transparent;
             btnPerfil.CustomizableEdges = customizableEdges1;
             btnPerfil.DisabledState.BorderColor = Color.DarkGray;
             btnPerfil.DisabledState.CustomBorderColor = Color.DarkGray;
             btnPerfil.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnPerfil.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnPerfil.FillColor = Color.FromArgb(21, 21, 21);
+            btnPerfil.FillColor = Color.FromArgb(166, 2, 73);
             btnPerfil.Font = new Font("Segoe UI", 9F);
             btnPerfil.ForeColor = Color.White;
-            btnPerfil.Location = new Point(0, 213);
+            btnPerfil.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
+            btnPerfil.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnPerfil.HoverState.ForeColor = Color.FromArgb(166, 2, 73);
+            btnPerfil.Location = new Point(0, 111);
             btnPerfil.Name = "btnPerfil";
             btnPerfil.ShadowDecoration.CustomizableEdges = customizableEdges2;
             btnPerfil.Size = new Size(200, 45);
@@ -103,18 +108,23 @@
             // 
             // btnUsuarios
             // 
+            btnUsuarios.Animated = true;
             btnUsuarios.BackColor = Color.Transparent;
-            btnUsuarios.BorderColor = Color.FromArgb(166, 2, 73);
+            btnUsuarios.BorderColor = Color.Transparent;
             btnUsuarios.BorderRadius = 5;
             btnUsuarios.BorderThickness = 1;
+            btnUsuarios.CheckedState.FillColor = Color.Transparent;
             btnUsuarios.CustomizableEdges = customizableEdges3;
             btnUsuarios.DisabledState.BorderColor = Color.DarkGray;
             btnUsuarios.DisabledState.CustomBorderColor = Color.DarkGray;
             btnUsuarios.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnUsuarios.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnUsuarios.FillColor = Color.FromArgb(21, 21, 21);
+            btnUsuarios.FillColor = Color.FromArgb(166, 2, 73);
             btnUsuarios.Font = new Font("Segoe UI", 9F);
             btnUsuarios.ForeColor = Color.White;
+            btnUsuarios.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
+            btnUsuarios.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnUsuarios.HoverState.ForeColor = Color.FromArgb(166, 2, 73);
             btnUsuarios.Location = new Point(0, 162);
             btnUsuarios.Name = "btnUsuarios";
             btnUsuarios.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -125,19 +135,24 @@
             // 
             // btnCategorias
             // 
+            btnCategorias.Animated = true;
             btnCategorias.BackColor = Color.Transparent;
-            btnCategorias.BorderColor = Color.FromArgb(166, 2, 73);
+            btnCategorias.BorderColor = Color.Transparent;
             btnCategorias.BorderRadius = 5;
             btnCategorias.BorderThickness = 1;
+            btnCategorias.CheckedState.FillColor = Color.Transparent;
             btnCategorias.CustomizableEdges = customizableEdges5;
             btnCategorias.DisabledState.BorderColor = Color.DarkGray;
             btnCategorias.DisabledState.CustomBorderColor = Color.DarkGray;
             btnCategorias.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnCategorias.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnCategorias.FillColor = Color.FromArgb(21, 21, 21);
+            btnCategorias.FillColor = Color.FromArgb(166, 2, 73);
             btnCategorias.Font = new Font("Segoe UI", 9F);
             btnCategorias.ForeColor = Color.White;
-            btnCategorias.Location = new Point(0, 111);
+            btnCategorias.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
+            btnCategorias.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnCategorias.HoverState.ForeColor = Color.FromArgb(166, 2, 73);
+            btnCategorias.Location = new Point(0, 213);
             btnCategorias.Name = "btnCategorias";
             btnCategorias.ShadowDecoration.CustomizableEdges = customizableEdges6;
             btnCategorias.Size = new Size(200, 45);
@@ -147,18 +162,23 @@
             // 
             // btnProdutos
             // 
+            btnProdutos.Animated = true;
             btnProdutos.BackColor = Color.Transparent;
-            btnProdutos.BorderColor = Color.FromArgb(166, 2, 73);
+            btnProdutos.BorderColor = Color.Transparent;
             btnProdutos.BorderRadius = 5;
             btnProdutos.BorderThickness = 1;
+            btnProdutos.CheckedState.FillColor = Color.Transparent;
             btnProdutos.CustomizableEdges = customizableEdges7;
             btnProdutos.DisabledState.BorderColor = Color.DarkGray;
             btnProdutos.DisabledState.CustomBorderColor = Color.DarkGray;
             btnProdutos.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnProdutos.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnProdutos.FillColor = Color.FromArgb(21, 21, 21);
+            btnProdutos.FillColor = Color.FromArgb(166, 2, 73);
             btnProdutos.Font = new Font("Segoe UI", 9F);
             btnProdutos.ForeColor = Color.White;
+            btnProdutos.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
+            btnProdutos.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnProdutos.HoverState.ForeColor = Color.FromArgb(166, 2, 73);
             btnProdutos.Location = new Point(0, 60);
             btnProdutos.Name = "btnProdutos";
             btnProdutos.ShadowDecoration.CustomizableEdges = customizableEdges8;
@@ -180,23 +200,28 @@
             // 
             // btnDashboard
             // 
+            btnDashboard.Animated = true;
             btnDashboard.BackColor = Color.Transparent;
-            btnDashboard.BorderColor = Color.FromArgb(166, 2, 73);
+            btnDashboard.BorderColor = Color.Transparent;
             btnDashboard.BorderRadius = 5;
             btnDashboard.BorderThickness = 1;
+            btnDashboard.CheckedState.FillColor = Color.Transparent;
             btnDashboard.CustomizableEdges = customizableEdges9;
             btnDashboard.DisabledState.BorderColor = Color.DarkGray;
             btnDashboard.DisabledState.CustomBorderColor = Color.DarkGray;
             btnDashboard.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btnDashboard.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnDashboard.FillColor = Color.FromArgb(21, 21, 21);
+            btnDashboard.FillColor = Color.FromArgb(166, 2, 73);
             btnDashboard.Font = new Font("Segoe UI", 9F);
             btnDashboard.ForeColor = Color.White;
+            btnDashboard.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
+            btnDashboard.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnDashboard.HoverState.ForeColor = Color.FromArgb(166, 2, 73);
             btnDashboard.Location = new Point(0, 9);
             btnDashboard.Name = "btnDashboard";
             btnDashboard.ShadowDecoration.CustomizableEdges = customizableEdges10;
             btnDashboard.Size = new Size(200, 45);
-            btnDashboard.TabIndex = 1;
+            btnDashboard.TabIndex = 0;
             btnDashboard.Text = "Dashboard";
             btnDashboard.Click += btnDashboard_Click;
             // 
@@ -245,7 +270,7 @@
             // lblSidebarSub
             // 
             lblSidebarSub.AutoSize = true;
-            lblSidebarSub.BackColor = Color.FromArgb(21, 21, 21);
+            lblSidebarSub.BackColor = Color.Transparent;
             lblSidebarSub.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSidebarSub.ForeColor = Color.FromArgb(166, 2, 73);
             lblSidebarSub.Location = new Point(15, 33);
@@ -273,35 +298,11 @@
             pnlConteudo.Size = new Size(802, 496);
             pnlConteudo.TabIndex = 9;
             // 
-            // pnlHeader
+            // guna2BorderlessForm1
             // 
-            pnlHeader.BackColor = Color.FromArgb(15, 15, 15);
-            pnlHeader.Controls.Add(btnLogout);
-            pnlHeader.Controls.Add(lblTituloApp);
-            pnlHeader.Location = new Point(209, 3);
-            pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(802, 100);
-            pnlHeader.TabIndex = 10;
-            // 
-            // btnLogout
-            // 
-            btnLogout.BorderColor = Color.Brown;
-            btnLogout.BorderRadius = 5;
-            btnLogout.CustomizableEdges = customizableEdges11;
-            btnLogout.DisabledState.BorderColor = Color.DarkGray;
-            btnLogout.DisabledState.CustomBorderColor = Color.DarkGray;
-            btnLogout.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btnLogout.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btnLogout.FillColor = Color.Maroon;
-            btnLogout.Font = new Font("Segoe UI", 9F);
-            btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(693, 37);
-            btnLogout.Name = "btnLogout";
-            btnLogout.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            btnLogout.Size = new Size(90, 33);
-            btnLogout.TabIndex = 2;
-            btnLogout.Text = "Sair";
-            btnLogout.Click += btnLogout_Click;
+            guna2BorderlessForm1.ContainerControl = this;
+            guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
+            guna2BorderlessForm1.TransparentWhileDrag = true;
             // 
             // lblTituloApp
             // 
@@ -314,11 +315,40 @@
             lblTituloApp.TabIndex = 0;
             lblTituloApp.Text = "Hyper Speed Loja";
             // 
-            // guna2BorderlessForm1
+            // btnLogout
             // 
-            guna2BorderlessForm1.ContainerControl = this;
-            guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
-            guna2BorderlessForm1.TransparentWhileDrag = true;
+            btnLogout.Animated = true;
+            btnLogout.BorderColor = Color.Transparent;
+            btnLogout.BorderRadius = 5;
+            btnLogout.BorderThickness = 1;
+            btnLogout.CustomizableEdges = customizableEdges11;
+            btnLogout.DisabledState.BorderColor = Color.DarkGray;
+            btnLogout.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnLogout.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnLogout.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnLogout.FillColor = Color.Maroon;
+            btnLogout.Font = new Font("Segoe UI", 9F);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.HoverState.BorderColor = Color.Maroon;
+            btnLogout.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnLogout.HoverState.ForeColor = Color.Red;
+            btnLogout.Location = new Point(693, 37);
+            btnLogout.Name = "btnLogout";
+            btnLogout.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btnLogout.Size = new Size(90, 33);
+            btnLogout.TabIndex = 2;
+            btnLogout.Text = "Sair";
+            btnLogout.Click += btnLogout_Click;
+            // 
+            // pnlHeader
+            // 
+            pnlHeader.BackColor = Color.FromArgb(15, 15, 15);
+            pnlHeader.Controls.Add(btnLogout);
+            pnlHeader.Controls.Add(lblTituloApp);
+            pnlHeader.Location = new Point(209, 3);
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Size = new Size(802, 100);
+            pnlHeader.TabIndex = 10;
             // 
             // MainForm
             // 
@@ -334,6 +364,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "MainForm";
             Text = "MainForm";
+            Load += MainForm_Load;
             pnlSidebar.ResumeLayout(false);
             pnlSidebar.PerformLayout();
             pnlUsuario.ResumeLayout(false);
@@ -357,13 +388,13 @@
         private Label lblPerfil;
         private Label lblUsuario;
         private Panel pnlConteudo;
-        private Panel pnlHeader;
-        private Label lblTituloApp;
         private Guna.UI2.WinForms.Guna2Button btnPerfil;
         private Guna.UI2.WinForms.Guna2Button btnUsuarios;
         private Guna.UI2.WinForms.Guna2Button btnCategorias;
         private Guna.UI2.WinForms.Guna2Button btnProdutos;
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
+        private Panel pnlHeader;
         private Guna.UI2.WinForms.Guna2Button btnLogout;
+        private Label lblTituloApp;
     }
 }

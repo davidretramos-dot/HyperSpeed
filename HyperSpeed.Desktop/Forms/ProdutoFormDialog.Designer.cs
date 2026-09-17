@@ -66,7 +66,10 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Animated = true;
+            btnCancelar.BorderColor = Color.Transparent;
             btnCancelar.BorderRadius = 7;
+            btnCancelar.BorderThickness = 1;
             btnCancelar.CustomizableEdges = customizableEdges1;
             btnCancelar.DisabledState.BorderColor = Color.DarkGray;
             btnCancelar.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -75,6 +78,9 @@
             btnCancelar.FillColor = Color.FromArgb(64, 64, 64);
             btnCancelar.Font = new Font("Segoe UI", 9F);
             btnCancelar.ForeColor = Color.White;
+            btnCancelar.HoverState.BorderColor = Color.FromArgb(64, 64, 64);
+            btnCancelar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnCancelar.HoverState.ForeColor = Color.Silver;
             btnCancelar.Location = new Point(172, 531);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -85,7 +91,10 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Animated = true;
+            btnSalvar.BorderColor = Color.Transparent;
             btnSalvar.BorderRadius = 7;
+            btnSalvar.BorderThickness = 1;
             btnSalvar.CustomizableEdges = customizableEdges3;
             btnSalvar.DisabledState.BorderColor = Color.DarkGray;
             btnSalvar.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -94,6 +103,9 @@
             btnSalvar.FillColor = Color.DarkGreen;
             btnSalvar.Font = new Font("Segoe UI", 9F);
             btnSalvar.ForeColor = Color.White;
+            btnSalvar.HoverState.BorderColor = Color.DarkGreen;
+            btnSalvar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnSalvar.HoverState.ForeColor = Color.Green;
             btnSalvar.Location = new Point(24, 531);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -184,6 +196,7 @@
             // 
             // txtDescricao
             // 
+            txtDescricao.Animated = true;
             txtDescricao.BorderColor = Color.Black;
             txtDescricao.BorderRadius = 7;
             txtDescricao.CustomizableEdges = customizableEdges5;
@@ -196,7 +209,7 @@
             txtDescricao.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtDescricao.Font = new Font("Segoe UI", 9F);
             txtDescricao.ForeColor = Color.FromArgb(224, 224, 224);
-            txtDescricao.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtDescricao.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtDescricao.Location = new Point(23, 163);
             txtDescricao.Name = "txtDescricao";
             txtDescricao.PlaceholderText = "";
@@ -207,10 +220,11 @@
             // 
             // txtPreco
             // 
+            txtPreco.Animated = true;
             txtPreco.BorderColor = Color.Black;
             txtPreco.BorderRadius = 7;
             txtPreco.CustomizableEdges = customizableEdges7;
-            txtPreco.DefaultText = "R$";
+            txtPreco.DefaultText = "";
             txtPreco.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtPreco.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             txtPreco.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
@@ -219,10 +233,10 @@
             txtPreco.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtPreco.Font = new Font("Segoe UI", 9F);
             txtPreco.ForeColor = Color.FromArgb(224, 224, 224);
-            txtPreco.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtPreco.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtPreco.Location = new Point(24, 283);
             txtPreco.Name = "txtPreco";
-            txtPreco.PlaceholderText = "";
+            txtPreco.PlaceholderText = "R$";
             txtPreco.SelectedText = "";
             txtPreco.ShadowDecoration.CustomizableEdges = customizableEdges8;
             txtPreco.Size = new Size(481, 36);
@@ -230,6 +244,7 @@
             // 
             // txtCoverUrl
             // 
+            txtCoverUrl.Animated = true;
             txtCoverUrl.BorderColor = Color.Black;
             txtCoverUrl.BorderRadius = 7;
             txtCoverUrl.CustomizableEdges = customizableEdges9;
@@ -242,7 +257,7 @@
             txtCoverUrl.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtCoverUrl.Font = new Font("Segoe UI", 9F);
             txtCoverUrl.ForeColor = Color.FromArgb(224, 224, 224);
-            txtCoverUrl.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtCoverUrl.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtCoverUrl.Location = new Point(23, 348);
             txtCoverUrl.Name = "txtCoverUrl";
             txtCoverUrl.PlaceholderText = "";
@@ -253,6 +268,7 @@
             // 
             // txtTitulo
             // 
+            txtTitulo.Animated = true;
             txtTitulo.BorderColor = Color.Black;
             txtTitulo.BorderRadius = 7;
             txtTitulo.CustomizableEdges = customizableEdges11;
@@ -265,7 +281,7 @@
             txtTitulo.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             txtTitulo.Font = new Font("Segoe UI", 9F);
             txtTitulo.ForeColor = Color.FromArgb(224, 224, 224);
-            txtTitulo.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            txtTitulo.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtTitulo.Location = new Point(23, 90);
             txtTitulo.Name = "txtTitulo";
             txtTitulo.PlaceholderText = "";

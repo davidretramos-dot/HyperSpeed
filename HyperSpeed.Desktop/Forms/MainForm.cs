@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Reflection.Emit;
 using System.Text;
 using System.Windows.Forms;
 
@@ -42,31 +43,7 @@ namespace HyperSpeed.Desktop.Forms
         {
             InitializeComponent();
         }
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            //Guard: não executa em tempo de design
-            if (DesignMode) return;
 
-            //Instancia o serviço
-            _authService = new AuthApiService();
-
-            // Atualiza o título com a versão
-            this.Text = $"SenacGames Desktop - {AppConfig.Version}";
-
-            //Preenche dados dinâmicos de sessão no header
-            lblUsuario.Text = $"👷‍ {SessionManager.Instance.GetDisplayName()}";
-            lblPerfil.Text = SessionManager.Instance.IsAdmin ? "🔑 Administrador" : "👀 Usuário Comum";
-            lblPerfil.ForeColor = SessionManager.Instance.IsAdmin
-                ? HyperSpeedTheme.RedHyper
-                : HyperSpeedTheme.GreySpeed;
-            lblSessao.Text = $"🟢 {SessionManager.Instance.GetEmail()}";
-
-            // Configura permissões baseadas no perfil do usuário
-            ConfigurarPermissoes();
-
-            //Abre o DashBoard como tela inicial
-            NavegarParaDashboard();
-        }
 
         private void ConfigurarPermissoes()
         {
@@ -102,7 +79,7 @@ namespace HyperSpeed.Desktop.Forms
         {
             if (_botaoAtivo != null)
             {
-                _botaoAtivo.FillColor = Color.Transparent;
+                _botaoAtivo.FillColor = HyperSpeedTheme.RedHyper;
                 _botaoAtivo.ForeColor = Color.White;
                 _botaoAtivo.CustomBorderColor = Color.Transparent;
             }
@@ -111,9 +88,10 @@ namespace HyperSpeed.Desktop.Forms
 
             if (_botaoAtivo != null)
             {
-                _botaoAtivo.FillColor = Color.FromArgb(0, 50, 110);
-                _botaoAtivo.ForeColor = Color.White;
+                _botaoAtivo.FillColor = HyperSpeedTheme.BlackSpeed;
+                _botaoAtivo.ForeColor = HyperSpeedTheme.RedHyper;
                 _botaoAtivo.CustomBorderColor = HyperSpeedTheme.RedHyper;
+                _botaoAtivo.BorderColor = HyperSpeedTheme.RedHyper;
             }
         }
 
@@ -142,7 +120,11 @@ namespace HyperSpeed.Desktop.Forms
             }
         }
 
-        private void btnDashboard_Click(object sender, EventArgs e) => Navegar(new DashboardUserControl(), btnDashboard);
+        private void btnDashboard_Click(object sender, EventArgs e) 
+        {
+            Navegar(new DashboardUserControl(), btnDashboard);
+            this.ActiveControl = pnlConteudo;
+        } 
 
         private void btnProdutos_Click(object sender, EventArgs e) => Navegar(new ProdutosUserControl(), btnProdutos);
 
@@ -155,6 +137,32 @@ namespace HyperSpeed.Desktop.Forms
         private void pnlConteudo_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //Guard: não executa em tempo de design
+            if (DesignMode) return;
+
+            //Instancia o serviço
+            _authService = new AuthApiService();
+
+            // Atualiza o título com a versão
+            this.Text = $"SenacGames Desktop - {AppConfig.Version}";
+
+            //Preenche dados dinâmicos de sessão no header
+            lblUsuario.Text = $"👷‍ {SessionManager.Instance.GetDisplayName()}";
+            lblPerfil.Text = SessionManager.Instance.IsAdmin ? "🔑 Administrador" : "👀 Usuário Comum";
+            lblPerfil.ForeColor = SessionManager.Instance.IsAdmin
+                ? HyperSpeedTheme.RedHyper
+                : HyperSpeedTheme.GreySpeed;
+            lblSessao.Text = $"🟢 {SessionManager.Instance.GetEmail()}";
+
+            // Configura permissões baseadas no perfil do usuário
+            ConfigurarPermissoes();
+
+            //Abre o DashBoard como tela inicial
+            NavegarParaDashboard();
         }
     }
 }

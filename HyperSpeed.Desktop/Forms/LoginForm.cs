@@ -1,5 +1,7 @@
-﻿using HyperSpeed.Desktop.Helpers;
+﻿using Guna.UI2.WinForms;
+using HyperSpeed.Desktop.Helpers;
 using HyperSpeed.Desktop.Services;
+using HyperSpeed.Desktop.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,7 +42,7 @@ namespace HyperSpeed.Desktop.Forms
 
         private async void btnEntrar_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void ExibirErro(string mensagem)
@@ -116,10 +118,16 @@ namespace HyperSpeed.Desktop.Forms
                 if (success && user != null)
                 {
                     SessionManager.Instance.SetUser(user);
+
                     this.Hide();
+
                     using var mainform = new MainForm();
                     mainform.ShowDialog();
-                    this.Close();
+
+                    // Quando o MainForm fechar (logout), volta para o Login
+                    this.Show();
+
+                    
                 }
                 else
                 {
@@ -143,6 +151,12 @@ namespace HyperSpeed.Desktop.Forms
             {
                 SetCarregando(false);
             }
+        }
+
+        private void btnEsqueciSenha_Click(object sender, EventArgs e)
+        {
+            EsqueciSenhaForm esqueciSenhaForm = new EsqueciSenhaForm();
+            esqueciSenhaForm.Show();
         }
     }
 }

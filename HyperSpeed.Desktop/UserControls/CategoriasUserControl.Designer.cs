@@ -84,7 +84,10 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Animated = true;
+            btnCancelar.BorderColor = Color.Transparent;
             btnCancelar.BorderRadius = 5;
+            btnCancelar.BorderThickness = 1;
             btnCancelar.CustomizableEdges = customizableEdges1;
             btnCancelar.DisabledState.BorderColor = Color.DarkGray;
             btnCancelar.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -93,6 +96,9 @@
             btnCancelar.FillColor = Color.Gray;
             btnCancelar.Font = new Font("Segoe UI", 9F);
             btnCancelar.ForeColor = Color.White;
+            btnCancelar.HoverState.BorderColor = Color.Gray;
+            btnCancelar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnCancelar.HoverState.ForeColor = Color.Silver;
             btnCancelar.Location = new Point(106, 123);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.ShadowDecoration.CustomizableEdges = customizableEdges2;
@@ -103,7 +109,10 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Animated = true;
+            btnSalvar.BorderColor = Color.Transparent;
             btnSalvar.BorderRadius = 5;
+            btnSalvar.BorderThickness = 1;
             btnSalvar.CustomizableEdges = customizableEdges3;
             btnSalvar.DisabledState.BorderColor = Color.DarkGray;
             btnSalvar.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -112,6 +121,9 @@
             btnSalvar.FillColor = Color.Green;
             btnSalvar.Font = new Font("Segoe UI", 9F);
             btnSalvar.ForeColor = Color.White;
+            btnSalvar.HoverState.BorderColor = Color.Green;
+            btnSalvar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnSalvar.HoverState.ForeColor = Color.Green;
             btnSalvar.Location = new Point(3, 123);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -201,7 +213,10 @@
             // 
             // btnAtualizar
             // 
+            btnAtualizar.Animated = true;
+            btnAtualizar.BorderColor = Color.Transparent;
             btnAtualizar.BorderRadius = 10;
+            btnAtualizar.BorderThickness = 1;
             btnAtualizar.CustomizableEdges = customizableEdges9;
             btnAtualizar.DisabledState.BorderColor = Color.DarkGray;
             btnAtualizar.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -210,6 +225,9 @@
             btnAtualizar.FillColor = Color.Goldenrod;
             btnAtualizar.Font = new Font("Segoe UI", 9F);
             btnAtualizar.ForeColor = Color.White;
+            btnAtualizar.HoverState.BorderColor = Color.Goldenrod;
+            btnAtualizar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnAtualizar.HoverState.ForeColor = Color.Yellow;
             btnAtualizar.Location = new Point(428, 25);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -220,7 +238,10 @@
             // 
             // btnExcluir
             // 
+            btnExcluir.Animated = true;
+            btnExcluir.BorderColor = Color.Transparent;
             btnExcluir.BorderRadius = 10;
+            btnExcluir.BorderThickness = 1;
             btnExcluir.CustomizableEdges = customizableEdges11;
             btnExcluir.DisabledState.BorderColor = Color.DarkGray;
             btnExcluir.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -229,6 +250,9 @@
             btnExcluir.FillColor = Color.Maroon;
             btnExcluir.Font = new Font("Segoe UI", 9F);
             btnExcluir.ForeColor = Color.White;
+            btnExcluir.HoverState.BorderColor = Color.Maroon;
+            btnExcluir.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnExcluir.HoverState.ForeColor = Color.Red;
             btnExcluir.Location = new Point(314, 25);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.ShadowDecoration.CustomizableEdges = customizableEdges12;
@@ -239,7 +263,10 @@
             // 
             // btnEditar
             // 
+            btnEditar.Animated = true;
+            btnEditar.BorderColor = Color.Transparent;
             btnEditar.BorderRadius = 10;
+            btnEditar.BorderThickness = 1;
             btnEditar.CustomizableEdges = customizableEdges13;
             btnEditar.DisabledState.BorderColor = Color.DarkGray;
             btnEditar.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -248,6 +275,9 @@
             btnEditar.FillColor = Color.MidnightBlue;
             btnEditar.Font = new Font("Segoe UI", 9F);
             btnEditar.ForeColor = Color.White;
+            btnEditar.HoverState.BorderColor = Color.MidnightBlue;
+            btnEditar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnEditar.HoverState.ForeColor = Color.RoyalBlue;
             btnEditar.Location = new Point(200, 25);
             btnEditar.Name = "btnEditar";
             btnEditar.ShadowDecoration.CustomizableEdges = customizableEdges14;
@@ -258,7 +288,10 @@
             // 
             // btnNova
             // 
+            btnNova.Animated = true;
+            btnNova.BorderColor = Color.Transparent;
             btnNova.BorderRadius = 10;
+            btnNova.BorderThickness = 1;
             btnNova.CustomizableEdges = customizableEdges15;
             btnNova.DisabledState.BorderColor = Color.DarkGray;
             btnNova.DisabledState.CustomBorderColor = Color.DarkGray;
@@ -267,6 +300,9 @@
             btnNova.FillColor = Color.DarkGreen;
             btnNova.Font = new Font("Segoe UI", 9F);
             btnNova.ForeColor = Color.White;
+            btnNova.HoverState.BorderColor = Color.DarkGreen;
+            btnNova.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnNova.HoverState.ForeColor = Color.Green;
             btnNova.Location = new Point(86, 25);
             btnNova.Name = "btnNova";
             btnNova.ShadowDecoration.CustomizableEdges = customizableEdges16;

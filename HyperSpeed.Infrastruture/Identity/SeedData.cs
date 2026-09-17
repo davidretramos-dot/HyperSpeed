@@ -30,21 +30,21 @@ namespace HyperSpeed.Infrastruture.Identity
             if (!context.Categorias.Any())
             {
                 var categorias = new List<Categorias>
-    {
-        new Categorias { Nome = "Processadores" },
-        new Categorias { Nome = "Placas de Vídeo" },
-        new Categorias{ Nome = "SSD" },
-        new Categorias{ Nome = "Teclados" },
-        new Categorias { Nome = "Placas-Mãe" },
-        new Categorias { Nome = "Headsets e Fones" },
-        new Categorias { Nome = "Controles" },
-        new Categorias { Nome = "Iluminação RGB" },
-        new Categorias { Nome = "Monitores" },
-        new Categorias { Nome = "Gabinetes" },
-        new Categorias { Nome = "Mouses" },
-        new Categorias { Nome = "Notebooks" },
-        new Categorias { Nome = "Mesas" }
-    };
+                {
+                    new Categorias { Nome = "Processadores" },
+                    new Categorias { Nome = "Placas de Vídeo" },
+                    new Categorias{ Nome = "SSD" },
+                    new Categorias{ Nome = "Teclados" },
+                    new Categorias { Nome = "Placas-Mãe" },
+                    new Categorias { Nome = "Headsets e Fones" },
+                    new Categorias { Nome = "Controles" },
+                    new Categorias { Nome = "Iluminação RGB" },
+                    new Categorias { Nome = "Monitores" },
+                    new Categorias { Nome = "Gabinetes" },
+                    new Categorias { Nome = "Mouses" },
+                    new Categorias { Nome = "Notebooks" },
+                    new Categorias { Nome = "Mesas" }
+                };
 
                 await context.Categorias.AddRangeAsync(categorias);
                 await context.SaveChangesAsync();
@@ -114,10 +114,15 @@ namespace HyperSpeed.Infrastruture.Identity
                 await context.Produtos.AddRangeAsync(produtos);
                 await context.SaveChangesAsync();
             }
-
+            //admin
             if (!await roleManager.RoleExistsAsync("Admin"))
             {
                 await roleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            //cliente 
+            if (!await roleManager.RoleExistsAsync("Cliente"))
+            {
+                await roleManager.CreateAsync(new IdentityRole("Cliente"));
             }
             var AdminEmail = "adminHS@gmail.com";
             var AdminUser = await userManager.FindByEmailAsync(AdminEmail);

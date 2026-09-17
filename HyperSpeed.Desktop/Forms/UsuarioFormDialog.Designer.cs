@@ -59,11 +59,17 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Animated = true;
+            btnCancelar.BorderColor = Color.Transparent;
             btnCancelar.BorderRadius = 6;
+            btnCancelar.BorderThickness = 1;
             btnCancelar.CustomizableEdges = customizableEdges1;
             btnCancelar.FillColor = Color.FromArgb(64, 64, 64);
             btnCancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnCancelar.ForeColor = Color.White;
+            btnCancelar.HoverState.BorderColor = Color.FromArgb(64, 64, 64);
+            btnCancelar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnCancelar.HoverState.ForeColor = Color.Silver;
             btnCancelar.Location = new Point(318, 273);
             btnCancelar.Margin = new Padding(3, 2, 3, 2);
             btnCancelar.Name = "btnCancelar";
@@ -75,11 +81,17 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.Animated = true;
+            btnSalvar.BorderColor = Color.Transparent;
             btnSalvar.BorderRadius = 6;
+            btnSalvar.BorderThickness = 1;
             btnSalvar.CustomizableEdges = customizableEdges3;
             btnSalvar.FillColor = Color.DarkGreen;
             btnSalvar.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnSalvar.ForeColor = Color.White;
+            btnSalvar.HoverState.BorderColor = Color.DarkGreen;
+            btnSalvar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnSalvar.HoverState.ForeColor = Color.Green;
             btnSalvar.Location = new Point(196, 273);
             btnSalvar.Margin = new Padding(3, 2, 3, 2);
             btnSalvar.Name = "btnSalvar";
@@ -111,11 +123,13 @@
             // 
             // txtConfirmarSenha
             // 
+            txtConfirmarSenha.Animated = true;
             txtConfirmarSenha.BorderRadius = 6;
             txtConfirmarSenha.CustomizableEdges = customizableEdges5;
             txtConfirmarSenha.DefaultText = "";
             txtConfirmarSenha.FillColor = Color.FromArgb(15, 15, 15);
             txtConfirmarSenha.Font = new Font("Segoe UI", 9F);
+            txtConfirmarSenha.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtConfirmarSenha.Location = new Point(231, 175);
             txtConfirmarSenha.Margin = new Padding(3, 2, 3, 2);
             txtConfirmarSenha.Name = "txtConfirmarSenha";
@@ -138,11 +152,13 @@
             // 
             // txtSenha
             // 
+            txtSenha.Animated = true;
             txtSenha.BorderRadius = 6;
             txtSenha.CustomizableEdges = customizableEdges7;
             txtSenha.DefaultText = "";
             txtSenha.FillColor = Color.FromArgb(15, 15, 15);
             txtSenha.Font = new Font("Segoe UI", 9F);
+            txtSenha.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtSenha.Location = new Point(21, 175);
             txtSenha.Margin = new Padding(3, 2, 3, 2);
             txtSenha.Name = "txtSenha";
@@ -165,11 +181,13 @@
             // 
             // txtEmail
             // 
+            txtEmail.Animated = true;
             txtEmail.BorderRadius = 6;
             txtEmail.CustomizableEdges = customizableEdges9;
             txtEmail.DefaultText = "";
             txtEmail.FillColor = Color.FromArgb(15, 15, 15);
             txtEmail.Font = new Font("Segoe UI", 9F);
+            txtEmail.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtEmail.Location = new Point(21, 121);
             txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
@@ -191,11 +209,13 @@
             // 
             // txtNome
             // 
+            txtNome.Animated = true;
             txtNome.BorderRadius = 6;
             txtNome.CustomizableEdges = customizableEdges11;
             txtNome.DefaultText = "";
             txtNome.FillColor = Color.FromArgb(15, 15, 15);
             txtNome.Font = new Font("Segoe UI", 9F);
+            txtNome.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
             txtNome.Location = new Point(21, 67);
             txtNome.Margin = new Padding(3, 2, 3, 2);
             txtNome.Name = "txtNome";

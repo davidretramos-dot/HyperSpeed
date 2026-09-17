@@ -134,11 +134,17 @@
             // 
             // btnPesquisar
             // 
+            btnPesquisar.Animated = true;
+            btnPesquisar.BorderColor = Color.Transparent;
             btnPesquisar.BorderRadius = 6;
+            btnPesquisar.BorderThickness = 1;
             btnPesquisar.CustomizableEdges = customizableEdges3;
             btnPesquisar.FillColor = Color.FromArgb(43, 112, 255);
             btnPesquisar.Font = new Font("Segoe UI", 9F);
             btnPesquisar.ForeColor = Color.White;
+            btnPesquisar.HoverState.BorderColor = Color.FromArgb(43, 112, 255);
+            btnPesquisar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnPesquisar.HoverState.ForeColor = Color.FromArgb(43, 112, 255);
             btnPesquisar.Location = new Point(338, 6);
             btnPesquisar.Margin = new Padding(3, 2, 3, 2);
             btnPesquisar.Name = "btnPesquisar";
@@ -150,11 +156,17 @@
             // 
             // btnNovo
             // 
+            btnNovo.Animated = true;
+            btnNovo.BorderColor = Color.Transparent;
             btnNovo.BorderRadius = 6;
+            btnNovo.BorderThickness = 1;
             btnNovo.CustomizableEdges = customizableEdges5;
             btnNovo.FillColor = Color.DarkGreen;
             btnNovo.Font = new Font("Segoe UI", 9F);
             btnNovo.ForeColor = Color.White;
+            btnNovo.HoverState.BorderColor = Color.DarkGreen;
+            btnNovo.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnNovo.HoverState.ForeColor = Color.Green;
             btnNovo.Location = new Point(384, 6);
             btnNovo.Margin = new Padding(3, 2, 3, 2);
             btnNovo.Name = "btnNovo";
@@ -166,11 +178,17 @@
             // 
             // btnEditar
             // 
+            btnEditar.Animated = true;
+            btnEditar.BorderColor = Color.Transparent;
             btnEditar.BorderRadius = 6;
+            btnEditar.BorderThickness = 1;
             btnEditar.CustomizableEdges = customizableEdges7;
             btnEditar.FillColor = Color.DarkBlue;
             btnEditar.Font = new Font("Segoe UI", 9F);
             btnEditar.ForeColor = Color.White;
+            btnEditar.HoverState.BorderColor = Color.DarkBlue;
+            btnEditar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnEditar.HoverState.ForeColor = Color.RoyalBlue;
             btnEditar.Location = new Point(469, 6);
             btnEditar.Margin = new Padding(3, 2, 3, 2);
             btnEditar.Name = "btnEditar";
@@ -182,11 +200,17 @@
             // 
             // btnExcluir
             // 
+            btnExcluir.Animated = true;
+            btnExcluir.BorderColor = Color.Transparent;
             btnExcluir.BorderRadius = 6;
+            btnExcluir.BorderThickness = 1;
             btnExcluir.CustomizableEdges = customizableEdges9;
             btnExcluir.FillColor = Color.Maroon;
             btnExcluir.Font = new Font("Segoe UI", 9F);
             btnExcluir.ForeColor = Color.White;
+            btnExcluir.HoverState.BorderColor = Color.Maroon;
+            btnExcluir.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnExcluir.HoverState.ForeColor = Color.Red;
             btnExcluir.Location = new Point(554, 6);
             btnExcluir.Margin = new Padding(3, 2, 3, 2);
             btnExcluir.Name = "btnExcluir";
@@ -198,11 +222,17 @@
             // 
             // btnAtualizar
             // 
+            btnAtualizar.Animated = true;
+            btnAtualizar.BorderColor = Color.Transparent;
             btnAtualizar.BorderRadius = 6;
+            btnAtualizar.BorderThickness = 1;
             btnAtualizar.CustomizableEdges = customizableEdges11;
             btnAtualizar.FillColor = Color.Goldenrod;
             btnAtualizar.Font = new Font("Segoe UI", 9F);
             btnAtualizar.ForeColor = Color.White;
+            btnAtualizar.HoverState.BorderColor = Color.Goldenrod;
+            btnAtualizar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnAtualizar.HoverState.ForeColor = Color.Yellow;
             btnAtualizar.Location = new Point(639, 6);
             btnAtualizar.Margin = new Padding(3, 2, 3, 2);
             btnAtualizar.Name = "btnAtualizar";

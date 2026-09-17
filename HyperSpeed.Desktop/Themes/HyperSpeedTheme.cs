@@ -8,6 +8,8 @@ namespace HyperSpeed.Desktop.Themes
     {
         public static Color RedHyper = Color.FromArgb(166, 2, 73);
         public static Color GreySpeed = Color.FromArgb(21,21,21);
-        public static Color AzulPrimario => Color.FromArgb(0, 75, 135);
+        public static Color BlackSpeed = Color.FromArgb(16,16,16);
+        public static Color WhiteSpeed = Color.FromArgb(240,240,240);
+        
     }
 }

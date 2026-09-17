@@ -117,6 +117,82 @@ namespace HyperSpeed.API.Controllers
                
             });
         }
+
+        /// <summary>
+        /// Gera um token para recuperação de senha.
+        /// POST /api/auth/esqueci-senha
+        /// </summary>
+        [HttpPost("esqueci-senha")]
+        public async Task<ActionResult> EsqueciSenha([FromBody] EsqueciSenhaDTo dto)
+        {
+            var usuario = await _userManager.FindByEmailAsync(dto.Email);
+
+            if (usuario == null)
+            {
+                return NotFound(new
+                {
+                    message = "Usuário não encontrado."
+                });
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(usuario);
+
+            return Ok(new
+            {
+                message = "Token de recuperação gerado com sucesso.",
+                token = token
+            });
+        }
+
+        /// <summary>
+        /// Redefine a senha usando o token de recuperação.
+        /// POST /api/auth/redefinir-senha
+        /// </summary>
+        [HttpPost("redefinir-senha")]
+        public async Task<ActionResult> RedefinirSenha(
+            [FromBody] RedefinirSenhaDTo dto)
+        {
+            if (dto.NovaSenha != dto.ConfirmarNovaSenha)
+            {
+                return BadRequest(new
+                {
+                    message = "As senhas não coincidem."
+                });
+            }
+
+            var usuario = await _userManager.FindByEmailAsync(dto.Email);
+
+            if (usuario == null)
+            {
+                return NotFound(new
+                {
+                    message = "Usuário não encontrado."
+                });
+            }
+
+            var resultado = await _userManager.ResetPasswordAsync(
+                usuario,
+                dto.Token,
+                dto.NovaSenha
+            );
+
+            if (!resultado.Succeeded)
+            {
+                var erros = resultado.Errors
+                    .Select(erro => erro.Description);
+
+                return BadRequest(new
+                {
+                    message = "Não foi possível redefinir a senha.",
+                    errors = erros
+                });
+            }
+
+            return Ok(new
+            {
+                message = "Senha redefinida com sucesso."
+            });
+        }
     }
 }
  

@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(components);
             txtEmail = new Guna.UI2.WinForms.Guna2TextBox();
             txtSenha = new Guna.UI2.WinForms.Guna2TextBox();
@@ -54,6 +56,7 @@
             lblTextoFacaLogin = new Label();
             pbLogo = new PictureBox();
             btnFechar = new Guna.UI2.WinForms.Guna2CircleButton();
+            btnEsqueciSenha = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
             SuspendLayout();
             // 
@@ -68,7 +71,7 @@
             // 
             txtEmail.BorderColor = Color.Black;
             txtEmail.BorderRadius = 7;
-            txtEmail.CustomizableEdges = customizableEdges6;
+            txtEmail.CustomizableEdges = customizableEdges8;
             txtEmail.DefaultText = "";
             txtEmail.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtEmail.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -84,7 +87,7 @@
             txtEmail.PlaceholderForeColor = Color.FromArgb(64, 64, 64);
             txtEmail.PlaceholderText = "seuemail@email.com";
             txtEmail.SelectedText = "";
-            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            txtEmail.ShadowDecoration.CustomizableEdges = customizableEdges9;
             txtEmail.Size = new Size(439, 38);
             txtEmail.TabIndex = 0;
             txtEmail.KeyDown += txtEmail_KeyDown;
@@ -93,7 +96,7 @@
             // 
             txtSenha.BorderColor = Color.Black;
             txtSenha.BorderRadius = 7;
-            txtSenha.CustomizableEdges = customizableEdges4;
+            txtSenha.CustomizableEdges = customizableEdges6;
             txtSenha.DefaultText = "";
             txtSenha.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             txtSenha.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -109,7 +112,7 @@
             txtSenha.PlaceholderForeColor = Color.FromArgb(64, 64, 64);
             txtSenha.PlaceholderText = "•••••••";
             txtSenha.SelectedText = "";
-            txtSenha.ShadowDecoration.CustomizableEdges = customizableEdges5;
+            txtSenha.ShadowDecoration.CustomizableEdges = customizableEdges7;
             txtSenha.Size = new Size(439, 38);
             txtSenha.TabIndex = 1;
             txtSenha.KeyDown += txtSenha_KeyDown;
@@ -149,8 +152,11 @@
             // 
             // btnEntrar
             // 
+            btnEntrar.Animated = true;
+            btnEntrar.BorderColor = Color.Transparent;
             btnEntrar.BorderRadius = 7;
-            btnEntrar.CustomizableEdges = customizableEdges2;
+            btnEntrar.BorderThickness = 1;
+            btnEntrar.CustomizableEdges = customizableEdges4;
             btnEntrar.DisabledState.BorderColor = Color.DarkGray;
             btnEntrar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnEntrar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -158,9 +164,12 @@
             btnEntrar.FillColor = Color.FromArgb(166, 2, 73);
             btnEntrar.Font = new Font("Segoe UI", 9F);
             btnEntrar.ForeColor = Color.White;
-            btnEntrar.Location = new Point(53, 295);
+            btnEntrar.HoverState.BorderColor = Color.FromArgb(166, 2, 73);
+            btnEntrar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnEntrar.HoverState.ForeColor = Color.FromArgb(166, 2, 73);
+            btnEntrar.Location = new Point(54, 278);
             btnEntrar.Name = "btnEntrar";
-            btnEntrar.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            btnEntrar.ShadowDecoration.CustomizableEdges = customizableEdges5;
             btnEntrar.Size = new Size(349, 38);
             btnEntrar.TabIndex = 13;
             btnEntrar.Text = "Entrar";
@@ -249,6 +258,9 @@
             // 
             // btnFechar
             // 
+            btnFechar.Animated = true;
+            btnFechar.BorderColor = Color.Transparent;
+            btnFechar.BorderThickness = 1;
             btnFechar.DisabledState.BorderColor = Color.DarkGray;
             btnFechar.DisabledState.CustomBorderColor = Color.DarkGray;
             btnFechar.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -256,14 +268,41 @@
             btnFechar.FillColor = Color.Maroon;
             btnFechar.Font = new Font("Yu Gothic UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFechar.ForeColor = Color.White;
+            btnFechar.HoverState.BorderColor = Color.Maroon;
+            btnFechar.HoverState.FillColor = Color.FromArgb(16, 16, 16);
+            btnFechar.HoverState.ForeColor = Color.Red;
             btnFechar.Location = new Point(423, 9);
             btnFechar.Name = "btnFechar";
-            btnFechar.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            btnFechar.ShadowDecoration.CustomizableEdges = customizableEdges3;
             btnFechar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             btnFechar.Size = new Size(28, 28);
             btnFechar.TabIndex = 25;
             btnFechar.Text = "X";
             btnFechar.Click += btnFechar_Click;
+            // 
+            // btnEsqueciSenha
+            // 
+            btnEsqueciSenha.BorderColor = Color.Transparent;
+            btnEsqueciSenha.BorderRadius = 7;
+            btnEsqueciSenha.BorderThickness = 1;
+            btnEsqueciSenha.CustomizableEdges = customizableEdges1;
+            btnEsqueciSenha.DisabledState.BorderColor = Color.DarkGray;
+            btnEsqueciSenha.DisabledState.CustomBorderColor = Color.DarkGray;
+            btnEsqueciSenha.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btnEsqueciSenha.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btnEsqueciSenha.FillColor = Color.Transparent;
+            btnEsqueciSenha.Font = new Font("Segoe UI", 9F);
+            btnEsqueciSenha.ForeColor = Color.FromArgb(166, 2, 73);
+            btnEsqueciSenha.HoverState.BorderColor = Color.Transparent;
+            btnEsqueciSenha.HoverState.FillColor = Color.Transparent;
+            btnEsqueciSenha.HoverState.ForeColor = Color.White;
+            btnEsqueciSenha.Location = new Point(156, 322);
+            btnEsqueciSenha.Name = "btnEsqueciSenha";
+            btnEsqueciSenha.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnEsqueciSenha.Size = new Size(143, 20);
+            btnEsqueciSenha.TabIndex = 26;
+            btnEsqueciSenha.Text = "Esqueci minha senha";
+            btnEsqueciSenha.Click += btnEsqueciSenha_Click;
             // 
             // LoginForm
             // 
@@ -271,6 +310,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 21, 21);
             ClientSize = new Size(463, 504);
+            Controls.Add(btnEsqueciSenha);
             Controls.Add(btnFechar);
             Controls.Add(pbLogo);
             Controls.Add(lblTextoFacaLogin);
@@ -316,5 +356,6 @@
         private Label lblTextoFacaLogin;
         private PictureBox pbLogo;
         private Guna.UI2.WinForms.Guna2CircleButton btnFechar;
+        private Guna.UI2.WinForms.Guna2Button btnEsqueciSenha;
     }
 }
